@@ -18,6 +18,7 @@ int main (int argc, char *argv[]) {
     struct sockaddr_in serv_addr;
     char sendBuff[1025];
     time_t ticks;
+    FILE *fp;
 
     listen_fd = socket(AF_INET, SOCK_STREAM, 0);
     memset(&serv_addr, '0', sizeof(serv_addr));
@@ -30,9 +31,9 @@ int main (int argc, char *argv[]) {
     bind(listen_fd, (struct sockaddr *) &serv_addr, sizeof(serv_addr));
 
     listen(listen_fd, 10);
-
     while (1) {
         conn_fd = accept(listen_fd, (struct sockaddr *) NULL, NULL);
+        send(conn_fd, "Enter text:", 7, 0);
 
         ticks = time(NULL);
         snprintf(sendBuff, sizeof(sendBuff), "%.24s\r\n", ctime(&ticks));
