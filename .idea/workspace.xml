@@ -32,6 +32,9 @@
     <list default="true" id="cbe1daa6-af34-445a-9582-6ab8c7a2a4ea" name="Default Changelist" comment="">
 <<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+=======
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
@@ -119,6 +122,7 @@
 =======
 >>>>>>> 4b8fccc842bf84fef71eb9abd60bf7f82810b0c4
       <change beforePath="$PROJECT_DIR$/server/src/server.c" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/server.c" afterDir="false" />
+>>>>>>> 6525ce366cdfbcd4c6e6e34170df23dca70167a6
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,11 +176,14 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
+=======
     <configuration name="uchat" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="uchat" TARGET_NAME="uchat" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="uchat" RUN_TARGET_NAME="uchat">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+>>>>>>> 6525ce366cdfbcd4c6e6e34170df23dca70167a6
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -199,7 +206,11 @@
       <workItem from="1608742580176" duration="56000" />
 =======
       <workItem from="1608733268919" duration="1651000" />
+<<<<<<< HEAD
+      <workItem from="1608742648467" duration="518000" />
+=======
 >>>>>>> 4b8fccc842bf84fef71eb9abd60bf7f82810b0c4
+>>>>>>> 6525ce366cdfbcd4c6e6e34170df23dca70167a6
     </task>
     <servers />
   </component>
