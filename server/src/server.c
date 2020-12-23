@@ -9,15 +9,13 @@
 void* send_and_write(void *data) {
     t_server *serv = (t_server *) data;
     char client_message[MAX];
-    serv->user_socket
-    printf()
+    sleep(10);
     while (1) {
         printf("read massage...\n");
-        read(cli_sockfd, client_message, sizeof(client_message));
-
-        //Send the message back to client
+        read(serv->user_socket[0], client_message, sizeof(client_message));
+//        Send the message back to client
         printf("send massage to client: '%s'\n", client_message);
-        write(cli_sockfd, client_message, strlen(client_message));
+        write(serv->user_socket[0], client_message, strlen(client_message));
         memset(&client_message, '\0', sizeof(client_message));
     }
     return 0;
@@ -63,9 +61,8 @@ int main(int argc , char *argv[]) {
     //Receive a message from client
     for (int i = 0; i != -1;) {
         //accept connection from an incoming client
-        serv->user_socket[i] = accept(sockfd, (struct sockaddr *)&client, (socklen_t*)&c);
-        i++;
-        if (serv->user_socket[i] < 0) {
+        serv->user_socket[0] = accept(sockfd, (struct sockaddr *)&client, (socklen_t*)&c);
+        if (serv->user_socket[0] < 0) {
             write(2, "ERROR, accept failed", 20);
             return 1;
         }
