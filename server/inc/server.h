@@ -16,9 +16,15 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
+#include <pthread.h>
 #include <time.h>
 
 #define MAX 1024
 #define PORT 5000
+
+typedef struct s_server {
+    int *user_socket;
+
+}              t_server;
 
 #endif //UCHAT_SERVER_H

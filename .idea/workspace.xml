@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
-    <generated />
+    <generated>
+      <config projectName="uchat" targetName="uchat" />
+    </generated>
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -28,97 +30,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cbe1daa6-af34-445a-9582-6ab8c7a2a4ea" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/inc/libmx.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_arr_rotate.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_atoi.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_atol.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_binary_search.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_bubble_sort.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_bubble_sort_reverse.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_charjoin.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_concat_words.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_copy_int_arr.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_count_substr.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_count_words.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_create_node.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_del_char.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_del_extra_spaces.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_del_strarr.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_factorial_iter.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_factorial_rec.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_file_to_str.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_foreach.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_get_char_index.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_get_substr_index.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_hex_to_nbr.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_insertion_sort.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_int_len.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_is_odd.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_is_positive.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_isalpha.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_isdigit.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_islower.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_isspace.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_isupper.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_itoa.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_list_size.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_memccpy.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_memchr.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_memcmp.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_memcpy.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_memmem.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_memmove.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_memrchr.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_memset.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_nbr_to_hex.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_pop_back.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_pop_front.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_pow.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_print_strarr.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_print_unicode.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_printchar.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_printchar_error.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_printerr.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_printint.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_printstr.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_push_back.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_push_front.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_push_penultimate.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_quicksort.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_read_line.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_realloc.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_replace_substr.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_s_strlen.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_sort_list.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_sqrt.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_str_reverse.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_strcat.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_strchr.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_strcmp.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_strcpy.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_strdel.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_strdup.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_strjoin.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_strjoin_uls.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_strlen.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_strncmp.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_strncpy.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_strndup.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_strnew.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_strsplit.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_strstr.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_strtrim.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_substr.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_swap_char.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_tolower.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libmx/src/mx_toupper.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Uchat.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Uchat.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/inc/server.h" beforeDir="false" afterPath="$PROJECT_DIR$/server/inc/server.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/server.c" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/server.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,8 +41,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ClangdSettings">
+    <option name="clangTidyViaClangd" value="false" />
     <option name="formatViaClangd" value="false" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -155,6 +72,23 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="uchat" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="uchat" TARGET_NAME="uchat" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="uchat" RUN_TARGET_NAME="uchat">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -169,6 +103,8 @@
       <workItem from="1608553969599" duration="6146000" />
       <workItem from="1608643894618" duration="247000" />
       <workItem from="1608655035950" duration="152000" />
+      <workItem from="1608726215707" duration="395000" />
+      <workItem from="1608726614346" duration="2805000" />
     </task>
     <servers />
   </component>
@@ -192,5 +128,13 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="260" y="382" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1440@0.0.2560.1440" timestamp="1608555179181" />
+    <state width="640" height="220" key="ImportCMakeProjectWizard.bottomPanel" timestamp="1608726611675">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="640" height="220" key="ImportCMakeProjectWizard.bottomPanel/0.0.2560.1440@0.0.2560.1440" timestamp="1608726611675" />
+    <state width="640" height="513" key="ImportCMakeProjectWizard.topPanel" timestamp="1608726611674">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="640" height="513" key="ImportCMakeProjectWizard.topPanel/0.0.2560.1440@0.0.2560.1440" timestamp="1608726611674" />
   </component>
 </project>
