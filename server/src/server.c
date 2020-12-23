@@ -27,11 +27,11 @@ void* send_and_write(void *data) {
                 i = 0;
             }
             // от socket[i] мы будем ожидать входящих данных
-            fds[0].fd = serv->user_socket[i];
+            fds[0].fd = serv->user_socket[0];
             fds[0].events = POLLIN;
 
             // ждём до 1 секунд
-            ret = poll(fds, 2, 5000);
+            ret = poll(fds, 1, 2000);
             // проверяем успешность вызова
             if (ret == -1) {
                 // ошибка

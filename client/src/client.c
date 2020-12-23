@@ -10,48 +10,53 @@ void func(int sockfd)
     int n;
     for (;;) {
         bzero(buff, sizeof(buff));
-        printf("Enter the string : ");
+        write(1, "Enter the string: ", 18);
         n = 0;
         while ((buff[n++] = getchar()) != '\n')
             ;
         write(sockfd, buff, sizeof(buff));
         bzero(buff, sizeof(buff));
         read(sockfd, buff, sizeof(buff));
-        printf("From Server : %s", buff);
+        write(1, "Answer from Server: ", 20);
+        write(1, buff, strlen(buff));
         if ((strncmp(buff, "exit", 4)) == 0) {
-            printf("Client Exit...\n");
+            write(1, "Client Exit\n", 12);
             break;
         }
     }
 }
 
-int main()
-{
+int main(int argc, char *argv[]) {
     int sockfd, connfd;
     struct sockaddr_in servaddr, cli;
 
     // socket create and varification
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd == -1) {
-        printf("socket creation failed...\n");
+        write(2, "ERROR, socket creation failed", 29);
         exit(0);
     }
     else
-        printf("Socket successfully created..\n");
+        write(1, "Socket successfully created...\n", 31);
     bzero(&servaddr, sizeof(servaddr));
 
     // assign IP, PORT
     servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    if (argc == 2) {
+        servaddr.sin_addr.s_addr = inet_addr(argv[1]);
+    }
+    else {
+        servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    }
     servaddr.sin_port = htons(PORT);
 
     // connect the client socket to server socket
     if (connect(sockfd, (SA*)&servaddr, sizeof(servaddr)) != 0) {
-        printf("connection with the server failed...\n");
+        write(2, "ERROR, connection with the server failed!", 41);
         exit(0);
     }
     else
-        printf("connected to the server..\n");
+        write(1, "Successfully connected to the server...\n", 37);
 
     // function for chat
     func(sockfd);
