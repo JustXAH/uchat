@@ -18,20 +18,24 @@ void static read_and_write(t_server *serv, int i) {
 
 void* send_and_write(void *data) {
     t_server *serv = (t_server *) data;
-    struct pollfd fds[1];
+    struct pollfd poll_set[2];
     int ret = 0;
+    printf("cli_connect = %d\n", serv->cli_connect);
 
-    for (int i = 0; i != -1; i++) {
+    for (int i = 0; i != -1; ) {
         if (serv->cli_connect != 0) {
             if (i == serv->cli_connect) {
                 i = 0;
             }
+            printf("cli_connect = %d\n", serv->cli_connect);
             // от socket[i] мы будем ожидать входящих данных
-            fds[0].fd = serv->user_socket[i];
-            fds[0].events = POLLIN;
+            poll_set->fd = serv->user_socket[i];
+            poll_set->events = POLLIN;
 
             // ждём до 1 секунд
-            ret = poll(fds, 2, 5000);
+            ret = poll(poll_set, serv->cli_connect, 5000);
+            printf("ret = %d\n", ret);
+            printf("socket = %d[%d]\n", serv->user_socket[i], i);
             // проверяем успешность вызова
             if (ret == -1) {
                 // ошибка
@@ -41,14 +45,15 @@ void* send_and_write(void *data) {
                 // таймаут, событий не произошло
                 write(1, "No events happened\n", 19);
             }
-            else
-            {
-                read_and_write(serv, i);
+            else {
                 // обнаружили событие, обнулим revents чтобы можно было переиспользовать структуру
-                if (fds[0].revents & POLLIN)
-                    fds[0].revents = 0;
-                // обработка входных данных от sock1
+                if (poll_set->revents & POLLIN) {
+                    // обработка входных данных от sock1
+                    poll_set->revents = 0;
+                    read_and_write(serv, i);
+                }
             }
+            i++;
         }
     }
     return 0;
@@ -62,6 +67,7 @@ int main(int argc , char *argv[]) {
     t_server *serv = (t_server *)malloc(sizeof(t_server));
 
     serv->user_socket = (int *)malloc(sizeof(int) * MAX_CLIENTS);
+    serv->cli_connect = 0;
     for (int k = 0; k < MAX_CLIENTS; k++) {
         serv->user_socket[k] = 0;
     }
