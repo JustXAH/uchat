@@ -30,6 +30,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cbe1daa6-af34-445a-9582-6ab8c7a2a4ea" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
@@ -115,6 +116,8 @@
       <change beforePath="$PROJECT_DIR$/server/libmx/obj/mx_strdup.o" beforeDir="false" afterPath="$PROJECT_DIR$/server/libmx/obj/mx_strdup.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/libmx/obj/mx_strjoin.o" beforeDir="false" afterPath="$PROJECT_DIR$/server/libmx/obj/mx_strjoin.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/obj/server.o" beforeDir="false" />
+=======
+>>>>>>> 4b8fccc842bf84fef71eb9abd60bf7f82810b0c4
       <change beforePath="$PROJECT_DIR$/server/src/server.c" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/server.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -155,12 +158,16 @@
     </key>
   </component>
   <component name="RunManager">
+<<<<<<< HEAD
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+=======
+    <configuration name="uchat" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="uchat" TARGET_NAME="uchat" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="uchat" RUN_TARGET_NAME="uchat">
+>>>>>>> 4b8fccc842bf84fef71eb9abd60bf7f82810b0c4
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -187,8 +194,12 @@
       <workItem from="1608655035950" duration="152000" />
       <workItem from="1608726215707" duration="395000" />
       <workItem from="1608726614346" duration="2805000" />
+<<<<<<< HEAD
       <workItem from="1608733827248" duration="1094000" />
       <workItem from="1608742580176" duration="56000" />
+=======
+      <workItem from="1608733268919" duration="1651000" />
+>>>>>>> 4b8fccc842bf84fef71eb9abd60bf7f82810b0c4
     </task>
     <servers />
   </component>
