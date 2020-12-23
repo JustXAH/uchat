@@ -9,8 +9,8 @@
 void* send_and_write(void *data) {
     t_server *serv = (t_server *) data;
     char client_message[MAX];
-    serv->user_socket
-    printf()
+    serv->user_socket;
+
     while (1) {
         printf("read massage...\n");
         read(cli_sockfd, client_message, sizeof(client_message));
