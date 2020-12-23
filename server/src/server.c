@@ -9,14 +9,16 @@
 void* send_and_write(void *data) {
     t_server *serv = (t_server *) data;
     char client_message[MAX];
-    sleep(10);
     while (1) {
-        printf("read massage...\n");
-        read(serv->user_socket[0], client_message, sizeof(client_message));
+        if (serv->user_socket[0] != 0) {
+            printf("read massage...\n");
+            read(serv->user_socket[0], client_message, sizeof(client_message));
 //        Send the message back to client
-        printf("send massage to client: '%s'\n", client_message);
-        write(serv->user_socket[0], client_message, strlen(client_message));
-        memset(&client_message, '\0', sizeof(client_message));
+            printf("send massage to client: '%s'\n", client_message);
+            write(serv->user_socket[0], client_message,
+                  strlen(client_message));
+            memset(&client_message, '\0', sizeof(client_message));
+        }
     }
     return 0;
 }
@@ -29,6 +31,7 @@ int main(int argc , char *argv[]) {
     pthread_t thread;
     t_server *serv = (t_server *)malloc(sizeof(t_server));
     serv->user_socket = (int *)malloc(sizeof(int) * 2);
+    serv->user_socket[0] = 0;
 
     //Create socket
     sockfd = socket(AF_INET , SOCK_STREAM , 0);
