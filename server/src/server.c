@@ -35,7 +35,7 @@ void* send_and_write(void *data) {
             printf("cli_connect = %d\n", serv->cli_connect);
             // от socket[i] мы будем ожидать входящих данных
 
-            poll_set->fd = 4;
+            poll_set->fd = serv->user_socket[i];
             poll_set->events = POLLIN;
 
             // ждём до 1 секунд
@@ -75,7 +75,7 @@ int main(int argc , char *argv[]) {
     t_server *serv = (t_server *)malloc(sizeof(t_server));
 
     serv->user_socket = (int *)malloc(sizeof(int) * MAX_CLIENTS);
-    serv->cli_connect = 1;
+    serv->cli_connect = 0;
     for (int k = 0; k < MAX_CLIENTS; k++) {
         serv->user_socket[k] = k + 4;
     }
