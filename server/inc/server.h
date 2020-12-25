@@ -22,7 +22,7 @@
 #include <time.h>
 
 #define MAX 1024
-#define PORT 5001
+#define PORT 5000
 #define MAX_CLIENTS 5
 
 typedef struct s_server {
@@ -30,5 +30,8 @@ typedef struct s_server {
     int cli_connect;
 
 }              t_server;
+
+void mx_check_read(t_server *serv, int i);
+void mx_check_disconnect(t_server *server, int i);
 
 #endif //UCHAT_SERVER_H
