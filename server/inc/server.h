@@ -32,4 +32,7 @@ typedef struct s_server {
 
 }              t_server;
 
+void mx_check_read(t_server *serv, int i);
+void mx_check_disconnect(t_server *server, int i);
+
 #endif //UCHAT_SERVER_H

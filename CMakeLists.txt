@@ -9,6 +9,7 @@ include_directories(server/inc)
 include_directories(server/libmx/inc)
 
 add_executable(uchat
+        client/inc/cJSON.h
         client/inc/client.h
         client/libmx/inc/libmx.h
         client/libmx/src/mx_arr_rotate.c
@@ -94,7 +95,9 @@ add_executable(uchat
         client/libmx/src/mx_swap_char.c
         client/libmx/src/mx_tolower.c
         client/libmx/src/mx_toupper.c
+        client/src/cJSON.c
         client/src/client.c
+        server/inc/cJSON.h
         server/inc/server.h
         server/libmx/inc/libmx.h
         server/libmx/src/mx_arr_rotate.c
@@ -180,5 +183,8 @@ add_executable(uchat
         server/libmx/src/mx_swap_char.c
         server/libmx/src/mx_tolower.c
         server/libmx/src/mx_toupper.c
+        server/src/cJSON.c
+        server/src/mx_check_disconect.c
+        server/src/mx_check_read.c
         server/src/server.c
         test_serv.c)

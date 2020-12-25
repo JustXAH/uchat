@@ -86,6 +86,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/ikhanenko/Desktop/uchat/client/inc/cJSON.h">
+			<Option target="uchat"/>
+		</Unit>
 		<Unit filename="/Users/ikhanenko/Desktop/uchat/client/inc/client.h">
 			<Option target="uchat"/>
 		</Unit>
@@ -341,7 +344,13 @@
 		<Unit filename="/Users/ikhanenko/Desktop/uchat/client/libmx/src/mx_toupper.c">
 			<Option target="uchat"/>
 		</Unit>
+		<Unit filename="/Users/ikhanenko/Desktop/uchat/client/src/cJSON.c">
+			<Option target="uchat"/>
+		</Unit>
 		<Unit filename="/Users/ikhanenko/Desktop/uchat/client/src/client.c">
+			<Option target="uchat"/>
+		</Unit>
+		<Unit filename="/Users/ikhanenko/Desktop/uchat/server/inc/cJSON.h">
 			<Option target="uchat"/>
 		</Unit>
 		<Unit filename="/Users/ikhanenko/Desktop/uchat/server/inc/server.h">
@@ -597,6 +606,15 @@
 			<Option target="uchat"/>
 		</Unit>
 		<Unit filename="/Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_toupper.c">
+			<Option target="uchat"/>
+		</Unit>
+		<Unit filename="/Users/ikhanenko/Desktop/uchat/server/src/cJSON.c">
+			<Option target="uchat"/>
+		</Unit>
+		<Unit filename="/Users/ikhanenko/Desktop/uchat/server/src/mx_check_disconect.c">
+			<Option target="uchat"/>
+		</Unit>
+		<Unit filename="/Users/ikhanenko/Desktop/uchat/server/src/mx_check_read.c">
 			<Option target="uchat"/>
 		</Unit>
 		<Unit filename="/Users/ikhanenko/Desktop/uchat/server/src/server.c">

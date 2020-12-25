@@ -2384,6 +2384,33 @@ client/libmx/src/mx_toupper.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/uchat.dir/build.make CMakeFiles/uchat.dir/client/libmx/src/mx_toupper.c.s
 .PHONY : client/libmx/src/mx_toupper.c.s
 
+client/src/cJSON.o: client/src/cJSON.c.o
+
+.PHONY : client/src/cJSON.o
+
+# target to build an object file
+client/src/cJSON.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uchat.dir/build.make CMakeFiles/uchat.dir/client/src/cJSON.c.o
+.PHONY : client/src/cJSON.c.o
+
+client/src/cJSON.i: client/src/cJSON.c.i
+
+.PHONY : client/src/cJSON.i
+
+# target to preprocess a source file
+client/src/cJSON.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uchat.dir/build.make CMakeFiles/uchat.dir/client/src/cJSON.c.i
+.PHONY : client/src/cJSON.c.i
+
+client/src/cJSON.s: client/src/cJSON.c.s
+
+.PHONY : client/src/cJSON.s
+
+# target to generate assembly for a file
+client/src/cJSON.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uchat.dir/build.make CMakeFiles/uchat.dir/client/src/cJSON.c.s
+.PHONY : client/src/cJSON.c.s
+
 client/src/client.o: client/src/client.c.o
 
 .PHONY : client/src/client.o
@@ -4652,6 +4679,87 @@ server/libmx/src/mx_toupper.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/uchat.dir/build.make CMakeFiles/uchat.dir/server/libmx/src/mx_toupper.c.s
 .PHONY : server/libmx/src/mx_toupper.c.s
 
+server/src/cJSON.o: server/src/cJSON.c.o
+
+.PHONY : server/src/cJSON.o
+
+# target to build an object file
+server/src/cJSON.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uchat.dir/build.make CMakeFiles/uchat.dir/server/src/cJSON.c.o
+.PHONY : server/src/cJSON.c.o
+
+server/src/cJSON.i: server/src/cJSON.c.i
+
+.PHONY : server/src/cJSON.i
+
+# target to preprocess a source file
+server/src/cJSON.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uchat.dir/build.make CMakeFiles/uchat.dir/server/src/cJSON.c.i
+.PHONY : server/src/cJSON.c.i
+
+server/src/cJSON.s: server/src/cJSON.c.s
+
+.PHONY : server/src/cJSON.s
+
+# target to generate assembly for a file
+server/src/cJSON.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uchat.dir/build.make CMakeFiles/uchat.dir/server/src/cJSON.c.s
+.PHONY : server/src/cJSON.c.s
+
+server/src/mx_check_disconect.o: server/src/mx_check_disconect.c.o
+
+.PHONY : server/src/mx_check_disconect.o
+
+# target to build an object file
+server/src/mx_check_disconect.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uchat.dir/build.make CMakeFiles/uchat.dir/server/src/mx_check_disconect.c.o
+.PHONY : server/src/mx_check_disconect.c.o
+
+server/src/mx_check_disconect.i: server/src/mx_check_disconect.c.i
+
+.PHONY : server/src/mx_check_disconect.i
+
+# target to preprocess a source file
+server/src/mx_check_disconect.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uchat.dir/build.make CMakeFiles/uchat.dir/server/src/mx_check_disconect.c.i
+.PHONY : server/src/mx_check_disconect.c.i
+
+server/src/mx_check_disconect.s: server/src/mx_check_disconect.c.s
+
+.PHONY : server/src/mx_check_disconect.s
+
+# target to generate assembly for a file
+server/src/mx_check_disconect.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uchat.dir/build.make CMakeFiles/uchat.dir/server/src/mx_check_disconect.c.s
+.PHONY : server/src/mx_check_disconect.c.s
+
+server/src/mx_check_read.o: server/src/mx_check_read.c.o
+
+.PHONY : server/src/mx_check_read.o
+
+# target to build an object file
+server/src/mx_check_read.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uchat.dir/build.make CMakeFiles/uchat.dir/server/src/mx_check_read.c.o
+.PHONY : server/src/mx_check_read.c.o
+
+server/src/mx_check_read.i: server/src/mx_check_read.c.i
+
+.PHONY : server/src/mx_check_read.i
+
+# target to preprocess a source file
+server/src/mx_check_read.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uchat.dir/build.make CMakeFiles/uchat.dir/server/src/mx_check_read.c.i
+.PHONY : server/src/mx_check_read.c.i
+
+server/src/mx_check_read.s: server/src/mx_check_read.c.s
+
+.PHONY : server/src/mx_check_read.s
+
+# target to generate assembly for a file
+server/src/mx_check_read.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uchat.dir/build.make CMakeFiles/uchat.dir/server/src/mx_check_read.c.s
+.PHONY : server/src/mx_check_read.c.s
+
 server/src/server.o: server/src/server.c.o
 
 .PHONY : server/src/server.o
@@ -4964,6 +5072,9 @@ help:
 	@echo "... client/libmx/src/mx_toupper.o"
 	@echo "... client/libmx/src/mx_toupper.i"
 	@echo "... client/libmx/src/mx_toupper.s"
+	@echo "... client/src/cJSON.o"
+	@echo "... client/src/cJSON.i"
+	@echo "... client/src/cJSON.s"
 	@echo "... client/src/client.o"
 	@echo "... client/src/client.i"
 	@echo "... client/src/client.s"
@@ -5216,6 +5327,15 @@ help:
 	@echo "... server/libmx/src/mx_toupper.o"
 	@echo "... server/libmx/src/mx_toupper.i"
 	@echo "... server/libmx/src/mx_toupper.s"
+	@echo "... server/src/cJSON.o"
+	@echo "... server/src/cJSON.i"
+	@echo "... server/src/cJSON.s"
+	@echo "... server/src/mx_check_disconect.o"
+	@echo "... server/src/mx_check_disconect.i"
+	@echo "... server/src/mx_check_disconect.s"
+	@echo "... server/src/mx_check_read.o"
+	@echo "... server/src/mx_check_read.i"
+	@echo "... server/src/mx_check_read.s"
 	@echo "... server/src/server.o"
 	@echo "... server/src/server.i"
 	@echo "... server/src/server.s"

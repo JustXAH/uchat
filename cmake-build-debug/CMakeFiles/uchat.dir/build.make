@@ -1156,9 +1156,22 @@ CMakeFiles/uchat.dir/client/libmx/src/mx_toupper.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/uchat.dir/client/libmx/src/mx_toupper.c.s"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/ikhanenko/Desktop/uchat/client/libmx/src/mx_toupper.c -o CMakeFiles/uchat.dir/client/libmx/src/mx_toupper.c.s
 
+CMakeFiles/uchat.dir/client/src/cJSON.c.o: CMakeFiles/uchat.dir/flags.make
+CMakeFiles/uchat.dir/client/src/cJSON.c.o: ../client/src/cJSON.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_84) "Building C object CMakeFiles/uchat.dir/client/src/cJSON.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/client/src/cJSON.c.o   -c /Users/ikhanenko/Desktop/uchat/client/src/cJSON.c
+
+CMakeFiles/uchat.dir/client/src/cJSON.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/uchat.dir/client/src/cJSON.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/ikhanenko/Desktop/uchat/client/src/cJSON.c > CMakeFiles/uchat.dir/client/src/cJSON.c.i
+
+CMakeFiles/uchat.dir/client/src/cJSON.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/uchat.dir/client/src/cJSON.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/ikhanenko/Desktop/uchat/client/src/cJSON.c -o CMakeFiles/uchat.dir/client/src/cJSON.c.s
+
 CMakeFiles/uchat.dir/client/src/client.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/client/src/client.c.o: ../client/src/client.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_84) "Building C object CMakeFiles/uchat.dir/client/src/client.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_85) "Building C object CMakeFiles/uchat.dir/client/src/client.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/client/src/client.c.o   -c /Users/ikhanenko/Desktop/uchat/client/src/client.c
 
 CMakeFiles/uchat.dir/client/src/client.c.i: cmake_force
@@ -1171,7 +1184,7 @@ CMakeFiles/uchat.dir/client/src/client.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_arr_rotate.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_arr_rotate.c.o: ../server/libmx/src/mx_arr_rotate.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_85) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_arr_rotate.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_86) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_arr_rotate.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_arr_rotate.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_arr_rotate.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_arr_rotate.c.i: cmake_force
@@ -1184,7 +1197,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_arr_rotate.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_atoi.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_atoi.c.o: ../server/libmx/src/mx_atoi.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_86) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_atoi.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_87) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_atoi.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_atoi.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_atoi.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_atoi.c.i: cmake_force
@@ -1197,7 +1210,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_atoi.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_atol.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_atol.c.o: ../server/libmx/src/mx_atol.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_87) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_atol.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_88) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_atol.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_atol.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_atol.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_atol.c.i: cmake_force
@@ -1210,7 +1223,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_atol.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_binary_search.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_binary_search.c.o: ../server/libmx/src/mx_binary_search.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_88) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_binary_search.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_89) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_binary_search.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_binary_search.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_binary_search.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_binary_search.c.i: cmake_force
@@ -1223,7 +1236,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_binary_search.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_bubble_sort.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_bubble_sort.c.o: ../server/libmx/src/mx_bubble_sort.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_89) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_bubble_sort.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_90) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_bubble_sort.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_bubble_sort.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_bubble_sort.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_bubble_sort.c.i: cmake_force
@@ -1236,7 +1249,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_bubble_sort.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_bubble_sort_reverse.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_bubble_sort_reverse.c.o: ../server/libmx/src/mx_bubble_sort_reverse.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_90) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_bubble_sort_reverse.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_91) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_bubble_sort_reverse.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_bubble_sort_reverse.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_bubble_sort_reverse.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_bubble_sort_reverse.c.i: cmake_force
@@ -1249,7 +1262,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_bubble_sort_reverse.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_charjoin.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_charjoin.c.o: ../server/libmx/src/mx_charjoin.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_91) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_charjoin.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_92) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_charjoin.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_charjoin.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_charjoin.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_charjoin.c.i: cmake_force
@@ -1262,7 +1275,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_charjoin.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_concat_words.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_concat_words.c.o: ../server/libmx/src/mx_concat_words.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_92) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_concat_words.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_93) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_concat_words.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_concat_words.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_concat_words.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_concat_words.c.i: cmake_force
@@ -1275,7 +1288,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_concat_words.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_copy_int_arr.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_copy_int_arr.c.o: ../server/libmx/src/mx_copy_int_arr.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_93) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_copy_int_arr.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_94) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_copy_int_arr.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_copy_int_arr.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_copy_int_arr.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_copy_int_arr.c.i: cmake_force
@@ -1288,7 +1301,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_copy_int_arr.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_count_substr.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_count_substr.c.o: ../server/libmx/src/mx_count_substr.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_94) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_count_substr.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_95) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_count_substr.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_count_substr.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_count_substr.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_count_substr.c.i: cmake_force
@@ -1301,7 +1314,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_count_substr.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_count_words.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_count_words.c.o: ../server/libmx/src/mx_count_words.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_95) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_count_words.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_96) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_count_words.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_count_words.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_count_words.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_count_words.c.i: cmake_force
@@ -1314,7 +1327,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_count_words.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_create_node.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_create_node.c.o: ../server/libmx/src/mx_create_node.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_96) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_create_node.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_97) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_create_node.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_create_node.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_create_node.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_create_node.c.i: cmake_force
@@ -1327,7 +1340,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_create_node.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_del_char.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_del_char.c.o: ../server/libmx/src/mx_del_char.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_97) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_del_char.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_98) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_del_char.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_del_char.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_del_char.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_del_char.c.i: cmake_force
@@ -1340,7 +1353,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_del_char.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_del_extra_spaces.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_del_extra_spaces.c.o: ../server/libmx/src/mx_del_extra_spaces.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_98) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_del_extra_spaces.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_99) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_del_extra_spaces.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_del_extra_spaces.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_del_extra_spaces.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_del_extra_spaces.c.i: cmake_force
@@ -1353,7 +1366,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_del_extra_spaces.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_del_strarr.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_del_strarr.c.o: ../server/libmx/src/mx_del_strarr.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_99) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_del_strarr.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_100) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_del_strarr.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_del_strarr.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_del_strarr.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_del_strarr.c.i: cmake_force
@@ -1366,7 +1379,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_del_strarr.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_factorial_iter.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_factorial_iter.c.o: ../server/libmx/src/mx_factorial_iter.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_100) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_factorial_iter.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_101) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_factorial_iter.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_factorial_iter.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_factorial_iter.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_factorial_iter.c.i: cmake_force
@@ -1379,7 +1392,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_factorial_iter.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_factorial_rec.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_factorial_rec.c.o: ../server/libmx/src/mx_factorial_rec.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_101) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_factorial_rec.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_102) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_factorial_rec.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_factorial_rec.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_factorial_rec.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_factorial_rec.c.i: cmake_force
@@ -1392,7 +1405,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_factorial_rec.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_file_to_str.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_file_to_str.c.o: ../server/libmx/src/mx_file_to_str.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_102) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_file_to_str.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_103) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_file_to_str.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_file_to_str.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_file_to_str.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_file_to_str.c.i: cmake_force
@@ -1405,7 +1418,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_file_to_str.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_foreach.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_foreach.c.o: ../server/libmx/src/mx_foreach.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_103) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_foreach.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_104) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_foreach.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_foreach.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_foreach.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_foreach.c.i: cmake_force
@@ -1418,7 +1431,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_foreach.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_get_char_index.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_get_char_index.c.o: ../server/libmx/src/mx_get_char_index.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_104) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_get_char_index.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_105) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_get_char_index.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_get_char_index.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_get_char_index.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_get_char_index.c.i: cmake_force
@@ -1431,7 +1444,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_get_char_index.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_get_substr_index.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_get_substr_index.c.o: ../server/libmx/src/mx_get_substr_index.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_105) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_get_substr_index.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_106) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_get_substr_index.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_get_substr_index.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_get_substr_index.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_get_substr_index.c.i: cmake_force
@@ -1444,7 +1457,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_get_substr_index.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_hex_to_nbr.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_hex_to_nbr.c.o: ../server/libmx/src/mx_hex_to_nbr.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_106) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_hex_to_nbr.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_107) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_hex_to_nbr.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_hex_to_nbr.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_hex_to_nbr.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_hex_to_nbr.c.i: cmake_force
@@ -1457,7 +1470,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_hex_to_nbr.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_insertion_sort.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_insertion_sort.c.o: ../server/libmx/src/mx_insertion_sort.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_107) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_insertion_sort.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_108) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_insertion_sort.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_insertion_sort.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_insertion_sort.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_insertion_sort.c.i: cmake_force
@@ -1470,7 +1483,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_insertion_sort.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_int_len.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_int_len.c.o: ../server/libmx/src/mx_int_len.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_108) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_int_len.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_109) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_int_len.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_int_len.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_int_len.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_int_len.c.i: cmake_force
@@ -1483,7 +1496,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_int_len.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_is_odd.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_is_odd.c.o: ../server/libmx/src/mx_is_odd.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_109) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_is_odd.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_110) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_is_odd.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_is_odd.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_is_odd.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_is_odd.c.i: cmake_force
@@ -1496,7 +1509,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_is_odd.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_is_positive.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_is_positive.c.o: ../server/libmx/src/mx_is_positive.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_110) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_is_positive.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_111) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_is_positive.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_is_positive.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_is_positive.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_is_positive.c.i: cmake_force
@@ -1509,7 +1522,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_is_positive.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_isalpha.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_isalpha.c.o: ../server/libmx/src/mx_isalpha.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_111) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_isalpha.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_112) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_isalpha.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_isalpha.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_isalpha.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_isalpha.c.i: cmake_force
@@ -1522,7 +1535,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_isalpha.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_isdigit.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_isdigit.c.o: ../server/libmx/src/mx_isdigit.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_112) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_isdigit.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_113) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_isdigit.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_isdigit.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_isdigit.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_isdigit.c.i: cmake_force
@@ -1535,7 +1548,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_isdigit.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_islower.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_islower.c.o: ../server/libmx/src/mx_islower.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_113) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_islower.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_114) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_islower.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_islower.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_islower.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_islower.c.i: cmake_force
@@ -1548,7 +1561,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_islower.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_isspace.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_isspace.c.o: ../server/libmx/src/mx_isspace.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_114) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_isspace.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_115) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_isspace.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_isspace.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_isspace.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_isspace.c.i: cmake_force
@@ -1561,7 +1574,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_isspace.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_isupper.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_isupper.c.o: ../server/libmx/src/mx_isupper.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_115) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_isupper.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_116) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_isupper.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_isupper.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_isupper.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_isupper.c.i: cmake_force
@@ -1574,7 +1587,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_isupper.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_itoa.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_itoa.c.o: ../server/libmx/src/mx_itoa.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_116) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_itoa.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_117) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_itoa.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_itoa.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_itoa.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_itoa.c.i: cmake_force
@@ -1587,7 +1600,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_itoa.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_list_size.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_list_size.c.o: ../server/libmx/src/mx_list_size.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_117) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_list_size.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_118) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_list_size.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_list_size.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_list_size.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_list_size.c.i: cmake_force
@@ -1600,7 +1613,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_list_size.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_memccpy.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_memccpy.c.o: ../server/libmx/src/mx_memccpy.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_118) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_memccpy.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_119) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_memccpy.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_memccpy.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_memccpy.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_memccpy.c.i: cmake_force
@@ -1613,7 +1626,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_memccpy.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_memchr.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_memchr.c.o: ../server/libmx/src/mx_memchr.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_119) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_memchr.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_120) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_memchr.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_memchr.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_memchr.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_memchr.c.i: cmake_force
@@ -1626,7 +1639,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_memchr.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_memcmp.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_memcmp.c.o: ../server/libmx/src/mx_memcmp.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_120) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_memcmp.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_121) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_memcmp.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_memcmp.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_memcmp.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_memcmp.c.i: cmake_force
@@ -1639,7 +1652,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_memcmp.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_memcpy.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_memcpy.c.o: ../server/libmx/src/mx_memcpy.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_121) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_memcpy.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_122) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_memcpy.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_memcpy.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_memcpy.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_memcpy.c.i: cmake_force
@@ -1652,7 +1665,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_memcpy.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_memmem.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_memmem.c.o: ../server/libmx/src/mx_memmem.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_122) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_memmem.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_123) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_memmem.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_memmem.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_memmem.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_memmem.c.i: cmake_force
@@ -1665,7 +1678,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_memmem.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_memmove.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_memmove.c.o: ../server/libmx/src/mx_memmove.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_123) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_memmove.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_124) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_memmove.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_memmove.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_memmove.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_memmove.c.i: cmake_force
@@ -1678,7 +1691,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_memmove.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_memrchr.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_memrchr.c.o: ../server/libmx/src/mx_memrchr.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_124) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_memrchr.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_125) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_memrchr.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_memrchr.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_memrchr.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_memrchr.c.i: cmake_force
@@ -1691,7 +1704,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_memrchr.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_memset.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_memset.c.o: ../server/libmx/src/mx_memset.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_125) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_memset.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_126) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_memset.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_memset.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_memset.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_memset.c.i: cmake_force
@@ -1704,7 +1717,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_memset.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_nbr_to_hex.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_nbr_to_hex.c.o: ../server/libmx/src/mx_nbr_to_hex.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_126) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_nbr_to_hex.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_127) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_nbr_to_hex.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_nbr_to_hex.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_nbr_to_hex.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_nbr_to_hex.c.i: cmake_force
@@ -1717,7 +1730,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_nbr_to_hex.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_pop_back.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_pop_back.c.o: ../server/libmx/src/mx_pop_back.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_127) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_pop_back.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_128) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_pop_back.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_pop_back.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_pop_back.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_pop_back.c.i: cmake_force
@@ -1730,7 +1743,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_pop_back.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_pop_front.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_pop_front.c.o: ../server/libmx/src/mx_pop_front.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_128) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_pop_front.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_129) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_pop_front.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_pop_front.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_pop_front.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_pop_front.c.i: cmake_force
@@ -1743,7 +1756,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_pop_front.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_pow.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_pow.c.o: ../server/libmx/src/mx_pow.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_129) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_pow.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_130) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_pow.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_pow.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_pow.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_pow.c.i: cmake_force
@@ -1756,7 +1769,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_pow.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_print_strarr.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_print_strarr.c.o: ../server/libmx/src/mx_print_strarr.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_130) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_print_strarr.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_131) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_print_strarr.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_print_strarr.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_print_strarr.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_print_strarr.c.i: cmake_force
@@ -1769,7 +1782,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_print_strarr.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_print_unicode.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_print_unicode.c.o: ../server/libmx/src/mx_print_unicode.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_131) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_print_unicode.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_132) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_print_unicode.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_print_unicode.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_print_unicode.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_print_unicode.c.i: cmake_force
@@ -1782,7 +1795,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_print_unicode.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_printchar.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_printchar.c.o: ../server/libmx/src/mx_printchar.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_132) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_printchar.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_133) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_printchar.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_printchar.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_printchar.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_printchar.c.i: cmake_force
@@ -1795,7 +1808,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_printchar.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_printchar_error.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_printchar_error.c.o: ../server/libmx/src/mx_printchar_error.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_133) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_printchar_error.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_134) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_printchar_error.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_printchar_error.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_printchar_error.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_printchar_error.c.i: cmake_force
@@ -1808,7 +1821,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_printchar_error.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_printerr.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_printerr.c.o: ../server/libmx/src/mx_printerr.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_134) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_printerr.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_135) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_printerr.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_printerr.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_printerr.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_printerr.c.i: cmake_force
@@ -1821,7 +1834,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_printerr.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_printint.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_printint.c.o: ../server/libmx/src/mx_printint.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_135) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_printint.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_136) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_printint.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_printint.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_printint.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_printint.c.i: cmake_force
@@ -1834,7 +1847,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_printint.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_printstr.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_printstr.c.o: ../server/libmx/src/mx_printstr.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_136) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_printstr.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_137) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_printstr.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_printstr.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_printstr.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_printstr.c.i: cmake_force
@@ -1847,7 +1860,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_printstr.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_push_back.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_push_back.c.o: ../server/libmx/src/mx_push_back.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_137) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_push_back.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_138) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_push_back.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_push_back.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_push_back.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_push_back.c.i: cmake_force
@@ -1860,7 +1873,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_push_back.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_push_front.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_push_front.c.o: ../server/libmx/src/mx_push_front.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_138) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_push_front.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_139) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_push_front.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_push_front.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_push_front.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_push_front.c.i: cmake_force
@@ -1873,7 +1886,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_push_front.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_push_penultimate.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_push_penultimate.c.o: ../server/libmx/src/mx_push_penultimate.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_139) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_push_penultimate.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_140) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_push_penultimate.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_push_penultimate.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_push_penultimate.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_push_penultimate.c.i: cmake_force
@@ -1886,7 +1899,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_push_penultimate.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_quicksort.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_quicksort.c.o: ../server/libmx/src/mx_quicksort.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_140) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_quicksort.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_141) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_quicksort.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_quicksort.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_quicksort.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_quicksort.c.i: cmake_force
@@ -1899,7 +1912,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_quicksort.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_read_line.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_read_line.c.o: ../server/libmx/src/mx_read_line.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_141) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_read_line.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_142) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_read_line.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_read_line.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_read_line.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_read_line.c.i: cmake_force
@@ -1912,7 +1925,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_read_line.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_realloc.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_realloc.c.o: ../server/libmx/src/mx_realloc.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_142) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_realloc.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_143) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_realloc.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_realloc.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_realloc.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_realloc.c.i: cmake_force
@@ -1925,7 +1938,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_realloc.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_replace_substr.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_replace_substr.c.o: ../server/libmx/src/mx_replace_substr.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_143) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_replace_substr.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_144) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_replace_substr.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_replace_substr.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_replace_substr.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_replace_substr.c.i: cmake_force
@@ -1938,7 +1951,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_replace_substr.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_s_strlen.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_s_strlen.c.o: ../server/libmx/src/mx_s_strlen.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_144) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_s_strlen.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_145) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_s_strlen.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_s_strlen.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_s_strlen.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_s_strlen.c.i: cmake_force
@@ -1951,7 +1964,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_s_strlen.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_sort_list.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_sort_list.c.o: ../server/libmx/src/mx_sort_list.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_145) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_sort_list.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_146) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_sort_list.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_sort_list.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_sort_list.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_sort_list.c.i: cmake_force
@@ -1964,7 +1977,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_sort_list.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_sqrt.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_sqrt.c.o: ../server/libmx/src/mx_sqrt.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_146) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_sqrt.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_147) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_sqrt.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_sqrt.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_sqrt.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_sqrt.c.i: cmake_force
@@ -1977,7 +1990,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_sqrt.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_str_reverse.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_str_reverse.c.o: ../server/libmx/src/mx_str_reverse.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_147) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_str_reverse.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_148) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_str_reverse.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_str_reverse.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_str_reverse.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_str_reverse.c.i: cmake_force
@@ -1990,7 +2003,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_str_reverse.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strcat.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_strcat.c.o: ../server/libmx/src/mx_strcat.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_148) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strcat.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_149) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strcat.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_strcat.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_strcat.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strcat.c.i: cmake_force
@@ -2003,7 +2016,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_strcat.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strchr.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_strchr.c.o: ../server/libmx/src/mx_strchr.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_149) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strchr.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_150) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strchr.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_strchr.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_strchr.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strchr.c.i: cmake_force
@@ -2016,7 +2029,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_strchr.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strcmp.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_strcmp.c.o: ../server/libmx/src/mx_strcmp.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_150) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strcmp.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_151) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strcmp.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_strcmp.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_strcmp.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strcmp.c.i: cmake_force
@@ -2029,7 +2042,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_strcmp.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strcpy.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_strcpy.c.o: ../server/libmx/src/mx_strcpy.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_151) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strcpy.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_152) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strcpy.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_strcpy.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_strcpy.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strcpy.c.i: cmake_force
@@ -2042,7 +2055,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_strcpy.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strdel.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_strdel.c.o: ../server/libmx/src/mx_strdel.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_152) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strdel.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_153) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strdel.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_strdel.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_strdel.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strdel.c.i: cmake_force
@@ -2055,7 +2068,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_strdel.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strdup.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_strdup.c.o: ../server/libmx/src/mx_strdup.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_153) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strdup.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_154) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strdup.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_strdup.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_strdup.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strdup.c.i: cmake_force
@@ -2068,7 +2081,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_strdup.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strjoin.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_strjoin.c.o: ../server/libmx/src/mx_strjoin.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_154) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strjoin.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_155) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strjoin.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_strjoin.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_strjoin.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strjoin.c.i: cmake_force
@@ -2081,7 +2094,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_strjoin.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strjoin_uls.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_strjoin_uls.c.o: ../server/libmx/src/mx_strjoin_uls.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_155) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strjoin_uls.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_156) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strjoin_uls.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_strjoin_uls.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_strjoin_uls.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strjoin_uls.c.i: cmake_force
@@ -2094,7 +2107,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_strjoin_uls.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strlen.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_strlen.c.o: ../server/libmx/src/mx_strlen.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_156) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strlen.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_157) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strlen.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_strlen.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_strlen.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strlen.c.i: cmake_force
@@ -2107,7 +2120,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_strlen.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strncmp.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_strncmp.c.o: ../server/libmx/src/mx_strncmp.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_157) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strncmp.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_158) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strncmp.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_strncmp.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_strncmp.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strncmp.c.i: cmake_force
@@ -2120,7 +2133,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_strncmp.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strncpy.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_strncpy.c.o: ../server/libmx/src/mx_strncpy.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_158) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strncpy.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_159) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strncpy.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_strncpy.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_strncpy.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strncpy.c.i: cmake_force
@@ -2133,7 +2146,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_strncpy.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strndup.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_strndup.c.o: ../server/libmx/src/mx_strndup.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_159) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strndup.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_160) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strndup.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_strndup.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_strndup.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strndup.c.i: cmake_force
@@ -2146,7 +2159,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_strndup.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strnew.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_strnew.c.o: ../server/libmx/src/mx_strnew.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_160) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strnew.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_161) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strnew.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_strnew.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_strnew.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strnew.c.i: cmake_force
@@ -2159,7 +2172,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_strnew.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strsplit.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_strsplit.c.o: ../server/libmx/src/mx_strsplit.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_161) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strsplit.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_162) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strsplit.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_strsplit.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_strsplit.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strsplit.c.i: cmake_force
@@ -2172,7 +2185,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_strsplit.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strstr.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_strstr.c.o: ../server/libmx/src/mx_strstr.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_162) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strstr.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_163) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strstr.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_strstr.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_strstr.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strstr.c.i: cmake_force
@@ -2185,7 +2198,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_strstr.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strtrim.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_strtrim.c.o: ../server/libmx/src/mx_strtrim.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_163) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strtrim.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_164) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_strtrim.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_strtrim.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_strtrim.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_strtrim.c.i: cmake_force
@@ -2198,7 +2211,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_strtrim.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_substr.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_substr.c.o: ../server/libmx/src/mx_substr.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_164) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_substr.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_165) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_substr.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_substr.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_substr.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_substr.c.i: cmake_force
@@ -2211,7 +2224,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_substr.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_swap_char.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_swap_char.c.o: ../server/libmx/src/mx_swap_char.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_165) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_swap_char.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_166) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_swap_char.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_swap_char.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_swap_char.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_swap_char.c.i: cmake_force
@@ -2224,7 +2237,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_swap_char.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_tolower.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_tolower.c.o: ../server/libmx/src/mx_tolower.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_166) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_tolower.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_167) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_tolower.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_tolower.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_tolower.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_tolower.c.i: cmake_force
@@ -2237,7 +2250,7 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_tolower.c.s: cmake_force
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_toupper.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/libmx/src/mx_toupper.c.o: ../server/libmx/src/mx_toupper.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_167) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_toupper.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_168) "Building C object CMakeFiles/uchat.dir/server/libmx/src/mx_toupper.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/libmx/src/mx_toupper.c.o   -c /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_toupper.c
 
 CMakeFiles/uchat.dir/server/libmx/src/mx_toupper.c.i: cmake_force
@@ -2248,9 +2261,48 @@ CMakeFiles/uchat.dir/server/libmx/src/mx_toupper.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/uchat.dir/server/libmx/src/mx_toupper.c.s"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_toupper.c -o CMakeFiles/uchat.dir/server/libmx/src/mx_toupper.c.s
 
+CMakeFiles/uchat.dir/server/src/cJSON.c.o: CMakeFiles/uchat.dir/flags.make
+CMakeFiles/uchat.dir/server/src/cJSON.c.o: ../server/src/cJSON.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_169) "Building C object CMakeFiles/uchat.dir/server/src/cJSON.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/src/cJSON.c.o   -c /Users/ikhanenko/Desktop/uchat/server/src/cJSON.c
+
+CMakeFiles/uchat.dir/server/src/cJSON.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/uchat.dir/server/src/cJSON.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/ikhanenko/Desktop/uchat/server/src/cJSON.c > CMakeFiles/uchat.dir/server/src/cJSON.c.i
+
+CMakeFiles/uchat.dir/server/src/cJSON.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/uchat.dir/server/src/cJSON.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/ikhanenko/Desktop/uchat/server/src/cJSON.c -o CMakeFiles/uchat.dir/server/src/cJSON.c.s
+
+CMakeFiles/uchat.dir/server/src/mx_check_disconect.c.o: CMakeFiles/uchat.dir/flags.make
+CMakeFiles/uchat.dir/server/src/mx_check_disconect.c.o: ../server/src/mx_check_disconect.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_170) "Building C object CMakeFiles/uchat.dir/server/src/mx_check_disconect.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/src/mx_check_disconect.c.o   -c /Users/ikhanenko/Desktop/uchat/server/src/mx_check_disconect.c
+
+CMakeFiles/uchat.dir/server/src/mx_check_disconect.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/uchat.dir/server/src/mx_check_disconect.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/ikhanenko/Desktop/uchat/server/src/mx_check_disconect.c > CMakeFiles/uchat.dir/server/src/mx_check_disconect.c.i
+
+CMakeFiles/uchat.dir/server/src/mx_check_disconect.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/uchat.dir/server/src/mx_check_disconect.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/ikhanenko/Desktop/uchat/server/src/mx_check_disconect.c -o CMakeFiles/uchat.dir/server/src/mx_check_disconect.c.s
+
+CMakeFiles/uchat.dir/server/src/mx_check_read.c.o: CMakeFiles/uchat.dir/flags.make
+CMakeFiles/uchat.dir/server/src/mx_check_read.c.o: ../server/src/mx_check_read.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_171) "Building C object CMakeFiles/uchat.dir/server/src/mx_check_read.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/src/mx_check_read.c.o   -c /Users/ikhanenko/Desktop/uchat/server/src/mx_check_read.c
+
+CMakeFiles/uchat.dir/server/src/mx_check_read.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/uchat.dir/server/src/mx_check_read.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/ikhanenko/Desktop/uchat/server/src/mx_check_read.c > CMakeFiles/uchat.dir/server/src/mx_check_read.c.i
+
+CMakeFiles/uchat.dir/server/src/mx_check_read.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/uchat.dir/server/src/mx_check_read.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/ikhanenko/Desktop/uchat/server/src/mx_check_read.c -o CMakeFiles/uchat.dir/server/src/mx_check_read.c.s
+
 CMakeFiles/uchat.dir/server/src/server.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/server/src/server.c.o: ../server/src/server.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_168) "Building C object CMakeFiles/uchat.dir/server/src/server.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_172) "Building C object CMakeFiles/uchat.dir/server/src/server.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/server/src/server.c.o   -c /Users/ikhanenko/Desktop/uchat/server/src/server.c
 
 CMakeFiles/uchat.dir/server/src/server.c.i: cmake_force
@@ -2263,7 +2315,7 @@ CMakeFiles/uchat.dir/server/src/server.c.s: cmake_force
 
 CMakeFiles/uchat.dir/test_serv.c.o: CMakeFiles/uchat.dir/flags.make
 CMakeFiles/uchat.dir/test_serv.c.o: ../test_serv.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_169) "Building C object CMakeFiles/uchat.dir/test_serv.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_173) "Building C object CMakeFiles/uchat.dir/test_serv.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/uchat.dir/test_serv.c.o   -c /Users/ikhanenko/Desktop/uchat/test_serv.c
 
 CMakeFiles/uchat.dir/test_serv.c.i: cmake_force
@@ -2359,6 +2411,7 @@ uchat_OBJECTS = \
 "CMakeFiles/uchat.dir/client/libmx/src/mx_swap_char.c.o" \
 "CMakeFiles/uchat.dir/client/libmx/src/mx_tolower.c.o" \
 "CMakeFiles/uchat.dir/client/libmx/src/mx_toupper.c.o" \
+"CMakeFiles/uchat.dir/client/src/cJSON.c.o" \
 "CMakeFiles/uchat.dir/client/src/client.c.o" \
 "CMakeFiles/uchat.dir/server/libmx/src/mx_arr_rotate.c.o" \
 "CMakeFiles/uchat.dir/server/libmx/src/mx_atoi.c.o" \
@@ -2443,6 +2496,9 @@ uchat_OBJECTS = \
 "CMakeFiles/uchat.dir/server/libmx/src/mx_swap_char.c.o" \
 "CMakeFiles/uchat.dir/server/libmx/src/mx_tolower.c.o" \
 "CMakeFiles/uchat.dir/server/libmx/src/mx_toupper.c.o" \
+"CMakeFiles/uchat.dir/server/src/cJSON.c.o" \
+"CMakeFiles/uchat.dir/server/src/mx_check_disconect.c.o" \
+"CMakeFiles/uchat.dir/server/src/mx_check_read.c.o" \
 "CMakeFiles/uchat.dir/server/src/server.c.o" \
 "CMakeFiles/uchat.dir/test_serv.c.o"
 
@@ -2532,6 +2588,7 @@ uchat: CMakeFiles/uchat.dir/client/libmx/src/mx_substr.c.o
 uchat: CMakeFiles/uchat.dir/client/libmx/src/mx_swap_char.c.o
 uchat: CMakeFiles/uchat.dir/client/libmx/src/mx_tolower.c.o
 uchat: CMakeFiles/uchat.dir/client/libmx/src/mx_toupper.c.o
+uchat: CMakeFiles/uchat.dir/client/src/cJSON.c.o
 uchat: CMakeFiles/uchat.dir/client/src/client.c.o
 uchat: CMakeFiles/uchat.dir/server/libmx/src/mx_arr_rotate.c.o
 uchat: CMakeFiles/uchat.dir/server/libmx/src/mx_atoi.c.o
@@ -2616,11 +2673,14 @@ uchat: CMakeFiles/uchat.dir/server/libmx/src/mx_substr.c.o
 uchat: CMakeFiles/uchat.dir/server/libmx/src/mx_swap_char.c.o
 uchat: CMakeFiles/uchat.dir/server/libmx/src/mx_tolower.c.o
 uchat: CMakeFiles/uchat.dir/server/libmx/src/mx_toupper.c.o
+uchat: CMakeFiles/uchat.dir/server/src/cJSON.c.o
+uchat: CMakeFiles/uchat.dir/server/src/mx_check_disconect.c.o
+uchat: CMakeFiles/uchat.dir/server/src/mx_check_read.c.o
 uchat: CMakeFiles/uchat.dir/server/src/server.c.o
 uchat: CMakeFiles/uchat.dir/test_serv.c.o
 uchat: CMakeFiles/uchat.dir/build.make
 uchat: CMakeFiles/uchat.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_170) "Linking C executable uchat"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_174) "Linking C executable uchat"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/uchat.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

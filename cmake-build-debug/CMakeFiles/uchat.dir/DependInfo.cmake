@@ -87,6 +87,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/ikhanenko/Desktop/uchat/client/libmx/src/mx_swap_char.c" "/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles/uchat.dir/client/libmx/src/mx_swap_char.c.o"
   "/Users/ikhanenko/Desktop/uchat/client/libmx/src/mx_tolower.c" "/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles/uchat.dir/client/libmx/src/mx_tolower.c.o"
   "/Users/ikhanenko/Desktop/uchat/client/libmx/src/mx_toupper.c" "/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles/uchat.dir/client/libmx/src/mx_toupper.c.o"
+  "/Users/ikhanenko/Desktop/uchat/client/src/cJSON.c" "/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles/uchat.dir/client/src/cJSON.c.o"
   "/Users/ikhanenko/Desktop/uchat/client/src/client.c" "/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles/uchat.dir/client/src/client.c.o"
   "/Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_arr_rotate.c" "/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles/uchat.dir/server/libmx/src/mx_arr_rotate.c.o"
   "/Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_atoi.c" "/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles/uchat.dir/server/libmx/src/mx_atoi.c.o"
@@ -171,6 +172,9 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_swap_char.c" "/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles/uchat.dir/server/libmx/src/mx_swap_char.c.o"
   "/Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_tolower.c" "/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles/uchat.dir/server/libmx/src/mx_tolower.c.o"
   "/Users/ikhanenko/Desktop/uchat/server/libmx/src/mx_toupper.c" "/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles/uchat.dir/server/libmx/src/mx_toupper.c.o"
+  "/Users/ikhanenko/Desktop/uchat/server/src/cJSON.c" "/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles/uchat.dir/server/src/cJSON.c.o"
+  "/Users/ikhanenko/Desktop/uchat/server/src/mx_check_disconect.c" "/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles/uchat.dir/server/src/mx_check_disconect.c.o"
+  "/Users/ikhanenko/Desktop/uchat/server/src/mx_check_read.c" "/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles/uchat.dir/server/src/mx_check_read.c.o"
   "/Users/ikhanenko/Desktop/uchat/server/src/server.c" "/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles/uchat.dir/server/src/server.c.o"
   "/Users/ikhanenko/Desktop/uchat/test_serv.c" "/Users/ikhanenko/Desktop/uchat/cmake-build-debug/CMakeFiles/uchat.dir/test_serv.c.o"
   )
