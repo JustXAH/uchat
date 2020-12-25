@@ -6,5 +6,5 @@ C_FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk 
 
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/dvoichuck/Desktop/uchat/client/inc -I/Users/dvoichuck/Desktop/uchat/client/libmx/inc -I/Users/dvoichuck/Desktop/uchat/server/inc -I/Users/dvoichuck/Desktop/uchat/server/libmx/inc 
+C_INCLUDES = -I/Users/ikhanenko/Desktop/uchat/client/inc -I/Users/ikhanenko/Desktop/uchat/client/libmx/inc -I/Users/ikhanenko/Desktop/uchat/server/inc -I/Users/ikhanenko/Desktop/uchat/server/libmx/inc 
 
