@@ -4,8 +4,7 @@
 
 #include "client.h"
 
-void func(int sockfd)
-{
+void func(int sockfd) {
     char buff[MAX];
     int n;
     for (;;) {

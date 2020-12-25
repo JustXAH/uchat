@@ -5,6 +5,7 @@
 #ifndef UCHAT_SERVER_H
 #define UCHAT_SERVER_H
 
+#include "cJSON.h"
 #include "libmx.h"
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -22,7 +23,7 @@
 #include <time.h>
 
 #define MAX 1024
-#define PORT 5001
+#define PORT 5000
 #define MAX_CLIENTS 5
 
 typedef struct s_server {
