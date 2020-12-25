@@ -10,10 +10,9 @@ void func(int sockfd)
     int n;
     for (;;) {
         bzero(buff, sizeof(buff));
-        write(1, "Enter the string: ", 18);
+        write(1, "\nEnter the string: ", 19);
         n = 0;
-        while ((buff[n++] = getchar()) != '\n')
-            ;
+        while ((buff[n++] = getchar()) != '\n');
         write(sockfd, buff, sizeof(buff));
         bzero(buff, sizeof(buff));
         read(sockfd, buff, sizeof(buff));
@@ -33,7 +32,7 @@ int main(int argc, char *argv[]) {
     // socket create and varification
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd == -1) {
-        write(2, "ERROR, socket creation failed", 29);
+        write(2, "ERROR, socket creation failed\n", 30);
         exit(0);
     }
     else
@@ -52,7 +51,7 @@ int main(int argc, char *argv[]) {
 
     // connect the client socket to server socket
     if (connect(sockfd, (SA*)&servaddr, sizeof(servaddr)) != 0) {
-        write(2, "ERROR, connection with the server failed!", 41);
+        write(2, "ERROR, connection with the server failed!\n", 42);
         exit(0);
     }
     else
