@@ -19,8 +19,7 @@ void *read_server(void *data) {
     return 0;
 }
 
-void func(int sockfd)
-{
+void func(int sockfd) {
     char buff[MAX];
     int n;
     for (;;) {

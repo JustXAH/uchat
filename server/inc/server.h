@@ -5,6 +5,7 @@
 #ifndef UCHAT_SERVER_H
 #define UCHAT_SERVER_H
 
+#include "cJSON.h"
 #include "libmx.h"
 #include <sys/types.h>
 #include <sys/socket.h>
