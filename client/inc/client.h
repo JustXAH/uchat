@@ -20,6 +20,10 @@
 #include <pthread.h>
 #include <poll.h>
 
+typedef struct s_client {
+    int sockfd;
+}              t_client;
+
 #define MAX 80
 #define PORT 5000
 #define SA struct sockaddr

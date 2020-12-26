@@ -6,9 +6,9 @@
 
 void *read_server(void *data) {
     char buff[MAX];
-    int sockfd = (int) data;
+    t_client *cli = (t_client *) data;
 
-    while (read(sockfd, buff, sizeof(buff))) {
+    while (read(cli->sockfd, buff, sizeof(buff))) {
         write(1, buff, strlen(buff));
         if ((strncmp(buff, "exit", 4)) == 0) {
             write(1, "Client Exit\n", 12);
@@ -23,7 +23,6 @@ void func(int sockfd) {
     char buff[MAX];
     int n;
     for (;;) {
-        printf("L");
         bzero(buff, sizeof(buff));
         write(1, "\nEnter the string: ", 19);
         n = 0;
@@ -33,13 +32,14 @@ void func(int sockfd) {
 }
 
 int main(int argc, char *argv[]) {
-    int sockfd, connfd;
-    struct sockaddr_in servaddr, cli;
+    t_client *cli = (t_client *)malloc(sizeof(t_client));
+    struct sockaddr_in servaddr;
     pthread_t thread;
 
+
     // socket create and varification
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockfd == -1) {
+    cli->sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (cli->sockfd == -1) {
         write(2, "ERROR, socket creation failed\n", 30);
         exit(0);
     }
@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
     servaddr.sin_port = htons(PORT);
 
     // connect the client socket to server socket
-    if (connect(sockfd, (SA*)&servaddr, sizeof(servaddr)) != 0) {
+    if (connect(cli->sockfd, (SA*)&servaddr, sizeof(servaddr)) != 0) {
         write(2, "ERROR, connection with the server failed!\n", 42);
         exit(0);
     }
@@ -66,11 +66,11 @@ int main(int argc, char *argv[]) {
         write(1, "Successfully connected to the server...\n", 37);
 
     // function for chat
-    pthread_create(&thread, NULL, read_server, &sockfd);
-    func(sockfd);
+    pthread_create(&thread, NULL, read_server, cli);
+    func(cli->sockfd);
 
     // close the socket
-    close(sockfd);
+    close(cli->sockfd);
 }
 
 
