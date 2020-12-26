@@ -22,10 +22,17 @@
 
 typedef struct s_client {
     int sockfd;
+    char *login;
+    char *password;
+    char *nick;
+    char *birth;
+
 }              t_client;
 
 #define MAX 80
 #define PORT 5000
 #define SA struct sockaddr
+
+char *mx_create_json_profile(t_client *cli);
 
 #endif //UCHAT_CLIENT_H

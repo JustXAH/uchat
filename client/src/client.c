@@ -31,11 +31,34 @@ void func(int sockfd) {
     }
 }
 
+static void registration(t_client *cli) {
+    char buff[20];
+
+    write(1, "Please enter your login: ", 25);
+    scanf("%s", buff);
+    cli->login = strdup(buff);
+    memset(buff, '\0', 20);
+    write(1, "\nPlease enter your password: ", 29);
+    scanf("%s", buff);
+    cli->password = strdup(buff);
+    memset(buff, '\0', 20);
+    write(1, "\nPlease enter your nickname: ", 29);
+    scanf("%s", buff);
+    cli->nick = strdup(buff);
+    memset(buff, '\0', 20);
+    write(1, "\nPlease enter your birthday: ", 29);
+    scanf("%s", buff);
+    cli->birth = strdup(buff);
+    memset(buff, '\0', 20);
+}
+
 int main(int argc, char *argv[]) {
     t_client *cli = (t_client *)malloc(sizeof(t_client));
     struct sockaddr_in servaddr;
     pthread_t thread;
 
+    registration(cli);
+    mx_create_json_profile(cli);
 
     // socket create and varification
     cli->sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -63,7 +86,9 @@ int main(int argc, char *argv[]) {
         exit(0);
     }
     else
-        write(1, "Successfully connected to the server...\n", 37);
+        write(1, "Successfully connected to the server...\n", 40);
+
+
 
     // function for chat
     pthread_create(&thread, NULL, read_server, cli);
