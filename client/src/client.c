@@ -4,30 +4,39 @@
 
 #include "client.h"
 
-void func(int sockfd)
-{
+void *read_server(void *data) {
     char buff[MAX];
-    int n;
-    for (;;) {
-        bzero(buff, sizeof(buff));
-        write(1, "\nEnter the string: ", 19);
-        n = 0;
-        while ((buff[n++] = getchar()) != '\n');
-        write(sockfd, buff, sizeof(buff));
-        bzero(buff, sizeof(buff));
-        read(sockfd, buff, sizeof(buff));
-        write(1, "Answer from Server: ", 20);
+    int sockfd = (int) data;
+
+    while (read(sockfd, buff, sizeof(buff))) {
         write(1, buff, strlen(buff));
         if ((strncmp(buff, "exit", 4)) == 0) {
             write(1, "Client Exit\n", 12);
             break;
         }
+        bzero(buff, sizeof(buff));
+    }
+    return 0;
+}
+
+void func(int sockfd)
+{
+    char buff[MAX];
+    int n;
+    for (;;) {
+        printf("L");
+        bzero(buff, sizeof(buff));
+        write(1, "\nEnter the string: ", 19);
+        n = 0;
+        while ((buff[n++] = getchar()) != '\n');
+        write(sockfd, buff, sizeof(buff));
     }
 }
 
 int main(int argc, char *argv[]) {
     int sockfd, connfd;
     struct sockaddr_in servaddr, cli;
+    pthread_t thread;
 
     // socket create and varification
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -58,6 +67,7 @@ int main(int argc, char *argv[]) {
         write(1, "Successfully connected to the server...\n", 37);
 
     // function for chat
+    pthread_create(&thread, NULL, read_server, &sockfd);
     func(sockfd);
 
     // close the socket

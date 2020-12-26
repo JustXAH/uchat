@@ -16,9 +16,11 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
+#include <pthread.h>
+#include <poll.h>
 
 #define MAX 80
-#define PORT 5001
+#define PORT 5000
 #define SA struct sockaddr
 
 #endif //UCHAT_CLIENT_H
