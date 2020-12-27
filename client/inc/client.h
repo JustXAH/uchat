@@ -6,6 +6,7 @@
 #define UCHAT_CLIENT_H
 
 #include "cJSON.h"
+#include "libmx.h"
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <netinet/in.h>

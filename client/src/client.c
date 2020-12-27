@@ -56,9 +56,10 @@ int main(int argc, char *argv[]) {
     t_client *cli = (t_client *)malloc(sizeof(t_client));
     struct sockaddr_in servaddr;
     pthread_t thread;
+    char *login_json;
 
     registration(cli);
-    mx_create_json_profile(cli);
+    login_json = mx_create_json_profile(cli);
 
     // socket create and varification
     cli->sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -88,7 +89,7 @@ int main(int argc, char *argv[]) {
     else
         write(1, "Successfully connected to the server...\n", 40);
 
-
+    write(cli->sockfd, login_json, mx_strlen(login_json));
 
     // function for chat
     pthread_create(&thread, NULL, read_server, cli);
