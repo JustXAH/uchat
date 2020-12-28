@@ -34,7 +34,7 @@ static void read_and_write(t_server *serv, int i) {
 }
 
 void mx_check_read(t_server *serv, int i) {
-    struct pollfd poll_set[2];
+    struct pollfd poll_set[1];
     int ret = 0;
 
     printf("------------------------------\n");
@@ -43,6 +43,9 @@ void mx_check_read(t_server *serv, int i) {
 
     poll_set->fd = serv->user_socket[i];
     poll_set->events = POLLIN;
+
+//    poll_set[1].fd = serv->user_socket[i];
+//    poll_set[1].events = POLLHUP;
 
 
     // ждём до 1 секунд
@@ -66,6 +69,9 @@ void mx_check_read(t_server *serv, int i) {
             poll_set->revents = 0;
             read_and_write(serv, i);
         }
+//        if (poll_set->revents & POLLHUP) {
+//            serv->cli_connect -= 1;
+//        }
     }
     printf("------------------------------\n");
 }

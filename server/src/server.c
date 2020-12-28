@@ -2,20 +2,19 @@
 // Created by Igor Khanenko on 12/22/20.
 //
 
-#include "cJSON.h"
 #include "server.h"
-
 
 void* poll_and_rw(void *data) {
     t_server *serv = (t_server *) data;
-    struct pollfd poll_set[2];
 
-    for (int i = 0; i != -1; ) {
+
+    for (int i = 0; serv->exit == true; ) {
+//        mx_read_server(serv);
         if (serv->cli_connect != 0) {
             if (i == serv->cli_connect) {
                 i = 0;
             }
-            mx_check_disconnect(serv, i);
+//            mx_check_disconnect(serv, i);
             mx_check_read(serv, i);
             i++;
         }
@@ -31,17 +30,21 @@ int main(int argc , char *argv[]) {
     pthread_t thread;
     t_server *serv = (t_server *)malloc(sizeof(t_server));
 
+    serv->exit = false;
     serv->user_socket = (int *)malloc(sizeof(int) * MAX_CLIENTS);
     serv->cli_connect = 0;
     for (int k = 0; k < MAX_CLIENTS; k++) {
-        serv->user_socket[k] = k + 4;
+        serv->user_socket[k] = -1;
     }
     //Create socket
     sockfd = socket(AF_INET , SOCK_STREAM , 0);
     if (sockfd == -1) {
         write(2, "ERROR, could not create socket", 30);
     }
-    write(1, "Socket created!\n", 16);
+    else {
+        write(1, "Socket created!\n", 16);
+        serv->serv_sock_fd = sockfd;
+    }
 
     //Prepare the sockaddr_in structure
     server.sin_family = AF_INET;
@@ -65,20 +68,25 @@ int main(int argc , char *argv[]) {
 
     pthread_create(&thread, NULL, poll_and_rw, serv);
     //Receive a message from client
-    for (int i = 0; i != -1; i++) {
+    for (int i = 0; serv->exit != true; i++) {
+//        if (i == MAX_CLIENTS - 1)
+//            i = 0;
         //accept connection from an incoming client
-        serv->user_socket[i] = accept(sockfd, (struct sockaddr *)&client, (socklen_t*)&c);
+        serv->user_socket[i] = accept(sockfd, (struct sockaddr *) &client,
+                                      (socklen_t *) &c);
         read(serv->user_socket[i], send_buff, sizeof(send_buff));
+
         cJSON *user = cJSON_Parse(send_buff);
         printf("%s\n", cJSON_Print(user));
-        serv->cli_connect += 1;
 
         if (serv->user_socket[i] < 0) {
             write(2, "ERROR, accept failed", 20);
             return 1;
         }
-        else
+        else {
             write(1, "Connection accepted!\n", 21);
+            serv->cli_connect += 1;
+        }
     }
 
     return 0;

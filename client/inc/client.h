@@ -31,7 +31,7 @@ typedef struct s_client {
 }              t_client;
 
 #define MAX 80
-#define PORT 5000
+#define PORT 5001
 #define SA struct sockaddr
 
 char *mx_create_json_profile(t_client *cli);

@@ -23,15 +23,18 @@
 #include <time.h>
 
 #define MAX 1024
-#define PORT 5000
+#define PORT 5001
 #define MAX_CLIENTS 5
 
 typedef struct s_server {
     int *user_socket;
+    int serv_sock_fd;
     int cli_connect;
+    bool exit;
 
 }              t_server;
 
+void mx_read_server(t_server *serv);
 void mx_check_read(t_server *serv, int i);
 void mx_check_disconnect(t_server *server, int i);
 
