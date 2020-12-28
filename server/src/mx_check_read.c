@@ -46,7 +46,7 @@ void mx_check_read(t_server *serv, int i) {
 
 
     // ждём до 1 секунд
-    ret = poll(poll_set, serv->cli_connect, 5000);
+    ret = poll(poll_set, serv->cli_connect, 1);
     printf("ret = %d\n", ret);
     printf("socket = %d[%d]\n", serv->user_socket[i], i);
 

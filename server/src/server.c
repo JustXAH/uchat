@@ -27,6 +27,7 @@ int main(int argc , char *argv[]) {
     int sockfd;
     int c;
     struct sockaddr_in server , client;
+    char send_buff[1024];
     pthread_t thread;
     t_server *serv = (t_server *)malloc(sizeof(t_server));
 
@@ -64,9 +65,12 @@ int main(int argc , char *argv[]) {
 
     pthread_create(&thread, NULL, poll_and_rw, serv);
     //Receive a message from client
-    for (int i = 0; i != -1; ) {
+    for (int i = 0; i != -1; i++) {
         //accept connection from an incoming client
-        serv->user_socket[i++] = accept(sockfd, (struct sockaddr *)&client, (socklen_t*)&c);
+        serv->user_socket[i] = accept(sockfd, (struct sockaddr *)&client, (socklen_t*)&c);
+        read(serv->user_socket[i], send_buff, sizeof(send_buff));
+        cJSON *user = cJSON_Parse(send_buff);
+        printf("%s\n", cJSON_Print(user));
         serv->cli_connect += 1;
 
         if (serv->user_socket[i] < 0) {

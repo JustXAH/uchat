@@ -13,11 +13,11 @@ void mx_check_disconnect(t_server *serv, int i) {
     // от socket[i] мы будем ожидать входящих данных
 
     poll_set->fd = serv->user_socket[i];
-    poll_set->events = POLLERR;
+    poll_set->events = POLLHUP;
 
 
     // ждём до 1 секунд
-    ret = poll(poll_set, serv->cli_connect, 1000);
+    ret = poll(poll_set, serv->cli_connect, 1);
     printf("ret = %d\n", ret);
     printf("socket = %d[%d]\n", serv->user_socket[i], i);
 
@@ -32,7 +32,7 @@ void mx_check_disconnect(t_server *serv, int i) {
     }
     else {
         // обнаружили событие, обнулим revents чтобы можно было переиспользовать структуру
-        if (poll_set->revents & POLLERR) {
+        if (poll_set->revents & POLLHUP) {
             // обработка входных данных от sock1
             poll_set->revents = 0;
             printf("socked_disconnect\n");
