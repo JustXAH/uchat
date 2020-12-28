@@ -11,20 +11,21 @@ static void read_and_write(t_server *serv, int i) {
     write(1, "Waiting for a message...\n", 25);
     read(serv->user_socket[i], client_message, sizeof(client_message));
 //        Send the message back to client
-    str = mx_strsplit(client_message, ';');
+    cJSON *cJSON_massage = cJSON_Parse(client_message);
+    cJSON *name = cJSON_GetArrayItem(cJSON_massage, 0);
+    cJSON *massage = cJSON_GetArrayItem(cJSON_massage, 1);
+    printf("name = %s\nmassage = %s\n", cJSON_Print(name), cJSON_Print(massage));
+    str = mx_strsplit(cJSON_Print(massage), ';');
     if (str[1] == NULL) {
 //        free(str[0]);
-        str[0] = mx_strdup("Message recipient is not specified!\nusage: message;user number(0,1,2,3,4)");
-        printf("str[0] = %s, str[1] = %d", str[0], i);
-        printf("send massage to client: '%s'\n", client_message);
-        if (write(serv->user_socket[i], str[0],
-                  strlen(str[0])) == -1)
-            write(serv->user_socket[i], "User not found", 16);
+//        if (write(serv->user_socket[i], str[0],
+//                  strlen(str[0])) == -1)
+//            write(serv->user_socket[i], "User not found", 16);
 //        str[1] = mx_strdup(mx_itoa(i));
     }
     else {
         printf("str[0] = %s, str[1] = %s", str[0], str[1]);
-        printf("send massage to client: '%s'\n", client_message);
+        printf("send massage to client: '%s'\n", cJSON_Print(massage));
         if (write(serv->user_socket[mx_atoi(str[1])], str[0],
                   strlen(str[0])) == -1)
             write(serv->user_socket[i], "User not found", 16);

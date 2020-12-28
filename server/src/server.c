@@ -35,7 +35,7 @@ int main(int argc , char *argv[]) {
     serv->user_socket = (int *)malloc(sizeof(int) * MAX_CLIENTS);
     serv->cli_connect = 0;
     for (int k = 0; k < MAX_CLIENTS; k++) {
-        serv->user_socket[k] = k + 4;
+        serv->user_socket[k] = -1;
     }
     //Create socket
     sockfd = socket(AF_INET , SOCK_STREAM , 0);
@@ -72,7 +72,6 @@ int main(int argc , char *argv[]) {
         read(serv->user_socket[i], send_buff, sizeof(send_buff));
         cJSON *user = cJSON_Parse(send_buff);
         cJSON *name = cJSON_GetArrayItem(user, 1);
-        printf("%s\n", cJSON_Print(name));
         printf("%s\n", cJSON_Print(user));
         serv->cli_connect += 1;
 
