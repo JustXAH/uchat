@@ -19,15 +19,21 @@ void *read_server(void *data) {
     return 0;
 }
 
-void func(int sockfd) {
+void func(int sockfd, t_client *cli) {
     char buff[MAX];
     int n;
+    cJSON *LOGIN = cJSON_CreateString(cli->login);
+
     for (;;) {
-        bzero(buff, sizeof(buff));
+        cJSON *send = cJSON_CreateObject();
         write(1, "\nEnter the string: ", 19);
         n = 0;
         while ((buff[n++] = getchar()) != '\n');
-        write(sockfd, buff, sizeof(buff));
+        cJSON *MASSAGE = cJSON_CreateString(buff);
+        cJSON_AddItemToObject(send, "LOGIN", LOGIN);
+        cJSON_AddItemToObject(send, "massage", MASSAGE);
+        write(sockfd, cJSON_Print(send), sizeof(buff));
+        bzero(buff, sizeof(buff));
     }
 }
 
@@ -93,7 +99,7 @@ int main(int argc, char *argv[]) {
 
     // function for chat
     pthread_create(&thread, NULL, read_server, cli);
-    func(cli->sockfd);
+    func(cli->sockfd, cli);
 
     // close the socket
     close(cli->sockfd);
