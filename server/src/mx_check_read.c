@@ -17,11 +17,7 @@ static void read_and_write(t_server *serv, int i) {
     printf("name = %s\nmassage = %s\n", cJSON_Print(name), cJSON_Print(massage));
     str = mx_strsplit(cJSON_Print(massage), ';');
     if (str[1] == NULL) {
-//        free(str[0]);
-//        if (write(serv->user_socket[i], str[0],
-//                  strlen(str[0])) == -1)
-//            write(serv->user_socket[i], "User not found", 16);
-//        str[1] = mx_strdup(mx_itoa(i));
+        write(serv->user_socket[i], "Dima FUCK YOU\n", 14);
     }
     else {
         printf("str[0] = %s, str[1] = %s", str[0], str[1]);
@@ -39,18 +35,15 @@ void mx_check_read(t_server *serv, int i) {
     int ret = 0;
 
     printf("------------------------------\n");
+    printf("CHECK READ CLIENT SOCKET\n");
     printf("cli_connect = %d\n", serv->cli_connect);
     // от socket[i] мы будем ожидать входящих данных
 
     poll_set->fd = serv->user_socket[i];
     poll_set->events = POLLIN;
 
-//    poll_set[1].fd = serv->user_socket[i];
-//    poll_set[1].events = POLLHUP;
-
-
     // ждём до 1 секунд
-    ret = poll(poll_set, serv->cli_connect, 5000);
+    ret = poll(poll_set, 1, 3000);
     printf("ret = %d\n", ret);
     printf("socket = %d[%d]\n", serv->user_socket[i], i);
 
@@ -70,9 +63,6 @@ void mx_check_read(t_server *serv, int i) {
             poll_set->revents = 0;
             read_and_write(serv, i);
         }
-//        if (poll_set->revents & POLLHUP) {
-//            serv->cli_connect -= 1;
-//        }
     }
     printf("------------------------------\n");
 }

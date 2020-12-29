@@ -8,14 +8,14 @@ void* poll_and_rw(void *data) {
     t_server *serv = (t_server *) data;
 
 
-    for (int i = 0; serv->exit == true; ) {
+    for (int i = 0; serv->exit != true; ) {
 //        mx_read_server(serv);
         if (serv->cli_connect != 0) {
             if (i == serv->cli_connect) {
                 i = 0;
             }
-//            mx_check_disconnect(serv, i);
-            mx_check_read(serv, i);
+            mx_check_disconnect(serv, i);
+//            mx_check_read(serv, i);
             i++;
         }
     }
@@ -27,7 +27,6 @@ int main(int argc , char *argv[]) {
     int c;
     struct sockaddr_in server , client;
     char send_buff[1024];
-    char *str;
     pthread_t thread;
     t_server *serv = (t_server *)malloc(sizeof(t_server));
 
@@ -78,7 +77,7 @@ int main(int argc , char *argv[]) {
         read(serv->user_socket[i], send_buff, sizeof(send_buff));
 
         cJSON *user = cJSON_Parse(send_buff);
-        cJSON *name = cJSON_GetArrayItem(user, 1);
+//        cJSON *name = cJSON_GetArrayItem(user, 1);
         printf("%s\n", cJSON_Print(user));
 
         if (serv->user_socket[i] < 0) {

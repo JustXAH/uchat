@@ -10,10 +10,6 @@ void *read_server(void *data) {
 
     while (read(cli->sockfd, buff, sizeof(buff))) {
         write(1, buff, strlen(buff));
-        if ((strncmp(buff, "exit", 4)) == 0) {
-            write(1, "Client Exit\n", 12);
-            break;
-        }
         bzero(buff, sizeof(buff));
     }
     return 0;
@@ -29,6 +25,10 @@ void func(int sockfd, t_client *cli) {
         write(1, "\nEnter the string: ", 19);
         n = 0;
         while ((buff[n++] = getchar()) != '\n');
+        if ((strncmp(buff, "exit", 4)) == 0) {
+            write(1, "Client Exit\n", 12);
+            break;
+        }
         cJSON *MASSAGE = cJSON_CreateString(buff);
         cJSON_AddItemToObject(send, "LOGIN", LOGIN);
         cJSON_AddItemToObject(send, "massage", MASSAGE);

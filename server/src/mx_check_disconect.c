@@ -5,19 +5,19 @@
 #include "server.h"
 
 void mx_check_disconnect(t_server *serv, int i) {
-    struct pollfd poll_set[2];
+    struct pollfd poll_set[1];
     int ret = 0;
 
     printf("------------------------------\n");
+    printf("DISCONNECT\n");
     printf("cli_connect = %d\n", serv->cli_connect);
     // от socket[i] мы будем ожидать входящих данных
 
     poll_set->fd = serv->user_socket[i];
     poll_set->events = POLLHUP;
 
-
     // ждём до 1 секунд
-    ret = poll(poll_set, serv->cli_connect, 5000);
+    ret = poll(poll_set, 1, 3000);
     printf("ret = %d\n", ret);
     printf("socket = %d[%d]\n", serv->user_socket[i], i);
 
@@ -36,7 +36,7 @@ void mx_check_disconnect(t_server *serv, int i) {
             // обработка входных данных от sock1
             poll_set->revents = 0;
             printf("socked_disconnect\n");
-            serv->cli_connect--;
+            serv->cli_connect -= 1;
         }
     }
     printf("------------------------------\n");
