@@ -50,7 +50,7 @@ int main(int argc , char *argv[]) {
     server.sin_port = htons(PORT);
 
     //Bind
-    if( bind(sockfd, (struct sockaddr *)&server , sizeof(server)) < 0) {
+    if (bind(sockfd, (struct sockaddr *)&server , sizeof(server)) < 0) {
         //print the error message
         write(2, "ERROR, bind failed", 18);
         return 1;
@@ -71,7 +71,8 @@ int main(int argc , char *argv[]) {
         serv->user_socket[i] = accept(sockfd, (struct sockaddr *)&client, (socklen_t*)&c);
         read(serv->user_socket[i], send_buff, sizeof(send_buff));
         cJSON *user = cJSON_Parse(send_buff);
-        cJSON *name = cJSON_GetArrayItem(user, 1);
+        cJSON *name = cJSON_GetObjectItemCaseSensitive(user, "NICK");
+        printf("NICK = %s\n", name->valuestring);
         printf("%s\n", cJSON_Print(user));
         serv->cli_connect += 1;
 

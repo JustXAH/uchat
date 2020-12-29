@@ -15,7 +15,7 @@ static void read_and_write(t_server *serv, int i) {
     cJSON *name = cJSON_GetArrayItem(cJSON_massage, 0);
     cJSON *massage = cJSON_GetArrayItem(cJSON_massage, 1);
     printf("name = %s\nmassage = %s\n", cJSON_Print(name), cJSON_Print(massage));
-    str = mx_strsplit(cJSON_Print(massage), ';');
+    str = mx_strsplit(massage->valuestring, ';');
     if (str[1] == NULL) {
 //        free(str[0]);
 //        if (write(serv->user_socket[i], str[0],
@@ -25,7 +25,7 @@ static void read_and_write(t_server *serv, int i) {
     }
     else {
         printf("str[0] = %s, str[1] = %s", str[0], str[1]);
-        printf("send massage to client: '%s'\n", cJSON_Print(massage));
+        printf("send massage to client: '%s'\n", str[0]);
         if (write(serv->user_socket[mx_atoi(str[1])], str[0],
                   strlen(str[0])) == -1)
             write(serv->user_socket[i], "User not found", 16);
