@@ -17,11 +17,7 @@ static void read_and_write(t_server *serv, int i) {
     printf("name = %s\nmassage = %s\n", cJSON_Print(name), cJSON_Print(massage));
     str = mx_strsplit(massage->valuestring, ';');
     if (str[1] == NULL) {
-//        free(str[0]);
-//        if (write(serv->user_socket[i], str[0],
-//                  strlen(str[0])) == -1)
-//            write(serv->user_socket[i], "User not found", 16);
-//        str[1] = mx_strdup(mx_itoa(i));
+        write(serv->user_socket[i], "invalid string: Enter massage and socket\n", 41);
     }
     else {
         printf("str[0] = %s, str[1] = %s", str[0], str[1]);
