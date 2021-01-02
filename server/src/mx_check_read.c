@@ -4,13 +4,14 @@
 
 #include "server.h"
 
+
 static void read_and_write(t_server *serv, int i) {
     char client_message[MAX];
-    char **str;
     cJSON *USER_JSON = NULL;
     cJSON *TYPE = NULL; //тип связи клиент-сервер (1 - сообщения, 2 - аутентификация, 3 - регистрация)
     cJSON *SENDER = NULL; // отправитель (логин)
     cJSON *MESSAGE = NULL;
+    cJSON *TO = NULL;
 
     write(1, "Waiting for a message...\n", 25);
     read(serv->user_socket[i], client_message, MAX);
@@ -28,25 +29,25 @@ static void read_and_write(t_server *serv, int i) {
         else { //это TYPE = 1 - сообщения!
             SENDER = cJSON_GetObjectItemCaseSensitive(USER_JSON, "SENDER");
             MESSAGE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "MESSAGE");
-
+            TO = cJSON_GetObjectItemCaseSensitive(USER_JSON, "TO");
             printf("Sender = %s\nmessage = %s\n", cJSON_Print(SENDER),
                    cJSON_Print(MESSAGE));
-            str = mx_strsplit(MESSAGE->valuestring, ';');
-
-            if (str[1] == NULL) {
-                //ТУТ НАДО ИСПРАВЛЯТЬ ПОД JSON !!!
-                write(serv->user_socket[i],
-                      "Invalid  struct of message: Enter message and socket\n",
-                      41);
-            } else {
-                printf("str[0] = %s, str[1] = %s", str[0], str[1]);
-                printf("send message to client: '%s'\n", str[0]);
-                //ТУТ НАДО ИСПРАВЛЯТЬ ПОД JSON !!!
-                if (write(serv->user_socket[mx_atoi(str[1])], str[0],
-                          strlen(str[0])) == -1)
-                    write(serv->user_socket[i], "User not found", 16);
+            //ТУТ НАДО ИСПРАВЛЯТЬ ПОД JSON !!!
+            if (serv->cli_connect - 1 >= mx_atoi(TO->valuestring)) {
+                printf("%s\n", cJSON_Print(USER_JSON));
+                write(mx_atoi(TO->valuestring), cJSON_Print(USER_JSON),
+                      mx_strlen(cJSON_Print(USER_JSON)));
             }
-            mx_del_strarr(&str);
+            else {
+                cJSON_DeleteItemFromObject(USER_JSON, "MESSAGE");
+                cJSON_DeleteItemFromObject(USER_JSON, "TO");
+                TO = cJSON_CreateString(mx_itoa(i));
+                MESSAGE = cJSON_CreateString("User not found");
+                cJSON_AddItemToObject(USER_JSON, "TO", TO);
+                cJSON_AddItemToObject(USER_JSON, "MESSAGE", MESSAGE);
+                printf("%s\n", cJSON_Print(USER_JSON));
+                write(serv->user_socket[i], cJSON_Print(USER_JSON), 16);
+            }
             memset(&client_message, '\0', sizeof(client_message));
         }
     }

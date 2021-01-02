@@ -10,19 +10,21 @@ void *read_server(void *data) {
     cJSON *SERVER_JSON = NULL;
 //    cJSON *SENDER = NULL;
     cJSON *MESSAGE = NULL;
-
+    char *str = NULL;
 
     while (read(cli->sockfd, buff, sizeof(buff))) {
-//        write(1, "\nFrom server: ", 14);
-        SERVER_JSON = cJSON_Parse(buff);
-//        SENDER = cJSON_GetObjectItemCaseSensitive(SERVER_JSON, "SENDER");
-        MESSAGE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON, "MESSAGE");
-
-        write(1, cJSON_Print(MESSAGE), strlen(cJSON_Print(MESSAGE)));
-        memset(buff, '\0', sizeof(buff));
+        write(1, "\nFrom server: ", 14);
+        printf("%s\n", buff);
+//        SERVER_JSON = cJSON_Parse(buff);
+////        SENDER = cJSON_GetObjectItemCaseSensitive(SERVER_JSON, "SENDER");
+//        MESSAGE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON, "MESSAGE");
+//        str = mx_strdup(MESSAGE->valuestring);
+//        write(1, str, mx_strlen(str));
+//        memset(buff, '\0', sizeof(buff));
+//        free(str);
 //        cJSON_free(SERVER_JSON);
     }
-    cJSON_Delete(SERVER_JSON);
+//    cJSON_Delete(SERVER_JSON);
 
     return 0;
 }
@@ -32,7 +34,10 @@ void func(int sockfd, t_client *cli) {
     cJSON *SEND = cJSON_CreateObject();
     cJSON *TYPE = cJSON_CreateNumber(1);
     cJSON *LOGIN = cJSON_CreateString(cli->login);
+    cJSON *TO = NULL;
     cJSON *MESSAGE = NULL;
+    int n = 0;
+    char **str;
 //    bool first_entry = true;
 
     for (;;) {
@@ -42,23 +47,29 @@ void func(int sockfd, t_client *cli) {
 
         sleep(1);
         write(1, "\n\nEnter your message: ", 22);
-        scanf("%s", buff);
-        if ((strcmp(buff, "exit")) == 0) {
+        while ((buff[n++] = getchar()) != '\n');
+        n = 0;
+        if ((strncmp(buff, "exit", 4)) == 0) {
             write(1, "Client Exit\n", 12);
             break;
         }
-//            while ((buff[n++] = getchar()) != '\n');
-//            if ((strncmp(buff, "exit", 4)) == 0) {
-//                write(1, "Client Exit\n", 12);
-//                break;
-//            }
-        MESSAGE = cJSON_CreateString(buff);
-        cJSON_AddItemToObject(SEND, "TYPE", TYPE);
-        cJSON_AddItemToObject(SEND, "LOGIN", LOGIN);
-        cJSON_AddItemToObject(SEND, "MESSAGE", MESSAGE);
-        write(sockfd, cJSON_Print(SEND), sizeof(buff));
+        str = mx_strsplit(buff, ';');
+        if (str[1] == NULL)
+            write(1,
+                  "Invalid  struct of message: Enter message and socket\n",
+                  41);
+        else {
+            mx_del_char(str[1], mx_strlen(str[1]) - 1, '\n');
+            MESSAGE = cJSON_CreateString(str[0]);
+            TO = cJSON_CreateString(str[1]);
+            cJSON_AddItemToObject(SEND, "TYPE", TYPE);
+            cJSON_AddItemToObject(SEND, "LOGIN", LOGIN);
+            cJSON_AddItemToObject(SEND, "MESSAGE", MESSAGE);
+            cJSON_AddItemToObject(SEND, "TO", TO);
+            write(sockfd, cJSON_Print(SEND), sizeof(buff));
+            cJSON_free(MESSAGE);
+        }
         memset(buff, '\0', sizeof(buff));
-        cJSON_free(MESSAGE);
     }
     cJSON_Delete(SEND);
 }

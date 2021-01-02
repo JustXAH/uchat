@@ -23,7 +23,7 @@
 #include <time.h>
 
 #define MAX 1024
-#define PORT 5000
+#define PORT 5001
 #define MAX_CLIENTS 5
 
 typedef struct s_server {
