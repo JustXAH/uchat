@@ -15,7 +15,7 @@ void* poll_and_rw(void *data) {
                 i = 0;
             }
             mx_check_disconnect(serv, i);
-//            mx_check_read(serv, i);
+            mx_check_read(serv, i);
             i++;
         }
     }
@@ -29,6 +29,17 @@ int main(int argc , char *argv[]) {
     char send_buff[1024];
     pthread_t thread;
     t_server *serv = (t_server *)malloc(sizeof(t_server));
+
+//    int arr[MAX_CLIENTS] = {4, -1, 5, -1, 6};
+//
+//    for (int i = 0; i < 5; i++) {
+//        printf("%d\t", arr[i]);
+//    }
+//    printf("\n\n");
+//    mx_int_bubble_sort_reverse(arr, MAX_CLIENTS);
+//    for (int i = 0; i < 5; i++) {
+//        printf("%d\t", arr[i]);
+//    }
 
     serv->exit = false;
     serv->user_socket = (int *)malloc(sizeof(int) * MAX_CLIENTS);
@@ -69,25 +80,30 @@ int main(int argc , char *argv[]) {
     pthread_create(&thread, NULL, poll_and_rw, serv);
     //Receive a message from client
     for (int i = 0; serv->exit != true; i++) {
-//        if (i == MAX_CLIENTS - 1)
-//            i = 0;
-        //accept connection from an incoming client
-        serv->user_socket[i] = accept(sockfd, (struct sockaddr *) &client,
-                                      (socklen_t *) &c);
-        read(serv->user_socket[i], send_buff, sizeof(send_buff));
+        if (i == MAX_CLIENTS - 1)
+            i = 0;
+//        accept connection from an incoming client
+        if (serv->user_socket[i] == -1) {
+            serv->user_socket[i] = accept(sockfd, (struct sockaddr *) &client,
+                                          (socklen_t *) &c);
+//            read(serv->user_socket[i], send_buff, sizeof(send_buff));
+//            cJSON *user = cJSON_Parse(send_buff);
+//            cJSON *name = cJSON_GetObjectItemCaseSensitive(user, "NICK");
+//            printf("NICK = %s\n", name->valuestring);
+//            printf("%s\n", cJSON_Print(user));
+            if (serv->user_socket[i] < 0) {
+                write(2, "ERROR, accept failed", 20);
+                return 1;
+            }
+            else {
+                write(1, "Connection accepted!\n", 21);
+                mx_int_bubble_sort_reverse(serv->user_socket, MAX_CLIENTS);
+                serv->cli_connect += 1;
+            }
 
-        cJSON *user = cJSON_Parse(send_buff);
-        cJSON *name = cJSON_GetObjectItemCaseSensitive(user, "NICK");
-        printf("NICK = %s\n", name->valuestring);
-        printf("%s\n", cJSON_Print(user));
+//            mx_login_and_pass_authentication(send_buff, serv->user_socket[i]);
 
-        if (serv->user_socket[i] < 0) {
-            write(2, "ERROR, accept failed", 20);
-            return 1;
-        }
-        else {
-            write(1, "Connection accepted!\n", 21);
-            serv->cli_connect += 1;
+            i = 0;
         }
     }
 

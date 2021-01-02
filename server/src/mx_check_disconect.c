@@ -36,6 +36,8 @@ void mx_check_disconnect(t_server *serv, int i) {
             // обработка входных данных от sock1
             poll_set->revents = 0;
             printf("socked_disconnect\n");
+            serv->user_socket[i] = -1;
+            mx_int_bubble_sort_reverse(serv->user_socket, MAX_CLIENTS);
             serv->cli_connect -= 1;
         }
     }

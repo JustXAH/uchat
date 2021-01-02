@@ -23,7 +23,7 @@
 #include <time.h>
 
 #define MAX 1024
-#define PORT 5001
+#define PORT 5000
 #define MAX_CLIENTS 5
 
 typedef struct s_server {
@@ -34,6 +34,8 @@ typedef struct s_server {
 
 }              t_server;
 
+void mx_login_and_pass_authentication(cJSON *user_JSON, int user_sock);
+cJSON *mx_database_stub(cJSON *user);
 void mx_read_server(t_server *serv);
 void mx_check_read(t_server *serv, int i);
 void mx_check_disconnect(t_server *server, int i);

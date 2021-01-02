@@ -7,27 +7,50 @@
 static void read_and_write(t_server *serv, int i) {
     char client_message[MAX];
     char **str;
+    cJSON *USER_JSON = NULL;
+    cJSON *TYPE = NULL; //тип связи клиент-сервер (1 - сообщения, 2 - аутентификация, 3 - регистрация)
+    cJSON *SENDER = NULL; // отправитель (логин)
+    cJSON *MESSAGE = NULL;
 
     write(1, "Waiting for a message...\n", 25);
-    read(serv->user_socket[i], client_message, sizeof(client_message));
+    read(serv->user_socket[i], client_message, MAX);
 //        Send the message back to client
-    cJSON *cJSON_massage = cJSON_Parse(client_message);
-    cJSON *name = cJSON_GetArrayItem(cJSON_massage, 0);
-    cJSON *massage = cJSON_GetArrayItem(cJSON_massage, 1);
-    printf("name = %s\nmessage = %s\n", cJSON_Print(name), cJSON_Print(massage));
-    str = mx_strsplit(massage->valuestring, ';');
-    if (str[1] == NULL) {
-        write(serv->user_socket[i], "Invalid  struct of message: Enter message and socket\n", 41);
+    if (client_message[0] != '\0') {
+        USER_JSON = cJSON_Parse(client_message);
+        TYPE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "TYPE");
+
+        if (TYPE->valueint == 2) { // аутентификация
+            mx_login_and_pass_authentication(USER_JSON, serv->user_socket[i]);
+        }
+        else if (TYPE->valueint == 3) { // регистрация
+            //ТУТ должна быть функция для регистрации пользователя
+        }
+        else { //это TYPE = 1 - сообщения!
+            SENDER = cJSON_GetObjectItemCaseSensitive(USER_JSON, "SENDER");
+            MESSAGE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "MESSAGE");
+
+            printf("Sender = %s\nmessage = %s\n", cJSON_Print(SENDER),
+                   cJSON_Print(MESSAGE));
+            str = mx_strsplit(MESSAGE->valuestring, ';');
+
+            if (str[1] == NULL) {
+                //ТУТ НАДО ИСПРАВЛЯТЬ ПОД JSON !!!
+                write(serv->user_socket[i],
+                      "Invalid  struct of message: Enter message and socket\n",
+                      41);
+            } else {
+                printf("str[0] = %s, str[1] = %s", str[0], str[1]);
+                printf("send message to client: '%s'\n", str[0]);
+                //ТУТ НАДО ИСПРАВЛЯТЬ ПОД JSON !!!
+                if (write(serv->user_socket[mx_atoi(str[1])], str[0],
+                          strlen(str[0])) == -1)
+                    write(serv->user_socket[i], "User not found", 16);
+            }
+            mx_del_strarr(&str);
+            memset(&client_message, '\0', sizeof(client_message));
+        }
     }
-    else {
-        printf("str[0] = %s, str[1] = %s", str[0], str[1]);
-        printf("send message to client: '%s'\n", str[0]);
-        if (write(serv->user_socket[mx_atoi(str[1])], str[0],
-                  strlen(str[0])) == -1)
-            write(serv->user_socket[i], "User not found", 16);
-    }
-    mx_del_strarr(&str);
-    memset(&client_message, '\0', sizeof(client_message));
+    cJSON_Delete(USER_JSON);
 }
 
 void mx_check_read(t_server *serv, int i) {
