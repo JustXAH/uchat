@@ -18,7 +18,7 @@ void *read_server(void *data) {
 
     while (read(cli->sockfd, buff, sizeof(buff))) {
 //        write(1, "\nFrom %", 6);
-        printf("%s\n", buff);
+//        printf("%s\n", buff);
         SERVER_JSON = cJSON_Parse(buff);
         TYPE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON, "TYPE");
 
@@ -36,13 +36,13 @@ void *read_server(void *data) {
                 str_user_json = mx_create_user_profile(cli);
                 write(cli->sockfd, str_user_json, strlen(str_user_json));
             }
-            else { //RESULT = TRUE (аутентификация прошла успешно)
+            else { //RESULT = TRUE (аутентификация прошла успеexitшно)
                 cli->authentication = true;
             }
         }
         else { //TYPE == 1 (сообщения)
             SENDER = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
-                                                      "SENDER");
+                                                      "LOGIN");
             MESSAGE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
                                                        "MESSAGE");
 //        write (1, SENDER->valuestring, strlen(SENDER->valuestring));
@@ -109,11 +109,11 @@ void func(int sockfd, t_client *cli, pthread_t thread) {
                 cJSON_AddItemToObject(SEND, "MESSAGE", MESSAGE);
                 cJSON_AddItemToObject(SEND, "TO", TO);
                 str_send = cJSON_Print(SEND);
+//                printf("\n\nJSON send to server:%s\n\n", str_send);
                 write(sockfd, str_send, strlen(str_send));
                 cJSON_DeleteItemFromObject(SEND, "MESSAGE");
                 cJSON_DeleteItemFromObject(SEND, "TO");
-//            cJSON_free(MESSAGE);
-//            cJSON_free(TO);
+                free(str_send);
             }
             mx_del_strarr(&split_str);
             memset(buff, '\0', sizeof(buff));
@@ -168,6 +168,8 @@ int main(int argc, char *argv[]) {
 
     // close the socket
     close(cli->sockfd);
+
+    system("leaks -q client");
 
     return 0;
 }

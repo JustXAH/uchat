@@ -27,7 +27,7 @@ static void read_and_write(t_server *serv, int i) {
             //ТУТ должна быть функция для регистрации пользователя
         }
         else { //это TYPE = 1 - сообщения!
-            SENDER = cJSON_GetObjectItemCaseSensitive(USER_JSON, "SENDER");
+            SENDER = cJSON_GetObjectItemCaseSensitive(USER_JSON, "LOGIN");
             MESSAGE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "MESSAGE");
             TO = cJSON_GetObjectItemCaseSensitive(USER_JSON, "TO");
             printf("Sender = %s\nmessage = %s\n", cJSON_Print(SENDER),
@@ -35,7 +35,7 @@ static void read_and_write(t_server *serv, int i) {
             //ТУТ НАДО ИСПРАВЛЯТЬ ПОД JSON !!!
             if (serv->cli_connect - 1 >= TO->valueint) {
                 printf("%s\n", cJSON_Print(USER_JSON));
-                write(TO->valueint, cJSON_Print(USER_JSON),
+                write(serv->user_socket[TO->valueint], cJSON_Print(USER_JSON),
                       mx_strlen(cJSON_Print(USER_JSON)));
             }
             else {
