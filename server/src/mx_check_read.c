@@ -33,9 +33,9 @@ static void read_and_write(t_server *serv, int i) {
             printf("Sender = %s\nmessage = %s\n", cJSON_Print(SENDER),
                    cJSON_Print(MESSAGE));
             //ТУТ НАДО ИСПРАВЛЯТЬ ПОД JSON !!!
-            if (serv->cli_connect - 1 >= mx_atoi(TO->valuestring)) {
+            if (serv->cli_connect - 1 >= TO->valueint) {
                 printf("%s\n", cJSON_Print(USER_JSON));
-                write(mx_atoi(TO->valuestring), cJSON_Print(USER_JSON),
+                write(TO->valueint, cJSON_Print(USER_JSON),
                       mx_strlen(cJSON_Print(USER_JSON)));
             }
             else {

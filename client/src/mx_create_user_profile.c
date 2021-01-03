@@ -4,13 +4,40 @@
 
 #include "client.h"
 
+static void authentication(t_client *cli) {
+    char buff[20];
+
+    write(1, "Please enter your username and password\n", 40);
+    write(1, "Login: ", 7);
+    scanf("%s", buff);
+    cli->login = strdup(buff);
+    memset(buff, '\0', 20);
+    write(1, "Password: ", 10);
+    scanf("%s", buff);
+    cli->password = strdup(buff);
+    memset(buff, '\0', 20);
+//    write(1, "\nPlease enter your nickname: ", 29);
+//    scanf("%s", buff);
+//    cli->nick = strdup(buff);
+//    memset(buff, '\0', 20);
+//    write(1, "\nPlease enter your birthday: ", 29);
+//    scanf("%s", buff);
+//    cli->birth = strdup(buff);
+//    memset(buff, '\0', 20);
+}
+
 char *mx_create_user_profile(t_client *cli) {
     char *str_user = NULL;
     cJSON *USER = cJSON_CreateObject();
     cJSON *TYPE = cJSON_CreateNumber(2);
-    cJSON *LOGIN = cJSON_CreateString(cli->login);
-    cJSON *PASS = cJSON_CreateString(cli->password);
+    cJSON *LOGIN = NULL;
+    cJSON *PASS = NULL;
 
+    cli->authentication = false;
+    authentication(cli);
+
+    LOGIN = cJSON_CreateString(cli->login);
+    PASS = cJSON_CreateString(cli->password);
 
     cJSON_AddItemToObject(USER, "TYPE", TYPE);
     cJSON_AddItemToObject(USER, "LOGIN", LOGIN);

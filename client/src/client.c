@@ -7,94 +7,121 @@
 void *read_server(void *data) {
     t_client *cli = (t_client *) data;
     char buff[MAX];
+    char *str_user_json;
     cJSON *SERVER_JSON = NULL;
-//    cJSON *SENDER = NULL;
+    cJSON *TYPE = NULL;
+    cJSON *RESULT = NULL;
+    cJSON *SENDER = NULL;
     cJSON *MESSAGE = NULL;
-    char *str = NULL;
+
+//    char *str = NULL;
 
     while (read(cli->sockfd, buff, sizeof(buff))) {
-        write(1, "\nFrom server: ", 14);
+//        write(1, "\nFrom %", 6);
         printf("%s\n", buff);
-//        SERVER_JSON = cJSON_Parse(buff);
-////        SENDER = cJSON_GetObjectItemCaseSensitive(SERVER_JSON, "SENDER");
-//        MESSAGE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON, "MESSAGE");
+        SERVER_JSON = cJSON_Parse(buff);
+        TYPE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON, "TYPE");
+
+        if (TYPE->valueint == 2) { //аутентификация
+            RESULT = cJSON_GetObjectItemCaseSensitive(SERVER_JSON, "RESULT");
+            MESSAGE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON, "MESSAGE");
+            printf("\n%s", MESSAGE->valuestring);
+            if (cJSON_IsFalse(RESULT)) {
+                if (malloc_size(cli->login)) {
+                    free(cli->login);
+                }
+                if (malloc_size(cli->password)) {
+                    free(cli->password);
+                }
+                str_user_json = mx_create_user_profile(cli);
+                write(cli->sockfd, str_user_json, strlen(str_user_json));
+            }
+            else { //RESULT = TRUE (аутентификация прошла успешно)
+                cli->authentication = true;
+            }
+        }
+        else { //TYPE == 1 (сообщения)
+            SENDER = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
+                                                      "SENDER");
+            MESSAGE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
+                                                       "MESSAGE");
+//        write (1, SENDER->valuestring, strlen(SENDER->valuestring));
+            printf("\nFrom %s: %s", SENDER->valuestring,
+                   MESSAGE->valuestring);
+
 //        str = mx_strdup(MESSAGE->valuestring);
 //        write(1, str, mx_strlen(str));
-//        memset(buff, '\0', sizeof(buff));
+
 //        free(str);
-//        cJSON_free(SERVER_JSON);
+            cJSON_DeleteItemFromObject(SERVER_JSON, "SENDER");
+//            cJSON_free(SENDER);
+//            cJSON_free(SERVER_JSON);
+        }
+        cJSON_DeleteItemFromObject(SERVER_JSON, "TYPE");
+        cJSON_DeleteItemFromObject(SERVER_JSON, "MESSAGE");
+//        cJSON_free(MESSAGE);
+        memset(buff, '\0', sizeof(buff));
     }
-//    cJSON_Delete(SERVER_JSON);
+    cJSON_Delete(SERVER_JSON);
 
     return 0;
 }
 
-void func(int sockfd, t_client *cli) {
+void func(int sockfd, t_client *cli, pthread_t thread) {
     char buff[MAX];
+    char **split_str;
+    char *str_send;
     cJSON *SEND = cJSON_CreateObject();
     cJSON *TYPE = cJSON_CreateNumber(1);
     cJSON *LOGIN = cJSON_CreateString(cli->login);
     cJSON *TO = NULL;
     cJSON *MESSAGE = NULL;
-    int n = 0;
-    char **str;
-//    bool first_entry = true;
+//    int n = 0;
 
-    for (;;) {
+//    bool first_entry = true;
+//    if (cli->authentication == true) {
+        for (;;) {
 //        cJSON *SEND = cJSON_CreateObject();
 //        cJSON *TYPE = cJSON_CreateNumber(1);
 //        cJSON *login = cJSON_CreateString(cli->login);
 
-        sleep(1);
-        write(1, "\n\nEnter your message: ", 22);
-        while ((buff[n++] = getchar()) != '\n');
-        n = 0;
-        if ((strncmp(buff, "exit", 4)) == 0) {
-            write(1, "Client Exit\n", 12);
-            break;
+            sleep(1);
+            write(1, "\n\nEnter your message: ", 22);
+            scanf("%s", buff);
+//        while ((buff[n++] = getchar()) != '\n');
+//        n = 0;
+            if ((strncmp(buff, "exit", 4)) == 0) {
+                write(1, "Client Exit\n", 12);
+                pthread_cancel(thread);
+                break;
+            }
+            split_str = mx_strsplit(buff, ';');
+            if (split_str[1] == NULL)
+                write(1,
+                      "\nERROR, invalid  struct of message.\nusage: [message][;][socket]",
+                      64);
+            else {
+                mx_del_char(split_str[1], mx_strlen(split_str[1]) - 1, '\n');
+                MESSAGE = cJSON_CreateString(split_str[0]);
+                TO = cJSON_CreateNumber(mx_atoi(split_str[1]));
+                cJSON_AddItemToObject(SEND, "TYPE", TYPE);
+                cJSON_AddItemToObject(SEND, "LOGIN", LOGIN);
+                cJSON_AddItemToObject(SEND, "MESSAGE", MESSAGE);
+                cJSON_AddItemToObject(SEND, "TO", TO);
+                str_send = cJSON_Print(SEND);
+                write(sockfd, str_send, strlen(str_send));
+                cJSON_DeleteItemFromObject(SEND, "MESSAGE");
+                cJSON_DeleteItemFromObject(SEND, "TO");
+//            cJSON_free(MESSAGE);
+//            cJSON_free(TO);
+            }
+            mx_del_strarr(&split_str);
+            memset(buff, '\0', sizeof(buff));
         }
-        str = mx_strsplit(buff, ';');
-        if (str[1] == NULL)
-            write(1,
-                  "Invalid  struct of message: Enter message and socket\n",
-                  41);
-        else {
-            mx_del_char(str[1], mx_strlen(str[1]) - 1, '\n');
-            MESSAGE = cJSON_CreateString(str[0]);
-            TO = cJSON_CreateString(str[1]);
-            cJSON_AddItemToObject(SEND, "TYPE", TYPE);
-            cJSON_AddItemToObject(SEND, "LOGIN", LOGIN);
-            cJSON_AddItemToObject(SEND, "MESSAGE", MESSAGE);
-            cJSON_AddItemToObject(SEND, "TO", TO);
-            write(sockfd, cJSON_Print(SEND), sizeof(buff));
-            cJSON_free(MESSAGE);
-        }
-        memset(buff, '\0', sizeof(buff));
-    }
-    cJSON_Delete(SEND);
+        cJSON_Delete(SEND);
+//    }
 }
 
-static void authentication(t_client *cli) {
-    char buff[20];
-
-    write(1, "Please enter your username and password\n", 40);
-    write(1, "Login: ", 7);
-    scanf("%s", buff);
-    cli->login = strdup(buff);
-    memset(buff, '\0', 20);
-    write(1, "Password: ", 10);
-    scanf("%s", buff);
-    cli->password = strdup(buff);
-    memset(buff, '\0', 20);
-//    write(1, "\nPlease enter your nickname: ", 29);
-//    scanf("%s", buff);
-//    cli->nick = strdup(buff);
-//    memset(buff, '\0', 20);
-//    write(1, "\nPlease enter your birthday: ", 29);
-//    scanf("%s", buff);
-//    cli->birth = strdup(buff);
-//    memset(buff, '\0', 20);
-}
 
 int main(int argc, char *argv[]) {
     t_client *cli = (t_client *)malloc(sizeof(t_client));
@@ -130,13 +157,14 @@ int main(int argc, char *argv[]) {
     else
         write(1, "Successfully connected to the server...\n\n", 41);
 
-    authentication(cli);
+//    authentication(cli);
     login_json = mx_create_user_profile(cli);
     write(cli->sockfd, login_json, mx_strlen(login_json));
 
     // function for chat
     pthread_create(&thread, NULL, read_server, cli);
-    func(cli->sockfd, cli);
+    func(cli->sockfd, cli, thread);
+
 
     // close the socket
     close(cli->sockfd);
