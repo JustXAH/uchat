@@ -16,6 +16,7 @@ void mx_login_and_pass_authentication(cJSON *user_JSON, int user_sock) {
     write(user_sock, send, strlen(send));
 
     cJSON_Delete(AUTHENTICATION);
+    free(send);
 //    cJSON_Delete(user);
 //    printf("LOGIN = %s\n", login->valuestring);
 //    printf("PASS = %s\n", pass->valuestring);

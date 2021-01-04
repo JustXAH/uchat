@@ -32,7 +32,6 @@ static void read_and_write(t_server *serv, int i) {
             TO = cJSON_GetObjectItemCaseSensitive(USER_JSON, "TO");
             printf("Sender = %s\nmessage = %s\n", cJSON_Print(SENDER),
                    cJSON_Print(MESSAGE));
-            //ТУТ НАДО ИСПРАВЛЯТЬ ПОД JSON !!!
             if (serv->cli_connect - 1 >= TO->valueint) {
                 printf("%s\n", cJSON_Print(USER_JSON));
                 write(serv->user_socket[TO->valueint], cJSON_Print(USER_JSON),
@@ -46,7 +45,7 @@ static void read_and_write(t_server *serv, int i) {
                 cJSON_AddItemToObject(USER_JSON, "TO", TO);
                 cJSON_AddItemToObject(USER_JSON, "MESSAGE", MESSAGE);
                 printf("%s\n", cJSON_Print(USER_JSON));
-                write(serv->user_socket[i], cJSON_Print(USER_JSON), 16);
+                write(serv->user_socket[i], cJSON_Print(USER_JSON), mx_strlen(cJSON_Print(USER_JSON)));
             }
             memset(&client_message, '\0', sizeof(client_message));
         }

@@ -81,7 +81,7 @@ int main(int argc , char *argv[]) {
     //Receive a message from client
     for (int i = 0; serv->exit != true; i++) {
         if (i == MAX_CLIENTS - 1)
-            i = 0;
+            break;
 //        accept connection from an incoming client
         if (serv->user_socket[i] == -1) {
             serv->user_socket[i] = accept(sockfd, (struct sockaddr *) &client,
@@ -106,6 +106,7 @@ int main(int argc , char *argv[]) {
             i = 0;
         }
     }
-
+    pthread_cancel(thread);
+    system("leaks -q server");
     return 0;
 }
