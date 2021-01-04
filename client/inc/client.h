@@ -29,6 +29,7 @@ typedef struct s_client {
     char *login;
     char *password;
     int sockfd;
+    pthread_mutex_t mutex;
     bool authentication;
 //    char *nick;
 //    char *birth;
@@ -37,5 +38,6 @@ typedef struct s_client {
 
 
 char *mx_create_user_profile(t_client *cli);
+void mx_authentication_client(cJSON *SERVER_JSON, t_client *cli);
 
 #endif //UCHAT_CLIENT_H

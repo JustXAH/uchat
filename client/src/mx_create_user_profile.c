@@ -33,7 +33,6 @@ char *mx_create_user_profile(t_client *cli) {
     cJSON *LOGIN = NULL;
     cJSON *PASS = NULL;
 
-    cli->authentication = false;
     authentication(cli);
 
     LOGIN = cJSON_CreateString(cli->login);
@@ -46,6 +45,9 @@ char *mx_create_user_profile(t_client *cli) {
     str_user = cJSON_Print(USER);
 //    write(1, str_js, strlen(str_js));
 //    write(1, "\n", 1);
+    cJSON_DeleteItemFromObject(USER, "TYPE");
+    cJSON_DeleteItemFromObject(USER, "LOGIN");
+    cJSON_DeleteItemFromObject(USER, "PASS");
     cJSON_Delete(USER);
     return str_user;
 }

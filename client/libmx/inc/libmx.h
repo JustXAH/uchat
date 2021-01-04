@@ -140,4 +140,5 @@ void mx_bubble_sort_reverse(char **arr, int size);
 char *mx_substr(const char *str, int a, int b);
 void mx_del_char(char *str, int id, char ch);
 void mx_push_penultimate(t_list **list, void *data);
+void mx_int_bubble_sort_reverse(int *arr, int size);
 bool mx_int_search(int *arr, int num);
