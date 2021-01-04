@@ -1,6 +1,6 @@
-// #include <gtk/gtk.h>
-// #include <glib.h>
-#include "../inc/client.h"
+//#include <gtk/gtk.h>
+//#include <glib.h>
+#include "client.h"
 
 void destroy(GtkBuilder *builder) {
     gtk_main_quit();
@@ -13,13 +13,13 @@ int main(int argc, char *argv[]) {
     GError* error = NULL;
 
     builder = gtk_builder_new();
-    if (!gtk_builder_add_from_file(builder, "../glade/msg_test.ui", &error)) {
+    if (!gtk_builder_add_from_file(builder, "msg_test.ui", &error)) {
         g_critical("error load file: %s", error->message);
         g_error_free(error);
         gtk_main_quit();
     }
     gtk_builder_connect_signals(builder, builder);
-    window = GTK_WIDGET(gtk_builder_get_object(builder, "chat_app"));
+    window = GTK_WINDOW(gtk_builder_get_object(builder, "msg_test"));
     if (window) {
         g_critical("error getting window");
         gtk_main_quit();

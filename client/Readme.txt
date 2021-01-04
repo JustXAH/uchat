@@ -1,0 +1,1 @@
+Компилить все из папки сорс с флагами clang main.c handler.c -rdynamic `pkg-config --cflags --libs gtk+-3.0`
