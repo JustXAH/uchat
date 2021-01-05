@@ -22,8 +22,7 @@ CC		 = clang
 GFLAGS		= -std=c11 -Wall -Wextra -Werror -Wpedantic\
 			  -Wno-unused-command-line-argument -Wno-unused-variable \
 			  -Wno-unused-function -Wno-unused-parameter -g \
-			  -I/usr/local/include/libbson-1.0 -I/usr/local/include/libmongoc-1.0 \
-    		  -lmongoc-1.0 -lbson-1.0
+			  -lsqlite3
 IFLAGS	 = $(addprefix -I, $(LIB_INC) $(INC_DIR))
 COMPILE	 = $(CC) $(GFLAGS) $(IFLAGS) $(LIB_BIN)
 
