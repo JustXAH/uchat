@@ -23,25 +23,20 @@ void *read_server(void *data) {
             if (TYPE->valueint == 2) { //аутентификация
                 mx_authentication_client(SERVER_JSON, cli);
             }
+            else if (TYPE->valueint == 3) { //подтверждение регистрации
+                mx_confirmation_of_registration(SERVER_JSON, cli);
+            }
             else { //TYPE == 1 (сообщения)
 //                pthread_mutex_lock(&cli->mutex);
                 SENDER = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
                                                           "LOGIN");
                 MESSAGE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
                                                            "MESSAGE");
-//        write (1, SENDER->valuestring, strlen(SENDER->valuestring));
                 write (1, "\nFrom ", 6);
                 write(1, SENDER->valuestring, strlen(SENDER->valuestring));
                 write(1, ": ", 2);
                 write(1, MESSAGE->valuestring, strlen(MESSAGE->valuestring));
-//                printf("\nFrom %s: %s", SENDER->valuestring,
-//                       MESSAGE->valuestring);
-//        str = mx_strdup(MESSAGE->valuestring);
-//        write(1, str, mx_strlen(str));
-//        free(str);
                 cJSON_DeleteItemFromObject(SERVER_JSON, "LOGIN");
-//            cJSON_free(SENDER);
-//            cJSON_free(SERVER_JSON);
 //                pthread_mutex_unlock(&cli->mutex);
             }
             cJSON_DeleteItemFromObject(SERVER_JSON, "TYPE");
@@ -123,9 +118,8 @@ int main(int argc, char *argv[]) {
     t_client *cli = (t_client *)malloc(sizeof(t_client));
     struct sockaddr_in servaddr;
     pthread_t thread;
-    char *login_json;
 
-    cli->authentication = false;
+    mx_struct_initialization(cli);
 
     // socket create and varification
     cli->sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -155,19 +149,15 @@ int main(int argc, char *argv[]) {
     else
         write(1, "Successfully connected to the server...\n\n", 41);
 
-//    authentication(cli);
-    login_json = mx_create_user_profile(cli);
-    write(cli->sockfd, login_json, mx_strlen(login_json));
+    mx_login_or_register(cli);
+//    pthread_mutex_init(&cli->mutex, NULL);
 
-    pthread_mutex_init(&cli->mutex, NULL);
     // function for chat
     pthread_create(&thread, NULL, read_server, cli);
     func(cli->sockfd, cli, thread);
 
 
     // close the socket
-    if (malloc_size(login_json))
-        free(login_json);
     close(cli->sockfd);
 
     system("leaks -q client");

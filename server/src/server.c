@@ -26,20 +26,8 @@ int main(int argc , char *argv[]) {
     int sockfd;
     int c;
     struct sockaddr_in server , client;
-    char send_buff[1024];
     pthread_t thread;
     t_server *serv = (t_server *)malloc(sizeof(t_server));
-
-//    int arr[MAX_CLIENTS] = {4, -1, 5, -1, 6};
-//
-//    for (int i = 0; i < 5; i++) {
-//        printf("%d\t", arr[i]);
-//    }
-//    printf("\n\n");
-//    mx_int_bubble_sort_reverse(arr, MAX_CLIENTS);
-//    for (int i = 0; i < 5; i++) {
-//        printf("%d\t", arr[i]);
-//    }
 
     serv->exit = false;
     serv->user_socket = (int *)malloc(sizeof(int) * MAX_CLIENTS);

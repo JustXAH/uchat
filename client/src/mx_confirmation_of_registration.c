@@ -1,13 +1,13 @@
 //
-// Created by Igor Khanenko on 1/4/21.
+// Created by Igor Khanenko on 1/5/21.
 //
 
 #include "client.h"
 
-void mx_authentication_client(cJSON *SERVER_JSON, t_client *cli) {
+void mx_confirmation_of_registration(cJSON *SERVER_JSON, t_client *cli) {
     char *str_user_json;
     cJSON *RESULT = NULL;
-    bool registration = false;
+    bool registration = true;
 //    cJSON *MESSAGE = NULL;
 
     RESULT = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
@@ -15,8 +15,8 @@ void mx_authentication_client(cJSON *SERVER_JSON, t_client *cli) {
 //    MESSAGE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
 //                                               "MESSAGE");
 //    printf("\n%s", MESSAGE->valuestring);
-    if (cJSON_IsFalse(RESULT)) {
-        write(1, "\nWhoops! Your login or password is incorrect!\n\n", 47);
+    if (cJSON_IsFalse(RESULT)) { //ошибка при регистрации
+        write(1, "\nWhoops! Such an account already exists. Please try another username.\n\n", 73);
         if (malloc_size(cli->login)) {
             free(cli->login);
         }
@@ -27,8 +27,9 @@ void mx_authentication_client(cJSON *SERVER_JSON, t_client *cli) {
         write(cli->sockfd, str_user_json, strlen(str_user_json));
         free(str_user_json);
     }
-    else { //RESULT = TRUE (аутентификация прошла успеexitшно)
-        write(1, "\nWell done! You successfully logged in to G-CHAT.", 49);
+    else { //RESULT = TRUE (регистрация прошла успешно)
+        write(1, "\nCongratulations on your successful G-Chat account registration!", 63);
+        cli->registration = true;
         cli->authentication = true;
     }
     cJSON_DeleteItemFromObject(SERVER_JSON, "RESULT");

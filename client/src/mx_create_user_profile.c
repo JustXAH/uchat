@@ -4,8 +4,31 @@
 
 #include "client.h"
 
-static void authentication(t_client *cli) {
-    char buff[20];
+static void registration_func(t_client **cli) {
+    char buff[24];
+
+    if ((*cli)->first_reg == true) {
+        write(1, "Create your G-Chat account!\n", 28);
+        write(1, "Please enter your username: ", 28);
+        scanf("%s", buff);
+        (*cli)->login = strdup(buff);
+        memset(buff, '\0', 20);
+    }
+    write(1, "Please enter your password: ", 28);
+    scanf("%s", buff);
+    (*cli)->password = strdup(buff);
+    memset(buff, '\0', 20);
+    write(1, "Confirm your password: ", 23);
+    scanf("%s", buff);
+    if (strcmp((*cli)->password, buff) != 0) {
+        free((*cli)->password);
+        memset(buff, '\0', 20);
+        registration_func(cli);
+    }
+}
+
+static void log_in(t_client *cli) {
+    char buff[24];
 
     write(1, "Please enter your username and password\n", 40);
     write(1, "Login: ", 7);
@@ -16,24 +39,24 @@ static void authentication(t_client *cli) {
     scanf("%s", buff);
     cli->password = strdup(buff);
     memset(buff, '\0', 20);
-//    write(1, "\nPlease enter your nickname: ", 29);
-//    scanf("%s", buff);
-//    cli->nick = strdup(buff);
-//    memset(buff, '\0', 20);
-//    write(1, "\nPlease enter your birthday: ", 29);
-//    scanf("%s", buff);
-//    cli->birth = strdup(buff);
-//    memset(buff, '\0', 20);
 }
 
-char *mx_create_user_profile(t_client *cli) {
+char *mx_create_user_profile(t_client *cli, bool registration) {
     char *str_user = NULL;
     cJSON *USER = cJSON_CreateObject();
-    cJSON *TYPE = cJSON_CreateNumber(2);
+    cJSON *TYPE = NULL;
     cJSON *LOGIN = NULL;
     cJSON *PASS = NULL;
 
-    authentication(cli);
+    if (registration == true) {
+        registration_func(&cli);
+        registration = false;
+        TYPE = cJSON_CreateNumber(3);
+    }
+    else {
+        log_in(cli);
+        TYPE = cJSON_CreateNumber(2);
+    }
 
     LOGIN = cJSON_CreateString(cli->login);
     PASS = cJSON_CreateString(cli->password);
