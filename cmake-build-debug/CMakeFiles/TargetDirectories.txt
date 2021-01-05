@@ -1,0 +1,3 @@
+/Users/mtsyfir/Desktop/Sprints/St_2/uchat/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/mtsyfir/Desktop/Sprints/St_2/uchat/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/mtsyfir/Desktop/Sprints/St_2/uchat/cmake-build-debug/CMakeFiles/uchat.dir
