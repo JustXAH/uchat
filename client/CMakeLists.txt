@@ -8,4 +8,4 @@ include_directories(inc)
 add_executable(client
         inc/client.h
         src/handler.c
-        src/main.c)
+        src/main.c src/send_msg.c)

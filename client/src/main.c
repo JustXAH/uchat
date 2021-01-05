@@ -13,13 +13,13 @@ int main(int argc, char *argv[]) {
     GError* error = NULL;
 
     builder = gtk_builder_new();
-    if (!gtk_builder_add_from_file(builder, "msg_test.ui", &error)) {
+    if (!gtk_builder_add_from_file(builder, "PointG.ui", &error)) {
         g_critical("error load file: %s", error->message);
         g_error_free(error);
         gtk_main_quit();
     }
     gtk_builder_connect_signals(builder, builder);
-    window = GTK_WINDOW(gtk_builder_get_object(builder, "msg_test"));
+    window = GTK_WINDOW(gtk_builder_get_object(builder, "login_window"));
     if (window) {
         g_critical("error getting window");
         gtk_main_quit();
