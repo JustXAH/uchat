@@ -61,8 +61,12 @@ void mx_check_disconnect(t_server *server, int i);
  */
 sqlite3* mx_db_open(char *filename);
 int mx_db_close(sqlite3 *db);
-int mx_db_insert_new_user(sqlite3 *db, char *login, char *password);
+int mx_db_insert_new_user(sqlite3 *db, char *login, char *password); // return id of new user; 0 - login already exist
 int mx_db_check_login(sqlite3 *db, char *login, char *password); //returns id; "0" - login doesn't exist; "-1" - wrong password
-
+int mx_db_check_login_exist(sqlite3 *db, char *login); //returns id; "0" - login doesn't exist
+int mx_db_init(sqlite3 *db); //clean db and init tables
+int mx_db_create_new_contact(sqlite3 *db, int user, int contact); //
+int mx_db_create_new_chat(sqlite3 *db, int user, int contact); //return chat_id
+//int* mx_db_get_contacts(sqlite3 *db, int user) // 0-ended array of users_id
 
 #endif //UCHAT_MAIN_H
