@@ -50,23 +50,14 @@ void *read_server(void *data) {
     return 0;
 }
 
-void func(int sockfd, t_client *cli, pthread_t thread) {
+void func(int sock_fd, t_client *cli, pthread_t thread) {
     char buff[MAX];
-    char **split_str;
-    char *str_send;
-    cJSON *SEND = cJSON_CreateObject();
-    cJSON *TYPE = cJSON_CreateNumber(1);
-    cJSON *LOGIN = cJSON_CreateString(cli->login);
-    cJSON *TO = NULL;
-    cJSON *MESSAGE = NULL;
-//    int n = 0;
 
 //    bool first_entry = true;
 //    if (cli->authentication == true) {
         for (;;) {
             if (cli->authentication == true) {
-//                sleep(1);
-                usleep(200);
+                usleep(250);
                 //остановка потока read_server, на момент ввода сообщения юзером
 //                pthread_mutex_lock(&cli->mutex);
                 write(1, "\n\nEnter your message: ", 22);
@@ -76,41 +67,16 @@ void func(int sockfd, t_client *cli, pthread_t thread) {
                 //восстановление потока read_server, после ввода сообщения юзером
 //                pthread_mutex_unlock(&cli->mutex);
 
-//        while ((buff[n++] = getchar()) != '\n');
-//        n = 0;
                 if ((strncmp(buff, "exit", 4)) == 0) {
                     write(1, "Client Exit\n", 12);
                     pthread_cancel(thread);
                     break;
                 } else {
-                    split_str = mx_strsplit(buff, ';');
-                    if (split_str[1] == NULL)
-                        write(1,
-                              "\nERROR, invalid  struct of message.\nusage: [message][;][socket]",
-                              64);
-                    else {
-                        mx_del_char(split_str[1], mx_strlen(split_str[1]) - 1,
-                                    '\n');
-                        MESSAGE = cJSON_CreateString(split_str[0]);
-                        TO = cJSON_CreateNumber(mx_atoi(split_str[1]));
-                        cJSON_AddItemToObject(SEND, "TYPE", TYPE);
-                        cJSON_AddItemToObject(SEND, "LOGIN", LOGIN);
-                        cJSON_AddItemToObject(SEND, "MESSAGE", MESSAGE);
-                        cJSON_AddItemToObject(SEND, "TO", TO);
-                        str_send = cJSON_Print(SEND);
-//                printf("\n\nJSON send to server:%s\n\n", str_send);
-                        write(sockfd, str_send, strlen(str_send));
-                        cJSON_DeleteItemFromObject(SEND, "MESSAGE");
-                        cJSON_DeleteItemFromObject(SEND, "TO");
-                        if (malloc_size(str_send))
-                            free(str_send);
-                    }
-                    mx_del_strarr(&split_str);
+                    mx_sending_messages(cli, buff, sock_fd);
                     memset(buff, '\0', sizeof(buff));
                 }
             }
         }
-        cJSON_Delete(SEND);
 }
 
 
