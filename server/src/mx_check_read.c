@@ -4,44 +4,38 @@
 
 #include "server.h"
 
-
 static void read_and_write(t_server *serv, int user_num) {
     char buff_message[MAX];
-//    char *user_message = NULL;
-//    char *buff1 = NULL;
-//    char *buff2 = NULL;
     cJSON *USER_JSON = NULL;
     cJSON *TYPE = NULL; //тип связи клиент-сервер (1 - сообщения, 2 - аутентификация, 3 - регистрация)
-    cJSON *SENDER = NULL; // отправитель (логин)
+    cJSON *LOGIN = NULL;
+    cJSON *PASS = NULL;
     cJSON *MESSAGE = NULL;
     cJSON *TO = NULL;
 
     write(1, "Waiting for a message...\n", 25);
     read(serv->user_socket[user_num], buff_message, MAX);
-//    {
-//        buff1 = mx_strdup(buff_message);
-//        buff2 = mx_strjoin(buff1, user_message);
-//        user_message = mx_strdup(buff2);
-//        free(buff1);
-//        free(buff2);
-//        memset(&buff_message, '\0', sizeof(buff_message));
-//    }
+
 //        Send the message back to client
     if (buff_message[0] != '\0') {
         USER_JSON = cJSON_Parse(buff_message);
         TYPE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "TYPE");
 
         if (TYPE->valueint == 2) { // аутентификация
-            mx_login_and_pass_authentication(USER_JSON, serv->user_socket[user_num]);
+            LOGIN = cJSON_GetObjectItemCaseSensitive(USER_JSON, "LOGIN");
+            PASS = cJSON_GetObjectItemCaseSensitive(USER_JSON, "PASS");
+            mx_login_and_pass_authentication(serv, LOGIN->valuestring, PASS->valuestring, serv->user_socket[user_num]);
         }
         else if (TYPE->valueint == 3) { // регистрация
-            mx_user_registration(USER_JSON, serv->user_socket[user_num]);
+            LOGIN = cJSON_GetObjectItemCaseSensitive(USER_JSON, "LOGIN");
+            PASS = cJSON_GetObjectItemCaseSensitive(USER_JSON, "PASS");
+            mx_user_registration(serv, LOGIN->valuestring, PASS->valuestring, serv->user_socket[user_num]);
         }
         else { //это TYPE = 1 - сообщения!
-            SENDER = cJSON_GetObjectItemCaseSensitive(USER_JSON, "LOGIN");
+            LOGIN = cJSON_GetObjectItemCaseSensitive(USER_JSON, "LOGIN");
             MESSAGE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "MESSAGE");
             TO = cJSON_GetObjectItemCaseSensitive(USER_JSON, "TO");
-            printf("Sender = %s\nmessage = %s\n", cJSON_Print(SENDER),
+            printf("Sender = %s\nmessage = %s\n", cJSON_Print(LOGIN),
                    cJSON_Print(MESSAGE));
             if (serv->cli_connect - 1 >= TO->valueint) {
                 printf("%s\n", cJSON_Print(USER_JSON));

@@ -23,18 +23,14 @@ void* poll_and_rw(void *data) {
 }
 
 int main(int argc , char *argv[]) {
+    t_server *serv = (t_server *)malloc(sizeof(t_server));
     int sockfd;
     int c;
     struct sockaddr_in server , client;
     pthread_t thread;
-    t_server *serv = (t_server *)malloc(sizeof(t_server));
 
-    serv->exit = false;
-    serv->user_socket = (int *)malloc(sizeof(int) * MAX_CLIENTS);
-    serv->cli_connect = 0;
-    for (int k = 0; k < MAX_CLIENTS; k++) {
-        serv->user_socket[k] = -1;
-    }
+    mx_serv_struct_initialization(serv);
+
     //Create socket
     sockfd = socket(AF_INET , SOCK_STREAM , 0);
     if (sockfd == -1) {
@@ -58,6 +54,12 @@ int main(int argc , char *argv[]) {
     }
     write(1, "Socket successfully binded!\n", 28);
 
+    //database open
+    serv->db = mx_db_open("uchat.db");
+    if (!serv->db) {
+        return -1;
+    }
+
     //Listen
     listen(sockfd , 3);
 
@@ -74,11 +76,6 @@ int main(int argc , char *argv[]) {
         if (serv->user_socket[i] == -1) {
             serv->user_socket[i] = accept(sockfd, (struct sockaddr *) &client,
                                           (socklen_t *) &c);
-//            read(serv->user_socket[i], send_buff, sizeof(send_buff));
-//            cJSON *user = cJSON_Parse(send_buff);
-//            cJSON *name = cJSON_GetObjectItemCaseSensitive(user, "NICK");
-//            printf("NICK = %s\n", name->valuestring);
-//            printf("%s\n", cJSON_Print(user));
             if (serv->user_socket[i] < 0) {
                 write(2, "ERROR, accept failed", 20);
                 return 1;
@@ -88,13 +85,11 @@ int main(int argc , char *argv[]) {
                 mx_int_bubble_sort_reverse(serv->user_socket, MAX_CLIENTS);
                 serv->cli_connect += 1;
             }
-
-//            mx_login_and_pass_authentication(send_buff, serv->user_socket[i]);
-
             i = 0;
         }
     }
     pthread_cancel(thread);
+    mx_db_close(serv->db);
     system("leaks -q server");
     return 0;
 }
