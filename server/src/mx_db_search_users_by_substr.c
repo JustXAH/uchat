@@ -8,7 +8,7 @@ typedef struct s_id_node {
 t_id_node *id_list;
 int count;
 
-static int get_contacts_callback(void *NotUsed, int argc, char **argv, char **azColName) {
+static int search_users_callback(void *NotUsed, int argc, char **argv, char **azColName) {
     count++;
     t_id_node *id = (t_id_node*)malloc(sizeof(t_id_node));
     id->id = mx_atoi(argv[0]);
@@ -25,7 +25,7 @@ int *mx_db_search_users_by_substr(sqlite3 *db, char *str) {
     count = 0;
     snprintf(sql, sizeof(sql),
              "SELECT Id FROM Users WHERE Login LIKE '%%%s%%';",str);
-    rc = sqlite3_exec(db, sql, get_contacts_callback, 0, &err_msg);
+    rc = sqlite3_exec(db, sql, search_users_callback, 0, &err_msg);
     if (rc != SQLITE_OK ) {
         fprintf(stderr, "Failed to select data\n");
         fprintf(stderr, "SQL error: %s\n", err_msg);

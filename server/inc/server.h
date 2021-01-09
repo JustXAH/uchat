@@ -69,6 +69,8 @@ int mx_db_create_new_contact(sqlite3 *db, int user, int contact); //
 int mx_db_create_new_chat(sqlite3 *db, int user, int contact); //return chat_id
 int *mx_db_get_contacts(sqlite3 *db, int user); // 0-ended array of users_id; NULL if contactlist is empty
 char *mx_db_get_login(sqlite3 *db, int user);
-int *mx_db_search_users_by_substr(sqlite3 *db, char *str);
+int *mx_db_search_users_by_substr(sqlite3 *db, char *str); // 0-ended array of users_id; NULL if found nothing
+int mx_db_get_chat_by_users(sqlite3 *db, int user_1, int user_2); //return chat_id; 0 if chat doesn't exist
+int mx_db_create_new_message(sqlite3 *db, int user, int chat, char *text);
 
 #endif //UCHAT_MAIN_H
