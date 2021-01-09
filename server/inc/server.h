@@ -37,13 +37,21 @@ typedef struct s_server {
 
 }              t_server;
 
-//struct for database
+//structs for database
 typedef struct s_user {
     int id;
     char *login;
     char *password;
     struct s_user *next;
 }              t_user;
+
+typedef struct s_message {
+    int id;
+    int user;
+    char *text;
+    time_t timestamp;
+    struct s_message *next;
+} t_message;
 
 /*
  * SERVER
@@ -72,5 +80,6 @@ char *mx_db_get_login(sqlite3 *db, int user);
 int *mx_db_search_users_by_substr(sqlite3 *db, char *str); // 0-ended array of users_id; NULL if found nothing
 int mx_db_get_chat_by_users(sqlite3 *db, int user_1, int user_2); //return chat_id; 0 if chat doesn't exist
 int mx_db_create_new_message(sqlite3 *db, int user, int chat, char *text);
+t_message *mx_db_get_last_messages(sqlite3 *db, int chat);
 
 #endif //UCHAT_MAIN_H

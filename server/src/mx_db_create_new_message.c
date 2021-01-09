@@ -6,7 +6,7 @@ int mx_db_create_new_message(sqlite3 *db, int user, int chat, char *text){
 
     char sql[1024];
     snprintf(sql, sizeof(sql),
-             "INSERT INTO Messages(User,Chat,Text,Time) VALUES ('%d','%d','%s',CURRENT_TIMESTAMP);",user,chat,text);
+             "INSERT INTO Messages(User,Chat,Text,Time) VALUES ('%d','%d','%s','%ld');",user,chat,text,time(0));
 
     rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
 
