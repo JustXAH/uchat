@@ -1,6 +1,6 @@
 #include "server.h"
 
-int mx_db_create_new_contact(sqlite3 *db, int user, int contact) {
+int *mx_db_create_new_contact(sqlite3 *db, int user, int contact) {
     char *err_msg = 0;
     int rc;
 
@@ -18,6 +18,6 @@ int mx_db_create_new_contact(sqlite3 *db, int user, int contact) {
         fprintf(stdout, "New contact created successfully\n");
     }
 
-    int last_id = sqlite3_last_insert_rowid(db);
-    return last_id;
+    //int last_id = sqlite3_last_insert_rowid(db);
+    return mx_db_get_contacts(db, user);
 }
