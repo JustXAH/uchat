@@ -51,6 +51,12 @@ typedef struct s_user_info {
     struct s_user_info *next;
 }              t_user_info;
 
+typedef struct s_chat_info {
+    int id;
+    char *chat_name;
+    struct s_chat_info *next;
+}               t_chat_info;
+
 typedef struct s_message {
     int id;
     int user;
@@ -88,6 +94,7 @@ char *mx_db_get_login(sqlite3 *db, int user);
 int *mx_db_search_users_by_substr(sqlite3 *db, char *str); // 0-ended array of users_id; NULL if found nothing
 char **mx_db_search_logins_by_substr(sqlite3 *db, char *str);
 int mx_db_get_chat_by_users(sqlite3 *db, int user_1, int user_2); //return chat_id; 0 if chat doesn't exist
+t_chat_info *mx_db_get_chats_info(sqlite3 *db, int user);
 int mx_db_create_new_message(sqlite3 *db, int user, int chat, char *text);
 t_message *mx_db_get_last_messages(sqlite3 *db, int chat);
 
