@@ -10,6 +10,8 @@ static void read_and_write(t_server *serv, int user_num) {
     cJSON *TYPE = NULL; //тип связи клиент-сервер (1 - сообщения, 2 - аутентификация, 3 - регистрация)
     cJSON *LOGIN = NULL;
     cJSON *PASS = NULL;
+    cJSON *USER_ID = NULL;
+    cJSON *CONTACT_ID = NULL;
     cJSON *MESSAGE = NULL;
     cJSON *TO = NULL;
 
@@ -20,19 +22,29 @@ static void read_and_write(t_server *serv, int user_num) {
     if (buff_message[0] != '\0') {
         USER_JSON = cJSON_Parse(buff_message);
         TYPE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "TYPE");
+        LOGIN = cJSON_GetObjectItemCaseSensitive(USER_JSON, "LOGIN");
 
         if (TYPE->valueint == 2) { // аутентификация
-            LOGIN = cJSON_GetObjectItemCaseSensitive(USER_JSON, "LOGIN");
             PASS = cJSON_GetObjectItemCaseSensitive(USER_JSON, "PASS");
             mx_login_and_pass_authentication(serv, LOGIN->valuestring, PASS->valuestring, serv->user_socket[user_num]);
         }
         else if (TYPE->valueint == 3) { // регистрация
-            LOGIN = cJSON_GetObjectItemCaseSensitive(USER_JSON, "LOGIN");
             PASS = cJSON_GetObjectItemCaseSensitive(USER_JSON, "PASS");
             mx_user_registration(serv, LOGIN->valuestring, PASS->valuestring, serv->user_socket[user_num]);
         }
+        else if (TYPE->valueint == 4) { // поиск контакта по полному логину
+            mx_user_search(serv, LOGIN->valuestring, serv->user_socket[user_num]);
+        }
+        else if (TYPE->valueint == 5) { // create new contact
+            mx_add_new_contact(serv, USER_ID->valueint, CONTACT_ID->valueint, serv->user_socket[user_num]);
+        }
+        else if (TYPE->valueint == 6) { // create new chat
+            mx_add_new_chat(serv, USER_ID->valueint, CONTACT_ID->valueint, serv->user_socket[user_num]);
+        }
+        else if (TYPE->valueint == 10) { // system calls (now just db_init)
+            mx_db_init(serv->db);
+        }
         else { //это TYPE = 1 - сообщения!
-            LOGIN = cJSON_GetObjectItemCaseSensitive(USER_JSON, "LOGIN");
             MESSAGE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "MESSAGE");
             TO = cJSON_GetObjectItemCaseSensitive(USER_JSON, "TO");
             printf("Sender = %s\nmessage = %s\n", cJSON_Print(LOGIN),

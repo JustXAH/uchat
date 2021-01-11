@@ -49,12 +49,12 @@ int mx_db_check_login(sqlite3 *db, char *login, char *password) {
     int res_id = -1;
     if (!mx_strcmp(users->password, password))
         res_id = users->id;
-    t_user *tmp;
-    while (users != NULL) {
-        tmp = users;
-        users = users->next;
-        //printf("!%d %s %s\n", tmp->id, tmp->login, tmp->password);
-        free(tmp);
-    }
+    // t_user *tmp;
+    // while (users != NULL) {
+    //     tmp = users;
+    //     users = users->next;
+    //     //printf("!%d %s %s\n", tmp->id, tmp->login, tmp->password);
+    //     free(tmp);
+    // }
     return res_id;
 }

@@ -59,7 +59,8 @@ int main(int argc , char *argv[]) {
     if (!serv->db) {
         return -1;
     }
-
+//    printf("\nDB = %d\n", (int) serv->db);
+//    mx_db_init(serv->db);
     //Listen
     listen(sockfd , 3);
 
