@@ -4,12 +4,24 @@
 
 #include "server.h"
 
-void mx_login_and_pass_authentication(cJSON *user_JSON, int user_sock) {
+void mx_login_and_pass_authentication(t_server *serv, char *u_login, char *u_pass, int user_sock) {
+    cJSON *AUTHENTICATION = cJSON_CreateObject();
+    cJSON *TYPE = cJSON_CreateNumber(2); // log in - вход в аккаунт
+    cJSON *RESULT = NULL; //результат аутентификации: FALSE - неудачно, TRUE - успешно
+    cJSON *USER_ID = NULL;
     char *send = NULL;
-//    cJSON *user = user_JSON;
-    cJSON *AUTHENTICATION = mx_database_stub(user_JSON);
-//    cJSON *login = cJSON_GetObjectItemCaseSensitive(user, "LOGIN");
-//    cJSON *pass = cJSON_GetObjectItemCaseSensitive(user, "PASS");
+
+    USER_ID = cJSON_CreateNumber(mx_db_check_login(serv->db, u_login, u_pass));
+    if (USER_ID->valueint == 0 || USER_ID->valueint == -1) {
+        RESULT = cJSON_CreateFalse(); // ошибка при входе в аккаунт - "0" - такой логин не существует, "-1" - неверный пароль
+    }
+    else {
+        RESULT = cJSON_CreateTrue(); //регистрация прошла успешно
+    }
+
+    cJSON_AddItemToObject(AUTHENTICATION, "TYPE", TYPE);
+    cJSON_AddItemToObject(AUTHENTICATION, "RESULT", RESULT);
+    cJSON_AddItemToObject(AUTHENTICATION, "USER_ID", USER_ID);
 
     send = cJSON_Print(AUTHENTICATION);
 
@@ -17,8 +29,4 @@ void mx_login_and_pass_authentication(cJSON *user_JSON, int user_sock) {
 
     cJSON_Delete(AUTHENTICATION);
     free(send);
-//    cJSON_Delete(user);
-//    printf("LOGIN = %s\n", login->valuestring);
-//    printf("PASS = %s\n", pass->valuestring);
-//    printf("%s\n", cJSON_Print(user));
 }

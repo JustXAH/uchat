@@ -4,51 +4,96 @@
 
 #include "server.h"
 
-
-static void read_and_write(t_server *serv, int i) {
-    char client_message[MAX];
+static void read_and_write(t_server *serv, int user_num) {
+    char buff_message[MAX];
     cJSON *USER_JSON = NULL;
     cJSON *TYPE = NULL; //тип связи клиент-сервер (1 - сообщения, 2 - аутентификация, 3 - регистрация)
-    cJSON *SENDER = NULL; // отправитель (логин)
+    cJSON *LOGIN = NULL;
+    cJSON *PASS = NULL;
     cJSON *MESSAGE = NULL;
     cJSON *TO = NULL;
 
     write(1, "Waiting for a message...\n", 25);
-    read(serv->user_socket[i], client_message, MAX);
-//        Send the message back to client
-    if (client_message[0] != '\0') {
-        USER_JSON = cJSON_Parse(client_message);
-        TYPE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "TYPE");
+    read(serv->user_socket[user_num], buff_message, MAX);
 
-        if (TYPE->valueint == 2) { // аутентификация
-            mx_login_and_pass_authentication(USER_JSON, serv->user_socket[i]);
-        }
-        else if (TYPE->valueint == 3) { // регистрация
-            //ТУТ должна быть функция для регистрации пользователя
-        }
-        else { //это TYPE = 1 - сообщения!
-            SENDER = cJSON_GetObjectItemCaseSensitive(USER_JSON, "LOGIN");
-            MESSAGE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "MESSAGE");
-            TO = cJSON_GetObjectItemCaseSensitive(USER_JSON, "TO");
-            printf("Sender = %s\nmessage = %s\n", cJSON_Print(SENDER),
+//        Send the message back to client
+    if (buff_message[0] != '\0') {
+        USER_JSON = cJSON_Parse(buff_message);
+        TYPE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "TYPE");
+        serv->type_enum = TYPE->valueint;
+        printf("type = %d\n", serv->type_enum);
+        switch (serv->type_enum) {
+            case TYPE_NULL: //     created by the fact that enam stars from 0, and type start from 1
+                break;
+            case AUTHENTICATION:
+                LOGIN = cJSON_GetObjectItemCaseSensitive(USER_JSON, "LOGIN");
+                PASS = cJSON_GetObjectItemCaseSensitive(USER_JSON, "PASS");
+                mx_login_and_pass_authentication(serv, LOGIN->valuestring, PASS->valuestring, serv->user_socket[user_num]);
+                break;
+            case REGISTRATION:
+                LOGIN = cJSON_GetObjectItemCaseSensitive(USER_JSON, "LOGIN");
+                PASS = cJSON_GetObjectItemCaseSensitive(USER_JSON, "PASS");
+                mx_user_registration(serv, LOGIN->valuestring, PASS->valuestring, serv->user_socket[user_num]);
+                break;
+            case MESSAGES:
+                LOGIN = cJSON_GetObjectItemCaseSensitive(USER_JSON, "LOGIN");
+                MESSAGE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "MESSAGE");
+                TO = cJSON_GetObjectItemCaseSensitive(USER_JSON, "TO");
+                printf("Sender = %s\nmessage = %s\n", cJSON_Print(LOGIN),
                    cJSON_Print(MESSAGE));
-            if (serv->cli_connect - 1 >= TO->valueint) {
-                printf("%s\n", cJSON_Print(USER_JSON));
-                write(serv->user_socket[TO->valueint], cJSON_Print(USER_JSON),
-                      mx_strlen(cJSON_Print(USER_JSON)));
-            }
-            else {
-                cJSON_DeleteItemFromObject(USER_JSON, "MESSAGE");
-                cJSON_DeleteItemFromObject(USER_JSON, "TO");
-                TO = cJSON_CreateString(mx_itoa(i));
-                MESSAGE = cJSON_CreateString("User not found");
-                cJSON_AddItemToObject(USER_JSON, "TO", TO);
-                cJSON_AddItemToObject(USER_JSON, "MESSAGE", MESSAGE);
-                printf("%s\n", cJSON_Print(USER_JSON));
-                write(serv->user_socket[i], cJSON_Print(USER_JSON), mx_strlen(cJSON_Print(USER_JSON)));
-            }
-            memset(&client_message, '\0', sizeof(client_message));
+                if (serv->cli_connect - 1 >= TO->valueint) {
+                    printf("%s\n", cJSON_Print(USER_JSON));
+                    write(serv->user_socket[TO->valueint], cJSON_Print(USER_JSON),
+                    mx_strlen(cJSON_Print(USER_JSON)));
+                }
+                else {
+                    cJSON_DeleteItemFromObject(USER_JSON, "MESSAGE");
+                    cJSON_DeleteItemFromObject(USER_JSON, "TO");
+                    TO = cJSON_CreateString(mx_itoa(user_num));
+                    MESSAGE = cJSON_CreateString("User not found");
+                    cJSON_AddItemToObject(USER_JSON, "TO", TO);
+                    cJSON_AddItemToObject(USER_JSON, "MESSAGE", MESSAGE);
+                    printf("%s\n", cJSON_Print(USER_JSON));
+                    write(serv->user_socket[user_num], cJSON_Print(USER_JSON), mx_strlen(cJSON_Print(USER_JSON)));
+                    }
+//            free(buff_message);
+                memset(&buff_message, '\0', sizeof(buff_message));
+                break;
         }
+        // if (TYPE->valueint == 2) { // аутентификация
+        //     LOGIN = cJSON_GetObjectItemCaseSensitive(USER_JSON, "LOGIN");
+        //     PASS = cJSON_GetObjectItemCaseSensitive(USER_JSON, "PASS");
+        //     mx_login_and_pass_authentication(serv, LOGIN->valuestring, PASS->valuestring, serv->user_socket[user_num]);
+        // }
+        // else if (TYPE->valueint == 3) { // регистрация
+        //     LOGIN = cJSON_GetObjectItemCaseSensitive(USER_JSON, "LOGIN");
+        //     PASS = cJSON_GetObjectItemCaseSensitive(USER_JSON, "PASS");
+        //     mx_user_registration(serv, LOGIN->valuestring, PASS->valuestring, serv->user_socket[user_num]);
+        // }
+        // else { //это TYPE = 1 - сообщения!
+        //     LOGIN = cJSON_GetObjectItemCaseSensitive(USER_JSON, "LOGIN");
+        //     MESSAGE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "MESSAGE");
+        //     TO = cJSON_GetObjectItemCaseSensitive(USER_JSON, "TO");
+        //     printf("Sender = %s\nmessage = %s\n", cJSON_Print(LOGIN),
+        //            cJSON_Print(MESSAGE));
+        //     if (serv->cli_connect - 1 >= TO->valueint) {
+        //         printf("%s\n", cJSON_Print(USER_JSON));
+        //         write(serv->user_socket[TO->valueint], cJSON_Print(USER_JSON),
+        //               mx_strlen(cJSON_Print(USER_JSON)));
+        //     }
+        //     else {
+        //         cJSON_DeleteItemFromObject(USER_JSON, "MESSAGE");
+        //         cJSON_DeleteItemFromObject(USER_JSON, "TO");
+        //         TO = cJSON_CreateString(mx_itoa(user_num));
+        //         MESSAGE = cJSON_CreateString("User not found");
+        //         cJSON_AddItemToObject(USER_JSON, "TO", TO);
+        //         cJSON_AddItemToObject(USER_JSON, "MESSAGE", MESSAGE);
+        //         printf("%s\n", cJSON_Print(USER_JSON));
+        //         write(serv->user_socket[user_num], cJSON_Print(USER_JSON), mx_strlen(cJSON_Print(USER_JSON)));
+        //     }
+////            free(buff_message);
+            // memset(&buff_message, '\0', sizeof(buff_message));
+        // }
     }
     cJSON_Delete(USER_JSON);
 }
