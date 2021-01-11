@@ -87,7 +87,8 @@ void func(int sockfd, t_client *cli, pthread_t thread) {
                     write(1, "Client Exit\n", 12);
                     pthread_cancel(thread);
                     break;
-                } else {
+                }
+                else {
                     split_str = mx_strsplit(buff, ';');
                     if (split_str[1] == NULL)
                         write(1,
@@ -103,7 +104,6 @@ void func(int sockfd, t_client *cli, pthread_t thread) {
                         cJSON_AddItemToObject(SEND, "MESSAGE", MESSAGE);
                         cJSON_AddItemToObject(SEND, "TO", TO);
                         str_send = cJSON_Print(SEND);
-//                printf("\n\nJSON send to server:%s\n\n", str_send);
                         write(sockfd, str_send, strlen(str_send));
                         cJSON_DeleteItemFromObject(SEND, "MESSAGE");
                         cJSON_DeleteItemFromObject(SEND, "TO");
