@@ -44,6 +44,7 @@ typedef enum e_type_cJSON_message {
     USER_SEARCH,
     NEW_CONTACT,
     NEW_CHAT,
+    NEW_MESSAGE,
 }           e_type_cJSON;
 
 //struct for server
@@ -85,6 +86,7 @@ void mx_user_registration(t_server *serv, char *u_login, char *u_pass, int user_
 void mx_user_search(t_server *serv, char *u_login, int user_sock);
 void mx_add_new_contact(t_server *serv, int user_id, int contact_id, int user_sock);
 void mx_add_new_chat(t_server *serv, int user_id, int contact_id, int user_sock);
+void mx_add_new_message(t_server *serv, int user_id, int chat_id, int user_sock, char *messages);
 
 /*
  * DATABASE
@@ -102,8 +104,8 @@ int *mx_db_get_chats(sqlite3 *db, int user);
 //char *mx_db_get_login(sqlite3 *db, int user);
 //int *mx_db_search_users_by_substr(sqlite3 *db, char *str); // 0-ended array of users_id; NULL if found nothing
 //char **mx_db_search_logins_by_substr(sqlite3 *db, char *str);
-//int mx_db_get_chat_by_users(sqlite3 *db, int user_1, int user_2); //return chat_id; 0 if chat doesn't exist
-//int mx_db_create_new_message(sqlite3 *db, int user, int chat, char *text);
+int mx_db_get_chat_by_users(sqlite3 *db, int user_1, int user_2); //return chat_id; 0 if chat doesn't exist
+int mx_db_create_new_message(sqlite3 *db, int user, int chat, char *text);
 //t_message *mx_db_get_last_messages(sqlite3 *db, int chat);
 
 #endif //UCHAT_MAIN_H
