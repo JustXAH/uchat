@@ -5,6 +5,14 @@
 #ifndef UCHAT_MAIN_H
 #define UCHAT_MAIN_H
 
+#ifdef __APPLE__
+#define MALLOC_SIZE malloc_size
+#elif __linux__
+#define _XOPEN_SOURCE 500
+#define MALLOC_SIZE malloc_usable_size
+#include <strings.h>
+#endif
+
 #include "cJSON.h"
 #include "libmx.h"
 #include <sys/types.h>
