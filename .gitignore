@@ -6,14 +6,8 @@
 .vscode
 for_test.h
 test.txt
-.idea*
-.idea/
 .idea
-*.idea
-cmake-build-debug*
 cmake-build-debug
-cmake-build-debug/
-*cmake-build-debug
 CMakeLists.txt
 tmain.c
 test.c
