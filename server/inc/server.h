@@ -27,6 +27,17 @@
 #define PORT 5000
 #define MAX_CLIENTS 5
 
+//enum for type cjson
+typedef enum e_type_cJSON_message {
+    TYPE_NULL,
+    MESSAGES,
+    AUTHENTICATION,
+    REGISTRATION,
+    USER_SEARCH,
+    NEW_CONTACT,
+    NEW_CHAT,
+}           e_type_cJSON;
+
 //struct for server
 typedef struct s_server {
     sqlite3 *db;
@@ -34,7 +45,7 @@ typedef struct s_server {
     int serv_sock_fd;
     int cli_connect;
     bool exit;
-
+    e_type_cJSON type_enum;
 }              t_server;
 
 //struct for database
