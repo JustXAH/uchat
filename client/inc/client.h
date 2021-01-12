@@ -21,17 +21,12 @@
 #include <pthread.h>
 #include <poll.h>
 
-<<<<<<< HEAD
-
-#define MAX 4096
-=======
 // glade
 #include <gtk/gtk.h>
 #include <glib.h>
 #include <gio/gio.h>
 
 #define MAX_LEN 4096
->>>>>>> 8dfc33b1be648e481de6a411b66861b6baaa5d35
 #define PORT 5000
 #define SA struct sockaddr
 

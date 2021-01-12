@@ -27,15 +27,6 @@ static void read_and_write(t_server *serv, int user_num) {
         switch (serv->type_enum) {
             case TYPE_NULL: // создана из-за того что enum начинает отсчет с 0, а типы с 1
                 break;
-            case AUTHENTICATION:
-                PASS = cJSON_GetObjectItemCaseSensitive(USER_JSON, "PASS");
-                mx_login_and_pass_authentication(serv, LOGIN->valuestring, PASS->valuestring,
-                                                 serv->user_socket[user_num]);
-                break;
-            case REGISTRATION:
-                PASS = cJSON_GetObjectItemCaseSensitive(USER_JSON, "PASS");
-                mx_user_registration(serv, LOGIN->valuestring, PASS->valuestring, serv->user_socket[user_num]);
-                break;
             case MESSAGES:
                 MESSAGE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "MESSAGE");
                 TO = cJSON_GetObjectItemCaseSensitive(USER_JSON, "TO");
@@ -58,8 +49,20 @@ static void read_and_write(t_server *serv, int user_num) {
 //              free(buff_message);
                 memset(&buff_message, '\0', sizeof(buff_message));
                 break;
-            case USER_SEARCH:
-                mx_user_search(serv, LOGIN->valuestring, serv->user_socket[user_num]);
+            case AUTHENTICATION:
+                PASS = cJSON_GetObjectItemCaseSensitive(USER_JSON, "PASS");
+                mx_login_and_pass_authentication(serv, LOGIN->valuestring, PASS->valuestring,
+                                                 serv->user_socket[user_num]);
+                break;
+            case REGISTRATION:
+                PASS = cJSON_GetObjectItemCaseSensitive(USER_JSON, "PASS");
+                mx_user_registration(serv, LOGIN->valuestring, PASS->valuestring, serv->user_socket[user_num]);
+                break;
+            case USER_SEARCH_BY_SUBSTRING:
+                mx_user_search_by_substr(serv, LOGIN->valuestring, serv->user_socket[user_num]);
+                break;
+            case USER_SEARCH_BY_LOGIN:
+                mx_user_search_by_login(serv, LOGIN->valuestring, serv->user_socket[user_num]);
                 break;
             case NEW_CONTACT:
                 mx_add_new_contact(serv, USER_ID->valueint, CONTACT_ID->valueint, serv->user_socket[user_num]);
@@ -67,6 +70,10 @@ static void read_and_write(t_server *serv, int user_num) {
             case NEW_CHAT:
                 mx_add_new_chat(serv, USER_ID->valueint, CONTACT_ID->valueint, serv->user_socket[user_num]);
                 break;
+            case GET_LOGIN:
+                mx_get_login(serv, USER_ID->valueint, serv->user_socket[user_num]);
+                break;
+
 
         }
 //        if (TYPE->valueint == 2) { // аутентификация
