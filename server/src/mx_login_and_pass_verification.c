@@ -13,25 +13,6 @@ static int int_arr_len(const int *arr) {
     return len;
 }
 
-//static cJSON *json_id_arr_creator(sqlite3 *db, int user, int which) {
-//    cJSON *ID_ARR = NULL;
-//    int *buff_arr;
-//    int arr_len;
-//
-//    if (which == 1) { // "1" - return cJSON array of contacts ID
-//        buff_arr = mx_db_get_contacts(db, user);
-//        arr_len = int_arr_len(buff_arr);
-//        ID_ARR = cJSON_CreateIntArray(buff_arr, arr_len);
-//    }
-//    else { // "2" - return cJSON array of chats ID
-//        buff_arr = mx_db_get_chats(db, user);
-//        arr_len = int_arr_len(buff_arr);
-//        ID_ARR = cJSON_CreateIntArray(buff_arr, arr_len);
-//    }
-//    free(buff_arr);
-//    return ID_ARR;
-//}
-
 void chats_json_creator(sqlite3 *db, int user, cJSON **SEND) {
     t_chats *chats = mx_db_get_chats_info(db, user);
     cJSON *CHATS_ID = cJSON_CreateIntArray(chats->id, chats->count);;
@@ -40,10 +21,10 @@ void chats_json_creator(sqlite3 *db, int user, cJSON **SEND) {
     cJSON_AddItemToObject((*SEND), "CHATS_ID", CHATS_ID);
     cJSON_AddItemToObject((*SEND), "CHATS_NAME", CHATS_NAME);
 
-    if (malloc_size(chats->id)) {
+    if (MALLOC_SIZE(chats->id)) {
         free(chats->id);
     }
-    if (malloc_size(chats->chat_name)) {
+    if (MALLOC_SIZE(chats->chat_name)) {
         mx_del_strarr(&chats->chat_name);
     }
     free(chats);
@@ -57,10 +38,10 @@ void contacts_json_creator(sqlite3 *db, int user, cJSON **SEND) {
     cJSON_AddItemToObject((*SEND), "CONTACTS_ID", CONTACTS_ID);
     cJSON_AddItemToObject((*SEND), "CONTACTS_LOGIN", CONTACTS_LOGIN);
 
-    if (malloc_size(contacts->id)) {
+    if (MALLOC_SIZE(contacts->id)) {
         free(contacts->id);
     }
-    if (malloc_size(contacts->login)) {
+    if (MALLOC_SIZE(contacts->login)) {
         mx_del_strarr(&contacts->login);
     }
     free(contacts);

@@ -24,7 +24,9 @@ static cJSON *json_id_arr_creator(sqlite3 *db, int user_id, int contact_id) {
         buff_arr = mx_db_get_contacts(db, user_id);
         arr_len = int_arr_len(buff_arr);
         CONTACTS = cJSON_CreateIntArray(buff_arr, arr_len);
-        free(buff_arr);
+        if (MALLOC_SIZE(buff_arr)) {
+            free(buff_arr);
+        }
     }
     return CONTACTS;
 }

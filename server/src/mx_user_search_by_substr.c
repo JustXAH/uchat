@@ -45,5 +45,5 @@ void mx_user_search_by_substr(t_server *serv, char *u_login, int user_sock) {
 
     cJSON_Delete(SEND);
     free(send_str);
-//    free(buff_arr);
+    free(buff_arr);
 }
