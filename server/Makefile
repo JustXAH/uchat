@@ -1,4 +1,4 @@
-NAME = client
+NAME = server
 
 
 SRC_DIR = src/
@@ -6,9 +6,7 @@ OBJ_DIR = obj/
 INC_DIR = inc/
 
 
-DIRS	= $(notdir $(wildcard $(SRC_DIR)*))
-FILES	= $(foreach dir, $(DIRS), $(basename $(wildcard $(SRC_DIR)$(dir)/*.c)))
-SRC		= $(FILES:%=%.c)
+SRC = $(wildcard $(SRC_DIR)/*.c)
 OBJ		= $(SRC:src/%.c=$(OBJ_DIR)%.o)
 INC_H	= $(wildcard $(INC_DIR)*.h)
 
@@ -21,12 +19,13 @@ LIB_INC	 = $(addsuffix $(INC_DIR), $(LIB_DIRS))
 
 
 CC		 = clang
-GFLAGS		= -rdynamic `pkg-config --cflags --libs gtk+-3.0`\
-			  -std=c11 -Wall -Wextra\
+GFLAGS		= -std=c11 -Wall -Wextra -Werror -Wpedantic \
 			  -Wno-unused-command-line-argument -Wno-unused-variable \
-			  -Wno-unused-function -Wno-unused-parameter -g
+			  -Wno-unused-function -Wno-unused-parameter -g \
+			  -lsqlite3 -pthread
 IFLAGS	 = $(addprefix -I, $(LIB_INC) $(INC_DIR))
 COMPILE	 = $(CC) $(GFLAGS) $(IFLAGS) $(LIB_BIN)
+
 
 MAKE_M	 = make -sf Makefile -C
 MKDIR	 = mkdir -p
