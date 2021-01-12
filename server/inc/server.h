@@ -78,7 +78,7 @@ int mx_db_check_login_exist(sqlite3 *db, char *login); //returns id; "0" - login
 int mx_db_init(sqlite3 *db); //clean db and init tables
 int mx_db_create_new_contact(sqlite3 *db, int user, int contact); // return "-1" - if an error occurred while creating a new contact
 int mx_db_create_new_chat(sqlite3 *db, int user, int contact); //return "-1" - if an error occurred while creating a new chat
-int *mx_db_get_contacts(sqlite3 *db, int user); // 0-ended array of users_id; NULL if contactlist is empty
+int *mx_db_get_contacts(sqlite3 *db, int user); // 0-ended array of users_id; NULL if contact list is empty
 int *mx_db_get_chats(sqlite3 *db, int user);
 //char *mx_db_get_login(sqlite3 *db, int user);
 //int *mx_db_search_users_by_substr(sqlite3 *db, char *str); // 0-ended array of users_id; NULL if found nothing
