@@ -16,50 +16,50 @@ bool check_credentials() {
     }
     return valid;
 }
-void on_log_login_btn_clicked(GtkButton *btn, t_client *cli) {
+void on_log_login_btn_clicked(GtkButton *btn, t_system *sys, t_user *user) {
    bool valid = check_credentials();
     if (!valid) {
         printf("login type valid error\n");
-        gtk_widget_override_color (reg_win.err_log_label,
+        /*gtk_widget_override_color (reg_win.err_log_label,
                                    GTK_STATE_FLAG_NORMAL,
                                    "#7F7F7F");
         gtk_widget_override_color (reg_win.err_pas_label,
                                    GTK_STATE_FLAG_NORMAL,
-                                   "#7F7F7F");
+                                   "#7F7F7F");*/
         gtk_label_set_text(reg_win.err_log_label, "Invalid login or pass");
         return;
     }
-    cli->login = strdup(gtk_entry_get_text(reg_win.log_entry));
-    cli->password = strdup(gtk_entry_get_text(reg_win.pass_entry));
-    printf("\nLOGIN = %s\nPASS = %s\n", cli->login, cli->password);
+    user->login = strdup(gtk_entry_get_text(reg_win.log_entry));
+    user->password = strdup(gtk_entry_get_text(reg_win.pass_entry));
+    printf("\nLOGIN = %s\nPASS = %s\n", user->login, user->password);
     gtk_label_set_text(reg_win.err_log_label, "Success");
     gtk_label_set_text(reg_win.err_pas_label, "Success");
 
-    gtk_chat_window(cli);
-    //Send credentials to server
+//    gtk_chat_window(sys, user);
+    mx_registration_or_login_request(sys, user);
 }
 
-void on_log_reg_btn_clicked(GtkButton *btn, t_client *cli) {
+void on_log_reg_btn_clicked(GtkButton *btn, t_system *sys) {
     printf("Start REG\n");
-    if (cli->builder) {
+    if (sys->builder) {
         gtk_stack_set_visible_child_name(reg_win.stk, "reg_window");
     }
 }
 
-void on_back_to_log_clicked(GtkButton *btn, t_client *cli) {
+void on_back_to_log_clicked(GtkButton *btn, t_system *sys) {
     printf("back to log\n");
-    if (cli->builder) {
+    if (sys->builder) {
         gtk_stack_set_visible_child_name(reg_win.stk, "log_window");
     }
 }
 
 static void change_lbls(GtkEntry *reg_pas_label1, GtkEntry *reg_pas_label2, char *text){
     printf("%s\n", text);
-    gtk_label_set_text(reg_pas_label1, text);
-    gtk_label_set_text(reg_pas_label2, text);
-    gtk_widget_override_color (reg_pas_label1,
+    gtk_label_set_text(GTK_LABEL(reg_pas_label1), text);
+    gtk_label_set_text(GTK_LABEL(reg_pas_label2), text);
+    /*gtk_widget_override_color (reg_pas_label1,
                                GTK_STATE_FLAG_NORMAL,
-                               "#7F7F7F");
+                               "#7F7F7F");*/
 }
 static bool check_pass_valid(){
     char *pass1 = (char *)gtk_entry_get_text(reg_win.reg_pass1);
@@ -67,16 +67,16 @@ static bool check_pass_valid(){
     bool valid = true;
 
     if(strcmp(pass1, pass2) != 0) {
-        change_lbls(reg_win.reg_pas_label1, reg_win.reg_pas_label2, "Passwords do not match");
+        change_lbls(GTK_ENTRY(reg_win.reg_pas_label1), GTK_ENTRY(reg_win.reg_pas_label2), "Passwords do not match");
         return false;
     }
     if (strlen(pass1) < 6 ) {
-        change_lbls(reg_win.reg_pas_label1, reg_win.reg_pas_label2, "Passwords less 6 chars");
+        change_lbls(GTK_ENTRY(reg_win.reg_pas_label1), GTK_ENTRY(reg_win.reg_pas_label2), "Passwords less 6 chars");
         return false;
     }
     for (int i = 0; pass1[i]; i++) {
         if (!isdigit(pass1[i]) && !isalpha(pass1[i])) {
-            change_lbls(reg_win.reg_pas_label1, reg_win.reg_pas_label2, "App just char and sym");
+            change_lbls(GTK_ENTRY(reg_win.reg_pas_label1), GTK_ENTRY(reg_win.reg_pas_label2), "App just char and sym");
             return false;
         }
     }
@@ -127,14 +127,14 @@ static bool check_valid_email() {
                     return true;
                 }
                 else if (!isalpha(ebuffer[j]) && !isdigit(ebuffer[j])) {
-                    printf("E-mail \"%s\" is incorrect\n", ebuffer[i]);
+                    printf("E-mail \"%s\" is incorrect\n", ebuffer);
                     gtk_label_set_text(reg_win.reg_email_label, "E-mail is incorrect");
                     return false;
                 }
             }
         }
         else if (!isalpha(ebuffer[i]) && !isdigit(ebuffer[i]) && ebuffer[i] != '.'){
-            printf("E-mail \"%s\" is incorrect\n", ebuffer[i]);
+            printf("E-mail \"%s\" is incorrect\n", ebuffer);
             gtk_label_set_text(reg_win.reg_email_label, "E-mail is incorrect");
             return false;
         }
@@ -143,7 +143,8 @@ static bool check_valid_email() {
     gtk_label_set_text(reg_win.reg_email_label, "E-mail is incorrect");
     return false;
 }
-void on_reg_new_btn_clicked(GtkButton *btn, t_client *cli) {
+
+void on_reg_new_btn_clicked(GtkButton *btn, t_system *sys, t_user *user) {
     bool valid = true;
 
     if (!check_valid_login()) {
@@ -155,10 +156,12 @@ void on_reg_new_btn_clicked(GtkButton *btn, t_client *cli) {
         printf("Pass2 = %s\n", (char *)gtk_entry_get_text(reg_win.reg_pass2));
         valid = false;
     }
-    if (!check_valid_email())
-        valid = false;
+//    if (!check_valid_email())
+//        valid = false;
     if (valid == false)
         return;
+    sys->registration = true;
+    mx_registration_or_login_request(sys, user);
 
 
 //    cli->login = strdup(gtk_entry_get_text(log_entry));

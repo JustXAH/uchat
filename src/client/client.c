@@ -5,168 +5,136 @@
 #include "client.h"
 
 extern t_reg_win reg__win;
-//void *read_server(void *data) {
-//    t_client *cli = (t_client *) data;
-//    char buff[MAX];
-//    cJSON *SERVER_JSON = NULL;
-//    cJSON *TYPE = NULL;
-//    cJSON *SENDER = NULL;
-//    cJSON *MESSAGE = NULL;
-//
-////    char *str = NULL;
-//
-//    while (read(cli->sockfd, buff, sizeof(buff))) {
-////        printf("%s\n", buff);
-////        write(1, "\nFrom %", 6);
-//        SERVER_JSON = cJSON_Parse(buff);
-//        TYPE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON, "TYPE");
-//        if (TYPE != NULL) {
-//            if (TYPE->valueint == 2) { //аутентификация
-//                mx_authentication_client(SERVER_JSON, cli);
-//            }
-//            else if (TYPE->valueint == 3) { //подтверждение регистрации
-//                mx_confirmation_of_registration(SERVER_JSON, cli);
-//            }
-//            else { //TYPE == 1 (сообщения)
-////                pthread_mutex_lock(&cli->mutex);
-//                SENDER = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
-//                                                          "LOGIN");
-//                MESSAGE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
-//                                                           "MESSAGE");
-//                write (1, "\nFrom ", 6);
-//                write(1, SENDER->valuestring, strlen(SENDER->valuestring));
-//                write(1, ": ", 2);
-//                write(1, MESSAGE->valuestring, strlen(MESSAGE->valuestring));
-//                cJSON_DeleteItemFromObject(SERVER_JSON, "LOGIN");
-////                pthread_mutex_unlock(&cli->mutex);
-//            }
-//            cJSON_DeleteItemFromObject(SERVER_JSON, "TYPE");
-//            cJSON_DeleteItemFromObject(SERVER_JSON, "TO");
-//            cJSON_DeleteItemFromObject(SERVER_JSON, "MESSAGE");
-////        cJSON_free(MESSAGE);
-//            memset(buff, '\0', sizeof(buff));
-//        }
-//        cJSON_Delete(SERVER_JSON);
+
+void *listen_signal(void *data) {
+    t_chat *chat = (t_chat *) data;
+    t_system *sys = chat->sys;
+    t_user *user = chat->user;
+
+//    write(1, "1\n", 2);
+//    gtk_main();
+//    write(1, "2\n", 2);
+//    while (check == true) {
+//        write(1, "Potok RABOTAET\n", 15);
+////        check = false;
 //    }
-//    return 0;
-//}
-//
-//void func(int sockfd, t_client *cli, pthread_t thread) {
-//    char buff[MAX];
-//    char **split_str;
-//    char *str_send;
-//    cJSON *SEND = cJSON_CreateObject();
-//    cJSON *TYPE = cJSON_CreateNumber(1);
-//    cJSON *LOGIN = cJSON_CreateString(cli->login);
-//    cJSON *TO = NULL;
-//    cJSON *MESSAGE = NULL;
-////    int n = 0;
-//
-////    bool first_entry = true;
-////    if (cli->authentication == true) {
-//        for (;;) {
-//            if (cli->authentication == true) {
-////                sleep(1);
-//                usleep(200);
-//                //остановка потока read_server, на момент ввода сообщения юзером
-////                pthread_mutex_lock(&cli->mutex);
-//                write(1, "\n\nEnter your message: ", 22);
-//
-//                scanf("%s", buff);
-//
-//                //восстановление потока read_server, после ввода сообщения юзером
-////                pthread_mutex_unlock(&cli->mutex);
-//
-////        while ((buff[n++] = getchar()) != '\n');
-////        n = 0;
-//                if ((strncmp(buff, "exit", 4)) == 0) {
-//                    write(1, "Client Exit\n", 12);
-//                    pthread_cancel(thread);
-//                    break;
-//                } else {
-//                    split_str = mx_strsplit(buff, ';');
-//                    if (split_str[1] == NULL)
-//                        write(1,
-//                              "\nERROR, invalid  struct of message.\nusage: [message][;][socket]",
-//                              64);
-//                    else {
-//                        mx_del_char(split_str[1], mx_strlen(split_str[1]) - 1,
-//                                    '\n');
-//                        MESSAGE = cJSON_CreateString(split_str[0]);
-//                        TO = cJSON_CreateNumber(mx_atoi(split_str[1]));
-//                        cJSON_AddItemToObject(SEND, "TYPE", TYPE);
-//                        cJSON_AddItemToObject(SEND, "LOGIN", LOGIN);
-//                        cJSON_AddItemToObject(SEND, "MESSAGE", MESSAGE);
-//                        cJSON_AddItemToObject(SEND, "TO", TO);
-//                        str_send = cJSON_Print(SEND);
-////                printf("\n\nJSON send to server:%s\n\n", str_send);
-//                        write(sockfd, str_send, strlen(str_send));
-//                        cJSON_DeleteItemFromObject(SEND, "MESSAGE");
-//                        cJSON_DeleteItemFromObject(SEND, "TO");
-//                        if (malloc_size(str_send))
-//                            free(str_send);
-//                    }
-//                    mx_del_strarr(&split_str);
-//                    memset(buff, '\0', sizeof(buff));
-//                }
-//            }
-//        }
-//        cJSON_Delete(SEND);
-//}
+    return 0;
+}
+
+void *read_server(void *data) {
+    t_chat *chat = (t_chat *)data;
+    t_system *sys = chat->sys;
+    t_user *user = chat->user;
+    char buff[MAX_LEN];
+    cJSON *SERVER_JSON = NULL;
+    cJSON *TYPE = NULL;
+    cJSON *SENDER = NULL;
+    cJSON *MESSAGE = NULL;
+
+//    char *str = NULL;
+//    write(1, "\nSOCKET =", 9);
+//    write(1, mx_itoa(chat->sys->sockfd), 1);
+//    printf("/nSocket = %d", chat->sys->sockfd);
+    while (read(sys->sockfd, buff, sizeof(buff))) {
+//        printf("%s\n", buff);
+//        write(1, "\nFrom %", 6);
+        SERVER_JSON = cJSON_Parse(buff);
+        TYPE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON, "TYPE");
+        if (TYPE != NULL) {
+            if (TYPE->valueint == 2) { //аутентификация
+                mx_authentication_client(sys, user, SERVER_JSON);
+            }
+            else if (TYPE->valueint == 3) { //подтверждение регистрации
+                mx_confirmation_of_registration(sys, user, SERVER_JSON);
+                if (sys->registration == true) {
+                    mx_account_login_request(sys, user);
+                }
+            }
+            else { //TYPE == 1 (сообщения)
+//                pthread_mutex_lock(&sys->mutex);
+                SENDER = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
+                                                          "LOGIN");
+                MESSAGE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
+                                                           "MESSAGE");
+                write (1, "\nFrom ", 6);
+                write(1, SENDER->valuestring, strlen(SENDER->valuestring));
+                write(1, ": ", 2);
+                write(1, MESSAGE->valuestring, strlen(MESSAGE->valuestring));
+                cJSON_DeleteItemFromObject(SERVER_JSON, "LOGIN");
+//                pthread_mutex_unlock(&sys->mutex);
+            }
+            cJSON_DeleteItemFromObject(SERVER_JSON, "TYPE");
+            cJSON_DeleteItemFromObject(SERVER_JSON, "TO");
+            cJSON_DeleteItemFromObject(SERVER_JSON, "MESSAGE");
+//        cJSON_free(MESSAGE);
+            memset(buff, '\0', sizeof(buff));
+        }
+        cJSON_Delete(SERVER_JSON);
+    }
+    return 0;
+}
+
 
 
 int main(int argc, char *argv[]) {
-    t_client *cli = (t_client *)malloc(sizeof(t_client));
-//    struct sockaddr_in servaddr;
-//    pthread_t thread;
-    mx_struct_initialization(cli);
+    t_system *sys = (t_system *)malloc(sizeof(t_system));
+    t_user *user = (t_user *)malloc(sizeof(t_user));
+    t_chat *chat = (t_chat *)malloc(sizeof(t_chat));
+    struct sockaddr_in servaddr;
+    pthread_t thread_server;
+    pthread_t thread_signal;
+
+    mx_structs_initialization(sys, user);
+
+//    printf("\nLOGIN = %s\nPASS = %s\n", user->login, user->password);
+
+    // socket create and varification
+    sys->sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sys->sockfd == -1) {
+        write(2, "ERROR, socket creation failed\n", 30);
+        exit(0);
+    }
+    else
+        write(1, "Socket successfully created...\n", 31);
+    bzero(&servaddr, sizeof(servaddr));
+
+    // assign IP, PORT
+    servaddr.sin_family = AF_INET;
+    if (argc == 2) {
+        servaddr.sin_addr.s_addr = inet_addr(argv[1]);
+    }
+    else {
+        servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    }
+    servaddr.sin_port = htons(PORT);
+
+    // connect the client socket to server socket
+    if (connect(sys->sockfd, (SA*)&servaddr, sizeof(servaddr)) != 0) {
+        write(2, "ERROR, connection with the server failed!\n", 42);
+        exit(0);
+    }
+    else
+        write(1, "Successfully connected to the server...\n\n", 41);
+
+    printf("/nSocket = %d\n2", sys->sockfd);
+
+//    mx_login_or_register(sys, user);
+//    pthread_mutex_init(&sys->mutex, NULL);
+
+    chat->sys = sys;
+    chat->user = user;
+    // function for chat
+    pthread_create(&thread_signal, NULL, listen_signal, chat);
+    pthread_create(&thread_server, NULL, read_server, chat);
+
+    mx_gtk_window(sys, user);
+//    mx_chat_event(sys, user, thread_server);
 
 
-    mx_gtk_window(argc, argv, cli);
+    // close the socket
+    close(sys->sockfd);
 
-
-    printf("\nLOGIN = %s\nPASS = %s\n", cli->login, cli->password);
-
-//    // socket create and varification
-//    cli->sockfd = socket(AF_INET, SOCK_STREAM, 0);
-//    if (cli->sockfd == -1) {
-//        write(2, "ERROR, socket creation failed\n", 30);
-//        exit(0);
-//    }
-//    else
-//        write(1, "Socket successfully created...\n", 31);
-//    bzero(&servaddr, sizeof(servaddr));
-//
-//    // assign IP, PORT
-//    servaddr.sin_family = AF_INET;
-//    if (argc == 2) {
-//        servaddr.sin_addr.s_addr = inet_addr(argv[1]);
-//    }
-//    else {
-//        servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
-//    }
-//    servaddr.sin_port = htons(PORT);
-//
-//    // connect the client socket to server socket
-//    if (connect(cli->sockfd, (SA*)&servaddr, sizeof(servaddr)) != 0) {
-//        write(2, "ERROR, connection with the server failed!\n", 42);
-//        exit(0);
-//    }
-//    else
-//        write(1, "Successfully connected to the server...\n\n", 41);
-//
-//    mx_login_or_register(cli);
-////    pthread_mutex_init(&cli->mutex, NULL);
-//
-//    // function for chat
-//    pthread_create(&thread, NULL, read_server, cli);
-//    func(cli->sockfd, cli, thread);
-//
-//
-//    // close the socket
-//    close(cli->sockfd);
-//
-//    system("leaks -q client");
+    system("leaks -q client");
 
     return 0;
 }

@@ -11,7 +11,7 @@ static void AddListItem(char *msg_text)
     buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
     gtk_text_buffer_set_text (buffer, msg_text, -1);
 
-    gtk_container_add(chat_win.chat_viewer, view);
+    gtk_container_add(GTK_CONTAINER(chat_win.chat_viewer), view);
     /*
     item = gtk_list_item_new_with_label (sText);
 
