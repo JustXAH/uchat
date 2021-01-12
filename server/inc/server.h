@@ -5,12 +5,13 @@
 #ifndef UCHAT_MAIN_H
 #define UCHAT_MAIN_H
 
-#define _XOPEN_SOURCE 500 
 
 #ifdef __APPLE__
 #define MALLOC_SIZE malloc_size
 #elif __linux__
+#define _XOPEN_SOURCE 500 
 #define MALLOC_SIZE malloc_usable_size
+#include <strings.h>
 #endif
 
 #include "cJSON.h"
@@ -31,7 +32,6 @@
 #include <time.h>
 #include <sqlite3.h>
 #include <string.h>
-#include <strings.h>
 
 #define MAX 4096
 #define PORT 5000
