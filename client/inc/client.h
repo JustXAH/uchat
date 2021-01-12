@@ -21,29 +21,104 @@
 #include <pthread.h>
 #include <poll.h>
 
+<<<<<<< HEAD
 
 #define MAX 4096
+=======
+// glade
+#include <gtk/gtk.h>
+#include <glib.h>
+#include <gio/gio.h>
+
+#define MAX_LEN 4096
+>>>>>>> 8dfc33b1be648e481de6a411b66861b6baaa5d35
 #define PORT 5000
 #define SA struct sockaddr
 
-typedef struct s_client {
-    char *login;
-    char *password;
-    int my_id;
+
+typedef struct s_system {
+//    char *login;
+//    char *password;
+//    int my_id;
+    char **argv;
+    int argc;
+    GtkBuilder *builder;
+    GtkWindow *window;
+    GtkWindow *reg_window;
+    GtkWindow *chat_window;
     int sockfd;
 //    pthread_mutex_t mutex;
     bool first_reg;
-    bool authentication;
     bool registration;
+    bool authentication;
+    bool menu;
     bool message_sent;
-}              t_client;
+    bool chat;
+    bool exit;
+}              t_system;
+
+typedef struct s_user {
+    char *login;
+    char *password;
+    int *contacts;
+    int *chats;
+    int my_id;
+}              t_user;
+
+typedef struct s_chat {
+    struct s_system *sys;
+    struct s_user *user;
+}              t_chat;
+
+//structs for glade
+typedef struct s_reg_win {
+    GtkEntry *log_entry;
+    GtkEntry *pass_entry;
+    GtkLabel *err_log_label;
+    GtkLabel *err_pas_label;
+    GtkStack *stk;
+    GtkEntry *reg_log;
+    GtkEntry *reg_pass1;
+    GtkEntry *reg_pass2;
+    GtkEntry *reg_email;
+    GtkLabel *reg_log_label;
+    GtkLabel *reg_pas_label1;
+    GtkLabel *reg_pas_label2;
+    GtkLabel *reg_email_label;
+}               t_reg_win;
+
+typedef struct s_chat_win {
+    GtkEntry *chat_msg;
+    GtkListBox *chat_viewer;
+}                t_chat_win;
 
 
-void mx_struct_initialization(t_client *cli);
-void mx_login_or_register(t_client *cli);
-char *mx_create_user_profile(t_client *cli, bool registration);
-void mx_confirmation_of_registration(cJSON *SERVER_JSON, t_client *cli);
-void mx_authentication_client(cJSON *SERVER_JSON, t_client *cli);
-void mx_sending_messages(t_client *cli, char *buff, int sock_fd);
+void mx_structs_initialization(t_system *sys, t_user *user);
+void mx_login_or_register(t_system *sys, t_user *user);
+char *mx_create_user_profile(t_system *sys, t_user *user);
+void mx_account_login_request(t_system *sys, t_user *user);
+void mx_registration_request(t_system *sys, t_user *user);
+void mx_confirmation_of_registration(t_system *sys, t_user *user, cJSON *SERVER_JSON);
+void mx_authentication_client(t_system *sys, t_user *user, cJSON *SERVER_JSON);
+void mx_chat_event(t_system *sys, t_user *user, pthread_t thread);
+void mx_client_menu(t_system *sys, t_user *user);
+void mx_sending_messages(t_system *sys, t_user *user, char *buff); // нужно переделать сначала сервер-бд, потом здесь
+
+void mx_registration_or_login_request(t_system *sys, t_user *user);
+
+/*
+ * MENU
+ */
+void mx_view_contacts_list(t_system *sys, t_user *user);
+void mx_view_chats_list(t_system *sys, t_user *user);
+void mx_user_search(t_system *sys, t_user *user);
+
+/*
+ * GLADE
+ */
+void reg_win_init(t_system *sys);
+void chat_win_init(t_system *sys);
+void mx_gtk_window(t_system *sys, t_user *user);
+void gtk_chat_window(t_system *sys, t_user *user);
 
 #endif //UCHAT_CLIENT_H

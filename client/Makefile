@@ -6,7 +6,9 @@ OBJ_DIR = obj/
 INC_DIR = inc/
 
 
-SRC = $(wildcard $(SRC_DIR)/*.c)
+DIRS	= $(notdir $(wildcard $(SRC_DIR)*))
+FILES	= $(foreach dir, $(DIRS), $(basename $(wildcard $(SRC_DIR)$(dir)/*.c)))
+SRC		= $(FILES:%=%.c)
 OBJ		= $(SRC:src/%.c=$(OBJ_DIR)%.o)
 INC_H	= $(wildcard $(INC_DIR)*.h)
 
@@ -19,7 +21,8 @@ LIB_INC	 = $(addsuffix $(INC_DIR), $(LIB_DIRS))
 
 
 CC		 = clang
-GFLAGS		= -std=c11 -Wall -Wextra -Werror -Wpedantic\
+GFLAGS		= -rdynamic `pkg-config --cflags --libs gtk+-3.0`\
+			  -std=c11 -Wall -Wextra\
 			  -Wno-unused-command-line-argument -Wno-unused-variable \
 			  -Wno-unused-function -Wno-unused-parameter -g
 IFLAGS	 = $(addprefix -I, $(LIB_INC) $(INC_DIR))

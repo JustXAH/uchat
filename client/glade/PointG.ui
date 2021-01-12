@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.38.2 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <object class="GtkWindow" id="login_window">
+    <property name="can-focus">False</property>
+    <property name="title" translatable="yes">Point Game Chat</property>
+    <property name="resizable">False</property>
+    <property name="window-position">center</property>
+    <property name="gravity">center</property>
+    <signal name="destroy" handler="on_login_window_destroy" swapped="no"/>
+    <child>
+      <object class="GtkFixed">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <child>
+          <object class="GtkEntry" id="login_field">
+            <property name="width-request">150</property>
+            <property name="height-request">30</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="margin-left">100</property>
+            <property name="margin-right">100</property>
+          </object>
+          <packing>
+            <property name="y">370</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="login_label">
+            <property name="width-request">100</property>
+            <property name="height-request">30</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Login/e-mail
+</property>
+          </object>
+          <packing>
+            <property name="x">130</property>
+            <property name="y">340</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="pass_field">
+            <property name="width-request">168</property>
+            <property name="height-request">34</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="margin-left">100</property>
+            <property name="margin-right">100</property>
+            <property name="margin-bottom">281</property>
+          </object>
+          <packing>
+            <property name="y">448</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="login_lable1">
+            <property name="width-request">100</property>
+            <property name="height-request">30</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Password
+</property>
+          </object>
+          <packing>
+            <property name="x">130</property>
+            <property name="y">420</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="login_btn">
+            <property name="label" translatable="yes">Login</property>
+            <property name="width-request">100</property>
+            <property name="height-request">50</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <signal name="clicked" handler="login_btn_clicked_cb" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">131</property>
+            <property name="y">520</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="reg_btn">
+            <property name="label" translatable="yes">Register</property>
+            <property name="width-request">100</property>
+            <property name="height-request">50</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <signal name="clicked" handler="reg_btn_clicked_cb" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">131</property>
+            <property name="y">580</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage">
+            <property name="width-request">310</property>
+            <property name="height-request">310</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="pixbuf">Logo.jpg</property>
+          </object>
+          <packing>
+            <property name="x">30</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="res_pass">
+            <property name="label" translatable="yes">  Restore 
+password</property>
+            <property name="name">Restore password</property>
+            <property name="width-request">100</property>
+            <property name="height-request">30</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="use-underline">True</property>
+            <signal name="clicked" handler="res_pass_clicked_cb" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">131</property>
+            <property name="y">640</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

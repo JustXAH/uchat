@@ -4,12 +4,12 @@
 
 #include "client.h"
 
-void mx_sending_messages(t_client *cli, char *buff, int sock_fd) {
+void mx_sending_messages(t_system *sys, t_user *user, char *buff) {
     char **split_str;
     char *str_send;
     cJSON *SEND = cJSON_CreateObject();
     cJSON *TYPE = cJSON_CreateNumber(1);
-    cJSON *LOGIN = cJSON_CreateString(cli->login);
+    cJSON *LOGIN = cJSON_CreateString(user->login);
     cJSON *TO = NULL;
     cJSON *MESSAGE = NULL;
 
@@ -32,7 +32,7 @@ void mx_sending_messages(t_client *cli, char *buff, int sock_fd) {
         cJSON_AddItemToObject(SEND, "TO", TO);
         str_send = cJSON_Print(SEND);
 //                printf("\n\nJSON send to server:%s\n\n", str_send);
-        write(sock_fd, str_send, strlen(str_send));
+        write(sys->sockfd, str_send, strlen(str_send));
         if (malloc_size(str_send))
             free(str_send);
     }

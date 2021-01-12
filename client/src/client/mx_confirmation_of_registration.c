@@ -4,22 +4,23 @@
 
 #include "client.h"
 
-static void registration_request(t_client *cli ) {
-    char *str_user_json;
-    bool registration = true;
+//static void registration_request(t_system *sys, t_user *user) {
+//    char *str_user_json;
+//
+//    sys->registration = false;
+//
+//    if (malloc_size(user->login)) {
+//        free(user->login);
+//    }
+//    if (malloc_size(user->password)) {
+//        free(user->password);
+//    }
+//    str_user_json = mx_create_user_profile(sys, user);
+//    write(sys->sockfd, str_user_json, strlen(str_user_json));
+//    free(str_user_json);
+//}
 
-    if (malloc_size(cli->login)) {
-        free(cli->login);
-    }
-    if (malloc_size(cli->password)) {
-        free(cli->password);
-    }
-    str_user_json = mx_create_user_profile(cli, registration);
-    write(cli->sockfd, str_user_json, strlen(str_user_json));
-    free(str_user_json);
-}
-
-void mx_confirmation_of_registration(cJSON *SERVER_JSON, t_client *cli) {
+void mx_confirmation_of_registration(t_system *sys, t_user *user, cJSON *SERVER_JSON) {
     cJSON *RESULT = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
                                                      "RESULT");
     cJSON *MY_ID = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
@@ -28,14 +29,13 @@ void mx_confirmation_of_registration(cJSON *SERVER_JSON, t_client *cli) {
 
     if (cJSON_IsFalse(RESULT)) { // ошибка при регистрации
         write(1, "\nWhoops! Such an account already exists. Please try another username.\n\n", 73);
-        registration_request(cli);
+        mx_registration_request(sys, user);
     }
     else { // RESULT = TRUE (регистрация прошла успешно)
         write(1, "\nCongratulations on your successful G-Chat account registration!\nYour ID: ", 74);
         write(1, id, strlen(id));
-        cli->registration = true;
-        cli->authentication = true;
-        cli->my_id = MY_ID->valueint;
+        user->my_id = MY_ID->valueint;
+        sys->registration = true;
     }
     cJSON_DeleteItemFromObject(SERVER_JSON, "RESULT");
     cJSON_DeleteItemFromObject(SERVER_JSON, "USER_ID");
