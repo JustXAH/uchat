@@ -1,5 +1,4 @@
 #pragma once
-
 /*
  *	STANDART LIBRARIES
  */
@@ -8,6 +7,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <fcntl.h>
+
 #include <malloc/malloc.h>
 
 #define INT_MIN -2147483648
