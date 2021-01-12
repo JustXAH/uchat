@@ -1,7 +1,7 @@
 #include "libmx.h"
 
 void *mx_realloc(void *ptr, size_t size) {
-    size_t len = malloc_usable_size(ptr);
+    size_t len = MALLOC_SIZE(ptr);
     unsigned char *new_pointer = NULL;
 
     if ((int)size >= 0) {

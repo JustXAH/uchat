@@ -33,10 +33,10 @@ void mx_sending_messages(t_system *sys, t_user *user, char *buff) {
         str_send = cJSON_Print(SEND);
 //                printf("\n\nJSON send to server:%s\n\n", str_send);
         write(sys->sockfd, str_send, strlen(str_send));
-        if (malloc_usable_size(str_send))
+        if (MALLOC_SIZE(str_send))
             free(str_send);
     }
-    if (malloc_usable_size(split_str))
+    if (MALLOC_SIZE(split_str))
         mx_del_strarr(&split_str);
     cJSON_Delete(SEND);
 }
