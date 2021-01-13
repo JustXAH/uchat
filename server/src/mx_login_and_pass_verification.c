@@ -14,7 +14,7 @@ static int int_arr_len(const int *arr) {
 }
 
 void chats_json_creator(sqlite3 *db, int user, cJSON **SEND) {
-    t_chats *chats = mx_db_get_chats_info(db, user);
+    t_chat *chats = mx_db_get_chats_info(db, user);
     cJSON *CHATS_ID = cJSON_CreateIntArray(chats->id, chats->count);;
     cJSON *CHATS_NAME = cJSON_CreateStringArray((const char **)chats->chat_name, chats->count);
 
@@ -31,7 +31,7 @@ void chats_json_creator(sqlite3 *db, int user, cJSON **SEND) {
 }
 
 void contacts_json_creator(sqlite3 *db, int user, cJSON **SEND) {
-    t_contacts *contacts = mx_db_get_contacts_info(db, user);
+    t_contact *contacts = mx_db_get_contacts_info(db, user);
     cJSON *CONTACTS_ID = cJSON_CreateIntArray(contacts->id, contacts->count);
     cJSON *CONTACTS_LOGIN = cJSON_CreateStringArray((const char **)contacts->login, contacts->count);
 

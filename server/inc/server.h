@@ -66,6 +66,18 @@ typedef struct s_user {
     struct s_user *next;
 }              t_user;
 
+typedef struct s_contact {
+    int *id;
+    char **login;
+    int count;
+}              t_contact;
+
+typedef struct s_chat {
+    int *id;
+    char **chat_name;
+    int count;
+}              t_chat;
+
 typedef struct s_user_info {
     int id;
     char *login;
@@ -85,18 +97,6 @@ typedef struct s_message {
     time_t timestamp;
     struct s_message *next;
 } t_message;
-
-typedef struct s_contact {
-    int *id;
-    char **login;
-    int count;
-}              t_contacts;
-
-typedef struct s_chats{
-    int *id;
-    char **chat_name;
-    int count;
-}              t_chats;
 
 /*
  * SERVER
@@ -125,14 +125,14 @@ int mx_db_check_login_exist(sqlite3 *db, char *login); //returns id; "0" - login
 int mx_db_init(sqlite3 *db); //clean db and init tables
 int mx_db_create_new_contact(sqlite3 *db, int user, int contact); //
 int mx_db_create_new_chat(sqlite3 *db, int user, int contact); //return chat_id
-int *mx_db_get_contacts(sqlite3 *db, int user); // 0-ended array of users_id; NULL if contact list is empty
-t_user_info *mx_db_get_contacts_info(sqlite3 *db, int user);
+int *mx_db_get_contacts(sqlite3 *db, int user); // 0-ended array of users_id; NULL if contactlist is empty
+t_contact *mx_db_get_contacts_info(sqlite3 *db, int user); //
 int *mx_db_get_chats(sqlite3 *db, int user);
 char *mx_db_get_login(sqlite3 *db, int user);
 //int *mx_db_search_users_by_substr(sqlite3 *db, char *str); // 0-ended array of users_id; NULL if found nothing
 char **mx_db_search_logins_by_substr(sqlite3 *db, char *str);
-//int mx_db_get_chat_by_users(sqlite3 *db, int user_1, int user_2); //return chat_id; 0 if chat doesn't exist
-t_chat_info *mx_db_get_chats_info(sqlite3 *db, int user);
+int mx_db_get_chat_by_users(sqlite3 *db, int user_1, int user_2); //return chat_id; 0 if chat doesn't exist
+t_chat *mx_db_get_chats_info(sqlite3 *db, int user);
 //int mx_db_create_new_message(sqlite3 *db, int user, int chat, char *text);
 //t_message *mx_db_get_last_messages(sqlite3 *db, int chat);
 

@@ -26,7 +26,7 @@ void mx_user_search_by_substr(t_server *serv, char *u_login, int user_sock) {
     char **buff_arr;
     char *send_str = NULL;
 
-   buff_arr = mx_db_search_logins_by_substr(serv->db, u_login));
+   buff_arr = mx_db_search_logins_by_substr(serv->db, u_login);
     if (buff_arr == NULL) { // "NULL" - no login matches
         RESULT = cJSON_CreateFalse();
     }
