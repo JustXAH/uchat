@@ -1,18 +1,18 @@
 //
-// Created by Igor Khanenko on 1/5/21.
+// Created by mac on 12.01.2021.
 //
 
 #include "server.h"
 
-void mx_user_registration(t_server *serv, char *u_login, char *u_pass, int user_sock) {
+void mx_get_login(t_server *serv, int user_id, int user_sock) {
     cJSON *SEND = cJSON_CreateObject();
-    cJSON *TYPE = cJSON_CreateNumber(REGISTRATION);
+    cJSON *TYPE = cJSON_CreateNumber(GET_LOGIN);
     cJSON *RESULT = NULL; //результат аутентификации: FALSE - неудачно, TRUE - успешно
-    cJSON *USER_ID = NULL;
+    cJSON *LOGIN = NULL;
     char *send_str = NULL;
 
-    USER_ID = cJSON_CreateNumber(mx_db_insert_new_user(serv->db, u_login, u_pass));
-    if (USER_ID->valueint == 0) {
+    LOGIN = cJSON_CreateString(mx_db_get_login(serv->db, user_id));
+    if (LOGIN->string == NULL) {
         RESULT = cJSON_CreateFalse(); // ошибка при регистрации - логин уже существует
     }
     else {
@@ -21,7 +21,7 @@ void mx_user_registration(t_server *serv, char *u_login, char *u_pass, int user_
 
     cJSON_AddItemToObject(SEND, "TYPE", TYPE);
     cJSON_AddItemToObject(SEND, "RESULT", RESULT);
-    cJSON_AddItemToObject(SEND, "USER_ID", USER_ID);
+    cJSON_AddItemToObject(SEND, "LOGIN", LOGIN);
 
     send_str = cJSON_Print(SEND);
     //send string-JSON to client

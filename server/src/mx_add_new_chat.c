@@ -24,30 +24,32 @@ static cJSON *json_id_arr_creator(sqlite3 *db, int user_id, int contact_id) {
         buff_arr = mx_db_get_contacts(db, user_id);
         arr_len = int_arr_len(buff_arr);
         CONTACTS = cJSON_CreateIntArray(buff_arr, arr_len);
-        free(buff_arr);
+        if (MALLOC_SIZE(buff_arr)) {
+            free(buff_arr);
+        }
     }
     return CONTACTS;
 }
 
 void mx_add_new_chat(t_server *serv, int user_id, int contact_id, int user_sock) {
-    cJSON *NEW_CHAT = cJSON_CreateObject();
-    cJSON *TYPE = cJSON_CreateNumber(5); // create new contact
+    cJSON *SEND = cJSON_CreateObject();
+    cJSON *TYPE = cJSON_CreateNumber(NEW_CHAT);
     cJSON *RESULT = NULL; // результат аутентификации: FALSE - неудачно, TRUE - успешно
     cJSON *CHATS_ID = NULL;
-    char *send = NULL;
+    char *send_str = NULL;
 
     CHATS_ID = json_id_arr_creator(serv->db, user_id, contact_id);
     // if CHATS_ID == NULL - an error occurred while creating a new contact, else - successfully created a new contact
     RESULT = CHATS_ID == NULL ? cJSON_CreateFalse() : cJSON_CreateTrue();
 
-    cJSON_AddItemToObject(NEW_CHAT, "TYPE", TYPE);
-    cJSON_AddItemToObject(NEW_CHAT, "RESULT", RESULT);
-    cJSON_AddItemToObject(NEW_CHAT, "CHATS_ID", CHATS_ID);
+    cJSON_AddItemToObject(SEND, "TYPE", TYPE);
+    cJSON_AddItemToObject(SEND, "RESULT", RESULT);
+    cJSON_AddItemToObject(SEND, "CHATS_ID", CHATS_ID);
 
-    send = cJSON_Print(NEW_CHAT);
+    send_str = cJSON_Print(SEND);
 
-    write(user_sock, send, strlen(send));
+    write(user_sock, send_str, strlen(send_str));
 
-    cJSON_Delete(NEW_CHAT);
-    free(send);
+    cJSON_Delete(SEND);
+    free(send_str);
 }
