@@ -73,7 +73,10 @@ static void read_and_write(t_server *serv, int user_num) {
             case GET_LOGIN:
                 mx_get_login(serv, USER_ID->valueint, serv->user_socket[user_num]);
                 break;
-
+            case NEW_MESSAGE:
+                MESSAGE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "MESSAGE");
+                mx_add_new_message(serv, USER_ID->valueint, CONTACT_ID->valueint, MESSAGE->valuestring);
+                break;
 
         }
 //        if (TYPE->valueint == 2) { // аутентификация
