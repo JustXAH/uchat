@@ -34,6 +34,7 @@
 #define MAX 4096
 #define PORT 5000
 #define MAX_CLIENTS 5
+#define COUNT_MESSAGES 30
 
 //enum for type cjson
 typedef enum e_type_cJSON_message {
@@ -47,6 +48,7 @@ typedef enum e_type_cJSON_message {
     NEW_CHAT,
     GET_LOGIN,
     NEW_MESSAGE,
+    LAST_MESSAGES,
 }            e_type_cJSON;
 
 //struct for server
@@ -126,6 +128,16 @@ void mx_serv_struct_initialization(t_server *serv);
 //void mx_read_server(t_server *serv);
 void mx_check_read(t_server *serv, int i);
 void mx_check_disconnect(t_server *server, int i);
+<<<<<<< HEAD
+void mx_login_and_pass_authentication(t_server *serv, char *u_login, char *u_pass, int user_sock); // нужна доработка!!!
+void mx_user_registration(t_server *serv, char *u_login, char *u_pass, int user_sock);
+void mx_user_search_by_login(t_server *serv, char *u_login, int user_sock);
+void mx_user_search_by_substr(t_server *serv, char *u_login, int user_sock);
+void mx_add_new_contact(t_server *serv, int user_id, int contact_id, int user_sock);
+void mx_add_new_chat(t_server *serv, int user_id, int contact_id, int user_sock);
+void mx_add_new_message(t_server *serv, int user_id, int contact_id, int chat_id, char *message);
+void mx_get_login(t_server *serv, int user_id, int user_sock);
+=======
 void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_sock);
 void mx_user_registration(t_server *serv, t_json *json, int user_sock);
 void mx_user_search_by_substr(t_server *serv, t_json *json, int user_sock);
@@ -134,6 +146,7 @@ void mx_add_new_contact(t_server *serv, t_json *json, int user_sock);
 void mx_add_new_chat(t_server *serv, t_json *json, int user_sock);
 void mx_add_new_message(t_server *serv, int user_id, int contact_id, char *message);
 void mx_get_login(t_server *serv, t_json *json, int user_sock);
+>>>>>>> 72b301cf361dd78950466ee2957734caf24fdc69
 void mx_last_messages();
 
 /*
