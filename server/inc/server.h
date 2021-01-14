@@ -61,6 +61,24 @@ typedef struct s_server {
     e_type_cJSON type_enum;
 }              t_server;
 
+typedef struct s_json {
+    cJSON *USER_JSON;
+    cJSON *SEND;
+    cJSON *TYPE;
+    cJSON *RESULT;
+    cJSON *LOGIN;
+    cJSON *PASS;
+    cJSON *USER_ID;
+    cJSON *CONTACT_ID;
+    cJSON *CONTACTS_ID_ARR;
+    cJSON *CONTACTS_LOGIN_ARR;
+    cJSON *CHATS_ID_ARR;
+    cJSON *CHATS_NAME_ARR;
+    cJSON *USERS_LOGIN_ARR;
+    cJSON *MESSAGE;
+    cJSON *TO;
+}              t_json;
+
 //struct for database
 typedef struct s_user {
     int id;
@@ -109,6 +127,7 @@ void mx_serv_struct_initialization(t_server *serv);
 //void mx_read_server(t_server *serv);
 void mx_check_read(t_server *serv, int i);
 void mx_check_disconnect(t_server *server, int i);
+<<<<<<< HEAD
 void mx_login_and_pass_authentication(t_server *serv, char *u_login, char *u_pass, int user_sock); // нужна доработка!!!
 void mx_user_registration(t_server *serv, char *u_login, char *u_pass, int user_sock);
 void mx_user_search_by_login(t_server *serv, char *u_login, int user_sock);
@@ -117,6 +136,16 @@ void mx_add_new_contact(t_server *serv, int user_id, int contact_id, int user_so
 void mx_add_new_chat(t_server *serv, int user_id, int contact_id, int user_sock);
 void mx_add_new_message(t_server *serv, int user_id, int contact_id, int chat_id, char *message);
 void mx_get_login(t_server *serv, int user_id, int user_sock);
+=======
+void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_sock);
+void mx_user_registration(t_server *serv, t_json *json, int user_sock);
+void mx_user_search_by_substr(t_server *serv, t_json *json, int user_sock);
+void mx_user_search_by_login(t_server *serv, t_json *json, int user_sock);
+void mx_add_new_contact(t_server *serv, t_json *json, int user_sock);
+void mx_add_new_chat(t_server *serv, t_json *json, int user_sock);
+void mx_add_new_message(t_server *serv, int user_id, int contact_id, char *message);
+void mx_get_login(t_server *serv, t_json *json, int user_sock);
+>>>>>>> 72b301cf361dd78950466ee2957734caf24fdc69
 void mx_last_messages();
 
 /*
@@ -130,7 +159,7 @@ int mx_db_check_login_exist(sqlite3 *db, char *login); //returns id; "0" - login
 int mx_db_init(sqlite3 *db); //clean db and init tables
 int mx_db_create_new_contact(sqlite3 *db, int user, int contact); //
 int mx_db_create_new_chat(sqlite3 *db, int user, int contact); //return chat_id
-int *mx_db_get_contacts(sqlite3 *db, int user); // 0-ended array of users_id; NULL if contactlist is empty
+int *mx_db_get_contacts(sqlite3 *db, int user); // 0-ended array of users_id; NULL if contact list is empty
 t_contact *mx_db_get_contacts_info(sqlite3 *db, int user); //
 int *mx_db_get_chats(sqlite3 *db, int user);
 char *mx_db_get_login(sqlite3 *db, int user);

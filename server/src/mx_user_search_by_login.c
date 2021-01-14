@@ -4,29 +4,27 @@
 
 #include "server.h"
 
-void mx_user_search_by_login(t_server *serv, char *u_login, int user_sock) {
-    cJSON *SEND = cJSON_CreateObject();
-    cJSON *TYPE = cJSON_CreateNumber(USER_SEARCH_BY_LOGIN);
-    cJSON *RESULT = NULL; //результат аутентификации: FALSE - неудачно, TRUE - успешно
-    cJSON *USER_ID = NULL;
+void mx_user_search_by_login(t_server *serv, t_json *json, int user_sock) {
     char *send_str = NULL;
 
-    USER_ID = cJSON_CreateNumber(mx_db_check_login_exist(serv->db, u_login));
-    if (USER_ID->valueint == 0) { // "0" - login doesn't exist
-        RESULT = cJSON_CreateFalse();
+    json->SEND = cJSON_CreateObject();
+    json->TYPE = cJSON_CreateNumber(USER_SEARCH_BY_LOGIN);
+
+    json->USER_ID = cJSON_CreateNumber(mx_db_check_login_exist(serv->db, json->LOGIN->valuestring));
+    if (json->USER_ID->valueint == 0) { // "0" - login doesn't exist
+        json->RESULT = cJSON_CreateFalse();
     }
     else {
-        RESULT = cJSON_CreateTrue(); //логин найден успешно
+        json->RESULT = cJSON_CreateTrue(); //логин найден успешно
     }
+    cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
+    cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
+    cJSON_AddItemToObject(json->SEND, "USER_ID", json->USER_ID);
 
-    cJSON_AddItemToObject(SEND, "TYPE", TYPE);
-    cJSON_AddItemToObject(SEND, "RESULT", RESULT);
-    cJSON_AddItemToObject(SEND, "USER_ID", USER_ID);
-
-    send_str = cJSON_Print(SEND);
+    send_str = cJSON_Print(json->SEND);
 
     write(user_sock, send_str, strlen(send_str));
 
-    cJSON_Delete(SEND);
+    cJSON_Delete(json->SEND);
     free(send_str);
 }

@@ -4,26 +4,23 @@
 
 #include "server.h"
 
-void add_new_contact_and_json_create(sqlite3 *db, int user_id, int contact_id, cJSON **SEND) {
+void add_new_contact_and_json_create(sqlite3 *db, t_json **json) {
     t_contact *contacts = NULL;
-    cJSON *RESULT = NULL;
-    cJSON *CONTACTS_ID = NULL;
-    cJSON *CONTACTS_LOGIN = NULL;
-    int answer = 0;
+    int answer;
 
-    answer = mx_db_create_new_contact(db, user_id, contact_id);
+    answer = mx_db_create_new_contact(db, (*json)->USER_ID->valueint, (*json)->CONTACT_ID->valueint);
     if (answer == -1) {
-        RESULT = cJSON_CreateFalse();
+        (*json)->RESULT = cJSON_CreateFalse();
     }
     else {
-        RESULT = cJSON_CreateTrue();
-        contacts = mx_db_get_contacts_info(db, user_id);
-        CONTACTS_ID = cJSON_CreateIntArray(contacts->id, contacts->count);
-        CONTACTS_LOGIN = cJSON_CreateStringArray((const char **)contacts->login, contacts->count);
+        (*json)->RESULT = cJSON_CreateTrue();
+        contacts = mx_db_get_contacts_info(db, (*json)->USER_ID->valueint);
+        (*json)->CONTACTS_ID_ARR = cJSON_CreateIntArray(contacts->id, contacts->count);
+        (*json)->CONTACTS_LOGIN_ARR = cJSON_CreateStringArray((const char * const *)contacts->login, contacts->count);
     }
-    cJSON_AddItemToObject((*SEND), "RESULT", RESULT);
-    cJSON_AddItemToObject((*SEND), "CONTACTS_ID", CONTACTS_ID);
-    cJSON_AddItemToObject((*SEND), "CONTACTS_LOGIN", CONTACTS_LOGIN);
+    cJSON_AddItemToObject((*json)->SEND, "RESULT", (*json)->RESULT);
+    cJSON_AddItemToObject((*json)->SEND, "CONTACTS_ID_ARR", (*json)->CONTACTS_ID_ARR);
+    cJSON_AddItemToObject((*json)->SEND, "CONTACTS_LOGIN_ARR", (*json)->CONTACTS_LOGIN_ARR);
 
     if (MALLOC_SIZE(contacts->id)) {
         free(contacts->id);
@@ -34,20 +31,21 @@ void add_new_contact_and_json_create(sqlite3 *db, int user_id, int contact_id, c
     free(contacts);
 }
 
-void mx_add_new_contact(t_server *serv, int user_id, int contact_id, int user_sock) {
-    cJSON *SEND = cJSON_CreateObject();
-    cJSON *TYPE = cJSON_CreateNumber(NEW_CONTACT);
+void mx_add_new_contact(t_server *serv, t_json *json, int user_sock) {
     char *send_str = NULL;
 
-    add_new_contact_and_json_create(serv->db, user_id, contact_id, &SEND);
+    json->SEND = cJSON_CreateObject();
+    json->TYPE = cJSON_CreateNumber(NEW_CONTACT);
 
-    cJSON_AddItemToObject(SEND, "TYPE", TYPE);
+    cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
 
-    send_str = cJSON_Print(SEND);
+    add_new_contact_and_json_create(serv->db, &json);
+
+    send_str = cJSON_Print(json->SEND);
 
     write(user_sock, send_str, strlen(send_str));
 
-    cJSON_Delete(SEND);
+    cJSON_Delete(json->SEND);
     free(send_str);
 }
 
