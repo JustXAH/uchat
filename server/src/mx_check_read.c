@@ -14,6 +14,7 @@ static void read_and_write(t_server *serv, int user_num) {
     cJSON *CONTACT_ID = NULL;
     cJSON *MESSAGE = NULL;
     cJSON *TO = NULL;
+    cJSON *CHAT_ID = NULL;
 
     write(1, "Waiting for a message...\n", 25);
     read(serv->user_socket[user_num], buff_message, MAX);
@@ -75,9 +76,14 @@ static void read_and_write(t_server *serv, int user_num) {
                 break;
             case NEW_MESSAGE:
                 MESSAGE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "MESSAGE");
-                mx_add_new_message(serv, USER_ID->valueint, CONTACT_ID->valueint, MESSAGE->valuestring);
+                USER_ID = cJSON_GetObjectItemCaseSensitive(USER_JSON, "USER_ID");
+                CONTACT_ID = cJSON_GetObjectItemCaseSensitive(USER_JSON, "CONTACT_ID");
+                CHAT_ID = cJSON_GetObjectItemCaseSensitive(USER_JSON, "CHAT_ID");
+                mx_add_new_message(serv, USER_ID->valueint, CONTACT_ID->valueint, CHAT_ID->valueint, MESSAGE->valuestring);
                 break;
-
+            case LAST_MESSAGES:
+                mx_last_messages(serv, CHAT_ID->valueint);
+                break;
         }
 //        if (TYPE->valueint == 2) { // аутентификация
 //            PASS = cJSON_GetObjectItemCaseSensitive(USER_JSON, "PASS");

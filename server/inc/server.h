@@ -34,6 +34,7 @@
 #define MAX 4096
 #define PORT 5000
 #define MAX_CLIENTS 5
+#define COUNT_MESSAGES 30
 
 //enum for type cjson
 typedef enum e_type_cJSON_message {
@@ -47,6 +48,7 @@ typedef enum e_type_cJSON_message {
     NEW_CHAT,
     GET_LOGIN,
     NEW_MESSAGE,
+    LAST_MESSAGES,
 }            e_type_cJSON;
 
 //struct for server
@@ -113,7 +115,7 @@ void mx_user_search_by_login(t_server *serv, char *u_login, int user_sock);
 void mx_user_search_by_substr(t_server *serv, char *u_login, int user_sock);
 void mx_add_new_contact(t_server *serv, int user_id, int contact_id, int user_sock);
 void mx_add_new_chat(t_server *serv, int user_id, int contact_id, int user_sock);
-void mx_add_new_message(t_server *serv, int user_id, int contact_id, char *message);
+void mx_add_new_message(t_server *serv, int user_id, int contact_id, int chat_id, char *message);
 void mx_get_login(t_server *serv, int user_id, int user_sock);
 void mx_last_messages();
 
