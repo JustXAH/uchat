@@ -4,22 +4,23 @@
 
 #include "server.h"
 
-static int int_arr_len(const int *arr) {
-    int len = 0;
+//static int int_arr_len(const int *arr) {
+//    int len = 0;
+//
+//    while (arr[len] != 0) {
+//        len++;
+//    }
+//    return len;
+//}
 
-    while (arr[len] != 0) {
-        len++;
-    }
-    return len;
-}
-
-void chats_json_creator(sqlite3 *db, int user, cJSON **SEND) {
+void chats_json_creator(sqlite3 *db, t_json **json, int user) {
     t_chat *chats = mx_db_get_chats_info(db, user);
-    cJSON *CHATS_ID = cJSON_CreateIntArray(chats->id, chats->count);;
-    cJSON *CHATS_NAME = cJSON_CreateStringArray((const char **)chats->chat_name, chats->count);
 
-    cJSON_AddItemToObject((*SEND), "CHATS_ID", CHATS_ID);
-    cJSON_AddItemToObject((*SEND), "CHATS_NAME", CHATS_NAME);
+    (*json)->CHATS_ID_ARR = cJSON_CreateIntArray(chats->id, chats->count);
+    (*json)->CHATS_NAME_ARR = cJSON_CreateStringArray((const char **)chats->chat_name, chats->count);
+
+    cJSON_AddItemToObject((*json)->SEND, "CHATS_ID_ARR", (*json)->CHATS_ID_ARR);
+    cJSON_AddItemToObject((*json)->SEND, "CHATS_LOGIN_ARR", (*json)->CHATS_NAME_ARR);
 
     if (MALLOC_SIZE(chats->id)) {
         free(chats->id);
@@ -30,13 +31,14 @@ void chats_json_creator(sqlite3 *db, int user, cJSON **SEND) {
     free(chats);
 }
 
-void contacts_json_creator(sqlite3 *db, int user, cJSON **SEND) {
+void contacts_json_creator(sqlite3 *db, t_json **json, int user) {
     t_contact *contacts = mx_db_get_contacts_info(db, user);
-    cJSON *CONTACTS_ID = cJSON_CreateIntArray(contacts->id, contacts->count);
-    cJSON *CONTACTS_LOGIN = cJSON_CreateStringArray((const char **)contacts->login, contacts->count);
 
-    cJSON_AddItemToObject((*SEND), "CONTACTS_ID", CONTACTS_ID);
-    cJSON_AddItemToObject((*SEND), "CONTACTS_LOGIN", CONTACTS_LOGIN);
+    (*json)->CONTACTS_ID_ARR = cJSON_CreateIntArray(contacts->id, contacts->count);
+    (*json)->CONTACTS_LOGIN_ARR = cJSON_CreateStringArray((const char **)contacts->login, contacts->count);
+
+    cJSON_AddItemToObject((*json)->SEND, "CONTACTS_ID_ARR", (*json)->CONTACTS_ID_ARR);
+    cJSON_AddItemToObject((*json)->SEND, "CONTACTS_LOGIN_ARR", (*json)->CONTACTS_LOGIN_ARR);
 
     if (MALLOC_SIZE(contacts->id)) {
         free(contacts->id);
@@ -47,35 +49,30 @@ void contacts_json_creator(sqlite3 *db, int user, cJSON **SEND) {
     free(contacts);
 }
 
-void mx_login_and_pass_authentication(t_server *serv, char *u_login, char *u_pass, int user_sock) {
-    cJSON *SEND = cJSON_CreateObject();
-    cJSON *TYPE = cJSON_CreateNumber(AUTHENTICATION);
-    cJSON *RESULT = NULL; //результат аутентификации: FALSE - неудачно, TRUE - успешно
-    cJSON *USER_ID = NULL;
-
+void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_sock) {
     char *send_str = NULL;
 
-//    mx_db_init(serv->db);
-    USER_ID = cJSON_CreateNumber(mx_db_check_login(serv->db, u_login, u_pass));
-    if (USER_ID->valueint == 0 || USER_ID->valueint == -1) {
-        RESULT = cJSON_CreateFalse(); // ошибка при входе в аккаунт - "0" - такой логин не существует, "-1" - неверный пароль
+    json->SEND = cJSON_CreateObject();
+    json->TYPE = cJSON_CreateNumber(AUTHENTICATION);
+
+    json->USER_ID = cJSON_CreateNumber(mx_db_check_login(serv->db, json->LOGIN->valuestring, json->PASS->valuestring));
+    if (json->USER_ID->valueint == 0 || json->USER_ID->valueint == -1) {
+        json->RESULT = cJSON_CreateFalse(); // ошибка при входе в аккаунт - "0" - такой логин не существует, "-1" - неверный пароль
     }
     else {
-        RESULT = cJSON_CreateTrue(); //регистрация прошла успешно
-        contacts_json_creator(serv->db, USER_ID->valueint, &SEND);
-        chats_json_creator(serv->db, USER_ID->valueint, &SEND);
-//        CONTACTS_ID = json_id_arr_creator(serv->db, USER_ID->valueint, 1);
-//        CHATS_ID = json_id_arr_creator(serv->db, USER_ID->valueint, 2);
+        json->RESULT = cJSON_CreateTrue(); //регистрация прошла успешно
+        contacts_json_creator(serv->db, &json, json->USER_ID->valueint);
+        chats_json_creator(serv->db, &json, json->USER_ID->valueint);
     }
 
-    cJSON_AddItemToObject(SEND, "TYPE", TYPE);
-    cJSON_AddItemToObject(SEND, "RESULT", RESULT);
-    cJSON_AddItemToObject(SEND, "USER_ID", USER_ID);
+    cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
+    cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
+    cJSON_AddItemToObject(json->SEND, "USER_ID", json->USER_ID);
 
-    send_str = cJSON_Print(SEND);
+    send_str = cJSON_Print(json->SEND);
 
     write(user_sock, send_str, strlen(send_str));
 
-    cJSON_Delete(SEND);
+    cJSON_Delete(json->SEND);
     free(send_str);
 }

@@ -18,32 +18,32 @@ static cJSON *logins_arr_json_creator(const char * const *logins) {
     return LOGINS_ARR;
 }
 
-void mx_user_search_by_substr(t_server *serv, char *u_login, int user_sock) {
-    cJSON *SEND = cJSON_CreateObject();
-    cJSON *TYPE = cJSON_CreateNumber(USER_SEARCH_BY_SUBSTRING);
-    cJSON *RESULT = NULL; //результат аутентификации: FALSE - неудачно, TRUE - успешно
-    cJSON *LOGINS_ARR = NULL;
-    char **buff_arr;
+void mx_user_search_by_substr(t_server *serv, t_json *json, int user_sock) {
+    char **buff_arr = NULL;
     char *send_str = NULL;
 
-   buff_arr = mx_db_search_logins_by_substr(serv->db, u_login);
+    json->SEND = cJSON_CreateObject();
+    json->TYPE = cJSON_CreateNumber(USER_SEARCH_BY_SUBSTRING);
+
+    buff_arr = mx_db_search_logins_by_substr(serv->db, json->LOGIN->valuestring);
     if (buff_arr == NULL) { // "NULL" - no login matches
-        RESULT = cJSON_CreateFalse();
+        json->RESULT = cJSON_CreateFalse();
     }
     else {
-        RESULT = cJSON_CreateTrue(); // there are logins matches by substring
-        LOGINS_ARR = logins_arr_json_creator((const char **)buff_arr);
+        json->RESULT = cJSON_CreateTrue(); // there are logins matches by substring
+        json->USERS_LOGIN_ARR = logins_arr_json_creator((const char * const *)buff_arr);
     }
+    cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
+    cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
+    cJSON_AddItemToObject(json->SEND, "USERS_LOGIN_ARR", json->USERS_LOGIN_ARR);
 
-    cJSON_AddItemToObject(SEND, "TYPE", TYPE);
-    cJSON_AddItemToObject(SEND, "RESULT", RESULT);
-    cJSON_AddItemToObject(SEND, "LOGINS_ARR", LOGINS_ARR);
-
-    send_str = cJSON_Print(SEND);
+    send_str = cJSON_Print(json->SEND);
 
     write(user_sock, send_str, strlen(send_str));
 
-    cJSON_Delete(SEND);
+    cJSON_Delete(json->SEND);
     free(send_str);
-    free(buff_arr);
+    if (MALLOC_SIZE(buff_arr)) {
+        mx_del_strarr(&buff_arr);
+    }
 }

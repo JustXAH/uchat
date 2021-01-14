@@ -5,77 +5,77 @@
 #include "server.h"
 
 static void read_and_write(t_server *serv, int user_num) {
+    t_json *json = (t_json *)malloc(sizeof(t_json));
     char buff_message[MAX];
-    cJSON *USER_JSON = NULL;
-    cJSON *TYPE = NULL; //тип связи клиент-сервер (1 - сообщения, 2 - аутентификация, 3 - регистрация)
-    cJSON *LOGIN = NULL;
-    cJSON *PASS = NULL;
-    cJSON *USER_ID = NULL;
-    cJSON *CONTACT_ID = NULL;
-    cJSON *MESSAGE = NULL;
-    cJSON *TO = NULL;
+//    cJSON *USER_JSON = NULL;
+//    cJSON *TYPE = NULL; //тип связи клиент-сервер (1 - сообщения, 2 - аутентификация, 3 - регистрация)
+//    cJSON *LOGIN = NULL;
+//    cJSON *PASS = NULL;
+//    cJSON *USER_ID = NULL;
+//    cJSON *CONTACT_ID = NULL;
+//    cJSON *MESSAGE = NULL;
+//    cJSON *TO = NULL;
 
     write(1, "Waiting for a message...\n", 25);
     read(serv->user_socket[user_num], buff_message, MAX);
 
 //        Send the message back to client
     if (buff_message[0] != '\0') {
-        USER_JSON = cJSON_Parse(buff_message);
-        TYPE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "TYPE");
-        LOGIN = cJSON_GetObjectItemCaseSensitive(USER_JSON, "LOGIN");
-        serv->type_enum = TYPE->valueint;
+        json->USER_JSON = cJSON_Parse(buff_message);
+        json->TYPE = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "TYPE");
+        json->LOGIN = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "LOGIN");
+        serv->type_enum = json->TYPE->valueint;
         switch (serv->type_enum) {
             case TYPE_NULL: // создана из-за того что enum начинает отсчет с 0, а типы с 1
                 break;
             case MESSAGES:
-                MESSAGE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "MESSAGE");
-                TO = cJSON_GetObjectItemCaseSensitive(USER_JSON, "TO");
-                printf("Sender = %s\nmessage = %s\n", cJSON_Print(LOGIN),
-                       cJSON_Print(MESSAGE));
-                if (serv->cli_connect - 1 >= TO->valueint) {
-                    printf("%s\n", cJSON_Print(USER_JSON));
-                    write(serv->user_socket[TO->valueint], cJSON_Print(USER_JSON),
-                          mx_strlen(cJSON_Print(USER_JSON)));
+                json->MESSAGE = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "MESSAGE");
+                json->TO = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "TO");
+                printf("Sender = %s\nmessage = %s\n", cJSON_Print(json->LOGIN),
+                       cJSON_Print(json->MESSAGE));
+                if (serv->cli_connect - 1 >= json->TO->valueint) {
+                    printf("%s\n", cJSON_Print(json->USER_JSON));
+                    write(serv->user_socket[json->TO->valueint], cJSON_Print(json->USER_JSON),
+                          mx_strlen(cJSON_Print(json->USER_JSON)));
                 } else {
-                    cJSON_DeleteItemFromObject(USER_JSON, "MESSAGE");
-                    cJSON_DeleteItemFromObject(USER_JSON, "TO");
-                    TO = cJSON_CreateString(mx_itoa(user_num));
-                    MESSAGE = cJSON_CreateString("User not found");
-                    cJSON_AddItemToObject(USER_JSON, "TO", TO);
-                    cJSON_AddItemToObject(USER_JSON, "MESSAGE", MESSAGE);
-                    printf("%s\n", cJSON_Print(USER_JSON));
-                    write(serv->user_socket[user_num], cJSON_Print(USER_JSON), mx_strlen(cJSON_Print(USER_JSON)));
+                    cJSON_DeleteItemFromObject(json->USER_JSON, "MESSAGE");
+                    cJSON_DeleteItemFromObject(json->USER_JSON, "TO");
+                    json->TO = cJSON_CreateString(mx_itoa(user_num));
+                    json->MESSAGE = cJSON_CreateString("User not found");
+                    cJSON_AddItemToObject(json->USER_JSON, "TO", json->TO);
+                    cJSON_AddItemToObject(json->USER_JSON, "MESSAGE", json->MESSAGE);
+                    printf("%s\n", cJSON_Print(json->USER_JSON));
+                    write(serv->user_socket[user_num], cJSON_Print(json->USER_JSON), mx_strlen(cJSON_Print(json->USER_JSON)));
                 }
 //              free(buff_message);
                 memset(&buff_message, '\0', sizeof(buff_message));
                 break;
             case AUTHENTICATION:
-                PASS = cJSON_GetObjectItemCaseSensitive(USER_JSON, "PASS");
-                mx_login_and_pass_authentication(serv, LOGIN->valuestring, PASS->valuestring,
-                                                 serv->user_socket[user_num]);
+                json->PASS = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "PASS");
+                mx_login_and_pass_authentication(serv, json, serv->user_socket[user_num]);
                 break;
             case REGISTRATION:
-                PASS = cJSON_GetObjectItemCaseSensitive(USER_JSON, "PASS");
-                mx_user_registration(serv, LOGIN->valuestring, PASS->valuestring, serv->user_socket[user_num]);
+                json->PASS = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "PASS");
+                mx_user_registration(serv, json, serv->user_socket[user_num]);
                 break;
             case USER_SEARCH_BY_SUBSTRING:
-                mx_user_search_by_substr(serv, LOGIN->valuestring, serv->user_socket[user_num]);
+                mx_user_search_by_substr(serv, json, serv->user_socket[user_num]);
                 break;
             case USER_SEARCH_BY_LOGIN:
-                mx_user_search_by_login(serv, LOGIN->valuestring, serv->user_socket[user_num]);
+                mx_user_search_by_login(serv, json, serv->user_socket[user_num]);
                 break;
             case NEW_CONTACT:
-                mx_add_new_contact(serv, USER_ID->valueint, CONTACT_ID->valueint, serv->user_socket[user_num]);
+                mx_add_new_contact(serv, json, serv->user_socket[user_num]);
                 break;
             case NEW_CHAT:
-                mx_add_new_chat(serv, USER_ID->valueint, CONTACT_ID->valueint, serv->user_socket[user_num]);
+                mx_add_new_chat(serv, json, serv->user_socket[user_num]); // нужно доделать
                 break;
             case GET_LOGIN:
-                mx_get_login(serv, USER_ID->valueint, serv->user_socket[user_num]);
+                mx_get_login(serv, json, serv->user_socket[user_num]); // нужно доделать
                 break;
             case NEW_MESSAGE:
-                MESSAGE = cJSON_GetObjectItemCaseSensitive(USER_JSON, "MESSAGE");
-                mx_add_new_message(serv, USER_ID->valueint, CONTACT_ID->valueint, MESSAGE->valuestring);
+                json->MESSAGE = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "MESSAGE");
+                mx_add_new_message(serv, json->USER_ID->valueint, json->CONTACT_ID->valueint, json->MESSAGE->valuestring);
                 break;
 
         }
