@@ -4,7 +4,7 @@
 
 #include "server.h"
 
-void mx_add_new_message(t_server *serv, int user_id, int contact_id, int chat_id, char *message) {
+void mx_add_new_message(t_server *serv, t_json *json) {
     cJSON *NEW_MESSAGES = cJSON_CreateObject();
     cJSON *TYPE = cJSON_CreateNumber(NEW_MESSAGE); // create new messages
     cJSON *RESULT = NULL; // результат аутентификации: FALSE - неудачно, TRUE - успешно
