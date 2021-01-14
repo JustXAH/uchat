@@ -17,7 +17,7 @@ void chats_json_creator(sqlite3 *db, t_json **json, int user) {
     t_chat *chats = mx_db_get_chats_info(db, user);
 
     (*json)->CHATS_ID_ARR = cJSON_CreateIntArray(chats->id, chats->count);
-    (*json)->CHATS_NAME_ARR = cJSON_CreateStringArray((const char **)chats->chat_name, chats->count);
+    (*json)->CHATS_NAME_ARR = cJSON_CreateStringArray((const char * const *)chats->chat_name, chats->count);
 
     cJSON_AddItemToObject((*json)->SEND, "CHATS_ID_ARR", (*json)->CHATS_ID_ARR);
     cJSON_AddItemToObject((*json)->SEND, "CHATS_LOGIN_ARR", (*json)->CHATS_NAME_ARR);
@@ -35,7 +35,7 @@ void contacts_json_creator(sqlite3 *db, t_json **json, int user) {
     t_contact *contacts = mx_db_get_contacts_info(db, user);
 
     (*json)->CONTACTS_ID_ARR = cJSON_CreateIntArray(contacts->id, contacts->count);
-    (*json)->CONTACTS_LOGIN_ARR = cJSON_CreateStringArray((const char **)contacts->login, contacts->count);
+    (*json)->CONTACTS_LOGIN_ARR = cJSON_CreateStringArray((const char * const *)contacts->login, contacts->count);
 
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_ID_ARR", (*json)->CONTACTS_ID_ARR);
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_LOGIN_ARR", (*json)->CONTACTS_LOGIN_ARR);

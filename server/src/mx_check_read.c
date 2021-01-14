@@ -122,7 +122,8 @@ static void read_and_write(t_server *serv, int user_num) {
 //            memset(&buff_message, '\0', sizeof(buff_message));
 //        }
     }
-    cJSON_Delete(USER_JSON);
+    cJSON_Delete(json->USER_JSON);
+    free(json);
 }
 
 void mx_check_read(t_server *serv, int i) {
