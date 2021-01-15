@@ -20,7 +20,7 @@
 //    free(str_user_json);
 //}
 
-void mx_confirmation_of_registration(t_system *sys, t_user *user, cJSON *SERVER_JSON) {
+void mx_confirmation_of_registration(t_system *sys, t_user *user, t_json *json) {
     cJSON *RESULT = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
                                                      "RESULT");
     cJSON *MY_ID = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,

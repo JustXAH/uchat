@@ -30,6 +30,20 @@
 #define PORT 5000
 #define SA struct sockaddr
 
+//enum for type cjson
+typedef enum e_type_cJSON_message {
+    TYPE_NULL,
+    MESSAGES,
+    AUTHENTICATION,
+    REGISTRATION,
+    USER_SEARCH_BY_SUBSTRING,
+    USER_SEARCH_BY_LOGIN,
+    NEW_CONTACT,
+    NEW_CHAT,
+    GET_LOGIN,
+    NEW_MESSAGE,
+    LAST_MESSAGES,
+}            e_type_cJSON;
 
 typedef struct s_system {
 //    char *login;
@@ -42,6 +56,7 @@ typedef struct s_system {
     GtkWindow *reg_window;
     GtkWindow *chat_window;
     int sockfd;
+    e_type_cJSON type_enum;
 //    pthread_mutex_t mutex;
     bool first_reg;
     bool registration;
@@ -55,14 +70,37 @@ typedef struct s_system {
 typedef struct s_user {
     char *login;
     char *password;
-    int *contacts;
-    int *chats;
+    int *contacts_id;
+    char **contacts_login;
+    int *chats_id;
+    char **chats_name;
     int my_id;
 }              t_user;
+
+typedef struct s_json {
+    cJSON *SERVER_JSON;
+    cJSON *SEND;
+    cJSON *TYPE;
+    cJSON *RESULT;
+    cJSON *LOGIN;
+    cJSON *PASS;
+    cJSON *USER_ID;
+    cJSON *CONTACT_ID;
+    cJSON *CONTACTS_ID_ARR;
+    cJSON *CONTACTS_LOGIN_ARR;
+    cJSON *CHATS_ID_ARR;
+    cJSON *CHATS_NAME_ARR;
+    cJSON *USERS_LOGIN_ARR;
+    cJSON *FOUND_LOGIN;
+    cJSON *MESSAGE;
+    cJSON *TO;
+    cJSON *CHAT_ID;
+}              t_json;
 
 typedef struct s_chat {
     struct s_system *sys;
     struct s_user *user;
+    struct s_json *json;
 }              t_chat;
 
 //structs for glade
@@ -89,12 +127,21 @@ typedef struct s_chat_win {
 
 
 void mx_structs_initialization(t_system *sys, t_user *user);
+
+/*
+ * READ SERVER ANSWER
+ */
+void *read_server(void *data); // second thread to read server responses
+void mx_authentication_client(t_system *sys, t_user *user, t_json *json);
+void mx_confirmation_of_registration(t_system *sys, t_user *user, t_json *json);
+void mx_found_users_by_substr(t_system *sys, t_user *user, t_json *json);
+void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json);
+
+
 void mx_login_or_register(t_system *sys, t_user *user);
 char *mx_create_user_profile(t_system *sys, t_user *user);
 void mx_account_login_request(t_system *sys, t_user *user);
 void mx_registration_request(t_system *sys, t_user *user);
-void mx_confirmation_of_registration(t_system *sys, t_user *user, cJSON *SERVER_JSON);
-void mx_authentication_client(t_system *sys, t_user *user, cJSON *SERVER_JSON);
 void mx_chat_event(t_system *sys, t_user *user, pthread_t thread);
 void mx_client_menu(t_system *sys, t_user *user);
 void mx_sending_messages(t_system *sys, t_user *user, char *buff); // нужно переделать сначала сервер-бд, потом здесь
