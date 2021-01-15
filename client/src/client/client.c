@@ -4,38 +4,15 @@
 
 #include "client.h"
 
+t_chat *chat;
 extern t_reg_win reg__win;
 extern t_client_st cl_listener;
-t_chat *chat;
 
 static gboolean client_event_listener(gpointer data) {
-    //printf("auth = %d logged_in = %d\n", chat->sys->authentication, client_st.logged_in);
-    if (cl_listener.authentication && !cl_listener.logged_in) {
-        gtk_chat_window(chat);
-        cl_listener.logged_in = true;
-        printf("reg_window hidden\nchat_window opened\n");
-    }
-    if (cl_listener.message_in_buffer) {
-        //
-        cl_listener.message_in_buffer = false;
-    }
+    mb_event_listener();
     return true;
 }
-/*
-void *listen_signal(void *data) {
-    t_chat *chat = (t_chat *) data;
-    t_system *sys = chat->sys;
-    t_user *user = chat->user;
 
-    gtk_main();
-    while (true) {
-        write(1, "Potok RABOTAET\n", 15);
-        sleep(10);
-    //        check = false;
-    }
-    return 0;
-}
-*/
 void *read_server(void *data) {
     t_chat *chat = (t_chat *)data;
     t_system *sys = chat->sys;
@@ -137,14 +114,10 @@ int main(int argc, char *argv[]) {
 
     chat->sys = sys;
     chat->user = user;
-    // function for chat
-    //pthread_create(&thread_signal, NULL, listen_signal, chat);
     pthread_create(&thread_server, NULL, read_server, chat);
+    // function for chat
     g_idle_add(client_event_listener, NULL);
-    gtk_log_window(chat);
-    //printf("s1\n");
-    //gtk_chat_window(chat);
-    
+    gtk_window_initializtion(chat);
 
     //    mx_chat_event(sys, user, thread_server);
 

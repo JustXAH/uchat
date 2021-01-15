@@ -2,7 +2,7 @@
 
 extern t_chat_win chat_win;
 
-void mb_display_messge(char *msg_text) {
+void mb_display_msg(char *msg_text) {
     GtkWidget *view;
     GtkTextBuffer *buffer;
 

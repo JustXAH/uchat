@@ -10,20 +10,15 @@ void on_log_login_btn_clicked(GtkButton *btn) {
     bool valid = check_credentials();
     if (!valid) {
         printf("login type valid error\n");
-        /*gtk_widget_override_color(reg_win.err_log_label,
-                                   GTK_STATE_FLAG_NORMAL,
-                                   "#7F7F7F");*/
-        gtk_label_set_text(reg_win.err_log_label, "Invalid login or pass");
+        gtk_label_set_text(reg_win.err_log_label, "Lambert, Lambert what a prick\n");
+        //mb_invalid_credentials_msg();
         return;
     }
     chat->user->login = strdup(gtk_entry_get_text(reg_win.log_entry));
     chat->user->password = strdup(gtk_entry_get_text(reg_win.pass_entry));
-    printf("\nLOGIN = %s\nPASS = %s\n", chat->user->login, chat->user->password);
-    gtk_label_set_text(reg_win.err_log_label, "Success");
-    gtk_label_set_text(reg_win.err_pas_label, "Success");
+    printf("\nsent LOGIN = %s\nsent PASS = %s\n", chat->user->login, chat->user->password);
 
     mx_registration_or_login_request(chat->sys, chat->user);
-    //gtk_chat_window(sys, user);
 }
 static bool check_credentials() {
     char *lbuffer = (char *)gtk_entry_get_text(reg_win.log_entry);

@@ -97,11 +97,12 @@ typedef struct s_reg_win {
 typedef struct s_chat_win {
     GtkEntry *chat_msg;
     GtkListBox *chat_viewer;
+    GtkListBox *contact_list;
 }                t_chat_win;
 
 typedef struct s_client_st {
     bool logged_in;
-    bool authentication;
+    char authentication;
     bool message_in_buffer;
 
 }               t_client_st;
@@ -129,11 +130,28 @@ void mx_user_search(t_system *sys, t_user *user);
 /*
  * GLADE
  */
+void gtk_window_initializtion(t_chat *chat);
+void gtk_show_chat_window(t_chat *chat);
+void gtk_show_log_window(t_chat *chat);
+
 void client_st_init();
 void reg_win_init(t_system *sys);
 void chat_win_init(t_system *sys);
-void gtk_log_window(t_chat *chat);
-void gtk_chat_window(t_chat *chat);
-void mb_display_messge(char *msg_text);
 
+void mb_display_msg(char *msg_text);
+void mb_invalid_credentials_msg();
+void mb_reset_credentials_msg();
+
+void mb_event_listener();
+void mb_auth_event_check();
 #endif //UCHAT_CLIENT_H
+
+
+
+/* 
+    user_id
+    time
+    text
+    avatar
+
+*/

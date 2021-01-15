@@ -30,8 +30,9 @@ void mx_authentication_client(t_system *sys, t_user *user, cJSON *SERVER_JSON) {
     cJSON *CHATS = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
                                                        "CHATS_ID");
     char *id = mx_itoa(MY_ID->valueint);
-    mx_printstr("mx_authentication_client\n");
+    //mx_printstr("mx_authentication_client\n");
     if (cJSON_IsFalse(RESULT)) {
+        cl_listener.authentication = 2;
         if (MY_ID->valueint == 0) {
             write(1, "\nOops! This login doesn't exist.\n\n", 34);
             mx_account_login_request(sys, user);
@@ -46,7 +47,7 @@ void mx_authentication_client(t_system *sys, t_user *user, cJSON *SERVER_JSON) {
         user->my_id = MY_ID->valueint;
 //        user->contacts = cJSON_(SERVER_JSON
         sys->registration = true;
-        sys->authentication = true;
+        sys->authentication = 1;
         sys->menu = true;
         cl_listener.authentication = true;
     }

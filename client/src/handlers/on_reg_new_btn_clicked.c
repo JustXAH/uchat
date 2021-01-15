@@ -4,6 +4,7 @@ extern t_reg_win reg_win;
 extern t_chat *chat;
 
 void on_log_reg_btn_clicked(GtkButton *btn, t_system *sys) {
+    mb_reset_credentials_msg();
     printf("Start REG\n");
     if (sys->builder) {
         gtk_stack_set_visible_child_name(reg_win.stk, "reg_window");

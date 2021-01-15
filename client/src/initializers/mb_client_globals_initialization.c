@@ -37,11 +37,13 @@ void chat_win_init(t_system *sys) {
                                                         "chat_msg_entry"));
     chat_win.chat_viewer = GTK_LIST_BOX(gtk_builder_get_object(sys->builder,
                                                         "chat_msg_lst_box"));
- 
+      chat_win.contact_list = GTK_LIST_BOX(gtk_builder_get_object(sys->builder,
+                                                        "contact_list"));                                                      
+
 }
 void client_st_init() {
     cl_listener.logged_in = false;
-    cl_listener.authentication = false;
+    cl_listener.authentication = 0;
     cl_listener.message_in_buffer = false;
     
 }
