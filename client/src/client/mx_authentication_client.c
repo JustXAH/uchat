@@ -60,11 +60,11 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
         sys->authentication = false;
         if (json->USER_ID->valueint == 0) { // login doesn't exist
             write (1, "LOGIN DOESN'T EXIST\n", 20); // это затычка!
-            // нужно вывести сообщение о ошибке на экран
+            // нужно вывести сообщение о ошибке на экран и запустить поторную процедуру логина
         }
         else  { // wrong password
             write (1, "WRONG PASSWORD\n", 15); // это затычка!
-            // нужно вывести сообщение о ошибке на экран
+            // нужно вывести сообщение о ошибке на экран и запустить поторную процедуру логина
         }
     }
     else { //RESULT = TRUE (login and password are confirmed - successful LOG IN)
