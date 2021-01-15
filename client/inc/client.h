@@ -5,6 +5,14 @@
 #ifndef UCHAT_CLIENT_H
 #define UCHAT_CLIENT_H
 
+#ifdef __APPLE__
+#define MALLOC_SIZE malloc_size
+#elif __linux__
+#define _XOPEN_SOURCE 500
+#define MALLOC_SIZE malloc_usable_size
+#include <strings.h>
+#endif
+
 #include "cJSON.h"
 #include "libmx.h"
 #include <sys/socket.h>
@@ -75,6 +83,7 @@ typedef struct s_user {
     int *chats_id;
     char **chats_name;
     int my_id;
+    int contact_count;
 }              t_user;
 
 typedef struct s_json {
@@ -95,6 +104,7 @@ typedef struct s_json {
     cJSON *MESSAGE;
     cJSON *TO;
     cJSON *CHAT_ID;
+    cJSON *CONTACTS_COUNT;
 }              t_json;
 
 typedef struct s_chat {
@@ -136,6 +146,7 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json);
 void mx_confirmation_of_registration(t_system *sys, t_user *user, t_json *json);
 void mx_found_users_by_substr(t_system *sys, t_user *user, t_json *json);
 void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json);
+void mx_add_new_contact(t_system *sys, t_user *user, t_json *json);
 
 
 void mx_login_or_register(t_system *sys, t_user *user);

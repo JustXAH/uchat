@@ -13,6 +13,7 @@ void add_new_contact_and_json_create(sqlite3 *db, t_json **json) {
         (*json)->RESULT = cJSON_CreateFalse();
     }
     else {
+        (*json)->COUNT_CONTACTS = cJSON_CreateNumber(contacts->count);
         (*json)->RESULT = cJSON_CreateTrue();
         contacts = mx_db_get_contacts_info(db, (*json)->USER_ID->valueint);
         (*json)->CONTACTS_ID_ARR = cJSON_CreateIntArray(contacts->id, contacts->count);
@@ -21,6 +22,7 @@ void add_new_contact_and_json_create(sqlite3 *db, t_json **json) {
     cJSON_AddItemToObject((*json)->SEND, "RESULT", (*json)->RESULT);
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_ID_ARR", (*json)->CONTACTS_ID_ARR);
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_LOGIN_ARR", (*json)->CONTACTS_LOGIN_ARR);
+    cJSON_AddItemToObject((*json)->SEND, "COUNT_CONTACTS", (*json)->COUNT_CONTACTS);
 
     if (MALLOC_SIZE(contacts->id)) {
         free(contacts->id);
