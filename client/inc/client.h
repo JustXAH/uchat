@@ -99,6 +99,12 @@ typedef struct s_chat_win {
     GtkListBox *chat_viewer;
 }                t_chat_win;
 
+typedef struct s_client_st {
+    bool logged_in;
+    bool authentication;
+    bool message_in_buffer;
+
+}               t_client_st;
 
 void mx_structs_initialization(t_system *sys, t_user *user);
 void mx_login_or_register(t_system *sys, t_user *user);
@@ -123,9 +129,11 @@ void mx_user_search(t_system *sys, t_user *user);
 /*
  * GLADE
  */
+void client_st_init();
 void reg_win_init(t_system *sys);
 void chat_win_init(t_system *sys);
-void mx_gtk_window(t_system *sys, t_user *user);
-void gtk_chat_window(t_system *sys, t_user *user);
+void gtk_log_window(t_chat *chat);
+void gtk_chat_window(t_chat *chat);
+void mb_display_messge(char *msg_text);
 
 #endif //UCHAT_CLIENT_H

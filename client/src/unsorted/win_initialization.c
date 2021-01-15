@@ -2,6 +2,7 @@
 
 t_reg_win reg_win;
 t_chat_win chat_win;
+t_client_st cl_listener;
 
 void reg_win_init(t_system *sys) {
     reg_win.log_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
@@ -37,4 +38,10 @@ void chat_win_init(t_system *sys) {
     chat_win.chat_viewer = GTK_LIST_BOX(gtk_builder_get_object(sys->builder,
                                                         "chat_msg_lst_box"));
  
+}
+void client_st_init() {
+    cl_listener.logged_in = false;
+    cl_listener.authentication = false;
+    cl_listener.message_in_buffer = false;
+    
 }

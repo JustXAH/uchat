@@ -4,6 +4,7 @@
 
 #include "client.h"
 
+extern t_client_st cl_listener;
 //static void account_login_request(t_system *sys, t_user *user) {
 //    char *str_user_json;
 //
@@ -29,7 +30,7 @@ void mx_authentication_client(t_system *sys, t_user *user, cJSON *SERVER_JSON) {
     cJSON *CHATS = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
                                                        "CHATS_ID");
     char *id = mx_itoa(MY_ID->valueint);
-
+    mx_printstr("mx_authentication_client\n");
     if (cJSON_IsFalse(RESULT)) {
         if (MY_ID->valueint == 0) {
             write(1, "\nOops! This login doesn't exist.\n\n", 34);
@@ -47,6 +48,7 @@ void mx_authentication_client(t_system *sys, t_user *user, cJSON *SERVER_JSON) {
         sys->registration = true;
         sys->authentication = true;
         sys->menu = true;
+        cl_listener.authentication = true;
     }
     cJSON_DeleteItemFromObject(SERVER_JSON, "RESULT");
     cJSON_DeleteItemFromObject(SERVER_JSON, "USER_ID");

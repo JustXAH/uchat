@@ -58,6 +58,7 @@
                       <object class="GtkListBox" id="chat_msg_lst_box">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
+                        <property name="hexpand">True</property>
                       </object>
                     </child>
                   </object>
@@ -90,6 +91,7 @@
                             <property name="is-focus">True</property>
                             <property name="can-default">True</property>
                             <property name="has-default">True</property>
+                            <property name="margin-right">75</property>
                             <property name="activates-default">True</property>
                             <signal name="activate" handler="send_msg" swapped="no"/>
                           </object>
@@ -98,7 +100,7 @@
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
+                    <property name="expand">True</property>
                     <property name="fill">True</property>
                     <property name="position">0</property>
                   </packing>
@@ -109,12 +111,13 @@
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="receives-default">False</property>
+                    <property name="image-position">right</property>
                     <signal name="clicked" handler="send_msg" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">7</property>
+                    <property name="position">9</property>
                   </packing>
                 </child>
               </object>
