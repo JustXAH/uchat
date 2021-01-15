@@ -14,6 +14,7 @@ void *read_server(void *data) {
     while (read(sys->sockfd, buff, sizeof(buff))) {
         json->SERVER_JSON = cJSON_Parse(buff);
         json->TYPE = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "TYPE");
+        sys->type_enum = json->TYPE->valueint;
         switch (sys->type_enum) {
             case TYPE_NULL: // создана из-за того что enum начинает отсчет с 0, а типы с 1
                 // stub
@@ -50,7 +51,9 @@ void *read_server(void *data) {
                 // функция, которая принимает ответ от запроса на подгрузку последних сообщений
                 break;
         }
+        cJSON_Delete(json->SERVER_JSON);
     }
+    free(json);
 
 //        if (TYPE != NULL) {
 //            if (TYPE->valueint == 2) { //аутентификация

@@ -75,6 +75,8 @@ typedef struct s_user {
     int *chats_id;
     char **chats_name;
     int my_id;
+    int contacts_count;
+    int chats_count;
 }              t_user;
 
 typedef struct s_json {
@@ -87,8 +89,10 @@ typedef struct s_json {
     cJSON *USER_ID;
     cJSON *CONTACT_ID;
     cJSON *CONTACTS_ID_ARR;
+    cJSON *CONTACTS_COUNT;
     cJSON *CONTACTS_LOGIN_ARR;
     cJSON *CHATS_ID_ARR;
+    cJSON *CHATS_COUNT;
     cJSON *CHATS_NAME_ARR;
     cJSON *USERS_LOGIN_ARR;
     cJSON *FOUND_LOGIN;
