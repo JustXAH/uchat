@@ -4,26 +4,23 @@
 
 #include "server.h"
 
-void add_new_chat_and_json_create(sqlite3 *db, int user_id, int contact_id, cJSON **SEND) {
+void add_new_chat_and_json_create(sqlite3 *db, t_json **json) {
     t_chat *chats = NULL;
-    cJSON *RESULT = NULL;
-    cJSON *CHATS_ID = NULL;
-    cJSON *CHATS_NAME = NULL;
-    int answer = 0;
+    int answer;
 
-    answer = mx_db_create_new_chat(db, user_id, contact_id);
+    answer = mx_db_create_new_chat(db, (*json)->USER_ID->valueint, (*json)->CONTACT_ID->valueint);
     if (answer == -1) {
-        RESULT = cJSON_CreateFalse();
+        (*json)->RESULT = cJSON_CreateFalse();
     }
     else {
-        RESULT = cJSON_CreateTrue();
-        chats = mx_db_get_chats_info(db, user_id);
-        CHATS_ID = cJSON_CreateIntArray(chats->id, chats->count);
-        CHATS_NAME = cJSON_CreateStringArray((const char **)chats->chat_name, chats->count);
+        (*json)->RESULT = cJSON_CreateTrue();
+        chats = mx_db_get_chats_info(db, (*json)->USER_ID->valueint);
+        (*json)->CHATS_ID_ARR = cJSON_CreateIntArray(chats->id, chats->count);
+        (*json)->CHATS_NAME_ARR = cJSON_CreateStringArray((const char * const*)chats->chat_name, chats->count);
     }
-    cJSON_AddItemToObject((*SEND), "RESULT", RESULT);
-    cJSON_AddItemToObject((*SEND), "CHATS_ID", CHATS_ID);
-    cJSON_AddItemToObject((*SEND), "CHATS_LOGIN", CHATS_NAME);
+    cJSON_AddItemToObject((*json)->SEND, "RESULT", (*json)->RESULT);
+    cJSON_AddItemToObject((*json)->SEND, "CHATS_ID_ARR", (*json)->CHATS_ID_ARR);
+    cJSON_AddItemToObject((*json)->SEND, "CHATS_NAME_ARR", (*json)->CHATS_NAME_ARR);
 
     if (MALLOC_SIZE(chats->id)) {
         free(chats->id);
@@ -34,20 +31,21 @@ void add_new_chat_and_json_create(sqlite3 *db, int user_id, int contact_id, cJSO
     free(chats);
 }
 
-void mx_add_new_chat(t_server *serv, int user_id, int contact_id, int user_sock) {
-    cJSON *SEND = cJSON_CreateObject();
-    cJSON *TYPE = cJSON_CreateNumber(NEW_CHAT);
+void mx_add_new_chat(t_server *serv, t_json *json, int user_sock) {
     char *send_str = NULL;
 
-    add_new_chat_and_json_create(serv->db, user_id, contact_id, &SEND);
+    json->SEND = cJSON_CreateObject();
+    json->TYPE = cJSON_CreateNumber(NEW_CHAT);
 
-    cJSON_AddItemToObject(SEND, "TYPE", TYPE);
+    cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
 
-    send_str = cJSON_Print(SEND);
+    add_new_chat_and_json_create(serv->db, &json);
+
+    send_str = cJSON_Print(json->SEND);
 
     write(user_sock, send_str, strlen(send_str));
 
-    cJSON_Delete(SEND);
+    cJSON_Delete(json->SEND);
     free(send_str);
 }
 

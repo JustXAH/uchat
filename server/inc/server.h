@@ -75,8 +75,10 @@ typedef struct s_json {
     cJSON *CHATS_ID_ARR;
     cJSON *CHATS_NAME_ARR;
     cJSON *USERS_LOGIN_ARR;
+    cJSON *FOUND_LOGIN;
     cJSON *MESSAGE;
     cJSON *TO;
+    cJSON *CHAT_ID;
 }              t_json;
 
 //struct for database
