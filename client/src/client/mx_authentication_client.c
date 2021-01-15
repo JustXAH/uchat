@@ -19,10 +19,8 @@ void user_chats_parse_and_save(t_user *user, t_json *json) {
         for (int i = 0; i != user->chats_count; i++) {
             user->chats_id[i] = cJSON_GetArrayItem(json->CHATS_ID_ARR, i)->valueint;
             user->chats_name[i] = strdup(cJSON_GetArrayItem(json->CHATS_NAME_ARR, i)->valuestring);
-            if (i + 1 == user->chats_count) {
-                user->chats_name[i + 1] = NULL;
-            }
         }
+        user->chats_name[user->contacts_count] = NULL;
     }
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_COUNT");
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_ID_ARR");
@@ -44,10 +42,8 @@ void user_contacts_parse_and_save(t_user *user, t_json *json) {
         for (int i = 0; i != user->contacts_count; i++) {
             user->contacts_id[i] = cJSON_GetArrayItem(json->CONTACTS_LOGIN_ARR, i)->valueint;
             user->contacts_login[i] = strdup(cJSON_GetArrayItem(json->CONTACTS_LOGIN_ARR, i)->valuestring);
-            if (i + 1 == user->contacts_count) {
-                user->contacts_login[i + 1] = NULL;
-            }
         }
+        user->contacts_login[user->contacts_count] = NULL;
     }
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "CONTACTS_COUNT");
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "CONTACTS_ID_ARR");
@@ -72,6 +68,7 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
         }
     }
     else { //RESULT = TRUE (login and password are confirmed - successful LOG IN)
+        user->my_id = json->USER_ID->valueint;
         user_contacts_parse_and_save(user, json);
         user_chats_parse_and_save(user, json);
 //        user->contacts = cJSON_(SERVER_JSON

@@ -79,6 +79,7 @@ typedef struct s_json {
     cJSON *MESSAGE;
     cJSON *TO;
     cJSON *CHAT_ID;
+    cJSON *COUNT_CONTACTS;
 }              t_json;
 
 //struct for database

@@ -36,7 +36,7 @@ void *read_server(void *data) {
                 mx_found_user_by_login(sys, user, json);
                 break;
             case NEW_CONTACT:
-                // функция, которая принимает ответ от запроса на создание нового контакта
+                mx_add_new_contact(sys, user, json);
                 break;
             case NEW_CHAT:
                 // функция, которая принимает ответ от запроса на создание нового чата
