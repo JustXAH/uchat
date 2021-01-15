@@ -17,7 +17,6 @@ static void add_contacts_id(t_user *user, cJSON *CONTACTS_ID_ARR) {
     for (int i = 0; i != user->contacts_count; i++) {
         user->contacts_id[i] = cJSON_GetArrayItem(CONTACTS_ID_ARR, i)->valueint;
     }
-//    user->contacts_id[user->contacts_count] = 0;
 }
 
 void mx_add_new_contact(t_system *sys, t_user *user, t_json *json) {

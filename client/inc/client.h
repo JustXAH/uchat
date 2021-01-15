@@ -149,7 +149,8 @@ void mx_confirmation_of_registration(t_system *sys, t_user *user, t_json *json);
 void mx_found_users_by_substr(t_system *sys, t_user *user, t_json *json);
 void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_contact(t_system *sys, t_user *user, t_json *json);
-
+void mx_add_new_chat(t_system *sys, t_user *user, t_json *json);
+void mx_get_login(t_system *sys, t_user *user, t_json *json);
 
 void mx_login_or_register(t_system *sys, t_user *user);
 char *mx_create_user_profile(t_system *sys, t_user *user);
