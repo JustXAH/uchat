@@ -129,7 +129,7 @@ int main(int argc, char *argv[]) {
     mx_gtk_window(sys, user);
 //    mx_chat_event(sys, user, thread_server);
 
-
+    mx_
     // close the socket
     close(sys->sockfd);
 
