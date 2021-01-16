@@ -1,10 +1,16 @@
 #include "server.h"
 
-t_user_info *user_info;
+typedef struct s_user_node {
+    int id;
+    char *login;
+    struct s_user_node *next;
+}              t_user_node;
+
+t_user_node *user_info;
 int count;
 
 static int get_contacts_info_callback(void *NotUsed, int argc, char **argv, char **azColName) {
-    t_user_info *u = (t_user_info*)malloc(sizeof(t_user_info));
+    t_user_node *u = (t_user_node*)malloc(sizeof(t_user_node));
     u->next = user_info;
     user_info = u;
     count++;
@@ -39,7 +45,7 @@ t_contact *mx_db_get_contacts_info(sqlite3 *db, int user) {
     for (int i = count-1; i >= 0; i--) {
         contacts->id[i] = user_info->id;
         contacts->login[i] = user_info->login;
-        t_user_info *tmp = user_info;
+        t_user_node *tmp = user_info;
         user_info = user_info->next;
         free(tmp);
     }
