@@ -7,6 +7,7 @@
 t_chat *chat;
 extern t_reg_win reg__win;
 extern t_client_st cl_listener;
+extern t_msg *incoming_msg_buffer;
 
 static gboolean client_event_listener(gpointer data) {
     mb_event_listener();
@@ -75,7 +76,6 @@ int main(int argc, char *argv[]) {
     pthread_t thread_signal;
 
     mx_structs_initialization(sys, user);
-    client_st_init();
 
 //    printf("\nLOGIN = %s\nPASS = %s\n", user->login, user->password);
 
@@ -115,6 +115,7 @@ int main(int argc, char *argv[]) {
     chat->sys = sys;
     chat->user = user;
     pthread_create(&thread_server, NULL, read_server, chat);
+
     // function for chat
     g_idle_add(client_event_listener, NULL);
     gtk_window_initializtion(chat);

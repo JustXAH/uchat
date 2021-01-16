@@ -101,12 +101,27 @@ typedef struct s_chat_win {
 }                t_chat_win;
 
 typedef struct s_client_st {
-    bool logged_in;
+    char logged_in;  // 0 - not logged in // 1 - logged in // 2 - request for login sent
     char authentication;
     bool message_in_buffer;
+    int user_in_focus; // 0 - home page
 
 }               t_client_st;
-
+typedef struct s_msg {
+    int user_id;
+    char *msg_time;
+    char *msg_text;
+    bool outgoing;
+    struct s_msg *next_msg;
+}              t_msg;
+typedef struct s_contact_list {
+    int user_id;
+    char *user_name;
+    t_msg *chat_history;
+    GtkWidget *contact_gui;
+    struct s_contact_list *next_contact;
+    //struct s_contact_list *prev_user;
+}              t_contact_list;
 void mx_structs_initialization(t_system *sys, t_user *user);
 void mx_login_or_register(t_system *sys, t_user *user);
 char *mx_create_user_profile(t_system *sys, t_user *user);
@@ -134,16 +149,24 @@ void gtk_window_initializtion(t_chat *chat);
 void gtk_show_chat_window(t_chat *chat);
 void gtk_show_log_window(t_chat *chat);
 
-void client_st_init();
 void reg_win_init(t_system *sys);
 void chat_win_init(t_system *sys);
-
-void mb_display_msg(char *msg_text);
-void mb_invalid_credentials_msg();
-void mb_reset_credentials_msg();
+void mb_client_globals_initialization();
 
 void mb_event_listener();
 void mb_auth_event_check();
+void mb_incoming_msg_check();
+
+void mb_contact_list_add(int user_id, char *user_name);
+void mb_msg_buffer_add(int user_id, char *time, char *msg_text);
+
+void mb_send_msg(t_msg *msg);
+void mb_display_msg(char *msg_text);
+void mb_display_chat_with_contact(int user_id);
+
+void mb_invalid_credentials_msg();
+void mb_reset_credentials_msg();
+
 #endif //UCHAT_CLIENT_H
 
 

@@ -24,7 +24,6 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="has-focus">True</property>
-                <property name="is-focus">True</property>
               </object>
               <packing>
                 <property name="x">102</property>
@@ -51,7 +50,6 @@
                 <property name="height-request">34</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <property name="has-focus">True</property>
               </object>
               <packing>
                 <property name="x">102</property>

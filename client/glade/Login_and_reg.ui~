@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.38.2 -->
 <interface>
-  <requires lib="gtk+" version="3.20"/>
+  <requires lib="gtk+" version="3.24"/>
   <object class="GtkWindow" id="log_and_reg_window">
     <property name="can-focus">False</property>
+    <property name="opacity">0.5</property>
     <property name="resizable">False</property>
     <property name="window-position">center</property>
     <property name="gravity">center</property>
@@ -22,6 +23,8 @@
                 <property name="height-request">30</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
+                <property name="has-focus">True</property>
+                <property name="is-focus">True</property>
               </object>
               <packing>
                 <property name="x">102</property>
@@ -48,7 +51,7 @@
                 <property name="height-request">34</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <property name="margin-bottom">281</property>
+                <property name="has-focus">True</property>
               </object>
               <packing>
                 <property name="x">102</property>
@@ -289,7 +292,7 @@ password</property>
           </packing>
         </child>
         <child>
-          <object class="GtkFixed" id="Loading">
+          <object class="GtkFixed" id="Loading_log_window">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <child>
@@ -353,7 +356,7 @@ password</property>
             </child>
           </object>
           <packing>
-            <property name="name">Loading</property>
+            <property name="name">loading_log_window</property>
             <property name="title" translatable="yes">page2</property>
             <property name="position">2</property>
           </packing>
@@ -371,25 +374,27 @@ password</property>
         <property name="can-focus">False</property>
         <child>
           <object class="GtkScrolledWindow">
+            <property name="width-request">125</property>
             <property name="visible">True</property>
-            <property name="can-focus">True</property>
+            <property name="can-focus">False</property>
             <property name="shadow-type">in</property>
             <child>
               <object class="GtkViewport">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <child>
-                  <object class="GtkListBox">
+                  <object class="GtkListBox" id="contact_list">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
+                    <signal name="row-selected" handler="on_contact_list_row_selected" swapped="no"/>
                   </object>
                 </child>
               </object>
             </child>
           </object>
           <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
             <property name="position">0</property>
           </packing>
         </child>
@@ -464,10 +469,10 @@ password</property>
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
                             <property name="has-focus">True</property>
-                            <property name="is-focus">True</property>
                             <property name="can-default">True</property>
                             <property name="has-default">True</property>
                             <property name="activates-default">True</property>
+                            <property name="show-emoji-icon">True</property>
                             <signal name="activate" handler="on_chat_send_btn_clicked" swapped="no"/>
                           </object>
                         </child>
@@ -484,7 +489,8 @@ password</property>
                   <object class="GtkButton" id="chat_send_btn">
                     <property name="label" translatable="yes">Send</property>
                     <property name="visible">True</property>
-                    <property name="can-focus">False</property>
+                    <property name="can-focus">True</property>
+                    <property name="has-focus">True</property>
                     <property name="receives-default">False</property>
                     <signal name="clicked" handler="on_chat_send_btn_clicked" swapped="no"/>
                   </object>

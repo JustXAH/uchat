@@ -33,8 +33,11 @@ void gtk_window_initializtion(t_chat *chat) {
     g_signal_connect(G_OBJECT(chat->sys->chat_window),"destroy", G_CALLBACK(destroy), chat->sys);
 
     gtk_widget_show(GTK_WIDGET(chat->sys->reg_window));
+
+    mb_client_globals_initialization();
     reg_win_init(chat->sys);
     chat_win_init(chat->sys);
+
     gtk_main();
 }
 void gtk_show_chat_window(t_chat *chat) {
