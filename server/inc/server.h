@@ -69,13 +69,21 @@ typedef struct s_chat_info {
     struct s_chat_info *next;
 }               t_chat_info;
 
-typedef struct s_message {
+typedef struct s_message_info {
     int id;
     int user;
     char *text;
     time_t timestamp;
-    struct s_message *next;
-} t_message;
+    struct s_message_info *next;
+}               t_message_info;
+
+typedef struct s_message {
+    int *id;
+    int *user;
+    char **text;
+    time_t *timestamp;
+    int count;
+}               t_message;
 
 /*
  * SERVER
