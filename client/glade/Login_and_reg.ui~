@@ -7,6 +7,8 @@
     <property name="opacity">0.5</property>
     <property name="resizable">False</property>
     <property name="window-position">center</property>
+    <property name="default-width">365</property>
+    <property name="default-height">650</property>
     <property name="gravity">center</property>
     <child>
       <object class="GtkStack" id="autoriz_stack">
@@ -24,7 +26,6 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="has-focus">True</property>
-                <property name="is-focus">True</property>
               </object>
               <packing>
                 <property name="x">102</property>
@@ -51,7 +52,6 @@
                 <property name="height-request">34</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <property name="has-focus">True</property>
               </object>
               <packing>
                 <property name="x">102</property>
@@ -112,23 +112,6 @@
               </object>
               <packing>
                 <property name="x">30</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="log_res_pass">
-                <property name="label" translatable="yes">  Restore 
-password</property>
-                <property name="name">Restore password</property>
-                <property name="width-request">100</property>
-                <property name="height-request">30</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <property name="use-underline">True</property>
-              </object>
-              <packing>
-                <property name="x">131</property>
-                <property name="y">640</property>
               </packing>
             </child>
           </object>

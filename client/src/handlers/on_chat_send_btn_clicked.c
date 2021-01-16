@@ -19,7 +19,7 @@ void on_chat_send_btn_clicked(GtkButton *btn, GtkBuilder *builder) {
     //mx_printstr("send button clicked\n");
 
     if (strlen(txt_msg) > 0) {
-        printf("%s\n", txt_msg);
+        //printf("%s\n", txt_msg);
         t_msg *msg = mb_form_msg(cl_listener.user_in_focus, txt_msg, true);
         mb_send_msg(msg);
         gtk_entry_set_text(chat_win.chat_msg, "");
