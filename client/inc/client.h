@@ -57,13 +57,17 @@ typedef struct s_system {
 //    char *login;
 //    char *password;
 //    int my_id;
-    char **argv;
-    int argc;
     GtkBuilder *builder;
     GtkWindow *window;
     GtkWindow *reg_window;
     GtkWindow *chat_window;
+    char **argv;
+    char **found_usernames;
+    char *found_username;
+    int argc;
     int sockfd;
+    int found_user_id;
+    int found_usernames_count;
     e_type_cJSON type_enum;
 //    pthread_mutex_t mutex;
     bool first_reg;
@@ -102,7 +106,7 @@ typedef struct s_json {
     cJSON *CHATS_ID_ARR;
     cJSON *CHATS_COUNT;
     cJSON *CHATS_NAME_ARR;
-    cJSON *USERS_LOGIN_ARR;
+    cJSON *FOUND_USERNAMES;
     cJSON *FOUND_LOGIN;
     cJSON *MESSAGE;
     cJSON *TO;
@@ -151,6 +155,7 @@ void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_contact(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_chat(t_system *sys, t_user *user, t_json *json);
 void mx_get_login(t_system *sys, t_user *user, t_json *json);
+void mx_add_new_contact_request(t_system *sys, t_user * user, t_json *json, int index);
 
 void mx_login_or_register(t_system *sys, t_user *user);
 char *mx_create_user_profile(t_system *sys, t_user *user);

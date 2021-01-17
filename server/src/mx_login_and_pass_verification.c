@@ -18,9 +18,11 @@ void chats_json_creator(sqlite3 *db, t_json **json, int user) {
 
     (*json)->CHATS_ID_ARR = cJSON_CreateIntArray(chats->id, chats->count);
     (*json)->CHATS_NAME_ARR = cJSON_CreateStringArray((const char * const *)chats->chat_name, chats->count);
+    (*json)->CHATS_COUNT = cJSON_CreateNumber(chats->count);
 
     cJSON_AddItemToObject((*json)->SEND, "CHATS_ID_ARR", (*json)->CHATS_ID_ARR);
-    cJSON_AddItemToObject((*json)->SEND, "CHATS_LOGIN_ARR", (*json)->CHATS_NAME_ARR);
+    cJSON_AddItemToObject((*json)->SEND, "CHATS_NAME_ARR", (*json)->CHATS_NAME_ARR);
+    cJSON_AddItemToObject((*json)->SEND, "CHATS_COUNT", (*json)->CHATS_COUNT);
 
     if (MALLOC_SIZE(chats->id)) {
         free(chats->id);
@@ -36,9 +38,11 @@ void contacts_json_creator(sqlite3 *db, t_json **json, int user) {
 
     (*json)->CONTACTS_ID_ARR = cJSON_CreateIntArray(contacts->id, contacts->count);
     (*json)->CONTACTS_LOGIN_ARR = cJSON_CreateStringArray((const char * const *)contacts->login, contacts->count);
+    (*json)->CONTACTS_COUNT = cJSON_CreateNumber(contacts->count);
 
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_ID_ARR", (*json)->CONTACTS_ID_ARR);
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_LOGIN_ARR", (*json)->CONTACTS_LOGIN_ARR);
+    cJSON_AddItemToObject((*json)->SEND, "CONTACTS_COUNT", (*json)->CONTACTS_COUNT);
 
     if (MALLOC_SIZE(contacts->id)) {
         free(contacts->id);

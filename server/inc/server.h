@@ -72,9 +72,11 @@ typedef struct s_json {
     cJSON *CONTACT_ID;
     cJSON *CONTACTS_ID_ARR;
     cJSON *CONTACTS_LOGIN_ARR;
+    cJSON *CONTACTS_COUNT;
     cJSON *CHATS_ID_ARR;
     cJSON *CHATS_NAME_ARR;
-    cJSON *USERS_LOGIN_ARR;
+    cJSON *CHATS_COUNT;
+    cJSON *FOUND_USERNAMES;
     cJSON *FOUND_LOGIN;
     cJSON *MESSAGE;
     cJSON *TO;
@@ -138,7 +140,7 @@ void mx_add_new_contact(t_server *serv, t_json *json, int user_sock);
 void mx_add_new_chat(t_server *serv, t_json *json, int user_sock);
 void mx_add_new_message(t_server *serv, t_json *json);
 void mx_get_login(t_server *serv, t_json *json, int user_sock);
-void mx_last_messages(t_server *serv, t_json *json);
+//void mx_last_messages(t_server *serv, t_json *json);
 
 /*
  * DATABASE

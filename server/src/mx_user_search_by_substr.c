@@ -24,6 +24,7 @@ void mx_user_search_by_substr(t_server *serv, t_json *json, int user_sock) {
 
     json->SEND = cJSON_CreateObject();
     json->TYPE = cJSON_CreateNumber(USER_SEARCH_BY_SUBSTRING);
+    json->LOGIN = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "LOGIN");
 
     buff_arr = mx_db_search_logins_by_substr(serv->db, json->LOGIN->valuestring);
     if (buff_arr == NULL) { // "NULL" - no login matches
@@ -31,11 +32,11 @@ void mx_user_search_by_substr(t_server *serv, t_json *json, int user_sock) {
     }
     else {
         json->RESULT = cJSON_CreateTrue(); // there are logins matches by substring
-        json->USERS_LOGIN_ARR = logins_arr_json_creator((const char * const *)buff_arr);
+        json->FOUND_USERNAMES = logins_arr_json_creator((const char * const *)buff_arr);
     }
     cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
     cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
-    cJSON_AddItemToObject(json->SEND, "USERS_LOGIN_ARR", json->USERS_LOGIN_ARR);
+    cJSON_AddItemToObject(json->SEND, "FOUND_USERNAMES", json->FOUND_USERNAMES);
 
     send_str = cJSON_Print(json->SEND);
 

@@ -45,7 +45,7 @@ void *read_server(void *data) {
                 mx_get_login(sys, user, json);
                 break;
             case NEW_MESSAGE:
-                // функция, которая принимает ответ от запроса на создание нового сообщения
+                mx_add_new_messages(sys, user, json);
                 break;
             case LAST_MESSAGES:
                 // функция, которая принимает ответ от запроса на подгрузку последних сообщений
