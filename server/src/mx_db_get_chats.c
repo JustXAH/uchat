@@ -5,8 +5,8 @@ typedef struct s_id_node {
     struct s_id_node *next;
 }              t_id_node;
 
-t_id_node  *id_list;
-int  count;
+extern t_id_node *id_list;
+extern int count;
 
 static int mx_get_chats_callback(void *NotUsed, int argc, char **argv, char **azColName) {
     count++;

@@ -17,10 +17,10 @@ static void mb_add_msg_to_contact(t_msg **history, t_msg *new_msg) {
         temp->next_msg = new_msg;
     }
     printf("this will be added to history: %s\n", (*history)->msg_text);
-    if (cl_listener.user_in_focus == new_msg->user_id) {
+    if (cl_listener.contact_in_focus == new_msg->user_id) {
         //needs proper msg forming
         //printf("message sent to the chat in focus\n");
-        mb_display_msg(new_msg->msg_text);
+        mb_display_msg(new_msg);
     }
 }
 void mb_send_msg(t_msg *msg) {

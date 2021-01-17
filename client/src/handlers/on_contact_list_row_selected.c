@@ -9,7 +9,7 @@ void on_contact_list_row_selected() {
 
     while (con_buff) {
         if (gtk_widget_is_focus(con_buff->contact_gui)) {
-            cl_listener.user_in_focus = con_buff->user_id;
+            cl_listener.contact_in_focus = con_buff->user_id;
             mb_display_chat_with_contact(con_buff->user_id);
             return;
         }

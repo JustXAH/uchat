@@ -9,72 +9,13 @@ extern t_reg_win reg__win;
 extern t_client_st cl_listener;
 extern t_msg *incoming_msg_buffer;
 
-static gboolean client_event_listener(gpointer data) {
-    mb_event_listener();
-    return true;
-}
-
-void *read_server(void *data) {
-    t_chat *chat = (t_chat *)data;
-    t_system *sys = chat->sys;
-    t_user *user = chat->user;
-    char buff[MAX_LEN];
-    cJSON *SERVER_JSON = NULL;
-    cJSON *TYPE = NULL;
-    cJSON *SENDER = NULL;
-    cJSON *MESSAGE = NULL;
-
-//    char *str = NULL;
-//    write(1, "\nSOCKET =", 9);
-//    write(1, mx_itoa(chat->sys->sockfd), 1);
-//    printf("/nSocket = %d", chat->sys->sockfd);
-    while (read(sys->sockfd, buff, sizeof(buff))) {
-//        printf("%s\n", buff);
-//        write(1, "\nFrom %", 6);
-        SERVER_JSON = cJSON_Parse(buff);
-        TYPE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON, "TYPE");
-        if (TYPE != NULL) {
-            if (TYPE->valueint == 2) { //аутентификация
-                mx_authentication_client(sys, user, SERVER_JSON);
-            }
-            else if (TYPE->valueint == 3) { //подтверждение регистрации
-                mx_confirmation_of_registration(sys, user, SERVER_JSON);
-                if (sys->registration == true) {
-                    mx_account_login_request(sys, user);
-                }
-            }
-            else { //TYPE == 1 (сообщения)
-//                pthread_mutex_lock(&sys->mutex);
-                SENDER = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
-                                                          "LOGIN");
-                MESSAGE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
-                                                           "MESSAGE");
-                write (1, "\nFrom ", 6);
-                write(1, SENDER->valuestring, strlen(SENDER->valuestring));
-                write(1, ": ", 2);
-                write(1, MESSAGE->valuestring, strlen(MESSAGE->valuestring));
-                cJSON_DeleteItemFromObject(SERVER_JSON, "LOGIN");
-//                pthread_mutex_unlock(&sys->mutex);
-            }
-            cJSON_DeleteItemFromObject(SERVER_JSON, "TYPE");
-            cJSON_DeleteItemFromObject(SERVER_JSON, "TO");
-            cJSON_DeleteItemFromObject(SERVER_JSON, "MESSAGE");
-//        cJSON_free(MESSAGE);
-            memset(buff, '\0', sizeof(buff));
-        }
-        cJSON_Delete(SERVER_JSON);
-    }
-    return 0;
-}
-
 int main(int argc, char *argv[]) {
     t_system *sys = (t_system *)malloc(sizeof(t_system));
     t_user *user = (t_user *)malloc(sizeof(t_user));
-    chat = (t_chat *)malloc(sizeof(t_chat));
     struct sockaddr_in servaddr;
     pthread_t thread_server;
-    pthread_t thread_signal;
 
+    chat = (t_chat *)malloc(sizeof(t_chat));
     mx_structs_initialization(sys, user);
 
 //    printf("\nLOGIN = %s\nPASS = %s\n", user->login, user->password);
@@ -114,18 +55,73 @@ int main(int argc, char *argv[]) {
 
     chat->sys = sys;
     chat->user = user;
+    // function for chat
     pthread_create(&thread_server, NULL, read_server, chat);
 
-    // function for chat
-    g_idle_add(client_event_listener, NULL);
+    //MB's shit (starting the client's listener function and initializing windows)//
+    g_idle_add(mb_event_listener, NULL);
     gtk_window_initializtion(chat);
-
-    //    mx_chat_event(sys, user, thread_server);
+    //----------------------------------------------------------------------------//
+//    mx_chat_event(sys, user, thread_server);
 
     // close the socket
-    //close(sys->sockfd);
+    close(sys->sockfd);
 
     system("leaks -q client");
 
     return 0;
 }
+
+//void *read_server(void *data) {
+//    t_chat *chat = (t_chat *)data;
+//    t_system *sys = chat->sys;
+//    t_user *user = chat->user;
+//    char buff[MAX_LEN];
+//    cJSON *SERVER_JSON = NULL;
+//    cJSON *TYPE = NULL;
+//    cJSON *SENDER = NULL;
+//    cJSON *MESSAGE = NULL;
+//
+////    char *str = NULL;
+////    write(1, "\nSOCKET =", 9);
+////    write(1, mx_itoa(chat->sys->sockfd), 1);
+////    printf("/nSocket = %d", chat->sys->sockfd);
+//    while (read(sys->sockfd, buff, sizeof(buff))) {
+////        printf("%s\n", buff);
+////        write(1, "\nFrom %", 6);
+//        SERVER_JSON = cJSON_Parse(buff);
+//        TYPE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON, "TYPE");
+//        if (TYPE != NULL) {
+//            if (TYPE->valueint == 2) { //аутентификация
+//                mx_authentication_client(sys, user, SERVER_JSON);
+//            }
+//            else if (TYPE->valueint == 3) { //подтверждение регистрации
+//                mx_confirmation_of_registration(sys, user, SERVER_JSON);
+//                if (sys->registration == true) {
+//                    mx_account_login_request(sys, user);
+//                }
+//            }
+//            else { //TYPE == 1 (сообщения)
+////                pthread_mutex_lock(&sys->mutex);
+//                SENDER = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
+//                                                          "LOGIN");
+//                MESSAGE = cJSON_GetObjectItemCaseSensitive(SERVER_JSON,
+//                                                           "MESSAGE");
+//                write (1, "\nFrom ", 6);
+//                write(1, SENDER->valuestring, strlen(SENDER->valuestring));
+//                write(1, ": ", 2);
+//                write(1, MESSAGE->valuestring, strlen(MESSAGE->valuestring));
+//                cJSON_DeleteItemFromObject(SERVER_JSON, "LOGIN");
+////                pthread_mutex_unlock(&sys->mutex);
+//            }
+//            cJSON_DeleteItemFromObject(SERVER_JSON, "TYPE");
+//            cJSON_DeleteItemFromObject(SERVER_JSON, "TO");
+//            cJSON_DeleteItemFromObject(SERVER_JSON, "MESSAGE");
+////        cJSON_free(MESSAGE);
+//            memset(buff, '\0', sizeof(buff));
+//        }
+//        cJSON_Delete(SERVER_JSON);
+//    }
+//    return 0;
+//}
+

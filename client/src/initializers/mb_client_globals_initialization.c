@@ -48,7 +48,7 @@ void mb_client_globals_initialization() {
     cl_listener.logged_in = 0;
     cl_listener.authentication = 0;
     cl_listener.message_in_buffer = false;
-    cl_listener.user_in_focus = 0;
+    cl_listener.contact_in_focus = 0;
     incoming_msg_buffer = NULL;
     contact_list = NULL;
 }

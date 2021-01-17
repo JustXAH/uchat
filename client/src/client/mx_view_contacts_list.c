@@ -5,9 +5,9 @@
 #include "client.h"
 
 void mx_view_contacts_list(t_system *sys, t_user *user) {
-    if (user->contacts) {
-        for (int i = 0; user->contacts[i] != 0; i++) {
-            printf("Contact #%d ID: %d\n", i, user->contacts[i]);
+    if (user->contacts_id) {
+        for (int i = 0; user->contacts_id[i] != 0; i++) {
+            printf("Contact #%d ID: %d\n", i, user->contacts_id[i]);
 //            write(1, "\n", 1);
         }
     }

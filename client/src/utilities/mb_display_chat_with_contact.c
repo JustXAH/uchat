@@ -24,7 +24,7 @@ static void mb_load_chat_history(t_msg *history) {
     mb_clear_chat_viewer();
     while (history) {
         printf("%s\n",history->msg_text);
-        mb_display_msg(history->msg_text);
+        mb_display_msg(history);
         history = history->next_msg;
     }
 }

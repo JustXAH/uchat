@@ -5,8 +5,8 @@ typedef struct s_id_node {
     struct s_id_node *next;
 }              t_id_node;
 
-extern t_id_node *id_list;
-extern int  count;
+t_id_node *id_list;
+int count;
 
 static int search_users_callback(void *NotUsed, int argc, char **argv, char **azColName) {
     count++;

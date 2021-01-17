@@ -31,7 +31,7 @@
 #include <poll.h>
 #include <ctype.h>
 #include <unistd.h>
-#include <string.h>
+
 
 // glade
 #include <gtk/gtk.h>
@@ -42,18 +42,36 @@
 #define PORT 5000
 #define SA struct sockaddr
 
+//enum for type cjson
+typedef enum e_type_cJSON_message {
+    TYPE_NULL,
+    MESSAGES,
+    AUTHENTICATION,
+    REGISTRATION,
+    USER_SEARCH_BY_SUBSTRING,
+    USER_SEARCH_BY_LOGIN,
+    NEW_CONTACT,
+    NEW_CHAT,
+    GET_LOGIN,
+    NEW_MESSAGE,
+    LAST_MESSAGES,
+}            e_type_cJSON;
 
 typedef struct s_system {
 //    char *login;
 //    char *password;
 //    int my_id;
-    char **argv;
-    int argc;
     GtkBuilder *builder;
     GtkWindow *window;
     GtkWindow *reg_window;
     GtkWindow *chat_window;
+    char **argv;
+    char **found_usernames;
+    int argc;
     int sockfd;
+    int found_user_id;
+    int found_usernames_count;
+    e_type_cJSON type_enum;
 //    pthread_mutex_t mutex;
     bool first_reg;
     bool registration;
@@ -67,14 +85,41 @@ typedef struct s_system {
 typedef struct s_user {
     char *login;
     char *password;
-    int *contacts;
-    int *chats;
+    int *contacts_id;
+    char **contacts_login;
+    int *chats_id;
+    char **chats_name;
     int my_id;
+    int contacts_count;
+    int chats_count;
 }              t_user;
+
+typedef struct s_json {
+    cJSON *SERVER_JSON;
+    cJSON *SEND;
+    cJSON *TYPE;
+    cJSON *RESULT;
+    cJSON *LOGIN;
+    cJSON *PASS;
+    cJSON *USER_ID;
+    cJSON *CONTACT_ID;
+    cJSON *CONTACTS_ID_ARR;
+    cJSON *CONTACTS_COUNT;
+    cJSON *CONTACTS_LOGIN_ARR;
+    cJSON *CHATS_ID_ARR;
+    cJSON *CHATS_COUNT;
+    cJSON *CHATS_NAME_ARR;
+    cJSON *FOUND_USERNAMES;
+    cJSON *FOUND_LOGIN;
+    cJSON *MESSAGE;
+    cJSON *TO;
+    cJSON *CHAT_ID;
+}              t_json;
 
 typedef struct s_chat {
     struct s_system *sys;
     struct s_user *user;
+    struct s_json *json;
 }              t_chat;
 
 //structs for glade
@@ -104,16 +149,20 @@ typedef struct s_client_st {
     char logged_in;  // 0 - not logged in // 1 - logged in // 2 - request for login sent
     char authentication;
     bool message_in_buffer;
-    int user_in_focus; // 0 - home page
-
+    int contact_in_focus; // 0 - home page
+    int logged_in_id;
+    char *logged_in_name;
 }               t_client_st;
+
 typedef struct s_msg {
     int user_id;
+    char *user_name;
     char *msg_time;
     char *msg_text;
     bool outgoing;
     struct s_msg *next_msg;
 }              t_msg;
+
 typedef struct s_contact_list {
     int user_id;
     char *user_name;
@@ -122,13 +171,27 @@ typedef struct s_contact_list {
     struct s_contact_list *next_contact;
     //struct s_contact_list *prev_user;
 }              t_contact_list;
+
 void mx_structs_initialization(t_system *sys, t_user *user);
+/*
+ * READ SERVER ANSWER
+ */
+void *read_server(void *data); // second thread to read server responses
+void mx_authentication_client(t_system *sys, t_user *user, t_json *json);
+void mx_confirmation_of_registration(t_system *sys, t_user *user, t_json *json);
+void mx_found_users_by_substr(t_system *sys, t_user *user, t_json *json);
+void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json);
+void mx_add_new_contact(t_system *sys, t_user *user, t_json *json);
+
+/*
+ * REQUEST TO SERVER
+ */
+void mx_add_new_contact_request(t_system *sys, t_user * user, t_json *json, int index);
+
 void mx_login_or_register(t_system *sys, t_user *user);
 char *mx_create_user_profile(t_system *sys, t_user *user);
 void mx_account_login_request(t_system *sys, t_user *user);
 void mx_registration_request(t_system *sys, t_user *user);
-void mx_confirmation_of_registration(t_system *sys, t_user *user, cJSON *SERVER_JSON);
-void mx_authentication_client(t_system *sys, t_user *user, cJSON *SERVER_JSON);
 void mx_chat_event(t_system *sys, t_user *user, pthread_t thread);
 void mx_client_menu(t_system *sys, t_user *user);
 void mx_sending_messages(t_system *sys, t_user *user, char *buff); // нужно переделать сначала сервер-бд, потом здесь
@@ -153,7 +216,7 @@ void reg_win_init(t_system *sys);
 void chat_win_init(t_system *sys);
 void mb_client_globals_initialization();
 
-void mb_event_listener();
+gboolean mb_event_listener(gpointer data);
 void mb_auth_event_check();
 void mb_incoming_msg_check();
 
@@ -161,20 +224,10 @@ void mb_contact_list_add(int user_id, char *user_name);
 void mb_msg_buffer_add(int user_id, char *time, char *msg_text);
 
 void mb_send_msg(t_msg *msg);
-void mb_display_msg(char *msg_text);
+void mb_display_msg(t_msg *msg);
 void mb_display_chat_with_contact(int user_id);
 
 void mb_invalid_credentials_msg();
 void mb_reset_credentials_msg();
 
 #endif //UCHAT_CLIENT_H
-
-
-
-/* 
-    user_id
-    time
-    text
-    avatar
-
-*/
