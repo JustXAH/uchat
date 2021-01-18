@@ -1,3 +1,4 @@
+
 //
 // Created by dima on 15.01.2021.
 //
@@ -17,7 +18,6 @@ static void add_contacts_id(t_user *user, cJSON *CONTACTS_ID_ARR) {
     for (int i = 0; i != user->contacts_count; i++) {
         user->contacts_id[i] = cJSON_GetArrayItem(CONTACTS_ID_ARR, i)->valueint;
     }
-//    user->contacts_id[user->contacts_count] = 0;
 }
 
 void mx_add_new_contact(t_system *sys, t_user *user, t_json *json) {
@@ -35,7 +35,7 @@ void mx_add_new_contact(t_system *sys, t_user *user, t_json *json) {
             free(user->contacts_id);
         }
         add_contacts_id(user, json->CONTACTS_ID_ARR);
-        
+
         if (MALLOC_SIZE(user->contacts_login)) {
             free(user->contacts_login);
         }

@@ -2,8 +2,8 @@
 extern t_contact_list *contact_list;
 extern t_chat_win chat_win;
 //----------------------------------------------------------------------------//
-static void mb_load_chat_history(t_msg *history);
-static void mb_form_msg_str(t_msg *history);
+static void mb_load_chat_history(t_message *history);
+static void mb_form_msg_str(t_message *history);
 static void mb_clear_chat_viewer();
 ///////////////////////////////////////////////////////////////////////////////
 void mb_display_chat_with_contact(int user_id) {
@@ -20,15 +20,15 @@ void mb_display_chat_with_contact(int user_id) {
         } while ((temp = temp->next_contact));  
     }  
 }///////////////////////////////////////////////////////////////////////////////
-static void mb_load_chat_history(t_msg *history) {
+static void mb_load_chat_history(t_message *history) {
     mb_clear_chat_viewer();
     while (history) {
-        printf("%s\n",history->msg_text);
+        printf("%s\n",history->text);
         mb_display_msg(history);
-        history = history->next_msg;
+        history = history->next;
     }
 }
-static void mb_form_msg_str(t_msg *history) {
+static void mb_form_msg_str(t_message *history) {
     printf("pishov v zhopu\n");
 }
 static void mb_clear_chat_viewer() {
