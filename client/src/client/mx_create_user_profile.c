@@ -48,9 +48,9 @@ char *mx_create_user_profile(t_system *sys, t_user *user) {
     cJSON *LOGIN = NULL;
     cJSON *PASS = NULL;
 
-    if (sys->registration == false) {
+    if (sys->reg_confirmation == false) {
         registration_func(sys, &user);
-        sys->registration = true;
+        sys->reg_confirmation = true;
         TYPE = cJSON_CreateNumber(3);
     }
     else {

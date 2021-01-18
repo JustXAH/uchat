@@ -59,14 +59,16 @@ void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_soc
     json->SEND = cJSON_CreateObject();
     json->TYPE = cJSON_CreateNumber(AUTHENTICATION);
 
-    json->USER_ID = cJSON_CreateNumber(mx_db_check_login(serv->db, json->LOGIN->valuestring, json->PASS->valuestring));
+    json->USER_ID = cJSON_CreateNumber(mx_db_check_login(serv->db, 
+                                                            json->LOGIN->valuestring, 
+                                                            json->PASS->valuestring));
     if (json->USER_ID->valueint == 0 || json->USER_ID->valueint == -1) {
         json->RESULT = cJSON_CreateFalse(); // ошибка при входе в аккаунт - "0" - такой логин не существует, "-1" - неверный пароль
     }
     else {
         json->RESULT = cJSON_CreateTrue(); //регистрация прошла успешно
-        contacts_json_creator(serv->db, &json, json->USER_ID->valueint);
-        chats_json_creator(serv->db, &json, json->USER_ID->valueint);
+        //contacts_json_creator(serv->db, &json, json->USER_ID->valueint);
+        //chats_json_creator(serv->db, &json, json->USER_ID->valueint);
     }
 
     cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
@@ -74,9 +76,10 @@ void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_soc
     cJSON_AddItemToObject(json->SEND, "USER_ID", json->USER_ID);
 
     send_str = cJSON_Print(json->SEND);
-
+    mx_printstr("response for an authentication request sent\n");
     write(user_sock, send_str, strlen(send_str));
 
     cJSON_Delete(json->SEND);
     free(send_str);
+    mx_printstr("mx_login_and_pass_authentication finished\n");
 }

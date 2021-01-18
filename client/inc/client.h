@@ -74,7 +74,8 @@ typedef struct s_system {
     e_type_cJSON type_enum;
 //    pthread_mutex_t mutex;
     bool first_reg;
-    bool registration;
+    bool reg_request;
+    bool reg_confirmation;
     bool authentication;
     bool menu;
     bool message_sent;

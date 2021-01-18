@@ -27,7 +27,7 @@ void mx_confirmation_of_registration(t_system *sys, t_user *user, t_json *json) 
                                                     "USER_ID");
 
     if (cJSON_IsFalse(json->RESULT)) { // ошибка при регистрации
-        sys->registration = false;
+        sys->reg_confirmation = false;
         write(1, "Such an account already exists\n", 31); // это заглушка
         //нужно вывести ошибку на экран и запустить повторную регистрацию
         
@@ -35,7 +35,7 @@ void mx_confirmation_of_registration(t_system *sys, t_user *user, t_json *json) 
     else { // RESULT = TRUE (регистрация прошла успешно)
        // вывести сообщение о успешной регистрации и кнопку для перехода на окно ЛОГИНА
         user->my_id = json->USER_ID->valueint;
-        sys->registration = true;
+        sys->reg_confirmation = true;
     }
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "RESULT");
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "USER_ID");

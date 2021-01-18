@@ -7,7 +7,7 @@
 void mx_account_login_request(t_system *sys, t_user *user) {
     char *str_user_json;
 
-    sys->registration = true;
+    sys->reg_confirmation = true;
     if (MALLOC_SIZE(user->login)) {
         free(user->login);
     }
