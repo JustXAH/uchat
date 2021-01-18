@@ -30,7 +30,7 @@ void mx_add_new_chat(t_system *sys, t_user *user, t_json *json) {
             // вызов всплывающего текста c ошибкой
         }
         else {
-            user->CHATS_COUNT = json->CHATS_COUNT->valueint;
+            user->chats_count = json->CHATS_COUNT->valueint;
             if (MALLOC_SIZE(user->chats_id)) {
                 free(user->chats_id);
             }
@@ -39,7 +39,7 @@ void mx_add_new_chat(t_system *sys, t_user *user, t_json *json) {
             if (MALLOC_SIZE(user->chats_name)) {
                 free(user->chats_name)
             }
-            add_chats_name(user, json->CHATS_NAME_ARR);
+            add_chats_login(user, json->CHATS_NAME_ARR);
         }
         cJSON_DeleteItemFromObject(json->SERVER_JSON, "RESULT");
         cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_COUNT");
