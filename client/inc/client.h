@@ -141,6 +141,15 @@ typedef struct s_chat_win {
     GtkListBox *chat_viewer;
 }                t_chat_win;
 
+typedef struct s_message {
+    int *id;
+    int *user;
+    char **text;
+    time_t *timestamp;
+    int count;
+    struct t_message *next;
+}               t_message;
+
 
 void mx_structs_initialization(t_system *sys, t_user *user);
 
@@ -156,6 +165,7 @@ void mx_add_new_contact(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_chat(t_system *sys, t_user *user, t_json *json);
 void mx_get_login(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_contact_request(t_system *sys, t_user * user, t_json *json, int index);
+void mx_last_messages(t_system *sys, t_user *user, t_json *json);
 
 void mx_login_or_register(t_system *sys, t_user *user);
 char *mx_create_user_profile(t_system *sys, t_user *user);

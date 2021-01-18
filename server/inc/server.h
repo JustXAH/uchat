@@ -79,9 +79,14 @@ typedef struct s_json {
     cJSON *FOUND_USERNAMES;
     cJSON *FOUND_LOGIN;
     cJSON *MESSAGE;
+    cJSON *MESSAGES_ARR;
     cJSON *TO;
     cJSON *CHAT_ID;
+    cJSON *COUNT_MESSAGES_ARR;
     cJSON *COUNT_CONTACTS;
+    cJSON *SENDER_ID;
+    cJSON *MESSAGE_TIME;
+    cJSON *MESSAGE_ID;
 }              t_json;
 
 //struct for database
@@ -117,12 +122,12 @@ typedef struct s_chat_info {
 }               t_chat_info;
 
 typedef struct s_message {
-    int id;
-    int user;
-    char *text;
-    time_t timestamp;
-    struct s_message *next;
-} t_message;
+    int *id;
+    int *user;
+    char **text;
+    time_t *timestamp;
+    int count;
+}               t_message;
 
 /*
  * SERVER
@@ -140,7 +145,7 @@ void mx_add_new_contact(t_server *serv, t_json *json, int user_sock);
 void mx_add_new_chat(t_server *serv, t_json *json, int user_sock);
 void mx_add_new_message(t_server *serv, t_json *json);
 void mx_get_login(t_server *serv, t_json *json, int user_sock);
-//void mx_last_messages(t_server *serv, t_json *json);
+void mx_last_messages(t_server *serv, t_json *json);
 
 /*
  * DATABASE
