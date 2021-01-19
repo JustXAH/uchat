@@ -56,3 +56,4 @@ t_message *mx_db_get_last_messages(sqlite3 *db, int chat) {
     }
     return mes;
 }
+

@@ -38,8 +38,6 @@
 
 //enum for type cjson
 typedef enum e_type_cJSON_message {
-//    TYPE_NULL,
-//    MESSAGES,
     AUTHENTICATION,
     REGISTRATION,
     USER_SEARCH_BY_SUBSTRING,
@@ -79,9 +77,14 @@ typedef struct s_json {
     cJSON *FOUND_USERNAMES;
     cJSON *FOUND_LOGIN;
     cJSON *MESSAGE;
+    cJSON *MESSAGES_ARR;
     cJSON *TO;
     cJSON *CHAT_ID;
+    cJSON *COUNT_MESSAGES_ARR;
     cJSON *COUNT_CONTACTS;
+    cJSON *SENDER_ID;
+    cJSON *MESSAGE_TIME;
+    cJSON *MESSAGE_ID;
 }              t_json;
 
 //struct for database
@@ -130,6 +133,7 @@ typedef struct s_message {
     time_t *timestamp;
     int count;
 }               t_message;
+
 //
 //typedef struct s_user {
 //    int id;
@@ -174,6 +178,7 @@ typedef struct s_message {
  * SERVER
  */
 void mx_serv_struct_initialization(t_server *serv);
+void mx_json_struct_initialization(t_json *json);
 //cJSON *mx_database_stub(cJSON *user);
 //void mx_read_server(t_server *serv);
 void mx_check_read(t_server *serv, int i);
@@ -184,9 +189,9 @@ void mx_user_search_by_substr(t_server *serv, t_json *json, int user_sock);
 void mx_user_search_by_login(t_server *serv, t_json *json, int user_sock);
 void mx_add_new_contact(t_server *serv, t_json *json, int user_sock);
 void mx_add_new_chat(t_server *serv, t_json *json, int user_sock);
-void mx_add_new_message(t_server *serv, t_json *json);
+void mx_add_new_message(t_server *serv, t_json *json, int user_sock);
 void mx_get_login(t_server *serv, t_json *json, int user_sock);
-void mx_last_messages(t_server *serv, t_json *json);
+void mx_last_messages(t_server *serv, t_json *json, int user_sock);
 
 /*
  * DATABASE
