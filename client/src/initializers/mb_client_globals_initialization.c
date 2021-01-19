@@ -2,6 +2,9 @@
 
 t_reg_win reg_win;
 t_chat_win chat_win;
+t_client_st cl_listener;
+t_msg *incoming_msg_buffer;
+t_contact_list *contact_list;
 
 void reg_win_init(t_system *sys) {
     reg_win.log_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
@@ -32,9 +35,20 @@ void reg_win_init(t_system *sys) {
                                                         "reg_email_lable"));
 }
 void chat_win_init(t_system *sys) {
-    chat_win.chat_msg = GTK_WIDGET(gtk_builder_get_object(sys->builder,
+    chat_win.chat_msg = GTK_ENTRY(gtk_builder_get_object(sys->builder,
                                                         "chat_msg_entry"));
-    chat_win.chat_viewer = GTK_WIDGET(gtk_builder_get_object(sys->builder,
+    chat_win.chat_viewer = GTK_LIST_BOX(gtk_builder_get_object(sys->builder,
                                                         "chat_msg_lst_box"));
- 
+    
+    chat_win.contact_list = GTK_LIST_BOX(gtk_builder_get_object(sys->builder,
+                                                        "contact_list"));                                                      
+
+}
+void mb_client_globals_initialization() {
+    cl_listener.logged_in = 0;
+    cl_listener.authentication = 0;
+    cl_listener.message_in_buffer = false;
+    cl_listener.contact_in_focus = 0;
+    incoming_msg_buffer = NULL;
+    contact_list = NULL;
 }

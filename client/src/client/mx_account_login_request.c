@@ -8,10 +8,10 @@ void mx_account_login_request(t_system *sys, t_user *user) {
     char *str_user_json;
 
     sys->registration = true;
-    if (malloc_size(user->login)) {
+    if (MALLOC_SIZE(user->login)) {
         free(user->login);
     }
-    if (malloc_size(user->password)) {
+    if (MALLOC_SIZE(user->password)) {
         free(user->password);
     }
     str_user_json = mx_create_user_profile(sys, user);

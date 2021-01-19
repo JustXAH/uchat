@@ -4,20 +4,72 @@
 
 #include "client.h"
 
+t_chat *chat;
 extern t_reg_win reg__win;
+extern t_client_st cl_listener;
+extern t_msg *incoming_msg_buffer;
 
-void *listen_signal(void *data) {
-    t_chat *chat = (t_chat *) data;
-    t_system *sys = chat->sys;
-    t_user *user = chat->user;
+int main(int argc, char *argv[]) {
+    t_system *sys = (t_system *)malloc(sizeof(t_system));
+    t_user *user = (t_user *)malloc(sizeof(t_user));
+    struct sockaddr_in servaddr;
+    pthread_t thread_server;
 
-//    write(1, "1\n", 2);
-//    gtk_main();
-//    write(1, "2\n", 2);
-//    while (check == true) {
-//        write(1, "Potok RABOTAET\n", 15);
-////        check = false;
-//    }
+    chat = (t_chat *)malloc(sizeof(t_chat));
+    mx_structs_initialization(sys, user);
+
+//    printf("\nLOGIN = %s\nPASS = %s\n", user->login, user->password);
+
+    // socket create and varification
+    sys->sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sys->sockfd == -1) {
+        write(2, "ERROR, socket creation failed\n", 30);
+        exit(0);
+    }
+    else
+        write(1, "Socket successfully created...\n", 31);
+    bzero(&servaddr, sizeof(servaddr));
+
+    // assign IP, PORT
+    servaddr.sin_family = AF_INET;
+    if (argc == 2) {
+        servaddr.sin_addr.s_addr = inet_addr(argv[1]);
+    }
+    else {
+        servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    }
+    servaddr.sin_port = htons(PORT);
+
+    // connect the client socket to server socket
+    if (connect(sys->sockfd, (SA*)&servaddr, sizeof(servaddr)) != 0) {
+        write(2, "ERROR, connection with the server failed!\n", 42);
+        exit(0);
+    }
+    else
+        write(1, "Successfully connected to the server...\n\n", 41);
+
+    printf("/nSocket = %d\n2", sys->sockfd);
+
+//    mx_login_or_register(sys, user);
+//    pthread_mutex_init(&sys->mutex, NULL);
+
+    chat->sys = sys;
+    chat->user = user;
+    // function for chat
+    pthread_create(&thread_server, NULL, read_server, chat);
+
+    //MB's shit (starting the client's listener function and initializing windows)//
+    g_idle_add(mb_event_listener, NULL);
+    gtk_window_initializtion(chat);
+    //----------------------------------------------------------------------------//
+//    mx_chat_event(sys, user, thread_server);
+
+    // close the socket
+    close(sys->sockfd);
+
+    system("leaks -q client");
+
+    return 0;
 }
 
 //void *read_server(void *data) {
@@ -73,67 +125,3 @@ void *listen_signal(void *data) {
 //    return 0;
 //}
 
-
-
-int main(int argc, char *argv[]) {
-    t_system *sys = (t_system *)malloc(sizeof(t_system));
-    t_user *user = (t_user *)malloc(sizeof(t_user));
-    t_chat *chat = (t_chat *)malloc(sizeof(t_chat));
-    struct sockaddr_in servaddr;
-    pthread_t thread_server;
-    pthread_t thread_signal;
-
-    mx_structs_initialization(sys, user);
-
-//    printf("\nLOGIN = %s\nPASS = %s\n", user->login, user->password);
-
-    // socket create and varification
-    sys->sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sys->sockfd == -1) {
-        write(2, "ERROR, socket creation failed\n", 30);
-        exit(0);
-    }
-    else
-        write(1, "Socket successfully created...\n", 31);
-    bzero(&servaddr, sizeof(servaddr));
-
-    // assign IP, PORT
-    servaddr.sin_family = AF_INET;
-    if (argc == 2) {
-        servaddr.sin_addr.s_addr = inet_addr(argv[1]);
-    }
-    else {
-        servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
-    }
-    servaddr.sin_port = htons(PORT);
-
-    // connect the client socket to server socket
-    if (connect(sys->sockfd, (SA*)&servaddr, sizeof(servaddr)) != 0) {
-        write(2, "ERROR, connection with the server failed!\n", 42);
-        exit(0);
-    }
-    else
-        write(1, "Successfully connected to the server...\n\n", 41);
-
-    printf("/nSocket = %d\n2", sys->sockfd);
-
-//    mx_login_or_register(sys, user);
-//    pthread_mutex_init(&sys->mutex, NULL);
-
-    chat->sys = sys;
-    chat->user = user;
-    // function for chat
-    pthread_create(&thread_signal, NULL, listen_signal, chat);
-    pthread_create(&thread_server, NULL, read_server, chat);
-
-    mx_gtk_window(sys, user);
-//    mx_chat_event(sys, user, thread_server);
-
-    mx_
-    // close the socket
-    close(sys->sockfd);
-
-    system("leaks -q client");
-
-    return 0;
-}

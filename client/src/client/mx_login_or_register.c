@@ -5,7 +5,7 @@
 #include "client.h"
 
 void mx_login_or_register(t_system *sys, t_user *user) {
-    char *login_json;
+    char *login_json = NULL;
     char choice[1];
 
 //    sys->registration = false;
@@ -31,6 +31,6 @@ void mx_login_or_register(t_system *sys, t_user *user) {
         write(1, "Incorrect answer!\n", 18);
     }
 
-    if (malloc_size(login_json))
+    if (login_json != NULL)
         free(login_json);
 }

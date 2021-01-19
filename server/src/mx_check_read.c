@@ -17,30 +17,30 @@ static void read_and_write(t_server *serv, int user_num) {
         json->TYPE = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "TYPE");
         serv->type_enum = json->TYPE->valueint;
         switch (serv->type_enum) {
-            case TYPE_NULL: // создана из-за того что enum начинает отсчет с 0, а типы с 1
-                break;
-            case MESSAGES:
-//                json->MESSAGE = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "MESSAGE");
-//                json->TO = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "TO");
-//                printf("Sender = %s\nmessage = %s\n", cJSON_Print(json->LOGIN),
-//                       cJSON_Print(json->MESSAGE));
-//                if (serv->cli_connect - 1 >= json->TO->valueint) {
-//                    printf("%s\n", cJSON_Print(json->USER_JSON));
-//                    write(serv->user_socket[json->TO->valueint], cJSON_Print(json->USER_JSON),
-//                          mx_strlen(cJSON_Print(json->USER_JSON)));
-//                } else {
-//                    cJSON_DeleteItemFromObject(json->USER_JSON, "MESSAGE");
-//                    cJSON_DeleteItemFromObject(json->USER_JSON, "TO");
-//                    json->TO = cJSON_CreateString(mx_itoa(user_num));
-//                    json->MESSAGE = cJSON_CreateString("User not found");
-//                    cJSON_AddItemToObject(json->USER_JSON, "TO", json->TO);
-//                    cJSON_AddItemToObject(json->USER_JSON, "MESSAGE", json->MESSAGE);
-//                    printf("%s\n", cJSON_Print(json->USER_JSON));
-//                    write(serv->user_socket[user_num], cJSON_Print(json->USER_JSON), mx_strlen(cJSON_Print(json->USER_JSON)));
-//                }
-//              free(buff_message);
-                memset(&buff_message, '\0', sizeof(buff_message));
-                break;
+//            case TYPE_NULL: // создана из-за того что enum начинает отсчет с 0, а типы с 1
+//                break;
+//            case MESSAGES:
+////                json->MESSAGE = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "MESSAGE");
+////                json->TO = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "TO");
+////                printf("Sender = %s\nmessage = %s\n", cJSON_Print(json->LOGIN),
+////                       cJSON_Print(json->MESSAGE));
+////                if (serv->cli_connect - 1 >= json->TO->valueint) {
+////                    printf("%s\n", cJSON_Print(json->USER_JSON));
+////                    write(serv->user_socket[json->TO->valueint], cJSON_Print(json->USER_JSON),
+////                          mx_strlen(cJSON_Print(json->USER_JSON)));
+////                } else {
+////                    cJSON_DeleteItemFromObject(json->USER_JSON, "MESSAGE");
+////                    cJSON_DeleteItemFromObject(json->USER_JSON, "TO");
+////                    json->TO = cJSON_CreateString(mx_itoa(user_num));
+////                    json->MESSAGE = cJSON_CreateString("User not found");
+////                    cJSON_AddItemToObject(json->USER_JSON, "TO", json->TO);
+////                    cJSON_AddItemToObject(json->USER_JSON, "MESSAGE", json->MESSAGE);
+////                    printf("%s\n", cJSON_Print(json->USER_JSON));
+////                    write(serv->user_socket[user_num], cJSON_Print(json->USER_JSON), mx_strlen(cJSON_Print(json->USER_JSON)));
+////                }
+////              free(buff_message);
+//                memset(&buff_message, '\0', sizeof(buff_message));
+//                break;
             case AUTHENTICATION:
                 json->LOGIN = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "LOGIN");
                 json->PASS = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "PASS");

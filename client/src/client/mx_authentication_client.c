@@ -4,6 +4,8 @@
 
 #include "client.h"
 
+extern t_client_st cl_listener;
+
 void user_chats_parse_and_save(t_user *user, t_json *json) {
     user->chats_count = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
                                                             "CHATS_COUNT")->valueint;
@@ -61,10 +63,12 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
         if (json->USER_ID->valueint == 0) { // login doesn't exist
             write (1, "LOGIN DOESN'T EXIST\n", 20); // это затычка!
             // нужно вывести сообщение о ошибке на экран и запустить поторную процедуру логина
+            cl_listener.authentication = 2;
         }
         else  { // "-1" wrong password
             write (1, "WRONG PASSWORD\n", 15); // это затычка!
             // нужно вывести сообщение о ошибке на экран и запустить поторную процедуру логина
+            cl_listener.authentication = 2;
         }
     }
     else { //RESULT = TRUE (login and password are confirmed - successful LOG IN)
@@ -75,6 +79,7 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
         sys->authentication = true;
         sys->menu = true;
         // вход в логин прошел успешно! дальше нужно перейти в окно МЕНЮ чата
+        cl_listener.authentication = 1;
     }
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "RESULT");
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "USER_ID");

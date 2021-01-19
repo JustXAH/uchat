@@ -38,8 +38,8 @@
 
 //enum for type cjson
 typedef enum e_type_cJSON_message {
-    TYPE_NULL,
-    MESSAGES,
+//    TYPE_NULL,
+//    MESSAGES,
     AUTHENTICATION,
     REGISTRATION,
     USER_SEARCH_BY_SUBSTRING,

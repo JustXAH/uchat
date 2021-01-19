@@ -5,5 +5,5 @@
 #include "client.h"
 
 void mx_user_search(t_system *sys, t_user *user) {
-    write(1, "Oops! There should be a user search, but not yet!\n", 50);
+    write(1, "Oops! There should be a user search, but it's not here yet!\n", 50);
 }

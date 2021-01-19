@@ -5,10 +5,11 @@
 #ifndef UCHAT_CLIENT_H
 #define UCHAT_CLIENT_H
 
+
 #ifdef __APPLE__
 #define MALLOC_SIZE malloc_size
 #elif __linux__
-#define _XOPEN_SOURCE 500
+#define _XOPEN_SOURCE 500 
 #define MALLOC_SIZE malloc_usable_size
 #include <strings.h>
 #endif
@@ -28,6 +29,9 @@
 #include <errno.h>
 #include <pthread.h>
 #include <poll.h>
+#include <ctype.h>
+#include <unistd.h>
+
 
 // glade
 #include <gtk/gtk.h>
@@ -40,8 +44,8 @@
 
 //enum for type cjson
 typedef enum e_type_cJSON_message {
-    TYPE_NULL,
-    MESSAGES,
+//    TYPE_NULL,
+//    MESSAGES,
     AUTHENTICATION,
     REGISTRATION,
     USER_SEARCH_BY_SUBSTRING,
@@ -138,11 +142,37 @@ typedef struct s_reg_win {
 typedef struct s_chat_win {
     GtkEntry *chat_msg;
     GtkListBox *chat_viewer;
+    GtkListBox *contact_list;
 }                t_chat_win;
 
+typedef struct s_client_st {
+    char logged_in;  // 0 - not logged in // 1 - logged in // 2 - request for login sent
+    char authentication;
+    bool message_in_buffer;
+    int contact_in_focus; // 0 - home page
+    int logged_in_id;
+    char *logged_in_name;
+}               t_client_st;
+
+typedef struct s_msg {
+    int user_id;
+    char *user_name;
+    char *msg_time;
+    char *msg_text;
+    bool outgoing;
+    struct s_msg *next_msg;
+}              t_msg;
+
+typedef struct s_contact_list {
+    int user_id;
+    char *user_name;
+    t_msg *chat_history;
+    GtkWidget *contact_gui;
+    struct s_contact_list *next_contact;
+    //struct s_contact_list *prev_user;
+}              t_contact_list;
 
 void mx_structs_initialization(t_system *sys, t_user *user);
-
 /*
  * READ SERVER ANSWER
  */
@@ -178,9 +208,26 @@ void mx_user_search(t_system *sys, t_user *user);
 /*
  * GLADE
  */
+void gtk_window_initializtion(t_chat *chat);
+void gtk_show_chat_window(t_chat *chat);
+void gtk_show_log_window(t_chat *chat);
+
 void reg_win_init(t_system *sys);
 void chat_win_init(t_system *sys);
-void mx_gtk_window(t_system *sys, t_user *user);
-void gtk_chat_window(t_system *sys, t_user *user);
+void mb_client_globals_initialization();
+
+gboolean mb_event_listener(gpointer data);
+void mb_auth_event_check();
+void mb_incoming_msg_check();
+
+void mb_contact_list_add(int user_id, char *user_name);
+void mb_msg_buffer_add(int user_id, char *time, char *msg_text);
+
+void mb_send_msg(t_msg *msg);
+void mb_display_msg(t_msg *msg);
+void mb_display_chat_with_contact(int user_id);
+
+void mb_invalid_credentials_msg();
+void mb_reset_credentials_msg();
 
 #endif //UCHAT_CLIENT_H

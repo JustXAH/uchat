@@ -16,18 +16,19 @@ void *read_server(void *data) {
         json->TYPE = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "TYPE");
         sys->type_enum = json->TYPE->valueint;
         switch (sys->type_enum) {
-            case TYPE_NULL: // создана из-за того что enum начинает отсчет с 0, а типы с 1
-                // stub
-                write(1, "\nIt's stub for TYPE_NULL enum\n", 30);
-                break;
-            case MESSAGES:
-                // nothing here
-                break;
+//            case TYPE_NULL: // создана из-за того что enum начинает отсчет с 0, а типы с 1
+//                // stub
+//                write(1, "\nIt's stub for TYPE_NULL enum\n", 30);
+//                break;
+//            case MESSAGES:
+//                // nothing here
+//                break;
             case AUTHENTICATION:
                 mx_authentication_client(sys, user, json);
                 break;
             case REGISTRATION:
                 mx_confirmation_of_registration(sys, user, json);
+                write(1, "\n1\n", 3);
                 break;
             case USER_SEARCH_BY_SUBSTRING:
                 mx_found_users_by_substr(sys, user, json);
@@ -54,7 +55,7 @@ void *read_server(void *data) {
         cJSON_Delete(json->SERVER_JSON);
     }
     free(json);
-
+    return 0;
 //        if (TYPE != NULL) {
 //            if (TYPE->valueint == 2) { //аутентификация
 //                mx_authentication_client(sys, user, SERVER_JSON);
@@ -86,5 +87,4 @@ void *read_server(void *data) {
 //        }
 //        cJSON_Delete(SERVER_JSON);
 //    }
-//    return 0;
 }

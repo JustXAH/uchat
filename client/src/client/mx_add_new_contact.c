@@ -35,9 +35,9 @@ void mx_add_new_contact(t_system *sys, t_user *user, t_json *json) {
             free(user->contacts_id);
         }
         add_contacts_id(user, json->CONTACTS_ID_ARR);
-
+        
         if (MALLOC_SIZE(user->contacts_login)) {
-            free(user->contacts_login)
+            free(user->contacts_login);
         }
         add_contacts_login(user, json->CONTACTS_LOGIN_ARR);
     }
