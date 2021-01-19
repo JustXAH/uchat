@@ -6,10 +6,10 @@ typedef struct s_login_node {
 }              t_login_node;
 
 t_login_node *login_list;
-extern int count;
+int slbs_count;
 
 static int search_logins_callback(void *NotUsed, int argc, char **argv, char **azColName) {
-    count++;
+    slbs_count++;
     t_login_node *lgn = (t_login_node*)malloc(sizeof(t_login_node));
     lgn->login = mx_strdup(argv[0]);
     lgn->next = login_list;
@@ -22,7 +22,7 @@ char** mx_db_search_logins_by_substr(sqlite3 *db, char *str) {
     int rc;
 
     char sql[1024];
-    count = 0;
+    slbs_count = 0;
     snprintf(sql, sizeof(sql),
              "SELECT Login FROM Users WHERE Login LIKE '%%%s%%';",str);
     rc = sqlite3_exec(db, sql, search_logins_callback, 0, &err_msg);
@@ -35,11 +35,11 @@ char** mx_db_search_logins_by_substr(sqlite3 *db, char *str) {
     if (!login_list)
         return NULL;
 
-    char **logins = (char**)malloc((count+1) * sizeof(char*));
-    logins[count--] = NULL;
+    char **logins = (char**)malloc((slbs_count+1) * sizeof(char*));
+    logins[slbs_count--] = NULL;
     while (login_list) {
         t_login_node *tmp = login_list;
-        logins[count--] = login_list->login;
+        logins[slbs_count--] = login_list->login;
         login_list = login_list->next;
         free(tmp);
     }

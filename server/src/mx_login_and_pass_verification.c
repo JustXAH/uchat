@@ -24,33 +24,39 @@ void chats_json_creator(sqlite3 *db, t_json **json, int user) {
     cJSON_AddItemToObject((*json)->SEND, "CHATS_NAME_ARR", (*json)->CHATS_NAME_ARR);
     cJSON_AddItemToObject((*json)->SEND, "CHATS_COUNT", (*json)->CHATS_COUNT);
 
-    if (MALLOC_SIZE(chats->id)) {
-        free(chats->id);
+    if (chats->count > 0) {
+        if (MALLOC_SIZE(chats->id)) {
+            free(chats->id);
+        }
+        if (MALLOC_SIZE(chats->chat_name)) {
+            mx_del_strarr(&chats->chat_name);
+        }
     }
-    if (MALLOC_SIZE(chats->chat_name)) {
-        mx_del_strarr(&chats->chat_name);
-    }
-    free(chats);
+    if (MALLOC_SIZE(chats))
+        free(chats);
 }
 
 void contacts_json_creator(sqlite3 *db, t_json **json, int user) {
     t_contact *contacts = mx_db_get_contacts_info(db, user);
 
     (*json)->CONTACTS_ID_ARR = cJSON_CreateIntArray(contacts->id, contacts->count);
-    (*json)->CONTACTS_LOGIN_ARR = cJSON_CreateStringArray((const char * const *)contacts->login, contacts->count);
+    (*json)->CONTACTS_LOGIN_ARR = cJSON_CreateStringArray((const char *const *) contacts->login, contacts->count);
     (*json)->CONTACTS_COUNT = cJSON_CreateNumber(contacts->count);
 
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_ID_ARR", (*json)->CONTACTS_ID_ARR);
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_LOGIN_ARR", (*json)->CONTACTS_LOGIN_ARR);
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_COUNT", (*json)->CONTACTS_COUNT);
 
-    if (MALLOC_SIZE(contacts->id)) {
-        free(contacts->id);
+    if (contacts->count > 0) {
+        if (MALLOC_SIZE(contacts->id)) {
+            free(contacts->id);
+        }
+        if (MALLOC_SIZE(contacts->login)) {
+            mx_del_strarr(&contacts->login);
+        }
     }
-    if (MALLOC_SIZE(contacts->login)) {
-        mx_del_strarr(&contacts->login);
-    }
-    free(contacts);
+    if (MALLOC_SIZE(contacts))
+        free(contacts);
 }
 
 void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_sock) {
@@ -59,16 +65,14 @@ void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_soc
     json->SEND = cJSON_CreateObject();
     json->TYPE = cJSON_CreateNumber(AUTHENTICATION);
 
-    json->USER_ID = cJSON_CreateNumber(mx_db_check_login(serv->db, 
-                                                            json->LOGIN->valuestring, 
-                                                            json->PASS->valuestring));
+    json->USER_ID = cJSON_CreateNumber(mx_db_check_login(serv->db, json->LOGIN->valuestring, json->PASS->valuestring));
     if (json->USER_ID->valueint == 0 || json->USER_ID->valueint == -1) {
         json->RESULT = cJSON_CreateFalse(); // ошибка при входе в аккаунт - "0" - такой логин не существует, "-1" - неверный пароль
     }
     else {
         json->RESULT = cJSON_CreateTrue(); //регистрация прошла успешно
-        //contacts_json_creator(serv->db, &json, json->USER_ID->valueint);
-        //chats_json_creator(serv->db, &json, json->USER_ID->valueint);
+        contacts_json_creator(serv->db, &json, json->USER_ID->valueint);
+        chats_json_creator(serv->db, &json, json->USER_ID->valueint);
     }
 
     cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
@@ -76,10 +80,9 @@ void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_soc
     cJSON_AddItemToObject(json->SEND, "USER_ID", json->USER_ID);
 
     send_str = cJSON_Print(json->SEND);
-    mx_printstr("response for an authentication request sent\n");
+
     write(user_sock, send_str, strlen(send_str));
 
     cJSON_Delete(json->SEND);
     free(send_str);
-    mx_printstr("mx_login_and_pass_authentication finished\n");
 }

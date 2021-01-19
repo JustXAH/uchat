@@ -1,4 +1,3 @@
-
 //
 // Created by mac on 08.01.2021.
 //
@@ -35,7 +34,7 @@ static int check_login_callback(void *NotUsed, int argc, char **argv, char **azC
 int mx_db_check_login(sqlite3 *db, char *login, char *password) {
     char *err_msg = 0;
     int rc;
-
+    users = NULL;
     char sql[1024];
     snprintf(sql, sizeof(sql),
              "SELECT Id, Login, Password FROM Users WHERE Login = '%s';",login);
@@ -50,12 +49,13 @@ int mx_db_check_login(sqlite3 *db, char *login, char *password) {
     int res_id = -1;
     if (!mx_strcmp(users->password, password))
         res_id = users->id;
-    // t_user *tmp;
-    // while (users != NULL) {
-    //     tmp = users;
-    //     users = users->next;
-    //     //printf("!%d %s %s\n", tmp->id, tmp->login, tmp->password);
-    //     free(tmp);
-    // }
+    t_user *tmp;
+    while (users != NULL) {
+        tmp = users;
+        users = users->next;
+        free(tmp->login);
+        free(tmp->password);
+        free(tmp);
+    }
     return res_id;
 }
