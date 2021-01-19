@@ -67,6 +67,7 @@ typedef struct s_system {
     GtkWindow *chat_window;
     char **argv;
     char **found_usernames;
+    char *found_username;
     int argc;
     int sockfd;
     int found_user_id;
@@ -182,10 +183,8 @@ void mx_confirmation_of_registration(t_system *sys, t_user *user, t_json *json);
 void mx_found_users_by_substr(t_system *sys, t_user *user, t_json *json);
 void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_contact(t_system *sys, t_user *user, t_json *json);
-
-/*
- * REQUEST TO SERVER
- */
+void mx_add_new_chat(t_system *sys, t_user *user, t_json *json);
+void mx_get_login(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_contact_request(t_system *sys, t_user * user, t_json *json, int index);
 
 void mx_login_or_register(t_system *sys, t_user *user);

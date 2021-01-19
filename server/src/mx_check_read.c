@@ -70,7 +70,7 @@ static void read_and_write(t_server *serv, int user_num) {
                 mx_add_new_message(serv, json);
                 break;
             case LAST_MESSAGES:
-//                mx_last_messages(serv, json); //переделай под json структуру
+                mx_last_messages(serv, json); //переделай под json структуру
                 break;
         }
 //        if (TYPE->valueint == 2) { // аутентификация

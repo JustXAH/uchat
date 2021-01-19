@@ -40,13 +40,13 @@ void *read_server(void *data) {
                 mx_add_new_contact(sys, user, json);
                 break;
             case NEW_CHAT:
-                // функция, которая принимает ответ от запроса на создание нового чата
+                mx_add_new_chat(sys, user, json);
                 break;
             case GET_LOGIN:
-                // функция, которая принимает ответ от запроса на получение логина юзера по ID
+                mx_get_login(sys, user, json);
                 break;
             case NEW_MESSAGE:
-                // функция, которая принимает ответ от запроса на создание нового сообщения
+                mx_add_new_messages(sys, user, json);
                 break;
             case LAST_MESSAGES:
                 // функция, которая принимает ответ от запроса на подгрузку последних сообщений
