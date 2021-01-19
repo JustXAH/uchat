@@ -7,7 +7,7 @@
 t_chat *chat;
 extern t_reg_win reg__win;
 extern t_client_st cl_listener;
-extern t_msg *incoming_msg_buffer;
+extern t_message *incoming_msg_buffer;
 
 int main(int argc, char *argv[]) {
     t_system *sys = (t_system *)malloc(sizeof(t_system));

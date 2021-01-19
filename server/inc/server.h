@@ -107,7 +107,6 @@ typedef struct s_chat {
 typedef struct s_user_info {
     int id;
     char *login;
-    struct s_user_info *next;
 }              t_user_info;
 
 typedef struct s_chat_info {
@@ -116,13 +115,60 @@ typedef struct s_chat_info {
     struct s_chat_info *next;
 }               t_chat_info;
 
-typedef struct s_message {
+typedef struct s_message_info {
     int id;
     int user;
     char *text;
     time_t timestamp;
-    struct s_message *next;
-} t_message;
+    struct s_message_info *next;
+}               t_message_info;
+
+typedef struct s_message {
+    int *id;
+    int *user;
+    char **text;
+    time_t *timestamp;
+    int count;
+}               t_message;
+//
+//typedef struct s_user {
+//    int id;
+//    char *login;
+//    char *password;
+//    struct s_user *next;
+//}              t_user;
+//
+//typedef struct s_contact {
+//    int *id;
+//    char **login;
+//    int count;
+//}              t_contact;
+//
+//typedef struct s_chat {
+//    int *id;
+//    char **chat_name;
+//    int count;
+//}              t_chat;
+//
+//typedef struct s_user_info {
+//    int id;
+//    char *login;
+//    struct s_user_info *next;
+//}              t_user_info;
+//
+//typedef struct s_chat_info {
+//    int id;
+//    char *chat_name;
+//    struct s_chat_info *next;
+//}               t_chat_info;
+//
+//typedef struct s_message {
+//    int id;
+//    int user;
+//    char *text;
+//    time_t timestamp;
+//    struct s_message *next;
+//} t_message;
 
 /*
  * SERVER
@@ -140,7 +186,7 @@ void mx_add_new_contact(t_server *serv, t_json *json, int user_sock);
 void mx_add_new_chat(t_server *serv, t_json *json, int user_sock);
 void mx_add_new_message(t_server *serv, t_json *json);
 void mx_get_login(t_server *serv, t_json *json, int user_sock);
-//void mx_last_messages(t_server *serv, t_json *json);
+void mx_last_messages(t_server *serv, t_json *json);
 
 /*
  * DATABASE
@@ -157,7 +203,8 @@ int *mx_db_get_contacts(sqlite3 *db, int user); // 0-ended array of users_id; NU
 t_contact *mx_db_get_contacts_info(sqlite3 *db, int user); //
 int *mx_db_get_chats(sqlite3 *db, int user);
 char *mx_db_get_login(sqlite3 *db, int user);
-//int *mx_db_search_users_by_substr(sqlite3 *db, char *str); // 0-ended array of users_id; NULL if found nothing
+t_user_info *mx_db_get_user(sqlite3 *db, int user);
+int *mx_db_search_users_by_substr(sqlite3 *db, char *str); // 0-ended array of users_id; NULL if found nothing
 char **mx_db_search_logins_by_substr(sqlite3 *db, char *str);
 int mx_db_get_chat_by_users(sqlite3 *db, int user_1, int user_2); //return chat_id; 0 if chat doesn't exist
 t_chat *mx_db_get_chats_info(sqlite3 *db, int user);

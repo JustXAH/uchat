@@ -18,12 +18,12 @@ void mx_login_or_register(t_system *sys, t_user *user) {
     write(1, "\n", 1);
 
     if (strcmp(choice, "1") == 0) {  //Log in!;
-        sys->registration = true;
+        sys->reg_confirmation = true;
         login_json = mx_create_user_profile(sys, user);
         write(sys->sockfd, login_json, mx_strlen(login_json));
     }
     else if (strcmp(choice, "2") == 0) {
-        sys->registration = false;
+        sys->reg_confirmation = false;
         login_json = mx_create_user_profile(sys, user);
         write(sys->sockfd, login_json, mx_strlen(login_json));
     }

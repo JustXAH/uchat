@@ -44,8 +44,8 @@
 
 //enum for type cjson
 typedef enum e_type_cJSON_message {
-//    TYPE_NULL,
-//    MESSAGES,
+    TYPE_NULL,
+    MESSAGES,
     AUTHENTICATION,
     REGISTRATION,
     USER_SEARCH_BY_SUBSTRING,
@@ -53,9 +53,9 @@ typedef enum e_type_cJSON_message {
     NEW_CONTACT,
     NEW_CHAT,
     GET_LOGIN,
-    NEW_MESSAGE,
     LAST_MESSAGES,
 }            e_type_cJSON;
+
 
 typedef struct s_system {
 //    char *login;
@@ -75,7 +75,8 @@ typedef struct s_system {
     e_type_cJSON type_enum;
 //    pthread_mutex_t mutex;
     bool first_reg;
-    bool registration;
+    bool reg_request;
+    bool reg_confirmation;
     bool authentication;
     bool menu;
     bool message_sent;
@@ -154,7 +155,7 @@ typedef struct s_client_st {
     int logged_in_id;
     char *logged_in_name;
 }               t_client_st;
-
+/*
 typedef struct s_msg {
     int user_id;
     char *user_name;
@@ -163,11 +164,21 @@ typedef struct s_msg {
     bool outgoing;
     struct s_msg *next_msg;
 }              t_msg;
+*/
+typedef struct s_message {
+    int id;
+    int user;
+    char *user_name;
+    char *text;
+    bool outgoing;
+    time_t timestamp;
+    struct s_message *next;
+}               t_message;
 
 typedef struct s_contact_list {
     int user_id;
     char *user_name;
-    t_msg *chat_history;
+    t_message *chat_history;
     GtkWidget *contact_gui;
     struct s_contact_list *next_contact;
     //struct s_contact_list *prev_user;
@@ -185,6 +196,9 @@ void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_contact(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_chat(t_system *sys, t_user *user, t_json *json);
 void mx_get_login(t_system *sys, t_user *user, t_json *json);
+/*
+ * REQUEST TO SERVER
+ */
 void mx_add_new_contact_request(t_system *sys, t_user * user, t_json *json, int index);
 
 void mx_login_or_register(t_system *sys, t_user *user);
@@ -220,10 +234,10 @@ void mb_auth_event_check();
 void mb_incoming_msg_check();
 
 void mb_contact_list_add(int user_id, char *user_name);
-void mb_msg_buffer_add(int user_id, char *time, char *msg_text);
+void mb_msg_buffer_add(int user_id, time_t time, char *msg_text);
 
-void mb_send_msg(t_msg *msg);
-void mb_display_msg(t_msg *msg);
+void mb_send_msg(t_message *msg);
+void mb_display_msg(t_message *msg);
 void mb_display_chat_with_contact(int user_id);
 
 void mb_invalid_credentials_msg();

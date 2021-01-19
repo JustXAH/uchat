@@ -36,8 +36,8 @@ void on_reg_new_btn_clicked(GtkButton *btn, t_system *sys, t_user *user) {
 //        valid = false;
     if (valid == false)
         return;
-    sys->registration = true;
-    mx_registration_or_login_request(sys, user);
+    chat->sys->reg_request = true;
+    mx_registration_or_login_request(chat->sys, chat->user);
     //Send credentials to server
 }
 static void change_lbls(GtkEntry *reg_pas_label1, GtkEntry *reg_pas_label2, char *text){
@@ -54,22 +54,18 @@ static bool check_pass_valid() {
     bool valid = true;
 
     if(strcmp(pass1, pass2) != 0) {
-        change_lbls(GTK_ENTRY(reg_win.reg_pas_label1), GTK_ENTRY(reg_win.reg_pas_label2), "Passwords do not match");
-        return false;
+        gtk_label_set_text(reg_win.reg_pas_label1, "Passwords do not match");
+        gtk_label_set_text(reg_win.reg_pas_label2, "Passwords do not match");
+         return false;
     }
     if (strlen(pass1) < 6 ) {
-        change_lbls(GTK_ENTRY(reg_win.reg_pas_label1), GTK_ENTRY(reg_win.reg_pas_label2), "Passwords less 6 chars");
+        gtk_label_set_text(reg_win.reg_pas_label1, "Password is less than 6 chars");
+        gtk_label_set_text(reg_win.reg_pas_label2, "Password is less than 6 chars");
         return false;
     }
-    for (int i = 0; pass1[i]; i++) {
-        if (!isdigit(pass1[i]) && !isalpha(pass1[i])) {
-            change_lbls(GTK_ENTRY(reg_win.reg_pas_label1), GTK_ENTRY(reg_win.reg_pas_label2), "App just char and sym");
-            return false;
-        }
-    }
-    printf("Passwords are OK");
+    printf("Passwords are OK\n");
     gtk_label_set_text(reg_win.reg_pas_label1, "Password is OK");
-    gtk_label_set_text(reg_win.reg_pas_label2, "Confirmation matched");
+    gtk_label_set_text(reg_win.reg_pas_label2, "Confirmation matches");
     return true;
 }
 static bool check_valid_login() {
@@ -98,7 +94,7 @@ static bool check_valid_login() {
         }
     }
     printf("%s\n", "Login is OK");
-    gtk_label_set_text(reg_win.reg_log_label, "Login is OK");
+    gtk_label_set_text(reg_win.reg_log_label, "Login is OK\n");
     return true;
 }
 static bool check_valid_email() {
@@ -125,7 +121,7 @@ static bool check_valid_email() {
             return false;
         }
     }
-    printf("%s\n", "E-mail is incorrect");
+    printf("E-mail is incorrect\n");
     gtk_label_set_text(reg_win.reg_email_label, "E-mail is incorrect");
     return false;
 }
