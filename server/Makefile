@@ -1,4 +1,4 @@
-NAME = server
+NAME = uchat_server
 
 
 SRC_DIR = src/
