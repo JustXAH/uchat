@@ -1,17 +1,17 @@
 #include "server.h"
 
-int login_id;
+int cby_login_id;
 
 static int mx_get_chat_by_users_callback(void *NotUsed, int argc, char **argv, char **azColName) {
     if (argc)
-        login_id = mx_atoi(argv[0]);
+        cby_login_id = mx_atoi(argv[0]);
     return 0;
 }
 
 int mx_db_get_chat_by_users(sqlite3 *db, int user_1, int user_2) {
     char *err_msg = 0;
     int rc;
-    login_id = 0;
+    cby_login_id = 0;
     char sql[1024];
     snprintf(sql, sizeof(sql),
              "SELECT Id FROM Chats WHERE (User = '%d' AND User2 = '%d') OR (User = '%d' AND User2 = '%d');",user_1,user_2,user_2,user_1);
@@ -24,5 +24,5 @@ int mx_db_get_chat_by_users(sqlite3 *db, int user_1, int user_2) {
         sqlite3_free(err_msg);
     }
 
-    return login_id;
+    return cby_login_id;
 }

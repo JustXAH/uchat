@@ -20,7 +20,7 @@ static void change_lbls(GtkEntry *reg_pas_label1, GtkEntry *reg_pas_label2, char
 static bool check_pass_valid();
 static bool check_valid_login();
 static bool check_valid_email();
-void on_reg_new_btn_clicked(GtkButton *btn, t_system *sys, t_user *user) {
+void on_reg_new_btn_clicked(GtkButton *btn) {
     bool valid = true;
 
     if (!check_valid_login()) {
@@ -36,6 +36,9 @@ void on_reg_new_btn_clicked(GtkButton *btn, t_system *sys, t_user *user) {
 //        valid = false;
     if (valid == false)
         return;
+    chat->user->login = strdup((char *)gtk_entry_get_text(reg_win.reg_log));
+    chat->user->password = strdup((char *)gtk_entry_get_text(reg_win.reg_pass1));
+    //printf("1LOGIN = %s\n1PASS = %s\n", user->login, user->password);
     chat->sys->reg_request = true;
     mx_registration_or_login_request(chat->sys, chat->user);
     //Send credentials to server

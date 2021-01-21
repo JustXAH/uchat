@@ -17,8 +17,8 @@ void mx_registration_or_login_request(t_system *sys, t_user *user) {
     LOGIN = cJSON_CreateString(user->login);
     PASS = cJSON_CreateString(user->password);
 
-//    printf("LOGIN = %s\nPASS = %s\n", user->login, user->password);
-//    printf("LOGIN = %s\nPASS = %s\n", LOGIN->valuestring, PASS->valuestring);
+    printf("LOGIN = %s\nPASS = %s\n", user->login, user->password);
+    //printf("LOGIN = %s\nPASS = %s\n", LOGIN->valuestring, PASS->valuestring);
 
     cJSON_AddItemToObject(USER, "TYPE", TYPE);
     cJSON_AddItemToObject(USER, "LOGIN", LOGIN);
@@ -34,6 +34,8 @@ void mx_registration_or_login_request(t_system *sys, t_user *user) {
     cJSON_DeleteItemFromObject(USER, "TYPE");
     cJSON_DeleteItemFromObject(USER, "LOGIN");
     cJSON_DeleteItemFromObject(USER, "PASS");
+    //mx_printstr("starting to free shit\n");
     cJSON_Delete(USER);
     free(str_user);
+    //mx_printstr("shit freed successfully\n");
 }

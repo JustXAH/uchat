@@ -5,15 +5,15 @@ typedef struct s_id_node {
     struct s_id_node *next;
 }              t_id_node;
 
-t_id_node *id_list;
-int count;
+t_id_node *gcon_id_list;
+int gcon_count;
 
 static int get_contacts_callback(void *NotUsed, int argc, char **argv, char **azColName) {
-    count++;
+    gcon_count++;
     t_id_node *id = (t_id_node*)malloc(sizeof(t_id_node));
     id->id = mx_atoi(argv[0]);
-    id->next = id_list;
-    id_list = id;
+    id->next = gcon_id_list;
+    gcon_id_list = id;
     return 0;
 }
 
@@ -22,7 +22,7 @@ int *mx_db_get_contacts(sqlite3 *db, int user) {
     int rc;
 
     char sql[1024];
-    count = 0;
+    gcon_count = 0;
     snprintf(sql, sizeof(sql),
              "SELECT Contact FROM Contacts WHERE User = '%d';",user);
     rc = sqlite3_exec(db, sql, get_contacts_callback, 0, &err_msg);
@@ -32,15 +32,15 @@ int *mx_db_get_contacts(sqlite3 *db, int user) {
         sqlite3_free(err_msg);
     }
 
-    if (!id_list)
+    if (!gcon_id_list)
         return NULL;
 
-    int *contacts = (int *)malloc((count+1) * sizeof(int));
-    contacts[count--] = 0;
-    while (id_list) {
-        t_id_node *tmp = id_list;
-        contacts[count--] = id_list->id;
-        id_list = id_list->next;
+    int *contacts = (int *)malloc((gcon_count+1) * sizeof(int));
+    contacts[gcon_count--] = 0;
+    while (gcon_id_list) {
+        t_id_node *tmp = gcon_id_list;
+        contacts[gcon_count--] = gcon_id_list->id;
+        gcon_id_list = gcon_id_list->next;
         free(tmp);
     }
     return contacts;
