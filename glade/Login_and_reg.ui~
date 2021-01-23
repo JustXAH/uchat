@@ -577,6 +577,7 @@ Have a nice adventure, traveler.</property>
                                 <property name="activates-default">True</property>
                                 <property name="show-emoji-icon">True</property>
                                 <signal name="activate" handler="on_chat_send_btn_clicked" swapped="no"/>
+                                <accelerator key="t" signal="grab-focus"/>
                               </object>
                             </child>
                           </object>
@@ -1773,6 +1774,7 @@ Have a nice adventure, traveler.</property>
                         <property name="stock">gtk-properties</property>
                       </object>
                     </child>
+                    <accelerator key="Return" signal="activate"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>

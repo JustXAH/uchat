@@ -1774,7 +1774,6 @@ Have a nice adventure, traveler.</property>
                         <property name="stock">gtk-properties</property>
                       </object>
                     </child>
-                    <accelerator key="Return" signal="activate"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
