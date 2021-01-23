@@ -1753,7 +1753,6 @@ Have a nice adventure, traveler.</property>
                         <property name="stock">gtk-find</property>
                       </object>
                     </child>
-                    <accelerator key="Return" signal="activate"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>

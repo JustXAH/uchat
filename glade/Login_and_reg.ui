@@ -577,6 +577,7 @@ Have a nice adventure, traveler.</property>
                                 <property name="activates-default">True</property>
                                 <property name="show-emoji-icon">True</property>
                                 <signal name="activate" handler="on_chat_send_btn_clicked" swapped="no"/>
+                                <accelerator key="t" signal="grab-focus"/>
                               </object>
                             </child>
                           </object>
@@ -1735,9 +1736,29 @@ Have a nice adventure, traveler.</property>
                     <signal name="activate" handler="on_chat_search_btn_clicked" swapped="no"/>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
+                    <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="chat_search_btn">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <signal name="clicked" handler="on_chat_search_btn_clicked" swapped="no"/>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="stock">gtk-find</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
                   </packing>
                 </child>
                 <child>
@@ -1753,6 +1774,7 @@ Have a nice adventure, traveler.</property>
                         <property name="stock">gtk-properties</property>
                       </object>
                     </child>
+                    <accelerator key="Return" signal="activate"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
