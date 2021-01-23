@@ -54,6 +54,7 @@ typedef enum e_type_cJSON_message {
     LAST_MESSAGES,
 }            e_type_cJSON;
 
+
 typedef struct s_system {
 //    char *login;
 //    char *password;
@@ -80,6 +81,7 @@ typedef struct s_system {
     bool chat;
     bool exit;
 }              t_system;
+
 typedef struct s_user {
     char *login;
     char *password;
@@ -91,6 +93,7 @@ typedef struct s_user {
     int contacts_count;
     int chats_count;
 }              t_user;
+
 typedef struct s_json {
     cJSON *SERVER_JSON;
     cJSON *SEND;
@@ -112,6 +115,7 @@ typedef struct s_json {
     cJSON *TO;
     cJSON *CHAT_ID;
 }              t_json;
+
 typedef struct s_chat {
     struct s_system *sys;
     struct s_user *user;
@@ -134,35 +138,34 @@ typedef struct s_reg_win {
     GtkLabel *reg_pas_label2;
     GtkLabel *reg_email_label;
 }               t_reg_win;
+
 typedef struct s_chat_win {
-    GtkStackSwitcher *switcher;
-    //GtkStackSwitcher *contacts_bar;
-    //GtkStackSwitcher *chats_bar;
-
-    GtkListBox *contacts_list;
-    GtkListBox *chats_list;
-
-    GtkStack *all_stack;
-    GtkFixed *profile_box;
-
-    GtkBox *msg_box;
-    GtkEntry *msg_entry;
-    GtkListBox *msg_viewer;
+    GtkEntry *chat_msg;
+    GtkListBox *chat_viewer;
+    GtkListBox *contact_list;
 }                t_chat_win;
 
 typedef struct s_client_st {
     char logged_in;  // 0 - not logged in // 1 - logged in // 2 - request for login sent
     char authentication;
     bool message_in_buffer;
-    int chat_in_focus; // 0 - home page
+    int contact_in_focus; // 0 - home page
     int logged_in_id;
     char *logged_in_name;
 }               t_client_st;
-
+/*
+typedef struct s_msg {
+    int user_id;
+    char *user_name;
+    char *msg_time;
+    char *msg_text;
+    bool outgoing;
+    struct s_msg *next_msg;
+}              t_msg;
+*/
 typedef struct s_message {
     int id;
-    int user_id;
-    int chat_id;
+    int user;
     char *user_name;
     char *text;
     bool outgoing;
@@ -170,18 +173,15 @@ typedef struct s_message {
     struct s_message *next;
 }               t_message;
 
-typedef struct s_chat_list {
-    int chat_id;
-    int *user_ids;
-    char **user_names;
-    int user_amount;
+typedef struct s_contact_list {
+    int user_id;
+    char *user_name;
     t_message *chat_history;
     GtkWidget *contact_gui;
-    struct s_chat_list *next_chat;
-}              t_chat_list;
-/*typedef struct s_contact_list {
-    
-}              t_contact_list;*/
+    struct s_contact_list *next_contact;
+    //struct s_contact_list *prev_user;
+}              t_contact_list;
+
 void mx_structs_initialization(t_system *sys, t_user *user);
 /*
  * READ SERVER ANSWER
@@ -231,15 +231,14 @@ gboolean mb_event_listener(gpointer data);
 void mb_auth_event_check();
 void mb_incoming_msg_check();
 
-void mb_contact_list_add(int chat_id, int user_id, char *user_name);
-void mb_msg_buffer_add(int chat_id, int user_id, char *user_name, time_t time, char *msg_text);
+void mb_contact_list_add(int user_id, char *user_name);
+void mb_msg_buffer_add(int user_id, time_t time, char *msg_text);
 
 void mb_send_msg(t_message *msg);
 void mb_display_msg(t_message *msg);
-void mb_display_chat_with_contact(int chat_id);
+void mb_display_chat_with_contact(int user_id);
 
 void mb_invalid_credentials_msg();
 void mb_reset_credentials_msg();
 
-int mb_get_uid_by_cid(int chat_id);
 #endif //UCHAT_CLIENT_H
