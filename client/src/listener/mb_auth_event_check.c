@@ -13,8 +13,8 @@ void mb_auth_event_check() {
         gtk_show_chat_window(chat);
         cl_listener.logged_in = 1;
         //test lines below
-        cl_listener.logged_in_id = 69;
-        cl_listener.logged_in_name = mx_strdup("Horsecock");
+        //cl_listener.my_id = 69;
+        cl_listener.my_name = mx_strdup("Horsecock");
         mb_contact_list_add(1, 1, "Ckif");
         mb_contact_list_add(2, 2, "Prick");
 

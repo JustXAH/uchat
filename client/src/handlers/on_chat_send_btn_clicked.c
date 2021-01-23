@@ -24,8 +24,8 @@ void on_chat_send_btn_clicked(GtkButton *btn, GtkBuilder *builder) {
     if (strlen(txt_msg) > 0) {
         //printf("%d\n", cl_listener.chat_in_focus);
         t_message *msg = mb_form_msg(cl_listener.chat_in_focus,
-                                        cl_listener.logged_in_id,
-                                        cl_listener.logged_in_name,
+                                        cl_listener.my_id,
+                                        cl_listener.my_name,
                                         txt_msg, 
                                         true);
         mb_send_msg(msg);

@@ -40,9 +40,9 @@ void chat_win_init(t_system *sys) {
     chat_win.msg_viewer = GTK_LIST_BOX(gtk_builder_get_object(sys->builder,
                                                         "chat_msg_lst_box"));    
     chat_win.contacts_list = GTK_LIST_BOX(gtk_builder_get_object(sys->builder,
-                                                        "contacts_list"));
+                                                        "contact_list"));
     chat_win.chats_list = GTK_LIST_BOX(gtk_builder_get_object(sys->builder,
-                                                        "chats_list"));
+                                                        "chat_list"));
     chat_win.switcher = GTK_STACK_SWITCHER(gtk_builder_get_object(sys->builder,
                                                         "chat_switcher"));
     chat_win.msg_box = GTK_BOX(gtk_builder_get_object(sys->builder,

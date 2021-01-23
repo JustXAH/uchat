@@ -143,10 +143,10 @@ typedef struct s_chat_win {
     GtkListBox *chats_list;
 
     GtkStack *all_stack;
-    GtkFixed *profile_box;
+    GtkFixed    *profile_box;
 
-    GtkBox *msg_box;
-    GtkEntry *msg_entry;
+    GtkBox        *msg_box;
+    GtkEntry    *msg_entry;
     GtkListBox *msg_viewer;
 }                t_chat_win;
 
@@ -155,8 +155,8 @@ typedef struct s_client_st {
     char authentication;
     bool message_in_buffer;
     int chat_in_focus; // 0 - home page
-    int logged_in_id;
-    char *logged_in_name;
+    int my_id;
+    char *my_name;
 }               t_client_st;
 
 typedef struct s_message {

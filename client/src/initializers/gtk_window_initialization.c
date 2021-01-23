@@ -14,6 +14,9 @@ void gtk_window_initializtion(t_chat *chat) {
     gtk_init(NULL, NULL);
     GError* error = NULL;
 
+    GtkCssProvider *cssProvider = gtk_css_provider_new ();
+    gtk_css_provider_load_from_path(cssProvider,"glade/style.css",NULL);
+    gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), GTK_STYLE_PROVIDER(cssProvider), GTK_STYLE_PROVIDER_PRIORITY_USER);
     chat->sys->builder = gtk_builder_new();
     if (!gtk_builder_add_from_file(chat->sys->builder, "glade/Login_and_reg.ui", &error)) {
         g_critical("error load file: %s", error->message);
@@ -48,3 +51,5 @@ void gtk_show_log_window(t_chat *chat) {
     gtk_widget_hide(GTK_WIDGET(chat->sys->chat_window));
     gtk_widget_show_all(GTK_WIDGET(chat->sys->reg_window));
 }
+
+
