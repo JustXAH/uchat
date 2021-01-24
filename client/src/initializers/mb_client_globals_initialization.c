@@ -62,7 +62,9 @@ void chat_win_init(t_system *sys) {
     gtk_entry_completion_set_model (chat_win.s_comp, chat_win.s_comp_model);
     gtk_entry_completion_set_text_column (chat_win.s_comp, 0);
     g_signal_connect(G_OBJECT(chat_win.s_comp),"match-selected", G_CALLBACK(on_search_entry_match_select), NULL);
-                                                
+    chat_win.welcome_user = GTK_LABEL(gtk_builder_get_object(sys->builder,
+                                                        "welcome_user"));
+    
 }
 void mb_client_globals_initialization() {
     cl_listener.logged_in = 0;

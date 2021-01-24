@@ -152,6 +152,8 @@ typedef struct s_chat_win {
     GtkSearchEntry     *search_entry;
     GtkTreeModel       *s_comp_model;
     GtkEntryCompletion       *s_comp;
+
+    GtkLabel           *welcome_user;
 }                t_chat_win;
 
 typedef struct s_client_st {

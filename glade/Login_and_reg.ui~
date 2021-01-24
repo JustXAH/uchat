@@ -446,7 +446,7 @@
                 <property name="can-focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkLabel" id="wellcome_lbl">
+                  <object class="GtkLabel" id="welcome_lbl">
                     <property name="width-request">100</property>
                     <property name="height-request">80</property>
                     <property name="visible">True</property>
@@ -467,7 +467,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="wellcome_user">
+                  <object class="GtkLabel" id="welcome_user">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="margin-top">20</property>
@@ -484,7 +484,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="wellcome_lbl_2">
+                  <object class="GtkLabel" id="welcome_lbl_2">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="margin-top">20</property>
@@ -1734,6 +1734,7 @@ Have a nice adventure, traveler.</property>
                     <property name="primary-icon-sensitive">False</property>
                     <property name="input-purpose">name</property>
                     <signal name="activate" handler="on_chat_search_btn_clicked" swapped="no"/>
+                    <signal name="focus" handler="on_search_entry_changed" swapped="no"/>
                     <signal name="focus-in-event" handler="on_search_entry_changed" swapped="no"/>
                     <signal name="search-changed" handler="on_search_entry_changed" swapped="no"/>
                   </object>

@@ -446,7 +446,7 @@
                 <property name="can-focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkLabel" id="wellcome_lbl">
+                  <object class="GtkLabel" id="welcome_lbl">
                     <property name="width-request">100</property>
                     <property name="height-request">80</property>
                     <property name="visible">True</property>
@@ -454,7 +454,7 @@
                     <property name="halign">center</property>
                     <property name="margin-top">20</property>
                     <property name="margin-bottom">20</property>
-                    <property name="label" translatable="yes">Wellcome</property>
+                    <property name="label" translatable="yes">Welcome,</property>
                     <property name="justify">center</property>
                     <attributes>
                       <attribute name="size" value="50000"/>
@@ -467,7 +467,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="wellcome_user">
+                  <object class="GtkLabel" id="welcome_user">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="margin-top">20</property>
@@ -484,7 +484,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="wellcome_lbl_2">
+                  <object class="GtkLabel" id="welcome_lbl_2">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="margin-top">20</property>
