@@ -55,6 +55,9 @@
                 <property name="height-request">34</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
+                <property name="visibility">False</property>
+                <property name="invisible-char">*</property>
+                <property name="input-purpose">password</property>
               </object>
               <packing>
                 <property name="x">102</property>
@@ -159,6 +162,9 @@
                 <property name="height-request">34</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
+                <property name="visibility">False</property>
+                <property name="invisible-char">*</property>
+                <property name="input-purpose">password</property>
               </object>
               <packing>
                 <property name="x">100</property>
@@ -191,7 +197,7 @@
               </object>
               <packing>
                 <property name="x">135</property>
-                <property name="y">580</property>
+                <property name="y">520</property>
               </packing>
             </child>
             <child>
@@ -212,6 +218,9 @@
                 <property name="height-request">34</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
+                <property name="visibility">False</property>
+                <property name="invisible-char">*</property>
+                <property name="input-purpose">password</property>
               </object>
               <packing>
                 <property name="x">100</property>
@@ -244,7 +253,7 @@
               </object>
               <packing>
                 <property name="x">136</property>
-                <property name="y">642</property>
+                <property name="y">580</property>
               </packing>
             </child>
             <child>
