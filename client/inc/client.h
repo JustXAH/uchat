@@ -246,4 +246,9 @@ void mb_invalid_credentials_msg();
 void mb_reset_credentials_msg();
 
 int mb_get_uid_by_cid(int chat_id);
+
+gboolean on_search_entry_match_select(GtkEntryCompletion *widget,
+                                        GtkTreeModel       *model,
+                                        GtkTreeIter        *iter,
+                                        gpointer            user_data);
 #endif //UCHAT_CLIENT_H

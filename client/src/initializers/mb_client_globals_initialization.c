@@ -7,6 +7,7 @@ t_message *incoming_msg_buffer;
 t_chat_list *contact_list;
 t_chat_list *chat_list;
 
+
 void reg_win_init(t_system *sys) {
     reg_win.log_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
                                                         "log_login_field"));
@@ -52,19 +53,16 @@ void chat_win_init(t_system *sys) {
                                                         "msg_config_stk"));
     chat_win.profile_box = GTK_FIXED(gtk_builder_get_object(sys->builder,
                                                         "profile_fixed"));
+    //Search                                                    
     chat_win.search_entry = GTK_SEARCH_ENTRY(gtk_builder_get_object(sys->builder,
                                                         "chat_search_entry"));
     chat_win.s_comp = gtk_entry_completion_new ();
     gtk_entry_set_completion (GTK_ENTRY (chat_win.search_entry), chat_win.s_comp);  
     chat_win.s_comp_model = GTK_TREE_MODEL(gtk_list_store_new(1, G_TYPE_STRING));
     gtk_entry_completion_set_model (chat_win.s_comp, chat_win.s_comp_model);
-    gtk_entry_completion_set_text_column (chat_win.s_comp, 0);                                                
-    /*
-    chat_win.contacts_bar = GTK_STACK_SWITCHER(gtk_builder_get_object(sys->builder,
-                                                        "friends_sidebar"));
-    chat_win.chats_bar = GTK_STACK_SWITCHER(gtk_builder_get_object(sys->builder,
-                                                        "chats_sidebar"));  
-                                                        */                                                     
+    gtk_entry_completion_set_text_column (chat_win.s_comp, 0);
+    g_signal_connect(G_OBJECT(chat_win.s_comp),"match-selected", G_CALLBACK(on_search_entry_match_select), NULL);
+                                                
 }
 void mb_client_globals_initialization() {
     cl_listener.logged_in = 0;
