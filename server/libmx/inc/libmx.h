@@ -1,5 +1,4 @@
 #pragma once
-
 /*
  *	STANDART LIBRARIES
  */
@@ -8,7 +7,14 @@
 #include <stdbool.h>
 #include <string.h>
 #include <fcntl.h>
+
+#ifdef __APPLE__
+#define MALLOC_SIZE malloc_size
 #include <malloc/malloc.h>
+#elif __linux__
+#define MALLOC_SIZE malloc_usable_size
+#include <malloc.h>
+#endif
 
 #define INT_MIN -2147483648
 #define LONG_MAX 9223372036854775807

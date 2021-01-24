@@ -27,5 +27,5 @@ libmx.a
 empty
 *.txt
 *.db
-main.c
 server
+client

@@ -1,4 +1,4 @@
-NAME = server
+NAME = uchat_server
 
 
 SRC_DIR = src/
@@ -22,7 +22,7 @@ CC		 = clang
 GFLAGS		= -std=c11 -Wall -Wextra -Werror -Wpedantic \
 			  -Wno-unused-command-line-argument -Wno-unused-variable \
 			  -Wno-unused-function -Wno-unused-parameter -g \
-			  -lsqlite3
+			  -lsqlite3 -lpthread
 IFLAGS	 = $(addprefix -I, $(LIB_INC) $(INC_DIR))
 COMPILE	 = $(CC) $(GFLAGS) $(IFLAGS) $(LIB_BIN)
 
@@ -35,7 +35,7 @@ RM	 = /bin/rm -rf
 all: $(NAME)
 
 $(NAME): $(LIB_LIST) $(OBJ_DIR) $(OBJ)
-	@$(COMPILE) $(OBJ) -lmx -o $(NAME)
+	@$(COMPILE) $(OBJ) $(LIB_BIN) -o $(NAME)
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(LIB_BIN): $(LIB_LIST)

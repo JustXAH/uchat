@@ -1,4 +1,4 @@
-NAME = client
+NAME = uchat
 
 
 SRC_DIR = src/
@@ -6,7 +6,9 @@ OBJ_DIR = obj/
 INC_DIR = inc/
 
 
-SRC = $(wildcard $(SRC_DIR)/*.c)
+DIRS	= $(notdir $(wildcard $(SRC_DIR)*))
+FILES	= $(foreach dir, $(DIRS), $(basename $(wildcard $(SRC_DIR)$(dir)/*.c)))
+SRC		= $(FILES:%=%.c)
 OBJ		= $(SRC:src/%.c=$(OBJ_DIR)%.o)
 INC_H	= $(wildcard $(INC_DIR)*.h)
 
@@ -19,12 +21,12 @@ LIB_INC	 = $(addsuffix $(INC_DIR), $(LIB_DIRS))
 
 
 CC		 = clang
-GFLAGS		= -std=c11 -Wall -Wextra -Werror -Wpedantic\
+GFLAGS		= -rdynamic `pkg-config --cflags --libs gtk+-3.0`\
+			  -std=c11 -Wall -Wextra\
 			  -Wno-unused-command-line-argument -Wno-unused-variable \
 			  -Wno-unused-function -Wno-unused-parameter -g
 IFLAGS	 = $(addprefix -I, $(LIB_INC) $(INC_DIR))
 COMPILE	 = $(CC) $(GFLAGS) $(IFLAGS) $(LIB_BIN)
-
 
 MAKE_M	 = make -sf Makefile -C
 MKDIR	 = mkdir -p
@@ -34,7 +36,7 @@ RM	 = /bin/rm -rf
 all: $(NAME)
 
 $(NAME): $(LIB_LIST) $(OBJ_DIR) $(OBJ)
-	@$(COMPILE) $(OBJ) -lmx -o $(NAME)
+	@$(COMPILE) $(OBJ) $(LIB_BIN) -o $(NAME)
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 
 $(LIB_BIN): $(LIB_LIST)

@@ -6,11 +6,12 @@ int mx_list_size(t_list *list) {
 
     if (list == NULL)
         return i;
-    else
+    else {
         tmp = list;
         while (tmp != NULL) {
             i++;
             tmp = tmp->next;
         }
+    }
     return i;
 }
