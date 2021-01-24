@@ -91,15 +91,16 @@ static bool check_valid_login() {
     }
     for (int i = 0; lbuffer[i]; i++) {
         if (!isdigit(lbuffer[i]) && !isalpha(lbuffer[i])){
-            printf("%s\n", "App just char and sym");
-            gtk_label_set_text(reg_win.reg_log_label, "App just char and sym");
+            printf("%s\n", "Login contains illegal chars");
+            gtk_label_set_text(reg_win.reg_log_label, "Login contains illegal chars");
             return false;
         }
     }
-    printf("%s\n", "Login is OK");
-    gtk_label_set_text(reg_win.reg_log_label, "Login is OK\n");
+    printf("Login is OK\n");
+    //gtk_label_set_text(reg_win.reg_log_label, "Login is OK");
     return true;
 }
+/*
 static bool check_valid_email() {
     char *ebuffer = (char *)gtk_entry_get_text(reg_win.reg_email);
 
@@ -128,4 +129,5 @@ static bool check_valid_email() {
     gtk_label_set_text(reg_win.reg_email_label, "E-mail is incorrect");
     return false;
 }
+*/
 ////////////////////////////////////////////////////////////////////////////////////

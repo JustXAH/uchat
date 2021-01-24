@@ -135,19 +135,23 @@ typedef struct s_reg_win {
     GtkLabel *reg_email_label;
 }               t_reg_win;
 typedef struct s_chat_win {
-    GtkStackSwitcher *switcher;
+    GtkStackSwitcher       *switcher;
     //GtkStackSwitcher *contacts_bar;
     //GtkStackSwitcher *chats_bar;
 
-    GtkListBox *contacts_list;
-    GtkListBox *chats_list;
+    GtkListBox        *contacts_list;
+    GtkListBox           *chats_list;
 
-    GtkStack *all_stack;
-    GtkFixed    *profile_box;
+    GtkStack              *all_stack;
+    GtkFixed            *profile_box;
 
-    GtkBox        *msg_box;
-    GtkEntry    *msg_entry;
-    GtkListBox *msg_viewer;
+    GtkBox                  *msg_box;
+    GtkEntry              *msg_entry;
+    GtkListBox           *msg_viewer;
+
+    GtkSearchEntry     *search_entry;
+    GtkTreeModel       *s_comp_model;
+    GtkEntryCompletion       *s_comp;
 }                t_chat_win;
 
 typedef struct s_client_st {

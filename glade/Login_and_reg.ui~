@@ -1734,6 +1734,8 @@ Have a nice adventure, traveler.</property>
                     <property name="primary-icon-sensitive">False</property>
                     <property name="input-purpose">name</property>
                     <signal name="activate" handler="on_chat_search_btn_clicked" swapped="no"/>
+                    <signal name="focus-in-event" handler="on_search_entry_changed" swapped="no"/>
+                    <signal name="search-changed" handler="on_search_entry_changed" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -1774,7 +1776,6 @@ Have a nice adventure, traveler.</property>
                         <property name="stock">gtk-properties</property>
                       </object>
                     </child>
-                    <accelerator key="Return" signal="activate"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
