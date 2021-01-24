@@ -117,5 +117,6 @@ int mx_db_get_chat_by_users(sqlite3 *db, int user_1, int user_2); //return chat_
 t_chat *mx_db_get_chats_info(sqlite3 *db, int user);
 int mx_db_create_new_message(sqlite3 *db, int user, int chat, char *text);
 t_message *mx_db_get_last_messages(sqlite3 *db, int chat);
+t_user_info *mx_db_get_profile(sqlite3 *db, int user);
 
 #endif //UCHAT_MAIN_H
