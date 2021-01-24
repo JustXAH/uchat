@@ -1,5 +1,6 @@
 #include "client.h"
 
+extern t_client_st cl_listener;
 extern t_reg_win reg_win;
 extern t_chat *chat;
 
@@ -40,6 +41,7 @@ void on_reg_new_btn_clicked(GtkButton *btn) {
     chat->user->password = strdup((char *)gtk_entry_get_text(reg_win.reg_pass1));
     //printf("1LOGIN = %s\n1PASS = %s\n", user->login, user->password);
     chat->sys->reg_request = true;
+    cl_listener.my_name = strdup(gtk_entry_get_text(reg_win.reg_log));
     mx_registration_or_login_request(chat->sys, chat->user);
     //Send credentials to server
 }
