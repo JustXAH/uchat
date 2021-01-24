@@ -8,8 +8,9 @@ int mx_db_insert_new_user(sqlite3 *db, char *login, char *password) {
     char *err_msg = 0;
     int rc;
 
-    if (mx_db_check_login_exist(db,login))
+    if (mx_db_check_login_exist(db,login)) {
         return 0;
+    }
 
     char sql[1024];
     snprintf(sql, sizeof(sql),

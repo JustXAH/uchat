@@ -1,0 +1,9 @@
+#include "client.h"
+
+extern t_chat_win chat_win;
+
+void on_settings_btn_clicked(GtkButton *btn) {
+    gtk_stack_set_visible_child(chat_win.all_stack, 
+                            GTK_WIDGET(chat_win.profile_box));
+    //printf("settings button clicked\n");                        
+}

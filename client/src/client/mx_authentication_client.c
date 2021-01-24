@@ -80,6 +80,8 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
         sys->menu = true;
         // вход в логин прошел успешно! дальше нужно перейти в окно МЕНЮ чата
         cl_listener.authentication = 1;
+        cl_listener.my_id = json->USER_ID->valueint;
+        
     }
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "RESULT");
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "USER_ID");

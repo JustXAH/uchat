@@ -34,6 +34,8 @@ void add_new_chat_and_json_create(sqlite3 *db, t_json **json) {
 void mx_add_new_chat(t_server *serv, t_json *json, int user_sock) {
     char *send_str = NULL;
 
+    json->USER_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "USER_ID");
+    json->CONTACT_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "CONTACT_ID");
     json->SEND = cJSON_CreateObject();
     json->TYPE = cJSON_CreateNumber(NEW_CHAT);
 
