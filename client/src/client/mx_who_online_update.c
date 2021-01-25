@@ -39,7 +39,10 @@ void mx_who_online_update(t_system *sys, t_user *user, t_json *json) {
     if (MALLOC_SIZE(user->who_online)) {
         free(user->who_online);
     }
-    update_online_users_arr(user, json->WHO_ONLINE, cJSON_GetArraySize(json->WHO_ONLINE));
+    if (user->contacts_count > 0) {
+        update_online_users_arr(user, json->WHO_ONLINE,
+                                cJSON_GetArraySize(json->WHO_ONLINE));
+    }
 
 
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "WHO_ONLINE");

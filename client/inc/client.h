@@ -152,29 +152,35 @@ typedef struct s_chat_win {
 
     GtkListBox        *contacts_list;
     GtkListBox           *chats_list;
-
+    GtkListBox          *search_list;
+    
+    GtkStack           *search_stack;
     GtkStack              *all_stack;
-    GtkFixed            *profile_box;
+    GtkFixed         *my_profile_box;
+    GtkFixed          *u_profile_box;
 
     GtkBox                  *msg_box;
     GtkEntry              *msg_entry;
     GtkListBox           *msg_viewer;
 
-    GtkSearchEntry     *search_entry;
-    GtkTreeModel       *s_comp_model;
-    GtkEntryCompletion       *s_comp;
+    GtkSearchEntry     *csearch_entry;
+    GtkSearchEntry     *fsearch_entry;
+    GtkWidget              **fresults;
 
-    GtkLabel           *welcome_user;
+    GtkLabel            *welcome_user;
+
+    GtkLabel            *friend_login;
 }                t_chat_win;
 
 typedef struct s_client_st {
-    char *my_name;
-    int chat_in_focus; // 0 - home page
-    int my_id;
     char logged_in;  // 0 - not logged in // 1 - logged in // 2 - request for login sent
     char authentication;
     bool message_in_buffer;
-
+    int chat_in_focus; // 0 - home page
+    int my_id;
+    char *my_name;
+    bool fsearch;
+    bool awaiting_fs_res;
 }               t_client_st;
 
 typedef struct s_message {

@@ -73,7 +73,7 @@ void mx_check_read(t_server *serv, int user_index) {
     poll_set->events = POLLIN;
 
     // ждём до 1 секунд
-    ret = poll(poll_set, 1, 3000);
+    ret = poll(poll_set, 1, 1500);
     printf("ret = %d\n", ret);
     printf("socket = %d[%d]\n", serv->user_socket[user_index], user_index);
 

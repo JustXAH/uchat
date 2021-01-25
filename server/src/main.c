@@ -8,23 +8,25 @@ void* poll_and_rw(void *data) {
     t_server *serv = (t_server *) data;
 
     for (int i = 0; serv->exit != true; ) {
-//        mx_read_server(serv);
-        if (serv->cli_connect != 0) {
-            if (serv->update == true) {
-                i = 0;
-                if (serv->user_socket[i] != -1) {
-                    mx_sending_who_online(serv, i);
-                    printf("\nSent int array with ONLINE users ID to this User(ID: %d; Socket: %d)\n",
-                           serv->users_id[i], serv->user_socket[i]);
-                }
-            }
+        if (serv->cli_connect == 0) {
+            serv->update = false;
+        }
+        if (serv->cli_connect > 0) {
             if (i == serv->cli_connect) {
                 i = 0;
-                serv->update = false;
             }
             mx_check_disconnect(serv, i);
             mx_check_read(serv, i);
-            i++;
+            if (serv->cli_connect != 0) {
+                if (serv->update == true) {
+                    mx_update_handler(serv);
+//                    mx_sending_who_online(serv, i);
+//                    printf("\nSent int array with ONLINE users ID to this User(ID: %d; Socket: %d)\n",
+//                           serv->users_id[i], serv->user_socket[i]);
+                    serv->update = false;
+                }
+                i++;
+            }
         }
     }
     return 0;
