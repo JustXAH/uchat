@@ -58,6 +58,7 @@ typedef struct s_server {
     int serv_sock_fd;
     int cli_connect;
     bool update;
+//    bool update_first;
     bool exit;
     e_type_cJSON type_enum;
 }              t_server;
@@ -186,6 +187,7 @@ typedef struct s_message {
 void mx_serv_struct_initialization(t_server *serv);
 void mx_json_struct_initialization(t_json *json);
 void mx_sorting_users_and_sockets(t_server *serv);
+void mx_update_handler(t_server *serv);
 void mx_sending_who_online(t_server *serv, int user_index);
 //cJSON *mx_database_stub(cJSON *user);
 //void mx_read_server(t_server *serv);

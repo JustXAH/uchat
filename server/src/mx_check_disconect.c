@@ -17,7 +17,7 @@ void mx_check_disconnect(t_server *serv, int user_index) {
     poll_set->events = POLLHUP;
 
     // ждём до 1 секунд
-    ret = poll(poll_set, 1, 3000);
+    ret = poll(poll_set, 1, 1500);
     printf("ret = %d\n", ret);
     printf("socket = %d[%d]\n", serv->user_socket[user_index], user_index);
 
@@ -40,6 +40,7 @@ void mx_check_disconnect(t_server *serv, int user_index) {
             mx_sorting_users_and_sockets(serv);
 //            mx_int_bubble_sort_reverse(serv->user_socket, MAX_CLIENTS);
             serv->cli_connect -= 1;
+            serv->update = true;
         }
     }
     printf("------------------------------\n");
