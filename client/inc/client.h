@@ -65,6 +65,8 @@ typedef struct s_system {
     char **argv;
     char **found_usernames;
     char *found_username;
+    char *login_substr;
+    char *searched_login;
     int argc;
     int sockfd;
     int found_user_id;
@@ -106,6 +108,8 @@ typedef struct s_json {
     cJSON *CHATS_ID_ARR;
     cJSON *CHATS_COUNT;
     cJSON *CHATS_NAME_ARR;
+    cJSON *LOGIN_SUBSTR;
+    cJSON *SEARCHED_LOGIN;
     cJSON *FOUND_USERNAMES;
     cJSON *FOUND_LOGIN;
     cJSON *MESSAGE;
@@ -141,19 +145,24 @@ typedef struct s_chat_win {
 
     GtkListBox        *contacts_list;
     GtkListBox           *chats_list;
-
+    GtkListBox          *search_list;
+    
+    GtkStack           *search_stack;
     GtkStack              *all_stack;
-    GtkFixed            *profile_box;
+    GtkFixed         *my_profile_box;
+    GtkFixed          *u_profile_box;
 
     GtkBox                  *msg_box;
     GtkEntry              *msg_entry;
     GtkListBox           *msg_viewer;
 
-    GtkSearchEntry     *search_entry;
-    GtkTreeModel       *s_comp_model;
-    GtkEntryCompletion       *s_comp;
+    GtkSearchEntry     *csearch_entry;
+    GtkSearchEntry     *fsearch_entry;
+    GtkWidget              **fresults;
 
-    GtkLabel           *welcome_user;
+    GtkLabel            *welcome_user;
+
+    GtkLabel            *friend_login;
 }                t_chat_win;
 
 typedef struct s_client_st {
@@ -163,6 +172,8 @@ typedef struct s_client_st {
     int chat_in_focus; // 0 - home page
     int my_id;
     char *my_name;
+    bool fsearch;
+    bool awaiting_fs_res;
 }               t_client_st;
 
 typedef struct s_message {
@@ -203,7 +214,11 @@ void mx_get_login(t_system *sys, t_user *user, t_json *json);
 /*
  * REQUEST TO SERVER
  */
-void mx_add_new_contact_request(t_system *sys, t_user * user, t_json *json, int index);
+void mx_registration_or_login_request(t_system *sys, t_user *user, t_json *json);
+void mx_user_search_by_substr_request(t_system *sys, t_json *json);
+void mx_user_search_by_login_request(t_system *sys, t_json *json);
+void mx_add_new_contact_request(t_system *sys, t_user * user, t_json *json, int contact_id);
+void mx_add_new_chat_request(t_system *sys, t_user * user, t_json *json, int contact_id);
 
 void mx_login_or_register(t_system *sys, t_user *user);
 char *mx_create_user_profile(t_system *sys, t_user *user);
@@ -213,7 +228,6 @@ void mx_chat_event(t_system *sys, t_user *user, pthread_t thread);
 void mx_client_menu(t_system *sys, t_user *user);
 void mx_sending_messages(t_system *sys, t_user *user, char *buff); // нужно переделать сначала сервер-бд, потом здесь
 
-void mx_registration_or_login_request(t_system *sys, t_user *user);
 
 /*
  * MENU

@@ -42,7 +42,7 @@ void on_reg_new_btn_clicked(GtkButton *btn) {
     //printf("1LOGIN = %s\n1PASS = %s\n", user->login, user->password);
     chat->sys->reg_request = true;
     cl_listener.my_name = strdup(gtk_entry_get_text(reg_win.reg_log));
-    mx_registration_or_login_request(chat->sys, chat->user);
+    mx_registration_or_login_request(chat->sys, chat->user, chat->json);
     //Send credentials to server
 }
 static void change_lbls(GtkEntry *reg_pas_label1, GtkEntry *reg_pas_label2, char *text){

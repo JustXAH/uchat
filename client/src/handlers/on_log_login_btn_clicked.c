@@ -22,7 +22,7 @@ void on_log_login_btn_clicked(GtkButton *btn) {
     cl_listener.my_name = strdup(gtk_entry_get_text(reg_win.log_entry));
     cl_listener.logged_in = 2;
     gtk_stack_set_visible_child_name(reg_win.stk, "loading_log_window");
-    mx_registration_or_login_request(chat->sys, chat->user);
+    mx_registration_or_login_request(chat->sys, chat->user, chat->json);
 }
 static bool check_credentials() {
     char *lbuffer = (char *)gtk_entry_get_text(reg_win.log_entry);

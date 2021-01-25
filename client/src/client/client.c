@@ -55,6 +55,7 @@ int main(int argc, char *argv[]) {
 
     chat->sys = sys;
     chat->user = user;
+    chat->json = (t_json *)malloc(sizeof(t_json));
     // function for chat
     pthread_create(&thread_server, NULL, read_server, chat);
 

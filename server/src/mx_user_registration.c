@@ -13,9 +13,11 @@ void mx_user_registration(t_server *serv, t_json *json, int user_sock) {
     json->USER_ID = cJSON_CreateNumber(mx_db_insert_new_user(serv->db, json->LOGIN->valuestring, json->PASS->valuestring));
     if (json->USER_ID->valueint == 0) { // "0" - ошибка при регистрации, логин уже существует
         json->RESULT = cJSON_CreateFalse();
+        write(1, "FALSE\n", 6);
     }
     else {
         json->RESULT = cJSON_CreateTrue(); //регистрация прошла успешно
+        write(1, "TRUE\n", 5);
     }
     cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
     cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);

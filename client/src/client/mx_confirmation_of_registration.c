@@ -38,7 +38,7 @@ void mx_confirmation_of_registration(t_system *sys, t_user *user, t_json *json) 
         sys->reg_confirmation = true;
         sys->reg_request = false;
         gtk_stack_set_visible_child_name(reg_win.stk, "loading_log_window");
-        mx_registration_or_login_request(sys, user);
+        mx_registration_or_login_request(sys, user, json);
     }
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "RESULT");
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "USER_ID");

@@ -7,7 +7,8 @@ static void mb_display_new_contact(t_chat_list *new_cont) {
     new_cont->contact_gui = gtk_label_new((const gchar *)new_cont->user_names[0]);
     
     gtk_container_add(GTK_CONTAINER(chat_win.contacts_list), new_cont->contact_gui);
-    gtk_widget_show(new_cont->contact_gui);  
+    gtk_widget_show(new_cont->contact_gui);
+    g_object_ref(new_cont->contact_gui);
 }
 void mb_contact_list_add(int chat_id, int user_id, char *user_name) {
     if (contact_list == NULL) {
