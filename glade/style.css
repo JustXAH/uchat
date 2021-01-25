@@ -165,3 +165,10 @@ color: rgb(1, 179, 179);
     font-size: 18px;
     color: black;
 }
+
+.msg_time {
+    color: black;
+    font-size: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
