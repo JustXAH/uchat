@@ -10,7 +10,7 @@ static void update_online_users_arr(t_user *user, cJSON *WHO_ONLINE,
     int friends_online = 0;
     int i;
     int j;
-
+    
     for (i = 0; cJSON_GetArrayItem(WHO_ONLINE, i)->valueint != -1 ||
            i != max_users; i++) {
         users_online++;
@@ -20,6 +20,9 @@ static void update_online_users_arr(t_user *user, cJSON *WHO_ONLINE,
             }
         }
     }
+    
+    if (user->who_online != NULL)
+        free(user->who_online);
     user->who_online = (int *) malloc(sizeof(int) * friends_online);
     user->who_online_count = 0;
     for (i = 0; i != users_online; i++) {

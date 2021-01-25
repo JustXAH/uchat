@@ -15,7 +15,7 @@ void *read_server(void *data) {
         json->SERVER_JSON = cJSON_Parse(buff);
         json->TYPE = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "TYPE");
         sys->type_enum = json->TYPE->valueint;
-        printf("swiitch starting buff: %s\n", buff);
+        printf("switch starting enum: %d  buff: %s\n",sys->type_enum, buff);
         switch (sys->type_enum) {
             case AUTHENTICATION:
                 mx_authentication_client(sys, user, json);
@@ -24,12 +24,11 @@ void *read_server(void *data) {
                 mx_confirmation_of_registration(sys, user, json);
                 break;
             case WHO_ONLINE:
-                mx_printstr("who is on duty today?\n");
-                //mx_who_online_update(sys, user, json);
-                mx_found_users_by_substr(sys, user, json);
+                //printf("who is on duty today?\n");
+                mx_who_online_update(sys, user, json);
                 break;
             case USER_SEARCH_BY_SUBSTRING:
-                mx_printstr("replied recieved from server\n");
+                printf("replied recieved from server\n");
                 mx_found_users_by_substr(sys, user, json);
                 break;
             case USER_SEARCH_BY_LOGIN:
@@ -55,7 +54,9 @@ void *read_server(void *data) {
         }
         printf("swiitch ending\n");
         cJSON_Delete(json->SERVER_JSON);
+        memset(buff, '\0', sizeof(buff));
     }
     free(json);
+    printf("read fucking done\n");
     return 0;
 }
