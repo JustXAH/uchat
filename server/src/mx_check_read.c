@@ -4,13 +4,13 @@
 
 #include "server.h"
 
-static void read_and_write(t_server *serv, int user_num) {
+static void read_and_write(t_server *serv, int user_index) {
     t_json *json = (t_json *)malloc(sizeof(t_json));
     char buff_message[MAX];
 
     mx_json_struct_initialization(json);
     write(1, "Waiting for a message...\n", 25);
-    read(serv->user_socket[user_num], buff_message, MAX);
+    read(serv->user_socket[user_index], buff_message, MAX);
 
 //        Send the message back to client
     if (buff_message[0] != '\0') {
@@ -23,33 +23,36 @@ static void read_and_write(t_server *serv, int user_num) {
             case AUTHENTICATION:
                 json->LOGIN = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "LOGIN");
                 json->PASS = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "PASS");
-                mx_login_and_pass_authentication(serv, json, serv->user_socket[user_num]);
+                mx_login_and_pass_authentication(serv, json, user_index);
                 break;
             case REGISTRATION:
                 json->LOGIN = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "LOGIN");
                 json->PASS = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "PASS");
-                mx_user_registration(serv, json, serv->user_socket[user_num]);
+                mx_user_registration(serv, json, user_index);
+                break;
+            case WHO_ONLINE:
+                // дописать обработку запроса о количестве юзеров онлайн
                 break;
             case USER_SEARCH_BY_SUBSTRING:
-                mx_user_search_by_substr(serv, json, serv->user_socket[user_num]);
+                mx_user_search_by_substr(serv, json, serv->user_socket[user_index]);
                 break;
             case USER_SEARCH_BY_LOGIN:
-                mx_user_search_by_login(serv, json, serv->user_socket[user_num]);
+                mx_user_search_by_login(serv, json, serv->user_socket[user_index]);
                 break;
             case NEW_CONTACT:
-                mx_add_new_contact(serv, json, serv->user_socket[user_num]);
+                mx_add_new_contact(serv, json, serv->user_socket[user_index]);
                 break;
             case NEW_CHAT:
-                mx_add_new_chat(serv, json, serv->user_socket[user_num]);
+                mx_add_new_chat(serv, json, serv->user_socket[user_index]);
                 break;
             case GET_LOGIN:
-                mx_get_login(serv, json, serv->user_socket[user_num]);
+                mx_get_login(serv, json, serv->user_socket[user_index]);
                 break;
             case NEW_MESSAGE:
-                mx_add_new_message(serv, json, serv->user_socket[user_num]);
+                mx_add_new_message(serv, json, serv->user_socket[user_index]);
                 break;
             case LAST_MESSAGES:
-                mx_last_messages(serv, json, serv->user_socket[user_num]);
+                mx_last_messages(serv, json, serv->user_socket[user_index]);
                 break;
         }
     }
@@ -57,7 +60,7 @@ static void read_and_write(t_server *serv, int user_num) {
     free(json);
 }
 
-void mx_check_read(t_server *serv, int i) {
+void mx_check_read(t_server *serv, int user_index) {
     struct pollfd poll_set[1];
     int ret = 0;
 
@@ -66,18 +69,18 @@ void mx_check_read(t_server *serv, int i) {
     printf("cli_connect = %d\n", serv->cli_connect);
     // от socket[i] мы будем ожидать входящих данных
 
-    poll_set->fd = serv->user_socket[i];
+    poll_set->fd = serv->user_socket[user_index];
     poll_set->events = POLLIN;
 
     // ждём до 1 секунд
-    ret = poll(poll_set, 1, 3000);
+    ret = poll(poll_set, 1, 1500);
     printf("ret = %d\n", ret);
-    printf("socket = %d[%d]\n", serv->user_socket[i], i);
+    printf("socket = %d[%d]\n", serv->user_socket[user_index], user_index);
 
     // проверяем успешность вызова
     if (ret == -1) {
         // ошибка
-        printf("ERROR, poll checking client socket #%d\n", i);
+        printf("ERROR, poll checking client socket #%d\n", user_index);
     }
     else if (ret == 0) {
         // таймаут, событий не произошло
@@ -88,7 +91,7 @@ void mx_check_read(t_server *serv, int i) {
         if (poll_set->revents & POLLIN) {
             // обработка входных данных от sock1
             poll_set->revents = 0;
-            read_and_write(serv, i);
+            read_and_write(serv, user_index);
         }
     }
     printf("------------------------------\n");

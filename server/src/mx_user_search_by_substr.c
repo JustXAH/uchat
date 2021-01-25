@@ -18,7 +18,7 @@ static cJSON *logins_arr_json_creator(const char * const *logins) {
     return LOGINS_ARR;
 }
 
-void mx_user_search_by_substr(t_server *serv, t_json *json, int user_sock) {
+void mx_user_search_by_substr(t_server *serv, t_json *json, int user_index) {
     char **buff_arr = NULL;
     char *send_str = NULL;
 
@@ -40,7 +40,7 @@ void mx_user_search_by_substr(t_server *serv, t_json *json, int user_sock) {
 
     send_str = cJSON_Print(json->SEND);
 
-    write(user_sock, send_str, strlen(send_str));
+    write(serv->user_socket[user_index], send_str, strlen(send_str));
 
     cJSON_Delete(json->SEND);
     free(send_str);

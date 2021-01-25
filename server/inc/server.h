@@ -33,13 +33,14 @@
 
 #define MAX 4096
 #define PORT 5000
-#define MAX_CLIENTS 5
+#define MAX_USERS 5
 #define COUNT_MESSAGES 30
 
 //enum for type cjson
 typedef enum e_type_cJSON_message {
     AUTHENTICATION,
     REGISTRATION,
+    WHO_ONLINE,
     USER_SEARCH_BY_SUBSTRING,
     USER_SEARCH_BY_LOGIN,
     NEW_CONTACT,
@@ -53,8 +54,11 @@ typedef enum e_type_cJSON_message {
 typedef struct s_server {
     sqlite3 *db;
     int *user_socket;
+    int *users_id;
     int serv_sock_fd;
     int cli_connect;
+    bool update;
+//    bool update_first;
     bool exit;
     e_type_cJSON type_enum;
 }              t_server;
@@ -182,19 +186,22 @@ typedef struct s_message {
  */
 void mx_serv_struct_initialization(t_server *serv);
 void mx_json_struct_initialization(t_json *json);
+void mx_sorting_users_and_sockets(t_server *serv);
+void mx_update_handler(t_server *serv);
+void mx_sending_who_online(t_server *serv, int user_index);
 //cJSON *mx_database_stub(cJSON *user);
 //void mx_read_server(t_server *serv);
-void mx_check_read(t_server *serv, int i);
-void mx_check_disconnect(t_server *server, int i);
-void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_sock);
-void mx_user_registration(t_server *serv, t_json *json, int user_sock);
-void mx_user_search_by_substr(t_server *serv, t_json *json, int user_sock);
-void mx_user_search_by_login(t_server *serv, t_json *json, int user_sock);
-void mx_add_new_contact(t_server *serv, t_json *json, int user_sock);
-void mx_add_new_chat(t_server *serv, t_json *json, int user_sock);
-void mx_add_new_message(t_server *serv, t_json *json, int user_sock);
-void mx_get_login(t_server *serv, t_json *json, int user_sock);
-void mx_last_messages(t_server *serv, t_json *json, int user_sock);
+void mx_check_read(t_server *serv, int user_index);
+void mx_check_disconnect(t_server *serv, int user_index);
+void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_index);
+void mx_user_registration(t_server *serv, t_json *json, int user_index);
+void mx_user_search_by_substr(t_server *serv, t_json *json, int user_index);
+void mx_user_search_by_login(t_server *serv, t_json *json, int user_index);
+void mx_add_new_contact(t_server *serv, t_json *json, int user_index);
+void mx_add_new_chat(t_server *serv, t_json *json, int user_index);
+void mx_add_new_message(t_server *serv, t_json *json, int user_index);
+void mx_get_login(t_server *serv, t_json *json, int user_index);
+void mx_last_messages(t_server *serv, t_json *json, int user_index);
 
 /*
  * DATABASE

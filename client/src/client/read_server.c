@@ -22,6 +22,9 @@ void *read_server(void *data) {
             case REGISTRATION:
                 mx_confirmation_of_registration(sys, user, json);
                 break;
+            case WHO_ONLINE:
+                mx_who_online_update(sys, user, json);
+                break;
             case USER_SEARCH_BY_SUBSTRING:
                 mx_found_users_by_substr(sys, user, json);
                 break;
@@ -39,6 +42,8 @@ void *read_server(void *data) {
                 break;
             case LAST_MESSAGES:
                 mx_get_last_messages(sys, user, json);
+                write(1, "LAST MESSAGES\n", 14);
+                // функция, которая принимает ответ от запроса на подгрузку последних сообщений
                 break;
         }
         cJSON_Delete(json->SERVER_JSON);

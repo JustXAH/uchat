@@ -31,7 +31,7 @@ void add_new_chat_and_json_create(sqlite3 *db, t_json **json) {
     free(chats);
 }
 
-void mx_add_new_chat(t_server *serv, t_json *json, int user_sock) {
+void mx_add_new_chat(t_server *serv, t_json *json, int user_index) {
     char *send_str = NULL;
 
     json->USER_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "USER_ID");
@@ -45,7 +45,7 @@ void mx_add_new_chat(t_server *serv, t_json *json, int user_sock) {
 
     send_str = cJSON_Print(json->SEND);
 
-    write(user_sock, send_str, strlen(send_str));
+    write(serv->user_socket[user_index], send_str, strlen(send_str));
 
     cJSON_Delete(json->SEND);
     free(send_str);
