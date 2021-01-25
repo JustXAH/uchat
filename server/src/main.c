@@ -8,14 +8,25 @@ void* poll_and_rw(void *data) {
     t_server *serv = (t_server *) data;
 
     for (int i = 0; serv->exit != true; ) {
-//        mx_read_server(serv);
-        if (serv->cli_connect != 0) {
+        if (serv->cli_connect == 0) {
+            serv->update = false;
+        }
+        if (serv->cli_connect > 0) {
             if (i == serv->cli_connect) {
                 i = 0;
             }
             mx_check_disconnect(serv, i);
             mx_check_read(serv, i);
-            i++;
+            if (serv->cli_connect != 0) {
+                if (serv->update == true) {
+                    mx_update_handler(serv);
+//                    mx_sending_who_online(serv, i);
+//                    printf("\nSent int array with ONLINE users ID to this User(ID: %d; Socket: %d)\n",
+//                           serv->users_id[i], serv->user_socket[i]);
+                    serv->update = false;
+                }
+                i++;
+            }
         }
     }
     return 0;
@@ -70,7 +81,7 @@ int main(int argc , char *argv[]) {
     pthread_create(&thread, NULL, poll_and_rw, serv);
     //Receive a message from client
     for (int i = 0; serv->exit != true; i++) {
-        if (i == MAX_CLIENTS - 1)
+        if (i == MAX_USERS - 1)
             break;
 //        accept connection from an incoming client
         if (serv->user_socket[i] == -1) {
@@ -82,7 +93,7 @@ int main(int argc , char *argv[]) {
             }
             else {
                 write(1, "Connection accepted!\n", 21);
-                mx_int_bubble_sort_reverse(serv->user_socket, MAX_CLIENTS);
+                mx_sorting_users_and_sockets(serv);
                 serv->cli_connect += 1;
             }
             i = 0;
