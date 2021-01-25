@@ -46,6 +46,7 @@
 typedef enum e_type_cJSON_message {
     AUTHENTICATION,
     REGISTRATION,
+    WHO_ONLINE,
     USER_SEARCH_BY_SUBSTRING,
     USER_SEARCH_BY_LOGIN,
     NEW_CONTACT,
@@ -90,6 +91,8 @@ typedef struct s_user {
     char **contacts_login;
     int *chats_id;
     char **chats_name;
+    int *who_online; // users with online status
+    int who_online_count;
     int my_id;
     int contacts_count;
     int chats_count;
@@ -106,6 +109,7 @@ typedef struct s_json {
     cJSON *CONTACTS_ID_ARR;
     cJSON *CONTACTS_COUNT;
     cJSON *CONTACTS_LOGIN_ARR;
+    cJSON *WHO_ONLINE;
     cJSON *CHATS_ID_ARR;
     cJSON *CHATS_COUNT;
     cJSON *CHATS_NAME_ARR;
@@ -163,12 +167,13 @@ typedef struct s_chat_win {
 }                t_chat_win;
 
 typedef struct s_client_st {
+    char *my_name;
+    int chat_in_focus; // 0 - home page
+    int my_id;
     char logged_in;  // 0 - not logged in // 1 - logged in // 2 - request for login sent
     char authentication;
     bool message_in_buffer;
-    int chat_in_focus; // 0 - home page
-    int my_id;
-    char *my_name;
+
 }               t_client_st;
 
 typedef struct s_message {
@@ -201,6 +206,7 @@ void mx_structs_initialization(t_system *sys, t_user *user);
 void *read_server(void *data); // second thread to read server responses
 void mx_authentication_client(t_system *sys, t_user *user, t_json *json);
 void mx_confirmation_of_registration(t_system *sys, t_user *user, t_json *json);
+void mx_who_online_update(t_system *sys, t_user *user, t_json *json);
 void mx_found_users_by_substr(t_system *sys, t_user *user, t_json *json);
 void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_contact(t_system *sys, t_user *user, t_json *json);
