@@ -4,7 +4,7 @@
 
 #include "server.h"
 
-void mx_add_new_message(t_server *serv, t_json *json, int user_sock) {
+void mx_add_new_message(t_server *serv, t_json *json, int user_index) {
     char *send = NULL;
     cJSON *MESSAGE_ID = NULL;
 
@@ -14,5 +14,5 @@ void mx_add_new_message(t_server *serv, t_json *json, int user_sock) {
     cJSON_AddItemToObject(json->SEND, "CHAT_ID", json->CHAT_ID);
     cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
 
-    mx_last_messages(serv, json, user_sock);
+    mx_last_messages(serv, json, serv->user_socket[user_index]);
 }

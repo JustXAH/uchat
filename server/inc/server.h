@@ -53,6 +53,7 @@ typedef enum e_type_cJSON_message {
 typedef struct s_server {
     sqlite3 *db;
     int *user_socket;
+    int *users_id;
     int serv_sock_fd;
     int cli_connect;
     bool exit;
@@ -186,15 +187,15 @@ void mx_json_struct_initialization(t_json *json);
 //void mx_read_server(t_server *serv);
 void mx_check_read(t_server *serv, int i);
 void mx_check_disconnect(t_server *server, int i);
-void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_sock);
-void mx_user_registration(t_server *serv, t_json *json, int user_sock);
-void mx_user_search_by_substr(t_server *serv, t_json *json, int user_sock);
-void mx_user_search_by_login(t_server *serv, t_json *json, int user_sock);
-void mx_add_new_contact(t_server *serv, t_json *json, int user_sock);
-void mx_add_new_chat(t_server *serv, t_json *json, int user_sock);
-void mx_add_new_message(t_server *serv, t_json *json, int user_sock);
-void mx_get_login(t_server *serv, t_json *json, int user_sock);
-void mx_last_messages(t_server *serv, t_json *json, int user_sock);
+void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_index);
+void mx_user_registration(t_server *serv, t_json *json, int user_index);
+void mx_user_search_by_substr(t_server *serv, t_json *json, int user_index);
+void mx_user_search_by_login(t_server *serv, t_json *json, int user_index);
+void mx_add_new_contact(t_server *serv, t_json *json, int user_index);
+void mx_add_new_chat(t_server *serv, t_json *json, int user_index);
+void mx_add_new_message(t_server *serv, t_json *json, int user_index);
+void mx_get_login(t_server *serv, t_json *json, int user_index);
+void mx_last_messages(t_server *serv, t_json *json, int user_index);
 
 /*
  * DATABASE

@@ -59,7 +59,7 @@ void contacts_json_creator(sqlite3 *db, t_json **json, int user) {
         free(contacts);
 }
 
-void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_sock) {
+void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_index) {
     char *send_str = NULL;
 
     json->SEND = cJSON_CreateObject();
@@ -73,6 +73,7 @@ void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_soc
         json->RESULT = cJSON_CreateTrue(); //регистрация прошла успешно
         contacts_json_creator(serv->db, &json, json->USER_ID->valueint);
         chats_json_creator(serv->db, &json, json->USER_ID->valueint);
+//        serv->users_id
     }
 
     cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
@@ -81,7 +82,7 @@ void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_soc
 
     send_str = cJSON_Print(json->SEND);
 
-    write(user_sock, send_str, strlen(send_str));
+    write(serv->user_socket[user_index], send_str, strlen(send_str));
 
     cJSON_Delete(json->SEND);
     free(send_str);
