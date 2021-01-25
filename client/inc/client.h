@@ -52,6 +52,7 @@ typedef enum e_type_cJSON_message {
     NEW_CHAT,
     GET_LOGIN,
     LAST_MESSAGES,
+    NEW_MESSAGE,
 }            e_type_cJSON;
 
 typedef struct s_system {
@@ -117,7 +118,13 @@ typedef struct s_json {
     cJSON *MESSAGE;
     cJSON *TO;
     cJSON *CHAT_ID;
+    cJSON *MESSAGES_ARR;
+    cJSON *COUNT_MESSAGES_ARR;
+    cJSON *MESSAGES_ID;
+    cJSON *MESSAGES_TIME;
+    cJSON *SENDER_ID;
 }              t_json;
+
 typedef struct s_chat {
     struct s_system *sys;
     struct s_user *user;
@@ -206,6 +213,7 @@ void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_contact(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_chat(t_system *sys, t_user *user, t_json *json);
 void mx_get_login(t_system *sys, t_user *user, t_json *json);
+void mx_get_last_messages(t_system *sys, t_user *user, t_json *json);
 /*
  * REQUEST TO SERVER
  */
@@ -214,6 +222,7 @@ void mx_user_search_by_substr_request(t_system *sys, t_json *json);
 void mx_user_search_by_login_request(t_system *sys, t_json *json);
 void mx_add_new_contact_request(t_system *sys, t_user * user, t_json *json, int contact_id);
 void mx_add_new_chat_request(t_system *sys, t_user * user, t_json *json, int contact_id);
+void mx_add_messages_request(t_system *sys, t_user *user, t_json *json, char *messages_str, int chat_id);
 
 void mx_login_or_register(t_system *sys, t_user *user);
 char *mx_create_user_profile(t_system *sys, t_user *user);

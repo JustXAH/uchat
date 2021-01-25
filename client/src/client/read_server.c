@@ -38,7 +38,7 @@ void *read_server(void *data) {
                 mx_get_login(sys, user, json);
                 break;
             case LAST_MESSAGES:
-                // функция, которая принимает ответ от запроса на подгрузку последних сообщений
+                mx_get_last_messages(sys, user, json);
                 break;
         }
         cJSON_Delete(json->SERVER_JSON);

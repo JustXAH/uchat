@@ -86,8 +86,8 @@ typedef struct s_json {
     cJSON *COUNT_MESSAGES_ARR;
     cJSON *COUNT_CONTACTS;
     cJSON *SENDER_ID;
-    cJSON *MESSAGE_TIME;
-    cJSON *MESSAGE_ID;
+    cJSON *MESSAGES_TIME;
+    cJSON *MESSAGES_ID;
 }              t_json;
 
 //struct for database
