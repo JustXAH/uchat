@@ -8,20 +8,59 @@
     /*border-right: 3px solid #0d0e11;*/
     /*border-color: #111217*/
 }
-#msg_box{
+#msg_config_stk{
     /*border-right: 3px solid #0d0e11;*/
     /*border-color: #111217*/
+    background-color: #2b2b2b;
 }
 #Chat_box{
     border-left: 3px solid #0d0e11;
-    border-color: #111217
+    border-color: #111217;
+    background-color: #2b2b2b;
 }
 #log_and_reg_window {
     background-color: #2b2b2b;
 }
+#chat_box {
+    background-color: #2b2b2b;
+}
+#welcome_lbl {
+    color: white;
+}
+#welcome_user {
+    color: white;
+}
+#welcome_lbl_2 {
+    color: white;
+}
+#chat_stack {
+    background-color: #2b2b2b;
+}
+#contact_list {
+    background-color: #2b2b2b;
+}
+#chat_list {
+    background-color: #2b2b2b;
+}
+#chat_msg_lst_box {
+    background-color: #2b2b2b;
+}
+#chat_msg_entry {
+    background-color: #2b2b2b;
+    color: white;
+    font-size: 13px;
+}
+#ban_list {
+    background-color: #2b2b2b;
+}
+/*-----------------------------classes----------------------------------*/
+.lbl_text {
+    color: white;
+}
 
-
-
+.backgrnd {
+    background-color: #2b2b2b;
+}
 .message_list {
     border-color: cyan;
     border-width: 3px;
@@ -80,7 +119,8 @@ color: rgb(1, 179, 179);
 }
 
 .msg_intext {
-    margin-top: 10px;
+    font-size: 13px;
+    /*margin-top: 10px;*/
     margin-bottom: 10px;
     margin-left: 10px;
     margin-right: 10px;
@@ -90,19 +130,38 @@ color: rgb(1, 179, 179);
 
 .msg_outext {
     margin-top: 10px;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
     margin-left: 10px;
     margin-right: 10px;
     color: rebeccapurple;
 }
 
 .msg_outext {
-    font-size: 14px;
+    font-size: 18px;
     margin-left: 10px;
     margin-right: 10px;
 
 }
 .msg_outext {
     border-color: cyan;
-    border-width: 3px;
+    border-width: 5px;
+}
+.msg_box {
+    background-color: azure;
+    border-color: aqua;
+    border-width: 5px;
+}
+.cont_list_ofline {
+    padding-top: 5px;
+    padding-bottom: 3px;
+    background-color: #ffa398;
+    font-size: 18px;
+    color: black;
+}
+.cont_list_oflinecont_list_online {
+    padding-top: 5px;
+    padding-bottom: 3px;
+    background-color: #a6ff8a;
+    font-size: 18px;
+    color: black;
 }
