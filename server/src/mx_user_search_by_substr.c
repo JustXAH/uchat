@@ -47,4 +47,5 @@ void mx_user_search_by_substr(t_server *serv, t_json *json, int user_index) {
     if (MALLOC_SIZE(buff_arr)) {
         mx_del_strarr(&buff_arr);
     }
+    mx_printstr("!!!!!!!reply for search request sent\n");
 }
