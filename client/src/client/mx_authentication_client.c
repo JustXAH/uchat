@@ -57,7 +57,7 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
                                                      "RESULT");
     json->USER_ID = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
                                                     "USER_ID");
-
+    
     if (cJSON_IsFalse(json->RESULT)) {
         sys->authentication = false;
         if (json->USER_ID->valueint == 0) { // login doesn't exist

@@ -22,6 +22,9 @@ void *read_server(void *data) {
             case REGISTRATION:
                 mx_confirmation_of_registration(sys, user, json);
                 break;
+            case WHO_ONLINE:
+                mx_who_online_update(sys, user, json);
+                break;
             case USER_SEARCH_BY_SUBSTRING:
                 mx_found_users_by_substr(sys, user, json);
                 break;
@@ -37,7 +40,12 @@ void *read_server(void *data) {
             case GET_LOGIN:
                 mx_get_login(sys, user, json);
                 break;
+            case NEW_MESSAGE:
+                write(1, "NEW MESSAGE\n", 12);
+                // функция, которая принимает ответ от запроса на подгрузку последних сообщений
+                break;
             case LAST_MESSAGES:
+                write(1, "LAST MESSAGES\n", 14);
                 // функция, которая принимает ответ от запроса на подгрузку последних сообщений
                 break;
         }

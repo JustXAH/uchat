@@ -73,7 +73,7 @@ void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_ind
         json->RESULT = cJSON_CreateTrue(); //регистрация прошла успешно
         contacts_json_creator(serv->db, &json, json->USER_ID->valueint);
         chats_json_creator(serv->db, &json, json->USER_ID->valueint);
-//        serv->users_id
+        serv->users_id[user_index] = json->USER_ID->valueint;
     }
 
     cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
