@@ -23,12 +23,12 @@ static void read_and_write(t_server *serv, int user_index) {
             case AUTHENTICATION:
                 json->LOGIN = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "LOGIN");
                 json->PASS = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "PASS");
-                mx_login_and_pass_authentication(serv, json, serv->user_socket[user_index]);
+                mx_login_and_pass_authentication(serv, json, user_index);
                 break;
             case REGISTRATION:
                 json->LOGIN = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "LOGIN");
                 json->PASS = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "PASS");
-                mx_user_registration(serv, json, serv->user_socket[user_index]);
+                mx_user_registration(serv, json, user_index);
                 break;
             case WHO_ONLINE:
                 // дописать обработку запроса о количестве юзеров онлайн

@@ -52,6 +52,7 @@ typedef enum e_type_cJSON_message {
     NEW_CONTACT,
     NEW_CHAT,
     GET_LOGIN,
+    NEW_MESSAGE,
     LAST_MESSAGES,
 }            e_type_cJSON;
 

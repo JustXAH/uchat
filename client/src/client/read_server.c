@@ -40,7 +40,12 @@ void *read_server(void *data) {
             case GET_LOGIN:
                 mx_get_login(sys, user, json);
                 break;
+            case NEW_MESSAGE:
+                write(1, "NEW MESSAGE\n", 12);
+                // функция, которая принимает ответ от запроса на подгрузку последних сообщений
+                break;
             case LAST_MESSAGES:
+                write(1, "LAST MESSAGES\n", 14);
                 // функция, которая принимает ответ от запроса на подгрузку последних сообщений
                 break;
         }
