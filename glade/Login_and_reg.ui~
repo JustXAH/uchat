@@ -1106,11 +1106,13 @@ Have a nice adventure, traveler.</property>
                       <object class="GtkEntry" id="edit_vax1_entry">
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
+                        <property name="hexpand">True</property>
                         <property name="text" translatable="yes">Vax 1</property>
                       </object>
                       <packing>
                         <property name="left-attach">0</property>
                         <property name="top-attach">0</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                     <child>
@@ -1122,6 +1124,7 @@ Have a nice adventure, traveler.</property>
                       <packing>
                         <property name="left-attach">0</property>
                         <property name="top-attach">1</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                     <child>
@@ -1133,6 +1136,7 @@ Have a nice adventure, traveler.</property>
                       <packing>
                         <property name="left-attach">0</property>
                         <property name="top-attach">2</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                     <child>
@@ -1144,6 +1148,7 @@ Have a nice adventure, traveler.</property>
                       <packing>
                         <property name="left-attach">0</property>
                         <property name="top-attach">3</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                     <child>
@@ -1155,6 +1160,7 @@ Have a nice adventure, traveler.</property>
                       <packing>
                         <property name="left-attach">0</property>
                         <property name="top-attach">4</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                     <child>
@@ -1166,6 +1172,7 @@ Have a nice adventure, traveler.</property>
                       <packing>
                         <property name="left-attach">0</property>
                         <property name="top-attach">5</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                     <child>
@@ -1177,6 +1184,7 @@ Have a nice adventure, traveler.</property>
                       <packing>
                         <property name="left-attach">0</property>
                         <property name="top-attach">6</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                     <child>
@@ -1188,21 +1196,7 @@ Have a nice adventure, traveler.</property>
                       <packing>
                         <property name="left-attach">0</property>
                         <property name="top-attach">7</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="edit_vax1_rec_btn">
-                        <property name="label">gtk-media-record</property>
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="receives-default">True</property>
-                        <property name="use-stock">True</property>
-                        <property name="always-show-image">True</property>
-                        <signal name="clicked" handler="on_edit_vax1_rec_btn_clicked" swapped="no"/>
-                      </object>
-                      <packing>
-                        <property name="left-attach">1</property>
-                        <property name="top-attach">0</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                     <child>
@@ -1232,21 +1226,6 @@ Have a nice adventure, traveler.</property>
                       <packing>
                         <property name="left-attach">3</property>
                         <property name="top-attach">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="edit_vax2_rec_btn">
-                        <property name="label">gtk-media-record</property>
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="receives-default">True</property>
-                        <property name="use-stock">True</property>
-                        <property name="always-show-image">True</property>
-                        <signal name="clicked" handler="on_edit_vax2_rec_btn_clicked" swapped="no"/>
-                      </object>
-                      <packing>
-                        <property name="left-attach">1</property>
-                        <property name="top-attach">1</property>
                       </packing>
                     </child>
                     <child>
@@ -1280,21 +1259,6 @@ Have a nice adventure, traveler.</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="edit_vax3_rec_btn">
-                        <property name="label">gtk-media-record</property>
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="receives-default">True</property>
-                        <property name="use-stock">True</property>
-                        <property name="always-show-image">True</property>
-                        <signal name="clicked" handler="on_edit_vax3_rec_btn_clicked" swapped="no"/>
-                      </object>
-                      <packing>
-                        <property name="left-attach">1</property>
-                        <property name="top-attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
                       <object class="GtkButton" id="edit_vax3_open_btn">
                         <property name="label">gtk-add</property>
                         <property name="visible">True</property>
@@ -1322,21 +1286,6 @@ Have a nice adventure, traveler.</property>
                       <packing>
                         <property name="left-attach">3</property>
                         <property name="top-attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="edit_vax4_rec_btn">
-                        <property name="label">gtk-media-record</property>
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="receives-default">True</property>
-                        <property name="use-stock">True</property>
-                        <property name="always-show-image">True</property>
-                        <signal name="clicked" handler="on_edit_vax4_rec_btn_clicked" swapped="no"/>
-                      </object>
-                      <packing>
-                        <property name="left-attach">1</property>
-                        <property name="top-attach">3</property>
                       </packing>
                     </child>
                     <child>
@@ -1370,21 +1319,6 @@ Have a nice adventure, traveler.</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="edit_vax5_rec_btn">
-                        <property name="label">gtk-media-record</property>
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="receives-default">True</property>
-                        <property name="use-stock">True</property>
-                        <property name="always-show-image">True</property>
-                        <signal name="clicked" handler="on_edit_vax5_rec_btn_clicked" swapped="no"/>
-                      </object>
-                      <packing>
-                        <property name="left-attach">1</property>
-                        <property name="top-attach">4</property>
-                      </packing>
-                    </child>
-                    <child>
                       <object class="GtkButton" id="edit_vax5_open_btn">
                         <property name="label">gtk-add</property>
                         <property name="visible">True</property>
@@ -1412,21 +1346,6 @@ Have a nice adventure, traveler.</property>
                       <packing>
                         <property name="left-attach">3</property>
                         <property name="top-attach">4</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="edit_vax6_rec_btn">
-                        <property name="label">gtk-media-record</property>
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="receives-default">True</property>
-                        <property name="use-stock">True</property>
-                        <property name="always-show-image">True</property>
-                        <signal name="clicked" handler="on_edit_vax6_rec_btn_clicked" swapped="no"/>
-                      </object>
-                      <packing>
-                        <property name="left-attach">1</property>
-                        <property name="top-attach">5</property>
                       </packing>
                     </child>
                     <child>
@@ -1460,21 +1379,6 @@ Have a nice adventure, traveler.</property>
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="edit_vax7_rec_btn">
-                        <property name="label">gtk-media-record</property>
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="receives-default">True</property>
-                        <property name="use-stock">True</property>
-                        <property name="always-show-image">True</property>
-                        <signal name="clicked" handler="on_edit_vax7_rec_btn_clicked" swapped="no"/>
-                      </object>
-                      <packing>
-                        <property name="left-attach">1</property>
-                        <property name="top-attach">6</property>
-                      </packing>
-                    </child>
-                    <child>
                       <object class="GtkButton" id="edit_vax7_open_btn">
                         <property name="label">gtk-add</property>
                         <property name="visible">True</property>
@@ -1502,21 +1406,6 @@ Have a nice adventure, traveler.</property>
                       <packing>
                         <property name="left-attach">3</property>
                         <property name="top-attach">6</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="edit_vax8_rec_btn">
-                        <property name="label">gtk-media-record</property>
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="receives-default">True</property>
-                        <property name="use-stock">True</property>
-                        <property name="always-show-image">True</property>
-                        <signal name="clicked" handler="on_edit_vax8_rec_btn_clicked" swapped="no"/>
-                      </object>
-                      <packing>
-                        <property name="left-attach">1</property>
-                        <property name="top-attach">7</property>
                       </packing>
                     </child>
                     <child>
@@ -1950,6 +1839,7 @@ Have a nice adventure, traveler.</property>
                             <signal name="focus" handler="on_search_entry_changed" swapped="no"/>
                             <signal name="focus-in-event" handler="on_search_entry_changed" swapped="no"/>
                             <signal name="search-changed" handler="on_friends_search_entry_changed" swapped="no"/>
+                            <signal name="stop-search" handler="on_friends_search_entry_stop_search" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>

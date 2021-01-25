@@ -19,3 +19,90 @@
 #log_and_reg_window {
     background-color: #2b2b2b;
 }
+
+
+
+.message_list {
+    border-color: cyan;
+    border-width: 3px;
+}
+
+.message_entry {
+    border-color: cyan;
+    border-width: 3px;
+}
+
+.message_box {
+    background-color: transparent;
+}
+
+.message_entry text {
+    background-color: black;
+    color: cyan;
+    font-weight: bold;
+}
+
+.message_lbl {
+    color:cyan;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0px 0px 0px 3px cyan inset;
+}
+
+.message_list {
+    background-color: black;
+    /* scroll-margin: 20px; /
+    / margin-top: 15px; */
+margin-right: 10px;
+color: rgb(1, 179, 179);
+.message_list row {
+    box-shadow: 0px 0px 0px 3px cyan inset;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+}
+
+
+.message_list row:active, row:focus {
+    box-shadow: 0px 0px 10px blue inset;
+}
+
+.sndr_intext {
+    box-shadow: 0px -3px cyan inset;
+    font-size: 13px;
+    margin-right: 50px;
+    margin-bottom: 10px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: rgb(200, 0, 0);
+    text-shadow: 0px 0px 5px rgb(120, 0, 0);
+}
+
+.msg_intext {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: darkcyan;
+}
+
+
+.msg_outext {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: rebeccapurple;
+}
+
+.msg_outext {
+    font-size: 14px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+.msg_outext {
+    border-color: cyan;
+    border-width: 3px;
+}
