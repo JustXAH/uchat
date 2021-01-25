@@ -46,11 +46,13 @@
 typedef enum e_type_cJSON_message {
     AUTHENTICATION,
     REGISTRATION,
+    WHO_ONLINE,
     USER_SEARCH_BY_SUBSTRING,
     USER_SEARCH_BY_LOGIN,
     NEW_CONTACT,
     NEW_CHAT,
     GET_LOGIN,
+    NEW_MESSAGE,
     LAST_MESSAGES,
 }            e_type_cJSON;
 
@@ -65,6 +67,9 @@ typedef struct s_system {
     char **argv;
     char **found_usernames;
     char *found_username;
+    char *login_substr;
+    char *searched_login;
+    char *found_user_login;
     int argc;
     int sockfd;
     int found_user_id;
@@ -87,6 +92,8 @@ typedef struct s_user {
     char **contacts_login;
     int *chats_id;
     char **chats_name;
+    int *who_online; // users with online status
+    int who_online_count;
     int my_id;
     int contacts_count;
     int chats_count;
@@ -103,10 +110,14 @@ typedef struct s_json {
     cJSON *CONTACTS_ID_ARR;
     cJSON *CONTACTS_COUNT;
     cJSON *CONTACTS_LOGIN_ARR;
+    cJSON *WHO_ONLINE;
     cJSON *CHATS_ID_ARR;
     cJSON *CHATS_COUNT;
     cJSON *CHATS_NAME_ARR;
+    cJSON *LOGIN_SUBSTR;
+    cJSON *SEARCHED_LOGIN;
     cJSON *FOUND_USERNAMES;
+    cJSON *FOUND_USER_ID;
     cJSON *FOUND_LOGIN;
     cJSON *MESSAGE;
     cJSON *TO;
@@ -141,19 +152,24 @@ typedef struct s_chat_win {
 
     GtkListBox        *contacts_list;
     GtkListBox           *chats_list;
-
+    GtkListBox          *search_list;
+    
+    GtkStack           *search_stack;
     GtkStack              *all_stack;
-    GtkFixed            *profile_box;
+    GtkFixed         *my_profile_box;
+    GtkFixed          *u_profile_box;
 
     GtkBox                  *msg_box;
     GtkEntry              *msg_entry;
     GtkListBox           *msg_viewer;
 
-    GtkSearchEntry     *search_entry;
-    GtkTreeModel       *s_comp_model;
-    GtkEntryCompletion       *s_comp;
+    GtkSearchEntry     *csearch_entry;
+    GtkSearchEntry     *fsearch_entry;
+    GtkWidget              **fresults;
 
-    GtkLabel           *welcome_user;
+    GtkLabel            *welcome_user;
+
+    GtkLabel            *friend_login;
 }                t_chat_win;
 
 typedef struct s_client_st {
@@ -163,6 +179,8 @@ typedef struct s_client_st {
     int chat_in_focus; // 0 - home page
     int my_id;
     char *my_name;
+    bool fsearch;
+    bool awaiting_fs_res;
 }               t_client_st;
 
 typedef struct s_message {
@@ -195,6 +213,7 @@ void mx_structs_initialization(t_system *sys, t_user *user);
 void *read_server(void *data); // second thread to read server responses
 void mx_authentication_client(t_system *sys, t_user *user, t_json *json);
 void mx_confirmation_of_registration(t_system *sys, t_user *user, t_json *json);
+void mx_who_online_update(t_system *sys, t_user *user, t_json *json);
 void mx_found_users_by_substr(t_system *sys, t_user *user, t_json *json);
 void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_contact(t_system *sys, t_user *user, t_json *json);
@@ -203,7 +222,11 @@ void mx_get_login(t_system *sys, t_user *user, t_json *json);
 /*
  * REQUEST TO SERVER
  */
-void mx_add_new_contact_request(t_system *sys, t_user * user, t_json *json, int index);
+void mx_registration_or_login_request(t_system *sys, t_user *user, t_json *json);
+void mx_user_search_by_substr_request(t_system *sys, t_json *json);
+void mx_user_search_by_login_request(t_system *sys, t_json *json);
+void mx_add_new_contact_request(t_system *sys, t_user * user, t_json *json, int contact_id);
+void mx_add_new_chat_request(t_system *sys, t_user * user, t_json *json, int contact_id);
 
 void mx_login_or_register(t_system *sys, t_user *user);
 char *mx_create_user_profile(t_system *sys, t_user *user);
@@ -213,7 +236,6 @@ void mx_chat_event(t_system *sys, t_user *user, pthread_t thread);
 void mx_client_menu(t_system *sys, t_user *user);
 void mx_sending_messages(t_system *sys, t_user *user, char *buff); // нужно переделать сначала сервер-бд, потом здесь
 
-void mx_registration_or_login_request(t_system *sys, t_user *user);
 
 /*
  * MENU

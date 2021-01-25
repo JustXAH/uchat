@@ -8,10 +8,15 @@ int mx_db_init(sqlite3 *db) {
                 "DROP TABLE IF EXISTS Contacts;"
                 "DROP TABLE IF EXISTS Chats;"
                 "DROP TABLE IF EXISTS Messages;"
+                "DROP TABLE IF EXISTS Files;"
+                "DROP TABLE IF EXISTS Voices;"
                 "CREATE TABLE Users(Id INTEGER PRIMARY KEY, Login TEXT, Password TEXT);"
                 "CREATE TABLE Contacts(Id INTEGER PRIMARY KEY, User INTEGER, Contact INTEGER);"
                 "CREATE TABLE Chats(Id INTEGER PRIMARY KEY, User INTEGER, User2 INTEGER);"
-                "CREATE TABLE Messages(Id INTEGER PRIMARY KEY, User INTEGER, Chat INTEGER, Text TEXT, Time INTEGER);";
+                "CREATE TABLE Messages(Id INTEGER PRIMARY KEY, User INTEGER, Chat INTEGER, Text TEXT, Time INTEGER);"
+                "CREATE TABLE Files(Id INTEGER PRIMARY KEY, Filename TEXT);"
+                "CREATE TABLE Voices(Id INTEGER PRIMARY KEY, User INTEGER, Number INTEGER, FileId INTEGER)";
+
 
     rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
 

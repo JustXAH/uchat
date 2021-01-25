@@ -17,4 +17,5 @@ void mx_structs_initialization(t_system *sys, t_user *user) {
     user->login = NULL;
     user->password = NULL;
     user->my_id = 0;
+    user->who_online_count = 0;
 }

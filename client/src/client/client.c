@@ -55,6 +55,7 @@ int main(int argc, char *argv[]) {
 
     chat->sys = sys;
     chat->user = user;
+    chat->json = (t_json *)malloc(sizeof(t_json));
     // function for chat
     pthread_create(&thread_server, NULL, read_server, chat);
 
@@ -66,7 +67,7 @@ int main(int argc, char *argv[]) {
 
     // close the socket
     close(sys->sockfd);
-
+    
     system("leaks -q client");
 
     return 0;
