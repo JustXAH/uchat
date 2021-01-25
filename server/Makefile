@@ -1,4 +1,4 @@
-NAME = server
+NAME = uchat_server
 
 
 SRC_DIR = src/
@@ -22,7 +22,7 @@ CC		 = clang
 GFLAGS		= -std=c11 -Wall -Wextra -Werror -Wpedantic \
 			  -Wno-unused-command-line-argument -Wno-unused-variable \
 			  -Wno-unused-function -Wno-unused-parameter -g \
-			  -lsqlite3 -pthread
+			  -lsqlite3 -lpthread
 IFLAGS	 = $(addprefix -I, $(LIB_INC) $(INC_DIR))
 COMPILE	 = $(CC) $(GFLAGS) $(IFLAGS) $(LIB_BIN)
 

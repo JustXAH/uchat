@@ -1,5 +1,6 @@
 #include "client.h"
 
+extern t_client_st cl_listener;
 extern t_reg_win reg_win;
 extern t_chat *chat;
 
@@ -20,7 +21,7 @@ static void change_lbls(GtkEntry *reg_pas_label1, GtkEntry *reg_pas_label2, char
 static bool check_pass_valid();
 static bool check_valid_login();
 static bool check_valid_email();
-void on_reg_new_btn_clicked(GtkButton *btn, t_system *sys, t_user *user) {
+void on_reg_new_btn_clicked(GtkButton *btn) {
     bool valid = true;
 
     if (!check_valid_login()) {
@@ -36,8 +37,12 @@ void on_reg_new_btn_clicked(GtkButton *btn, t_system *sys, t_user *user) {
 //        valid = false;
     if (valid == false)
         return;
-    sys->registration = true;
-    mx_registration_or_login_request(sys, user);
+    chat->user->login = strdup((char *)gtk_entry_get_text(reg_win.reg_log));
+    chat->user->password = strdup((char *)gtk_entry_get_text(reg_win.reg_pass1));
+    //printf("1LOGIN = %s\n1PASS = %s\n", user->login, user->password);
+    chat->sys->reg_request = true;
+    cl_listener.my_name = strdup(gtk_entry_get_text(reg_win.reg_log));
+    mx_registration_or_login_request(chat->sys, chat->user, chat->json);
     //Send credentials to server
 }
 static void change_lbls(GtkEntry *reg_pas_label1, GtkEntry *reg_pas_label2, char *text){
@@ -54,22 +59,18 @@ static bool check_pass_valid() {
     bool valid = true;
 
     if(strcmp(pass1, pass2) != 0) {
-        change_lbls(GTK_ENTRY(reg_win.reg_pas_label1), GTK_ENTRY(reg_win.reg_pas_label2), "Passwords do not match");
-        return false;
+        gtk_label_set_text(reg_win.reg_pas_label1, "Passwords do not match");
+        gtk_label_set_text(reg_win.reg_pas_label2, "Passwords do not match");
+         return false;
     }
     if (strlen(pass1) < 6 ) {
-        change_lbls(GTK_ENTRY(reg_win.reg_pas_label1), GTK_ENTRY(reg_win.reg_pas_label2), "Passwords less 6 chars");
+        gtk_label_set_text(reg_win.reg_pas_label1, "Password is less than 6 chars");
+        gtk_label_set_text(reg_win.reg_pas_label2, "Password is less than 6 chars");
         return false;
     }
-    for (int i = 0; pass1[i]; i++) {
-        if (!isdigit(pass1[i]) && !isalpha(pass1[i])) {
-            change_lbls(GTK_ENTRY(reg_win.reg_pas_label1), GTK_ENTRY(reg_win.reg_pas_label2), "App just char and sym");
-            return false;
-        }
-    }
-    printf("Passwords are OK");
+    printf("Passwords are OK\n");
     gtk_label_set_text(reg_win.reg_pas_label1, "Password is OK");
-    gtk_label_set_text(reg_win.reg_pas_label2, "Confirmation matched");
+    gtk_label_set_text(reg_win.reg_pas_label2, "Confirmation matches");
     return true;
 }
 static bool check_valid_login() {
@@ -92,15 +93,16 @@ static bool check_valid_login() {
     }
     for (int i = 0; lbuffer[i]; i++) {
         if (!isdigit(lbuffer[i]) && !isalpha(lbuffer[i])){
-            printf("%s\n", "App just char and sym");
-            gtk_label_set_text(reg_win.reg_log_label, "App just char and sym");
+            printf("%s\n", "Login contains illegal chars");
+            gtk_label_set_text(reg_win.reg_log_label, "Login contains illegal chars");
             return false;
         }
     }
-    printf("%s\n", "Login is OK");
-    gtk_label_set_text(reg_win.reg_log_label, "Login is OK");
+    printf("Login is OK\n");
+    //gtk_label_set_text(reg_win.reg_log_label, "Login is OK");
     return true;
 }
+/*
 static bool check_valid_email() {
     char *ebuffer = (char *)gtk_entry_get_text(reg_win.reg_email);
 
@@ -125,8 +127,9 @@ static bool check_valid_email() {
             return false;
         }
     }
-    printf("%s\n", "E-mail is incorrect");
+    printf("E-mail is incorrect\n");
     gtk_label_set_text(reg_win.reg_email_label, "E-mail is incorrect");
     return false;
 }
+*/
 ////////////////////////////////////////////////////////////////////////////////////

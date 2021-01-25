@@ -3,25 +3,32 @@
 extern t_chat_win chat_win;
 extern t_client_st cl_listener;
 
-static t_msg *mb_form_msg(int user_id, char *msg_text, bool outgoing) {
-    t_msg *msg;
+static t_message *mb_form_msg(int chat_id,      int user_id, 
+                              char *user_name,  char *msg_text, 
+                                                bool outgoing) {
+    t_message *msg;
 
-    msg = (t_msg *) malloc(sizeof(t_msg));
+    msg = (t_message *) malloc(sizeof(t_message));
     msg->outgoing = outgoing;
+    msg->chat_id = chat_id;
     msg->user_id = user_id;
-    msg->msg_text = strdup(msg_text);
-    msg->msg_time = NULL;
-    msg->next_msg = NULL;
+    msg->user_name = mx_strdup(user_name);
+    msg->text = strdup(msg_text);
+    msg->timestamp = 0;
+    msg->next = NULL;
     return msg;
 }
 void on_chat_send_btn_clicked(GtkButton *btn, GtkBuilder *builder) {
-    char *txt_msg = (char *)gtk_entry_get_text(chat_win.chat_msg);
-    //mx_printstr("send button clicked\n");
+    char *txt_msg = (char *)gtk_entry_get_text(chat_win.msg_entry);
 
     if (strlen(txt_msg) > 0) {
-        //printf("%s\n", txt_msg);
-        t_msg *msg = mb_form_msg(cl_listener.user_in_focus, txt_msg, true);
+        //printf("%d\n", cl_listener.chat_in_focus);
+        t_message *msg = mb_form_msg(cl_listener.chat_in_focus,
+                                        cl_listener.my_id,
+                                        cl_listener.my_name,
+                                        txt_msg, 
+                                        true);
         mb_send_msg(msg);
-        gtk_entry_set_text(chat_win.chat_msg, "");
+        gtk_entry_set_text(chat_win.msg_entry, "");
     }
 }

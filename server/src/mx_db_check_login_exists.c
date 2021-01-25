@@ -4,19 +4,19 @@
 
 #include "server.h"
 
-int login_id;
+int le_login_id;
 
 static int check_login_exist_callback(void *NotUsed, int argc, char **argv, char **azColName) {
     if (argc)
-        login_id = mx_atoi(argv[0]);
+        le_login_id = mx_atoi(argv[0]);
     return 0;
 }
 
 int mx_db_check_login_exist(sqlite3 *db, char *login) {
     char *err_msg = 0;
     int rc;
-
     char sql[1024];
+    le_login_id = 0;
     snprintf(sql, sizeof(sql),
              "SELECT Id FROM Users WHERE Login = '%s';",login);
 
@@ -28,5 +28,5 @@ int mx_db_check_login_exist(sqlite3 *db, char *login) {
         sqlite3_free(err_msg);
     }
 
-    return login_id;
+    return le_login_id;
 }
