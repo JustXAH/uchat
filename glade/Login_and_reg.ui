@@ -7,6 +7,7 @@
     <property name="name">log_and_reg_window</property>
     <property name="can-focus">False</property>
     <property name="opacity">0.5</property>
+    <property name="title" translatable="yes">GChat</property>
     <property name="resizable">False</property>
     <property name="window-position">center</property>
     <property name="default-width">365</property>
@@ -37,13 +38,15 @@
             </child>
             <child>
               <object class="GtkLabel" id="log_login_lable">
-                <property name="width-request">100</property>
+                <property name="width-request">365</property>
                 <property name="height-request">30</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Login
 </property>
-                <property name="width-chars">43</property>
+                <attributes>
+                  <attribute name="foreground" value="#ffffffffffff"/>
+                </attributes>
               </object>
               <packing>
                 <property name="y">340</property>
@@ -66,15 +69,17 @@
             </child>
             <child>
               <object class="GtkLabel" id="log_pass_lable">
-                <property name="width-request">100</property>
+                <property name="width-request">365</property>
                 <property name="height-request">30</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Password
 </property>
+                <attributes>
+                  <attribute name="foreground" value="#ffffffffffff"/>
+                </attributes>
               </object>
               <packing>
-                <property name="x">130</property>
                 <property name="y">420</property>
               </packing>
             </child>
@@ -87,6 +92,7 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <signal name="clicked" handler="on_log_login_btn_clicked" swapped="no"/>
+                <accelerator key="KP_Enter" signal="activate"/>
                 <accelerator key="Return" signal="activate"/>
               </object>
               <packing>
@@ -216,15 +222,17 @@
             </child>
             <child>
               <object class="GtkLabel" id="reg_login_lable">
-                <property name="width-request">100</property>
-                <property name="height-request">34</property>
+                <property name="width-request">365</property>
+                <property name="height-request">20</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Login
 </property>
+                <attributes>
+                  <attribute name="foreground" value="#ffffffffffff"/>
+                </attributes>
               </object>
               <packing>
-                <property name="x">131</property>
                 <property name="y">320</property>
               </packing>
             </child>
@@ -245,15 +253,17 @@
             </child>
             <child>
               <object class="GtkLabel" id="reg_pass_lable">
-                <property name="width-request">100</property>
-                <property name="height-request">34</property>
+                <property name="width-request">365</property>
+                <property name="height-request">20</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Password
 </property>
+                <attributes>
+                  <attribute name="foreground" value="#ffffffffffff"/>
+                </attributes>
               </object>
               <packing>
-                <property name="x">132</property>
                 <property name="y">380</property>
               </packing>
             </child>
@@ -301,15 +311,17 @@
             </child>
             <child>
               <object class="GtkLabel" id="reg_pass_conf_lable">
-                <property name="width-request">100</property>
+                <property name="width-request">365</property>
                 <property name="height-request">34</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Password
 </property>
+                <attributes>
+                  <attribute name="foreground" value="#ffffffffffff"/>
+                </attributes>
               </object>
               <packing>
-                <property name="x">134</property>
                 <property name="y">440</property>
               </packing>
             </child>
@@ -438,6 +450,7 @@
   </object>
   <object class="GtkApplicationWindow" id="msg_test">
     <property name="can-focus">False</property>
+    <property name="title" translatable="yes">GChat</property>
     <property name="default-width">600</property>
     <property name="default-height">400</property>
     <child>
@@ -464,9 +477,10 @@
                     <property name="halign">center</property>
                     <property name="margin-top">20</property>
                     <property name="margin-bottom">20</property>
-                    <property name="label" translatable="yes">Welcome,</property>
+                    <property name="label" translatable="yes">Welcome</property>
                     <property name="justify">center</property>
                     <attributes>
+                      <attribute name="foreground" value="#ffffffffffff"/>
                       <attribute name="size" value="50000"/>
                     </attributes>
                   </object>
@@ -484,6 +498,7 @@
                     <property name="margin-bottom">20</property>
                     <property name="label" translatable="yes">User</property>
                     <attributes>
+                      <attribute name="foreground" value="#ffffffffffff"/>
                       <attribute name="size" value="60000"/>
                     </attributes>
                   </object>
@@ -506,6 +521,9 @@ Have a nice adventure, traveler.</property>
                     <property name="justify">center</property>
                     <property name="wrap">True</property>
                     <property name="track-visited-links">False</property>
+                    <attributes>
+                      <attribute name="foreground" value="#ffffffffffff"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -597,6 +615,23 @@ Have a nice adventure, traveler.</property>
                       </packing>
                     </child>
                     <child>
+                      <object class="GtkButton" id="send_file">
+                        <property name="label">gtk-open</property>
+                        <property name="name">send_file</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="receives-default">True</property>
+                        <property name="use-stock">True</property>
+                        <property name="always-show-image">True</property>
+                        <signal name="clicked" handler="on_send_file_clicked" swapped="no"/>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
@@ -609,6 +644,8 @@ Have a nice adventure, traveler.</property>
                             <property name="has-focus">True</property>
                             <property name="receives-default">False</property>
                             <signal name="clicked" handler="on_chat_send_btn_clicked" swapped="no"/>
+                            <accelerator key="KP_Enter" signal="activate"/>
+                            <accelerator key="Return" signal="activate"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -2000,6 +2037,64 @@ Have a nice adventure, traveler.</property>
             <property name="fill">False</property>
             <property name="position">1</property>
           </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkFileChooserDialog" id="file_choose">
+    <property name="name">file_choose</property>
+    <property name="can-focus">False</property>
+    <property name="title" translatable="yes">Open file</property>
+    <property name="type-hint">dialog</property>
+    <property name="transient-for">msg_test</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can-focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can-focus">False</property>
+            <property name="layout-style">end</property>
+            <child>
+              <object class="GtkButton" id="file_select">
+                <property name="label" translatable="yes">Select</property>
+                <property name="name">file_select</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <signal name="clicked" handler="on_file_select_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="file_cancel">
+                <property name="label" translatable="yes">Cancel</property>
+                <property name="name">file_cancel</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <signal name="clicked" handler="on_file_cancel_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
         </child>
       </object>
     </child>
