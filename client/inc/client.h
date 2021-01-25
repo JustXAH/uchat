@@ -67,6 +67,7 @@ typedef struct s_system {
     char *found_username;
     char *login_substr;
     char *searched_login;
+    char *found_user_login;
     int argc;
     int sockfd;
     int found_user_id;
@@ -111,6 +112,7 @@ typedef struct s_json {
     cJSON *LOGIN_SUBSTR;
     cJSON *SEARCHED_LOGIN;
     cJSON *FOUND_USERNAMES;
+    cJSON *FOUND_USER_ID;
     cJSON *FOUND_LOGIN;
     cJSON *MESSAGE;
     cJSON *TO;

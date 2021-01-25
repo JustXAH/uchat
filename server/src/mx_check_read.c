@@ -4,13 +4,13 @@
 
 #include "server.h"
 
-static void read_and_write(t_server *serv, int user_num) {
+static void read_and_write(t_server *serv, int user_index) {
     t_json *json = (t_json *)malloc(sizeof(t_json));
     char buff_message[MAX];
 
     mx_json_struct_initialization(json);
     write(1, "Waiting for a message...\n", 25);
-    read(serv->user_socket[user_num], buff_message, MAX);
+    read(serv->user_socket[user_index], buff_message, MAX);
 
 //        Send the message back to client
     if (buff_message[0] != '\0') {
@@ -23,33 +23,33 @@ static void read_and_write(t_server *serv, int user_num) {
             case AUTHENTICATION:
                 json->LOGIN = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "LOGIN");
                 json->PASS = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "PASS");
-                mx_login_and_pass_authentication(serv, json, serv->user_socket[user_num]);
+                mx_login_and_pass_authentication(serv, json, serv->user_socket[user_index]);
                 break;
             case REGISTRATION:
                 json->LOGIN = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "LOGIN");
                 json->PASS = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "PASS");
-                mx_user_registration(serv, json, serv->user_socket[user_num]);
+                mx_user_registration(serv, json, serv->user_socket[user_index]);
                 break;
             case USER_SEARCH_BY_SUBSTRING:
-                mx_user_search_by_substr(serv, json, serv->user_socket[user_num]);
+                mx_user_search_by_substr(serv, json, serv->user_socket[user_index]);
                 break;
             case USER_SEARCH_BY_LOGIN:
-                mx_user_search_by_login(serv, json, serv->user_socket[user_num]);
+                mx_user_search_by_login(serv, json, serv->user_socket[user_index]);
                 break;
             case NEW_CONTACT:
-                mx_add_new_contact(serv, json, serv->user_socket[user_num]);
+                mx_add_new_contact(serv, json, serv->user_socket[user_index]);
                 break;
             case NEW_CHAT:
-                mx_add_new_chat(serv, json, serv->user_socket[user_num]);
+                mx_add_new_chat(serv, json, serv->user_socket[user_index]);
                 break;
             case GET_LOGIN:
-                mx_get_login(serv, json, serv->user_socket[user_num]);
+                mx_get_login(serv, json, serv->user_socket[user_index]);
                 break;
             case NEW_MESSAGE:
-                mx_add_new_message(serv, json, serv->user_socket[user_num]);
+                mx_add_new_message(serv, json, serv->user_socket[user_index]);
                 break;
             case LAST_MESSAGES:
-                mx_last_messages(serv, json, serv->user_socket[user_num]);
+                mx_last_messages(serv, json, serv->user_socket[user_index]);
                 break;
         }
     }

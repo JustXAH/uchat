@@ -22,7 +22,6 @@ void mx_registration_or_login_request(t_system *sys, t_user *user, t_json *json)
     cJSON_AddItemToObject(json->SEND, "PASS", json->PASS);
 
 //    printf("LOGIN = %s\nPASS = %s\n", LOGIN->valuestring, json->PASS->valuestring);
-
     str_user = cJSON_Print(json->SEND);
 //    write(1, str_js, strlen(str_js));
 //    write(1, "\n", 1);

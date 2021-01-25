@@ -7,7 +7,6 @@
 void* poll_and_rw(void *data) {
     t_server *serv = (t_server *) data;
 
-
     for (int i = 0; serv->exit != true; ) {
 //        mx_read_server(serv);
         if (serv->cli_connect != 0) {
