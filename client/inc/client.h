@@ -173,9 +173,6 @@ typedef struct s_chat_win {
 }                t_chat_win;
 
 typedef struct s_client_st {
-    char *my_name;
-    int chat_in_focus; // 0 - home page
-    int my_id;
     char logged_in;  // 0 - not logged in // 1 - logged in // 2 - request for login sent
     char authentication;
     bool message_in_buffer;
