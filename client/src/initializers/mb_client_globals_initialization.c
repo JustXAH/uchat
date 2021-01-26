@@ -59,6 +59,8 @@ void chat_win_init(t_system *sys) {
                                                         "profile_fixed"));
      chat_win.u_profile_box = GTK_FIXED(gtk_builder_get_object(sys->builder,
                                                         "add_ban_profile"));
+    chat_win.edit_vax_box = GTK_BOX(gtk_builder_get_object(sys->builder,
+                                                              "edit_vax"));
     //Search                                                    
     chat_win.fsearch_entry = GTK_SEARCH_ENTRY(gtk_builder_get_object(sys->builder,
                                                         "friends_search_entry"));
@@ -75,8 +77,10 @@ void chat_win_init(t_system *sys) {
     */
     chat_win.welcome_user = GTK_LABEL(gtk_builder_get_object(sys->builder,
                                                         "welcome_user"));
-     chat_win.friend_login = GTK_LABEL(gtk_builder_get_object(sys->builder,
-                                                        "friend_login"));   
+    chat_win.friend_login = GTK_LABEL(gtk_builder_get_object(sys->builder,
+                                                        "friend_login"));
+    chat_win.file_choose_window = GTK_WIDGET(gtk_builder_get_object(sys->builder,
+                                                           "file_choose"));
 }
 void mb_client_globals_initialization() {
     cl_listener.logged_in = 0;
