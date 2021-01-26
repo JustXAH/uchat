@@ -3,7 +3,7 @@
 extern t_client_st cl_listener;
 
 gboolean mb_event_listener(gpointer data) {
-    //mx_printstr("Listening to the Night Mother\n");
+    //printf("fsearch = %d\n", cl_listener.fsearch);
     mb_auth_event_check();
     mb_incoming_msg_check();
     return true;

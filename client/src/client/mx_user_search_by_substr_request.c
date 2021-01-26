@@ -3,6 +3,7 @@
 //
 
 #include "client.h"
+extern t_client_st cl_listener;
 
 void mx_user_search_by_substr_request(t_system *sys, t_json *json) {
     char *send_str = NULL;
@@ -17,11 +18,12 @@ void mx_user_search_by_substr_request(t_system *sys, t_json *json) {
     cJSON_AddItemToObject(json->SEND, "LOGIN_SUBSTR", json->LOGIN_SUBSTR);
 
     send_str = cJSON_Print(json->SEND);
-
     write(sys->sockfd, send_str, strlen(send_str));
+    printf("Search by substr request sent\n");
     cJSON_DeleteItemFromObject(json->SEND, "TYPE");
     cJSON_DeleteItemFromObject(json->SEND, "LOGIN_SUBSTR");
 
     cJSON_Delete(json->SEND);
     free(send_str);
+    cl_listener.awaiting_fs_res = true;
 }

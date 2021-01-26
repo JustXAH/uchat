@@ -6,9 +6,8 @@
 
 void mx_registration_or_login_request(t_system *sys, t_user *user, t_json *json) {
     char *str_user = NULL;
-
     json->SEND = cJSON_CreateObject();
-    printf(sys->reg_request == true ? "reg request sent\n" : "log request sent\n");
+    printf(sys->reg_request == true ? "Registration request sent\n" : "Login request sent\n");
     json->TYPE = sys->reg_request == true ? cJSON_CreateNumber(REGISTRATION) : cJSON_CreateNumber(AUTHENTICATION);
     sys->reg_request = false;
 
