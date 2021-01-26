@@ -54,7 +54,7 @@ void *read_server(void *data) {
                 cl_listener.pending_requests[GET_LOGIN] = false;
                 break;
             case NEW_MESSAGE:
-                // this is the stub
+                mx_add_new_message(sys, user, json);
                 cl_listener.pending_requests[NEW_MESSAGE] = false;
                 break;
             case LAST_MESSAGES:

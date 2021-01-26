@@ -18,8 +18,6 @@ void mx_add_messages_request(t_system *sys, t_user *user, t_json *json, char *me
     cJSON_AddItemToObject(json->SEND, "USER_ID", json->USER_ID);
     cJSON_AddItemToObject(json->SEND, "CHAT_ID", json->CHAT_ID);
     cJSON_AddItemToObject(json->SEND, "MESSAGE", json->MESSAGE);
-    cJSON_AddItemToObject(json->SEND, "CONTACT_ID", json->CONTACT_ID);
-
 
     send_str = cJSON_Print(json->SEND);
 

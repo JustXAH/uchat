@@ -231,6 +231,7 @@ void mx_add_new_contact(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_chat(t_system *sys, t_user *user, t_json *json);
 void mx_get_login(t_system *sys, t_user *user, t_json *json);
 void mx_get_last_messages(t_system *sys, t_user *user, t_json *json);
+void mx_add_new_message(t_system *sys, t_user *user, t_json *json);
 /*
  * REQUEST TO SERVER
  */
