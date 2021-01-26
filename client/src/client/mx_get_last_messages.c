@@ -18,7 +18,10 @@ static void add_in_user_message(t_json *json, t_user *user, int count) {
     int i = count - 1;
 
     time_str = get_time(cJSON_GetArrayItem(json->MESSAGES_TIME, i)->valueint);
-    mb_msg_buffer_add(json->CHAT_ID->valueint, cJSON_GetArrayItem(json->USER_ID, i)->valueint, cJSON_GetArrayItem(json->USER_NAME, i)->valuestring, 0, cJSON_GetArrayItem(json->MESSAGES_ARR, i)->valuestring);
+    mb_msg_buffer_add(cJSON_GetArrayItem(json->MESSAGES_ID, i)->valueint, json->CHAT_ID->valueint,
+                      cJSON_GetArrayItem(json->USER_ID, i)->valueint,
+                      cJSON_GetArrayItem(json->USER_NAME, i)->valuestring,
+                      time_str, cJSON_GetArrayItem(json->MESSAGES_ARR, i)->valuestring);
 }
 
 void mx_get_last_messages(t_system *sys, t_user *user, t_json *json) {

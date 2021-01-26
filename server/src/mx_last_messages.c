@@ -21,7 +21,7 @@ void mx_last_messages(t_server *serv, t_json *json, int user_index) {
         json->MESSAGES_ID = cJSON_CreateIntArray(message->id, message->count);
         json->MESSAGES_TIME = cJSON_CreateIntArray((const int *) message->timestamp, message->count);
         json->SENDER_ID = cJSON_CreateIntArray(message->user, message->count);
-        json->USER_NAME = cJSON_CreateString("login");
+        json->USER_NAME = cJSON_CreateStringArray((const char *const *)message->login, message->count);
 
         cJSON_AddItemToObject(json->SEND, "MESSAGES_ARR", json->MESSAGES_ARR);
         cJSON_AddItemToObject(json->SEND, "COUNT_MESSAGES_ARR", json->COUNT_MESSAGES_ARR);

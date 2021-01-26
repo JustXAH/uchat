@@ -140,6 +140,7 @@ typedef struct s_message {
     int *id;
     int *user;
     char **text;
+    char **login;
     time_t *timestamp;
     int count;
 }               t_message;
