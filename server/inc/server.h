@@ -95,6 +95,8 @@ typedef struct s_json {
     cJSON *MESSAGES_TIME;
     cJSON *MESSAGES_ID;
     cJSON *USER_NAME;
+    cJSON *MESSAGE_ID;
+    cJSON *XYI;
 }              t_json;
 
 //struct for database
