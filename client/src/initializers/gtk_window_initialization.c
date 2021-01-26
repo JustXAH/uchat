@@ -40,7 +40,7 @@ void gtk_window_initializtion(t_chat *chat) {
     mb_client_globals_initialization();
     reg_win_init(chat->sys);
     chat_win_init(chat->sys);
-
+    mx_printstr("gtk_main_starting\n");
     gtk_main();
 }
 void gtk_show_chat_window(t_chat *chat) {

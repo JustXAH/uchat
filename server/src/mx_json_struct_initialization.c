@@ -13,6 +13,7 @@ void mx_json_struct_initialization(t_json *json) {
     json->PASS = NULL;
     json->TYPE = NULL;
     json->SEND = NULL;
+    json->XYI = NULL;
     json->CONTACT_ID = NULL;
     json->CONTACTS_COUNT = NULL;
     json->CONTACTS_LOGIN_ARR = NULL;
@@ -24,7 +25,7 @@ void mx_json_struct_initialization(t_json *json) {
     json->CHAT_ID = NULL;
     json->COUNT_MESSAGES_ARR = NULL;
     json->MESSAGE = NULL;
-    json->MESSAGE_TIME = NULL;
+    json->MESSAGES_TIME = NULL;
     json->MESSAGES_ARR = NULL;
-    json->MESSAGE_ID = NULL;
+    json->MESSAGES_ID = NULL;
 }

@@ -11,6 +11,7 @@ void mb_auth_event_check() {
 
     if (cl_listener.authentication == 1 && cl_listener.logged_in != 1) {
     //Successful log in
+            mx_printstr("logging in\n");
         gtk_show_chat_window(chat);
         cl_listener.logged_in = 1;
         //test lines below

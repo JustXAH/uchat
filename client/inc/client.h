@@ -54,6 +54,8 @@ typedef enum e_type_cJSON_message {
     GET_LOGIN,
     NEW_MESSAGE,
     LAST_MESSAGES,
+    SAVE_AUDIO,
+    SEND_AUDIO,
 }            e_type_cJSON;
 
 typedef struct s_system {
@@ -126,7 +128,14 @@ typedef struct s_json {
     cJSON *MESSAGE;
     cJSON *TO;
     cJSON *CHAT_ID;
+    cJSON *MESSAGES_ARR;
+    cJSON *COUNT_MESSAGES_ARR;
+    cJSON *MESSAGES_ID;
+    cJSON *MESSAGES_TIME;
+    cJSON *SENDER_ID;
+    cJSON *USER_NAME;
 }              t_json;
+
 typedef struct s_chat {
     struct s_system *sys;
     struct s_user *user;
@@ -186,17 +195,19 @@ typedef struct s_client_st {
     int my_id;
     char *my_name;
     bool fsearch;
-    bool awaiting_fs_res;
+    bool *pending_requests;
 }               t_client_st;
 
 typedef struct s_message {
     int id;
     int user_id;
     int chat_id;
+    int msg_id;
     char *user_name;
     char *text;
     bool outgoing;
-    time_t timestamp;
+
+    char *timestamp;
     struct s_message *next;
 }               t_message;
 
@@ -225,6 +236,8 @@ void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_contact(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_chat(t_system *sys, t_user *user, t_json *json);
 void mx_get_login(t_system *sys, t_user *user, t_json *json);
+void mx_get_last_messages(t_system *sys, t_user *user, t_json *json);
+void mx_add_new_message(t_system *sys, t_user *user, t_json *json);
 /*
  * REQUEST TO SERVER
  */
@@ -233,6 +246,8 @@ void mx_user_search_by_substr_request(t_system *sys, t_json *json);
 void mx_user_search_by_login_request(t_system *sys, t_json *json);
 void mx_add_new_contact_request(t_system *sys, t_user * user, t_json *json, int contact_id);
 void mx_add_new_chat_request(t_system *sys, t_user * user, t_json *json, int contact_id);
+void mx_add_messages_request(t_system *sys, t_user *user, t_json *json, char *messages_str, int chat_id);
+void mx_get_last_messages_request(t_system *sys, t_user *user, t_json *json, int chat_id);
 
 void mx_login_or_register(t_system *sys, t_user *user);
 char *mx_create_user_profile(t_system *sys, t_user *user);
@@ -266,11 +281,12 @@ void mb_auth_event_check();
 void mb_incoming_msg_check();
 
 void mb_contact_list_add(int chat_id, int user_id, char *user_name);
-void mb_msg_buffer_add(int chat_id, int user_id, char *user_name, time_t time, char *msg_text);
+void mb_msg_buffer_add(int msg_id, int chat_id, int user_id, char *user_name, char *time, char *msg_text);
 
 void mb_send_msg(t_message *msg);
 void mb_display_msg(t_message *msg);
 void mb_display_chat_with_contact(int chat_id);
+void mb_add_msg_to_history(t_message **history, t_message *new_msg);
 
 void mb_invalid_credentials_msg();
 void mb_reset_credentials_msg();

@@ -4,6 +4,8 @@
 
 #include "client.h"
 
+extern t_client_st cl_listener;
+
 void mx_add_new_chat_request(t_system *sys, t_user * user, t_json *json, int contact_id) {
     char *send_str = NULL;
 
@@ -23,4 +25,5 @@ void mx_add_new_chat_request(t_system *sys, t_user * user, t_json *json, int con
 
     free(send_str);
     cJSON_Delete(json->SERVER_JSON);
+    cl_listener.pending_requests[NEW_CHAT] = true;
 }

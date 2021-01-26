@@ -92,8 +92,8 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <signal name="clicked" handler="on_log_login_btn_clicked" swapped="no"/>
-                <accelerator key="KP_Enter" signal="activate"/>
                 <accelerator key="Return" signal="activate"/>
+                <accelerator key="KP_Enter" signal="activate"/>
               </object>
               <packing>
                 <property name="x">131</property>
@@ -644,8 +644,8 @@ Have a nice adventure, traveler.</property>
                             <property name="has-focus">True</property>
                             <property name="receives-default">False</property>
                             <signal name="clicked" handler="on_chat_send_btn_clicked" swapped="no"/>
-                            <accelerator key="KP_Enter" signal="activate"/>
                             <accelerator key="Return" signal="activate"/>
+                            <accelerator key="KP_Enter" signal="activate"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>

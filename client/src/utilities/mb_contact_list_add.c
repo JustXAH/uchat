@@ -16,9 +16,10 @@ static void mb_display_new_contact(t_chat_list *new_cont) {
     gtk_style_context_add_class(context_contact, "cont_list_ofline");
 
     gtk_container_add(GTK_CONTAINER(chat_win.contacts_list), new_cont->contact_gui);
-    gtk_widget_show_all(new_cont->contact_gui);
+    gtk_widget_show(new_cont->contact_gui);
 }
 void mb_contact_list_add(int chat_id, int user_id, char *user_name) {
+    mx_printstr("mb_contact_list_add started\n");
     if (contact_list == NULL) {
         contact_list = (t_chat_list *)malloc(sizeof(t_chat_list));
         contact_list->next_chat = NULL;
@@ -37,4 +38,5 @@ void mb_contact_list_add(int chat_id, int user_id, char *user_name) {
     contact_list->chat_history = NULL;
     contact_list->chat_id = chat_id;
     mb_display_new_contact(contact_list);
+    mx_printstr("mb_contact_list_add finished successfully\n");
 }
