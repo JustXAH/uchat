@@ -57,7 +57,7 @@ void *read_server(void *data) {
                 cl_listener.pending_requests[GET_LOGIN] = false;
                 break;
             case NEW_MESSAGE:
-                // this is the stub
+                mx_add_new_message(sys, user, json);
                 cl_listener.pending_requests[NEW_MESSAGE] = false;
                 break;
             case LAST_MESSAGES:
@@ -65,6 +65,12 @@ void *read_server(void *data) {
                 write(1, "LAST MESSAGES\n", 14);
                 cl_listener.pending_requests[LAST_MESSAGES] = false;
                 // функция, которая принимает ответ от запроса на подгрузку последних сообщений
+                break;
+            case SAVE_AUDIO:
+                write(1, "SAVE AUDIO\n", 11);
+                break;
+            case SEND_AUDIO:
+                write(1, "SEND AUDIO\n", 11);
                 break;
         }
         printf("Switch ending\n");

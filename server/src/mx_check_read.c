@@ -22,13 +22,9 @@ static void read_and_write(t_server *serv, int user_index) {
         serv->type_enum = json->TYPE->valueint;
         switch (serv->type_enum) {
             case AUTHENTICATION:
-                json->LOGIN = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "LOGIN");
-                json->PASS = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "PASS");
                 mx_login_and_pass_authentication(serv, json, user_index);
                 break;
             case REGISTRATION:
-                json->LOGIN = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "LOGIN");
-                json->PASS = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "PASS");
                 mx_user_registration(serv, json, user_index);
                 break;
             case WHO_ONLINE:
@@ -56,6 +52,12 @@ static void read_and_write(t_server *serv, int user_index) {
                 break;
             case LAST_MESSAGES:
                 mx_last_messages(serv, json, user_index);
+                break;
+            case SAVE_AUDIO:
+                write(1, "SAVE AUDIO\n", 11);
+                break;
+            case SEND_AUDIO:
+                write(1, "SEND AUDIO\n", 11);
                 break;
         }
         printf("\nServer sent a response to the USER (SOCKET: %d ID: %d)\n",

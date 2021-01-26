@@ -54,6 +54,8 @@ typedef enum e_type_cJSON_message {
     GET_LOGIN,
     NEW_MESSAGE,
     LAST_MESSAGES,
+    SAVE_AUDIO,
+    SEND_AUDIO,
 }            e_type_cJSON;
 
 typedef struct s_system {
@@ -127,6 +129,7 @@ typedef struct s_json {
     cJSON *MESSAGES_ID;
     cJSON *MESSAGES_TIME;
     cJSON *SENDER_ID;
+    cJSON *USER_NAME;
 }              t_json;
 
 typedef struct s_chat {
@@ -228,6 +231,7 @@ void mx_add_new_contact(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_chat(t_system *sys, t_user *user, t_json *json);
 void mx_get_login(t_system *sys, t_user *user, t_json *json);
 void mx_get_last_messages(t_system *sys, t_user *user, t_json *json);
+void mx_add_new_message(t_system *sys, t_user *user, t_json *json);
 /*
  * REQUEST TO SERVER
  */
