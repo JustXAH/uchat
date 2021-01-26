@@ -1,4 +1,5 @@
 #include "client.h"
+
 extern t_chat_list *contact_list;
 extern t_chat_win chat_win;
 //----------------------------------------------------------------------------//

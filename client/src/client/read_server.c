@@ -4,6 +4,8 @@
 
 #include "client.h"
 
+extern t_client_st cl_listener;
+
 void *read_server(void *data) {
     t_chat *chat = (t_chat *)data;
     t_system *sys = chat->sys;
@@ -21,36 +23,44 @@ void *read_server(void *data) {
         switch (sys->type_enum) {
             case AUTHENTICATION:
                 mx_authentication_client(sys, user, json);
+                cl_listener.pending_requests[AUTHENTICATION] = false;
                 break;
             case REGISTRATION:
                 mx_confirmation_of_registration(sys, user, json);
+                cl_listener.pending_requests[REGISTRATION] = false;
                 break;
             case WHO_ONLINE:
-                write(1, "Who is on duty today?\n", 22);
                 mx_who_online_update(sys, user, json);
+                cl_listener.pending_requests[WHO_ONLINE] = false;
                 break;
             case USER_SEARCH_BY_SUBSTRING:
-//                write(1, "Replied recieved from server!!!\n", 32);
                 mx_found_users_by_substr(sys, user, json);
+                cl_listener.pending_requests[USER_SEARCH_BY_SUBSTRING] = false;
                 break;
             case USER_SEARCH_BY_LOGIN:
                 mx_found_user_by_login(sys, user, json);
+                cl_listener.pending_requests[USER_SEARCH_BY_LOGIN] = false;
                 break;
             case NEW_CONTACT:
                 mx_add_new_contact(sys, user, json);
+                cl_listener.pending_requests[NEW_CONTACT] = false;
                 break;
             case NEW_CHAT:
                 mx_add_new_chat(sys, user, json);
+                cl_listener.pending_requests[NEW_CHAT] = false;
                 break;
             case GET_LOGIN:
                 mx_get_login(sys, user, json);
+                cl_listener.pending_requests[GET_LOGIN] = false;
                 break;
             case NEW_MESSAGE:
                 // this is the stub
+                cl_listener.pending_requests[NEW_MESSAGE] = false;
                 break;
             case LAST_MESSAGES:
                 mx_get_last_messages(sys, user, json);
                 write(1, "LAST MESSAGES\n", 14);
+                cl_listener.pending_requests[LAST_MESSAGES] = false;
                 // функция, которая принимает ответ от запроса на подгрузку последних сообщений
                 break;
         }

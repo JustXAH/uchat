@@ -12,14 +12,15 @@ extern t_chat_list *contact_list;
     } while ((con_buff = con_buff->next_chat));
     return NULL;
 }*/
-void mb_msg_buffer_add(int chat_id, int user_id, char *user_name, time_t time, char *msg_text) {
+void mb_msg_buffer_add(int msg_id, int chat_id, int user_id, char *user_name, char *time, char *msg_text) {
     if (incoming_msg_buffer == NULL) {
         incoming_msg_buffer = (t_message *)malloc(sizeof(t_message));
+        incoming_msg_buffer->msg_id = msg_id;
         incoming_msg_buffer->chat_id = chat_id;
         incoming_msg_buffer->user_id = user_id;
         incoming_msg_buffer->user_name = mx_strdup(user_name);
-        incoming_msg_buffer->timestamp = time;
-        incoming_msg_buffer->text = msg_text;
+        incoming_msg_buffer->timestamp = mx_strdup(time);
+        incoming_msg_buffer->text = mx_strdup(msg_text);
         incoming_msg_buffer->outgoing = false;
         incoming_msg_buffer->next = NULL;
 
@@ -30,10 +31,12 @@ void mb_msg_buffer_add(int chat_id, int user_id, char *user_name, time_t time, c
             temp = temp->next;
         temp->next = (t_message *)malloc(sizeof(t_message));
         temp->next->chat_id = chat_id;
-        incoming_msg_buffer->user_id = user_id;
+
+        temp->next->msg_id = msg_id;
+        temp->next->user_id = user_id;
         temp->next->user_name = mx_strdup(user_name);
-        temp->next->timestamp = time;
-        temp->next->text = msg_text;
+        temp->next->timestamp = mx_strdup(time);
+        temp->next->text = mx_strdup(msg_text);
         temp->next->outgoing = false;
         temp->next->next = NULL;
     }

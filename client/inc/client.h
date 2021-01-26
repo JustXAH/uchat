@@ -186,17 +186,19 @@ typedef struct s_client_st {
     int my_id;
     char *my_name;
     bool fsearch;
-    bool awaiting_fs_res;
+    bool pending_requests[10];
 }               t_client_st;
 
 typedef struct s_message {
     int id;
     int user_id;
     int chat_id;
+    int msg_id;
     char *user_name;
     char *text;
     bool outgoing;
-    time_t timestamp;
+
+    char *timestamp;
     struct s_message *next;
 }               t_message;
 
@@ -268,11 +270,12 @@ void mb_auth_event_check();
 void mb_incoming_msg_check();
 
 void mb_contact_list_add(int chat_id, int user_id, char *user_name);
-void mb_msg_buffer_add(int chat_id, int user_id, char *user_name, time_t time, char *msg_text);
+void mb_msg_buffer_add(int msg_id, int chat_id, int user_id, char *user_name, char *time, char *msg_text);
 
 void mb_send_msg(t_message *msg);
 void mb_display_msg(t_message *msg);
 void mb_display_chat_with_contact(int chat_id);
+void mb_add_msg_to_history(t_message **history, t_message *new_msg);
 
 void mb_invalid_credentials_msg();
 void mb_reset_credentials_msg();

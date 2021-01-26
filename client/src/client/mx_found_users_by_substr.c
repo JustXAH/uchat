@@ -4,8 +4,6 @@
 
 #include "client.h"
 
-extern t_client_st cl_listener;
-
 void mx_found_users_by_substr(t_system *sys, t_user *user, t_json *json) {
 //    mx_printstr("recieved results from server\n");
     json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
@@ -40,6 +38,5 @@ void mx_found_users_by_substr(t_system *sys, t_user *user, t_json *json) {
         cJSON_DeleteItemFromObject(json->SERVER_JSON, "FOUND_USERNAMES");
     }
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "RESULT");
-    cl_listener.awaiting_fs_res = false;
 //    mx_printstr("users_found\n");
 }
