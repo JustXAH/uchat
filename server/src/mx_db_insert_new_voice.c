@@ -1,6 +1,6 @@
 #include "server.h"
 
-char* mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename){
+char* mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename, char *voice_name){
     char *err_msg = 0;
     int rc;
 
@@ -12,7 +12,7 @@ char* mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename){
 
     char sql[1024];
     snprintf(sql, sizeof(sql),
-             "INSERT INTO Voices(User,Number,FileId) VALUES ('%d','%d','%d');",user,number,file_id);
+             "INSERT INTO Voices(User,Number,FileId,VoiceName) VALUES ('%d','%d','%d','%s');",user,number,file_id,voice_name);
 
     rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
 

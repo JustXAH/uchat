@@ -142,45 +142,11 @@ typedef struct s_message {
     int count;
 }               t_message;
 
-//
-//typedef struct s_user {
-//    int id;
-//    char *login;
-//    char *password;
-//    struct s_user *next;
-//}              t_user;
-//
-//typedef struct s_contact {
-//    int *id;
-//    char **login;
-//    int count;
-//}              t_contact;
-//
-//typedef struct s_chat {
-//    int *id;
-//    char **chat_name;
-//    int count;
-//}              t_chat;
-//
-//typedef struct s_user_info {
-//    int id;
-//    char *login;
-//    struct s_user_info *next;
-//}              t_user_info;
-//
-//typedef struct s_chat_info {
-//    int id;
-//    char *chat_name;
-//    struct s_chat_info *next;
-//}               t_chat_info;
-//
-//typedef struct s_message {
-//    int id;
-//    int user;
-//    char *text;
-//    time_t timestamp;
-//    struct s_message *next;
-//} t_message;
+typedef struct s_voice {
+    int *id;
+    char **filename;
+    char **voice_name;
+}               t_voice;
 
 /*
  * SERVER
@@ -228,8 +194,9 @@ int mx_db_create_new_message(sqlite3 *db, int user, int chat, char *text);
 t_message *mx_db_get_last_messages(sqlite3 *db, int chat);
 
 int mx_db_insert_new_file(sqlite3 *db, char *filename);
-char* mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename);
-int* mx_db_get_users_voices(sqlite3 *db, int user);
+char *mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename, char *voice_name);
+t_voice *mx_db_get_users_voices(sqlite3 *db, int user);
 char* mx_db_get_filename(sqlite3 *db, int id);
+
 
 #endif //UCHAT_MAIN_H
