@@ -4,7 +4,7 @@
 
 #include "client.h"
 
-void mx_add_messages_request(t_system *sys, t_user *user, t_json *json, char *messages_str, int chat_id) {
+void mx_add_message_request(t_system *sys, t_user *user, t_json *json, char *messages_str, int chat_id) {
     char *send_str = NULL;
 
     json->SEND = cJSON_CreateObject();

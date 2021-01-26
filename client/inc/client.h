@@ -240,7 +240,7 @@ void mx_user_search_by_substr_request(t_system *sys, t_json *json);
 void mx_user_search_by_login_request(t_system *sys, t_json *json);
 void mx_add_new_contact_request(t_system *sys, t_user * user, t_json *json, int contact_id);
 void mx_add_new_chat_request(t_system *sys, t_user * user, t_json *json, int contact_id);
-void mx_add_messages_request(t_system *sys, t_user *user, t_json *json, char *messages_str, int chat_id);
+void mx_add_message_request(t_system *sys, t_user *user, t_json *json, char *messages_str, int chat_id);
 void mx_get_last_messages_request(t_system *sys, t_user *user, t_json *json, int chat_id);
 
 void mx_login_or_register(t_system *sys, t_user *user);
