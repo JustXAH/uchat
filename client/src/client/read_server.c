@@ -53,6 +53,12 @@ void *read_server(void *data) {
                 write(1, "LAST MESSAGES\n", 14);
                 // функция, которая принимает ответ от запроса на подгрузку последних сообщений
                 break;
+            case SAVE_AUDIO:
+                write(1, "SAVE AUDIO\n", 11);
+                break;
+            case SEND_AUDIO:
+                write(1, "SEND AUDIO\n", 11);
+                break;
         }
         printf("Switch ending\n");
         cJSON_Delete(json->SERVER_JSON);

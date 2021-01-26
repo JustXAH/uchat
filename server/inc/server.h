@@ -48,6 +48,8 @@ typedef enum e_type_cJSON_message {
     GET_LOGIN,
     NEW_MESSAGE,
     LAST_MESSAGES,
+    SAVE_AUDIO,
+    SEND_AUDIO,
 }            e_type_cJSON;
 
 //struct for server
@@ -225,5 +227,10 @@ int mx_db_get_chat_by_users(sqlite3 *db, int user_1, int user_2); //return chat_
 t_chat *mx_db_get_chats_info(sqlite3 *db, int user);
 int mx_db_create_new_message(sqlite3 *db, int user, int chat, char *text);
 t_message *mx_db_get_last_messages(sqlite3 *db, int chat);
+
+int mx_db_insert_new_file(sqlite3 *db, char *filename);
+char* mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename);
+int* mx_db_get_users_voices(sqlite3 *db, int user);
+char* mx_db_get_filename(sqlite3 *db, int id);
 
 #endif //UCHAT_MAIN_H

@@ -54,6 +54,8 @@ typedef enum e_type_cJSON_message {
     GET_LOGIN,
     NEW_MESSAGE,
     LAST_MESSAGES,
+    SAVE_AUDIO,
+    SEND_AUDIO,
 }            e_type_cJSON;
 
 typedef struct s_system {
