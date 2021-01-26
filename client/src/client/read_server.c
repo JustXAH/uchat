@@ -48,6 +48,7 @@ void *read_server(void *data) {
                 mx_printstr("new contact recieved from the server\n");
                 break;
             case NEW_CHAT:
+                mx_printstr("new chat  about to be recieved from the server\n");
                 mx_add_new_chat(sys, user, json);
                 cl_listener.pending_requests[NEW_CHAT] = false;
                 mx_printstr("new chat recieved from the server\n");

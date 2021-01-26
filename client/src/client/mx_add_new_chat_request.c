@@ -25,5 +25,5 @@ void mx_add_new_chat_request(t_system *sys, t_user * user, t_json *json, int con
 
     free(send_str);
     cJSON_Delete(json->SERVER_JSON);
-    cl_listener.pending_requests[NEW_CHAT] = false;
+    cl_listener.pending_requests[NEW_CHAT] = true;
 }
