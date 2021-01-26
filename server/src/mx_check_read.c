@@ -9,7 +9,7 @@ static void read_and_write(t_server *serv, int user_index) {
     char buff_message[MAX];
 
     mx_json_struct_initialization(json);
-    write(1, "Waiting for a message...\n", 25);
+    write(1, "Waiting for a json from client...\n", 25);
     read(serv->user_socket[user_index], buff_message, MAX);
 
 //        Send the message back to client
@@ -31,30 +31,32 @@ static void read_and_write(t_server *serv, int user_index) {
                 mx_user_registration(serv, json, user_index);
                 break;
             case WHO_ONLINE:
-                // дописать обработку запроса о количестве юзеров онлайн
+                mx_sending_who_online(serv, user_index);
                 break;
             case USER_SEARCH_BY_SUBSTRING:
-                mx_user_search_by_substr(serv, json, serv->user_socket[user_index]);
+                mx_user_search_by_substr(serv, json, user_index);
                 break;
             case USER_SEARCH_BY_LOGIN:
-                mx_user_search_by_login(serv, json, serv->user_socket[user_index]);
+                mx_user_search_by_login(serv, json, user_index);
                 break;
             case NEW_CONTACT:
-                mx_add_new_contact(serv, json, serv->user_socket[user_index]);
+                mx_add_new_contact(serv, json, user_index);
                 break;
             case NEW_CHAT:
-                mx_add_new_chat(serv, json, serv->user_socket[user_index]);
+                mx_add_new_chat(serv, json, user_index);
                 break;
             case GET_LOGIN:
-                mx_get_login(serv, json, serv->user_socket[user_index]);
+                mx_get_login(serv, json, user_index);
                 break;
             case NEW_MESSAGE:
-                mx_add_new_message(serv, json, serv->user_socket[user_index]);
+                mx_add_new_message(serv, json, user_index);
                 break;
             case LAST_MESSAGES:
-                mx_last_messages(serv, json, serv->user_socket[user_index]);
+                mx_last_messages(serv, json, user_index);
                 break;
         }
+        printf("\nServer sent a response to the USER (SOCKET: %d ID: %d)\n",
+               serv->user_socket[user_index], serv->users_id[user_index]);
     }
     cJSON_Delete(json->USER_JSON);
     free(json);

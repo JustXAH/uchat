@@ -11,11 +11,13 @@ void *read_server(void *data) {
     t_json *json = (t_json *)malloc(sizeof(t_json));
     char buff[MAX_LEN];
 
-    while (read(sys->sockfd, buff, sizeof(buff))) {
+    while (sys->exit != true) {
+        read(sys->sockfd, buff, sizeof(buff));
+//        write(1, "YUHU! I just received a response from the server\n", 49);
         json->SERVER_JSON = cJSON_Parse(buff);
         json->TYPE = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "TYPE");
         sys->type_enum = json->TYPE->valueint;
-        printf("switch starting enum: %d  buff: %s\n",sys->type_enum, buff);
+        printf("\nSwitch starting enum: %d  buff: %s\n",sys->type_enum, buff);
         switch (sys->type_enum) {
             case AUTHENTICATION:
                 mx_authentication_client(sys, user, json);
@@ -24,11 +26,11 @@ void *read_server(void *data) {
                 mx_confirmation_of_registration(sys, user, json);
                 break;
             case WHO_ONLINE:
-                //printf("who is on duty today?\n");
+//                write(1, "Who is on duty today?\n", 22);
                 mx_who_online_update(sys, user, json);
                 break;
             case USER_SEARCH_BY_SUBSTRING:
-                printf("replied recieved from server\n");
+//                write(1, "Replied recieved from server!!!\n", 32);
                 mx_found_users_by_substr(sys, user, json);
                 break;
             case USER_SEARCH_BY_LOGIN:
@@ -52,11 +54,11 @@ void *read_server(void *data) {
                 // функция, которая принимает ответ от запроса на подгрузку последних сообщений
                 break;
         }
-        printf("swiitch ending\n");
+        printf("Switch ending\n");
         cJSON_Delete(json->SERVER_JSON);
         memset(buff, '\0', sizeof(buff));
     }
     free(json);
-    printf("read fucking done\n");
+    printf("Read fucking done\n");
     return 0;
 }
