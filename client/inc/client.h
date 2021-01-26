@@ -72,6 +72,10 @@ typedef struct s_system {
     char *login_substr;
     char *searched_login;
     char *found_user_login;
+    char *file_path;
+    char *filename;
+    char *filename_extension;
+    int position;
     int argc;
     int sockfd;
     int found_user_id;
@@ -166,6 +170,7 @@ typedef struct s_chat_win {
     GtkStack           *search_stack;
     GtkStack              *all_stack;
     GtkFixed         *my_profile_box;
+    GtkBox         *edit_vax_box;
     GtkFixed          *u_profile_box;
 
     GtkBox                  *msg_box;
@@ -175,6 +180,7 @@ typedef struct s_chat_win {
     GtkSearchEntry     *csearch_entry;
     GtkSearchEntry     *fsearch_entry;
     GtkWidget              **fresults;
+    GtkWidget              *file_choose_window;
 
     GtkLabel            *welcome_user;
 
