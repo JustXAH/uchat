@@ -86,7 +86,9 @@ void mb_client_globals_initialization() {
     cl_listener.chat_in_focus = 0;
 
     cl_listener.fsearch = false;
-    for (int i = 0; i < 10; i++)
+
+    cl_listener.pending_requests = (bool *)malloc(LAST_MESSAGES + 1);
+    for (int i = 0; i <= LAST_MESSAGES; i++)
         cl_listener.pending_requests[i] = false;
     
     incoming_msg_buffer = NULL;

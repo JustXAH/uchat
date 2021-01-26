@@ -42,12 +42,15 @@ void *read_server(void *data) {
                 cl_listener.pending_requests[USER_SEARCH_BY_LOGIN] = false;
                 break;
             case NEW_CONTACT:
+                mx_printstr("new contact about to be recieved from the server\n");
                 mx_add_new_contact(sys, user, json);
                 cl_listener.pending_requests[NEW_CONTACT] = false;
+                mx_printstr("new contact recieved from the server\n");
                 break;
             case NEW_CHAT:
                 mx_add_new_chat(sys, user, json);
                 cl_listener.pending_requests[NEW_CHAT] = false;
+                mx_printstr("new chat recieved from the server\n");
                 break;
             case GET_LOGIN:
                 mx_get_login(sys, user, json);

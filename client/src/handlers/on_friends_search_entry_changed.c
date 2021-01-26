@@ -47,7 +47,7 @@ static void get_search_results() {
     int count = chat->sys->found_usernames_count;
 
     if (count) {
-        mx_printstr("about to show results\n");
+        //mx_printstr("about to show results\n");
         for (int i = 0; i < count; i++)
             gtk_container_add(GTK_CONTAINER(chat_win.search_list), 
                                 gtk_label_new((const gchar *)

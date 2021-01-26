@@ -186,7 +186,7 @@ typedef struct s_client_st {
     int my_id;
     char *my_name;
     bool fsearch;
-    bool pending_requests[10];
+    bool *pending_requests;
 }               t_client_st;
 
 typedef struct s_message {

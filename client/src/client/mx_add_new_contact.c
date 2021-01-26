@@ -25,7 +25,6 @@ void mx_add_new_contact(t_system *sys, t_user *user, t_json *json) {
     json->CONTACTS_ID_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "CONTACTS_ID_ARR");
     json->CONTACTS_LOGIN_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "CONTACTS_LOGIN_ARR");
     json->CONTACTS_COUNT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "CONTACTS_COUNT");
-
     if (cJSON_IsFalse(json->RESULT)) {
        // вызов всплывающего текста c ошибкой
     }
@@ -35,7 +34,6 @@ void mx_add_new_contact(t_system *sys, t_user *user, t_json *json) {
             free(user->contacts_id);
         }
         add_contacts_id(user, json->CONTACTS_ID_ARR);
-
         if (MALLOC_SIZE(user->contacts_login)) {
             free(user->contacts_login);
         }
@@ -45,4 +43,5 @@ void mx_add_new_contact(t_system *sys, t_user *user, t_json *json) {
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "CONTACTS_COUNT");
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "CONTACTS_ID_ARR");
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "CONTACTS_LOGIN_ARR");
+    mx_printstr("mx_add_new_contact finished successfully\n");
 }
