@@ -5,7 +5,7 @@
 #include "client.h"
 
 static void add_chats_login(t_user *user, cJSON *CHATS_NAME_ARR) {
-    user->chats_name = (char **)malloc(sizeof(char *) * user->chats_count);
+    user->chats_name = (char **)malloc(sizeof(char *) * (user->chats_count + 1));
     for (int i = 0; i != user->chats_count; i++) {
         user->chats_name[i] = mx_strdup(cJSON_GetArrayItem(CHATS_NAME_ARR, i)->valuestring);
     }
