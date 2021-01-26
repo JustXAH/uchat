@@ -4,20 +4,22 @@
 
 #include "client.h"
 
-static void get_time(t_json *json, int count) {
-    char **time_str = (char **)malloc(sizeof(char *) * count);
-    long time = 0;
-    time_t time_2 = 0;
 
-    for (int i = 0; i < count; i++)
-        time_str[i] = NULL;
-    for (int i = 0; time_str[i]; i++) {
-        time = cJSON_GetArrayItem(json->MESSAGES_TIME, i)->valueint;
-        time_2 = time;
-        time_str[i] = mx_substr(ctime(&(time_2)), 4, 16);
-    }
+static char *get_time(long time) {
+    char *time_str = NULL;
+    time_t time_2 = time;
+
+    time_str = mx_substr(ctime(&(time_2)), 4, 16);
+    return time_str;
 }
 
+static void add_in_user_message(t_json *json, t_user *user, int count) {
+    char *time_str;
+    int i = count - 1;
+
+    time_str = get_time(cJSON_GetArrayItem(json->MESSAGES_TIME, i)->valueint);
+    mb_msg_buffer_add(json->CHAT_ID->valueint, cJSON_GetArrayItem(json->USER_ID, i)->valueint, cJSON_GetArrayItem(json->USER_NAME, i)->valuestring, 0, cJSON_GetArrayItem(json->MESSAGES_ARR, i)->valuestring);
+}
 
 void mx_get_last_messages(t_system *sys, t_user *user, t_json *json) {
     json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "RESULT");
@@ -31,5 +33,7 @@ void mx_get_last_messages(t_system *sys, t_user *user, t_json *json) {
         json->MESSAGES_ID = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGES_ID");
         json->MESSAGES_TIME = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGE_TIME");
         json->CHAT_ID = cJSON_GetObjectItemCaseSensitive(json->SENDER_ID, "SENDER_ID");
+        json->USER_NAME = cJSON_GetObjectItemCaseSensitive(json->USER_NAME, "USER_NAME");
+        add_in_user_message(json, user, json->COUNT_MESSAGES_ARR->valueint);
     }
 }

@@ -129,6 +129,7 @@ typedef struct s_json {
     cJSON *MESSAGES_ID;
     cJSON *MESSAGES_TIME;
     cJSON *SENDER_ID;
+    cJSON *USER_NAME;
 }              t_json;
 
 typedef struct s_chat {
