@@ -52,67 +52,79 @@ static void get_filename() {
     }
     buff_path++;
     chat->sys->filename = strdup(buff_path);
-    mx_save_voice_file_request(chat->sys, chat->user, chat->json);
-    relize ();
+//    mx_save_voice_file_request(chat->sys, chat->user, chat->json);
 }
 
 
-static void open_file_cooser(int i) {
+static bool open_file_cooser(int i) {
 
     // Show the "Open Text File" dialog box
-    gtk_widget_show(chat_win.file_choose_window);
+//    gtk_window_set_transient_for(GTK_WINDOW(chat_win.file_choose_window), GTK_WINDOW(chat->sys->chat_window));
+    gtk_widget_show_all(chat_win.file_choose_window);
+    gtk_widget_get_can_default(chat_win.file_choose_window);
 
     // Check return value from Open Text File dialog box to see if user clicked the Open button
-    if (gtk_dialog_run(GTK_DIALOG (chat_win.file_choose_window)) == GTK_RESPONSE_OK) {
+    if (gtk_dialog_run(GTK_DIALOG (chat_win.file_choose_window)) == 1) {
         // Get the file name from the dialog box
        chat->sys->file_path = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(chat_win.file_choose_window));
         if (chat->sys->file_path != NULL && credentieal_file_type()) {
             chat->sys->position = i;
             get_filename();
+            gtk_widget_hide(chat_win.file_choose_window);
+            return true;
         }
     }
     // Finished with the "Open Text File" dialog box, so hide it
+    return false;
     gtk_widget_hide(chat_win.file_choose_window);
+
 }
 
 void on_edit_vax1_open_btn_clicked (GtkButton *btn) {
-    open_file_cooser(0);
-    chat->sys->voice_name = (char *)gtk_entry_get_text(chat_win.edit_vax1_entry);
+    if (open_file_cooser(0)) {
+        chat->sys->voice_name = strdup(gtk_entry_get_text(chat_win.edit_vax1_entry));
+        relize();
+    }
 }
 void on_edit_vax2_open_btn_clicked (GtkButton *btn) {
-    open_file_cooser(1);
-    chat->sys->voice_name = (char *)gtk_entry_get_text(chat_win.edit_vax2_entry);
+    if (open_file_cooser(1)) {
+        chat->sys->voice_name = strdup(gtk_entry_get_text(chat_win.edit_vax2_entry));
+        relize();
+    }
 }
 void on_edit_vax3_open_btn_clicked (GtkButton *btn) {
-    open_file_cooser(2);
-    chat->sys->voice_name = (char *)gtk_entry_get_text(chat_win.edit_vax3_entry);
+    if (open_file_cooser(2)) {
+        chat->sys->voice_name = strdup(gtk_entry_get_text(chat_win.edit_vax3_entry));
+        relize();
+    }
 }
 void on_edit_vax4_open_btn_clicked (GtkButton *btn) {
-    open_file_cooser(3);
-    chat->sys->voice_name = (char *)gtk_entry_get_text(chat_win.edit_vax4_entry);
+    if (open_file_cooser(3)) {
+        chat->sys->voice_name = strdup(gtk_entry_get_text(chat_win.edit_vax4_entry));
+        relize();
+    }
 }
 void on_edit_vax5_open_btn_clicked (GtkButton *btn) {
-    open_file_cooser(4);
-    chat->sys->voice_name = (char *)gtk_entry_get_text(chat_win.edit_vax5_entry);
+    if (open_file_cooser(4)) {
+        chat->sys->voice_name = strdup(gtk_entry_get_text(chat_win.edit_vax5_entry));
+        relize();
+    }
 }
 void on_edit_vax6_open_btn_clicked (GtkButton *btn) {
-    open_file_cooser(5);
-    chat->sys->voice_name = (char *)gtk_entry_get_text(chat_win.edit_vax6_entry);
+    if (open_file_cooser(5)) {
+        chat->sys->voice_name = strdup(gtk_entry_get_text(chat_win.edit_vax6_entry));
+        relize();
+    }
 }
 void on_edit_vax7_open_btn_clicked (GtkButton *btn) {
-    open_file_cooser(6);
-    chat->sys->voice_name = (char *)gtk_entry_get_text(chat_win.edit_vax7_entry);
+    if (open_file_cooser(6)) {
+        chat->sys->voice_name = strdup(gtk_entry_get_text(chat_win.edit_vax7_entry));
+        relize();
+    }
 }
 void on_edit_vax8_open_btn_clicked (GtkButton *btn) {
-    open_file_cooser(7);
-    chat->sys->voice_name = (char *)gtk_entry_get_text(chat_win.edit_vax8_entry);
+    if (open_file_cooser(7)) {
+        chat->sys->voice_name = strdup(gtk_entry_get_text(chat_win.edit_vax8_entry));
+        relize();
+    }
 }
-
-
-
-// File --> Quit
-void on_menuitm_quit_activate(GtkMenuItem *menuitem, GtkBuilder *builder)
-{
-    gtk_main_quit();
-}
-

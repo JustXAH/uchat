@@ -5,6 +5,9 @@
 #include "client.h"
 
 void mx_get_voice_file_from_user(t_system *sys, t_user *user, t_json *json) {
+    char command[256];
+    int status;
+
     json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "RESULT");
 
     if (cJSON_IsFalse(json->RESULT)) {
@@ -15,10 +18,12 @@ void mx_get_voice_file_from_user(t_system *sys, t_user *user, t_json *json) {
         printf("You have been sent a voice file. Voice file receiving...\n");
         mx_voice_file_receiving(sys);
         printf("Successfully received voice file from USER!\n");
-
         /*
          * тут должна быть функция воспроизведения войса
          */
+        sprintf( command, "afplay %s", "client/cache/voice_message" );
+        status = system( command );
+
         printf("Successfully played voice message!\n");
 
          // удаление голосового файла и папки cash
