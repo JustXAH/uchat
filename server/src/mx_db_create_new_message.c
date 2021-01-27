@@ -6,8 +6,10 @@ int mx_db_create_new_message(sqlite3 *db, int user, int chat, char *text){
 
     char sql[1024];
     snprintf(sql, sizeof(sql),
-             "INSERT INTO Messages(User,Chat,Text,Time) VALUES ('%d','%d','%s','%ld');",user,chat,text,time(0));
-
+             "INSERT INTO Messages(User,Chat,Text,Time) VALUES ('%d','%d','%s','%ld'); \
+             UPDATE Chats SET Notification2 = Notification2 + 1 WHERE Id = '%d' AND User = '%d'; \
+             UPDATE Chats SET Notification = Notification + 1 WHERE Id = '%d' AND User2 = '%d';"
+             ,user,chat,text,time(0),chat_id,user_id,chat_id,user_id);
     rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
 
     if (rc != SQLITE_OK ) {

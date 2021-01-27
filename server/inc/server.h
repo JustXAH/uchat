@@ -38,6 +38,7 @@
 #define COUNT_MESSAGES 30
 #define NUMBER_VOICES 8
 
+
 //enum for type cjson
 typedef enum e_type_cJSON_message {
     AUTHENTICATION,
@@ -152,7 +153,6 @@ typedef struct s_message {
     int *id;
     int *user;
     char **text;
-    char **login;
     time_t *timestamp;
     int count;
 }               t_message;
@@ -162,45 +162,6 @@ typedef struct s_voice {
     char **filename;
     char **voice_name;
 }               t_voice;
-//
-//typedef struct s_user {
-//    int id;
-//    char *login;
-//    char *password;
-//    struct s_user *next;
-//}              t_user;
-//
-//typedef struct s_contact {
-//    int *id;
-//    char **login;
-//    int count;
-//}              t_contact;
-//
-//typedef struct s_chat {
-//    int *id;
-//    char **chat_name;
-//    int count;
-//}              t_chat;
-//
-//typedef struct s_user_info {
-//    int id;
-//    char *login;
-//    struct s_user_info *next;
-//}              t_user_info;
-//
-//typedef struct s_chat_info {
-//    int id;
-//    char *chat_name;
-//    struct s_chat_info *next;
-//}               t_chat_info;
-//
-//typedef struct s_message {
-//    int id;
-//    int user;
-//    char *text;
-//    time_t timestamp;
-//    struct s_message *next;
-//} t_message;
 
 /*
  * SERVER
