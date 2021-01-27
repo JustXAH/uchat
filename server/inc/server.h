@@ -48,7 +48,7 @@ typedef enum e_type_cJSON_message {
     NEW_CHAT,
     GET_LOGIN,
     NEW_MESSAGE,
-    LAST_MESSAGES,
+    HISTORY_CHAT,
     SAVE_AUDIO,
     SEND_AUDIO,
 }            e_type_cJSON;
@@ -212,7 +212,7 @@ void mx_add_new_contact(t_server *serv, t_json *json, int user_index);
 void mx_add_new_chat(t_server *serv, t_json *json, int user_index);
 void mx_add_new_message(t_server *serv, t_json *json, int user_index);
 void mx_get_login(t_server *serv, t_json *json, int user_index);
-void mx_last_messages(t_server *serv, t_json *json, int user_index);
+void mx_history_chat(t_server *serv, t_json *json, int user_index);
 
 /*
  * DATABASE
@@ -240,7 +240,7 @@ t_message *mx_db_get_message(sqlite3 *db, int mes_id);
 
 int mx_db_insert_new_file(sqlite3 *db, char *filename);
 char *mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename, char *voice_name);
-t_voice *mx_db_get_users_voices(sqlite3 *db, int user);
+//t_voice *mx_db_get_users_voices(sqlite3 *db, int user);
 char* mx_db_get_filename(sqlite3 *db, int id);
 
 #endif //UCHAT_MAIN_H

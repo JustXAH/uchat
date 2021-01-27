@@ -40,6 +40,7 @@ int main(int argc , char *argv[]) {
     pthread_t thread;
 
     mx_serv_struct_initialization(serv);
+//    mx_db_init(serv->db);
 
     //Create socket
     sockfd = socket(AF_INET , SOCK_STREAM , 0);

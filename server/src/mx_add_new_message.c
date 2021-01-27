@@ -4,6 +4,13 @@
 
 #include "server.h"
 
+static void which_user_online(t_server *serv, t_json *json, char *send_str) {
+    int contact_id = json->CONTACT_ID->valueint;
+
+    for (int i = 0; serv->users_id[i]; i++)
+        if (serv->users_id[i] == contact_id)
+            write(serv->user_socket[i], send_str, strlen(send_str));
+}
 
 void mx_add_new_message(t_server *serv, t_json *json, int user_index) {
     char *send_str = NULL;
@@ -11,6 +18,7 @@ void mx_add_new_message(t_server *serv, t_json *json, int user_index) {
     json->USER_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON,"USER_ID");
     json->CHAT_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON,"CHAT_ID");
     json->MESSAGE = cJSON_GetObjectItemCaseSensitive(json->USER_JSON,"MESSAGE");
+    json->CONTACT_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON,"CONTACT_ID");
 
     json->SEND = cJSON_CreateObject();
     json->TYPE = cJSON_CreateNumber(NEW_MESSAGE);
@@ -30,9 +38,11 @@ void mx_add_new_message(t_server *serv, t_json *json, int user_index) {
     }
 
     send_str = cJSON_Print(json->SEND);
-    write(1, send_str, strlen(send_str));
+//    write(1, send_str, strlen(send_str));
 
+//    serv->users_id;
     write(serv->user_socket[user_index], send_str, strlen(send_str));
+    which_user_online(serv, json, send_str);
 
     cJSON_Delete(json->SEND);
     free(send_str);

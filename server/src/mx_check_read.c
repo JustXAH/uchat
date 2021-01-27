@@ -52,8 +52,8 @@ static void read_and_write(t_server *serv, int user_index) {
             case NEW_MESSAGE:
                 mx_add_new_message(serv, json, user_index);
                 break;
-            case LAST_MESSAGES:
-                mx_last_messages(serv, json, user_index);
+            case HISTORY_CHAT:
+                mx_history_chat(serv, json, user_index);
                 break;
             case SAVE_AUDIO:
                 write(1, "SAVE AUDIO\n", 11);
