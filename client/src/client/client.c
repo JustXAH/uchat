@@ -14,6 +14,7 @@ int main(int argc, char *argv[]) {
     t_user *user = (t_user *)malloc(sizeof(t_user));
     struct sockaddr_in servaddr;
     pthread_t thread_server;
+    int cli_socket = 0;
 
     chat = (t_chat *)malloc(sizeof(t_chat));
     mx_structs_initialization(sys, user);
@@ -21,7 +22,8 @@ int main(int argc, char *argv[]) {
 //    printf("\nLOGIN = %s\nPASS = %s\n", user->login, user->password);
 
     // socket create and varification
-    sys->sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    cli_socket = socket(AF_INET, SOCK_STREAM, 0);
+    sys->sockfd = cli_socket;
     if (sys->sockfd == -1) {
         write(2, "ERROR, socket creation failed\n", 30);
         exit(0);
@@ -62,15 +64,18 @@ int main(int argc, char *argv[]) {
     //MB's shit (starting the client's listener function and initializing windows)//
     g_idle_add(mb_event_listener, NULL);
     gtk_window_initializtion(chat);
-    mx_printstr("closing time\n");
+    printf("Waiting for finish thread read_server process...\n");
+    sleep(4);
     //----------------------------------------------------------------------------//
 //    mx_chat_event(sys, user, thread_server);
+    // read server thread closing
     pthread_cancel(thread_server);
+    printf("Thread read_server closed!\n");
     // close the socket
-    pthread_cancel(thread_server);
-    close(sys->sockfd);
-     mx_printstr("closing tim 2\n");
-    system("leaks -q client");
+    close(cli_socket);
+    printf("Socket closed!\n");
+
+    system("leaks -q uchat");
 
     return 0;
 }

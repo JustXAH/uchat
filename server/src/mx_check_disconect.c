@@ -17,7 +17,7 @@ void mx_check_disconnect(t_server *serv, int user_index) {
     poll_set->events = POLLHUP;
 
     // ждём до 1 секунд
-    ret = poll(poll_set, 1, 1500);
+    ret = poll(poll_set, 1, 1000);
     printf("ret = %d\n", ret);
     printf("socket = %d[%d]\n", serv->user_socket[user_index], user_index);
 

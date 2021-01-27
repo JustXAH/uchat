@@ -8,6 +8,7 @@ static void read_and_write(t_server *serv, int user_index) {
     t_json *json = (t_json *)malloc(sizeof(t_json));
     char buff_message[MAX_LEN];
 
+    serv->type_enum = -1;
     mx_json_struct_initialization(json);
     write(1, "Waiting for a json from client...\n", 25);
     read(serv->user_socket[user_index], buff_message, MAX_LEN);
@@ -83,7 +84,7 @@ void mx_check_read(t_server *serv, int user_index) {
     poll_set->events = POLLIN;
 
     // ждём до 1 секунд
-    ret = poll(poll_set, 1, 1500);
+    ret = poll(poll_set, 1, 1);
     printf("ret = %d\n", ret);
     printf("socket = %d[%d]\n", serv->user_socket[user_index], user_index);
     printf("user id = %d\n", serv->users_id[user_index]);

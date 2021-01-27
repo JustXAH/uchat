@@ -4,9 +4,12 @@
 
 #include "client.h"
 
+extern t_chat *chat;
 extern t_reg_win reg_win;
 
 void destroy(GtkBuilder *builder) {
+    chat->sys->exit = true;
+    printf("EXIT = TRUE\n");
     gtk_main_quit();
 }
 

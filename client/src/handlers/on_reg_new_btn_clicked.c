@@ -39,6 +39,10 @@ void on_reg_new_btn_clicked(GtkButton *btn) {
         return;
     chat->user->login = strdup((char *)gtk_entry_get_text(reg_win.reg_log));
     chat->user->password = strdup((char *)gtk_entry_get_text(reg_win.reg_pass1));
+    chat->user->hash_password = g_compute_checksum_for_string(G_CHECKSUM_SHA256,
+                                                         chat->user->password,
+                                                         strlen(chat->user->password));
+    mx_strdel(&chat->user->password);
     //printf("1LOGIN = %s\n1PASS = %s\n", user->login, user->password);
     chat->sys->reg_request = true;
     cl_listener.my_name = strdup(gtk_entry_get_text(reg_win.reg_log));

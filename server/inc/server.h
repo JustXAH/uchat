@@ -92,18 +92,18 @@ typedef struct s_json {
     cJSON *TO;
     cJSON *CHAT_ID;
     cJSON *COUNT_MESSAGES_ARR;
-    cJSON *COUNT_CONTACTS;
     cJSON *SENDER_ID;
     cJSON *MESSAGES_TIME;
     cJSON *MESSAGES_ID;
     cJSON *FILENAME;
-    cJSON *FILE_PATH;
     cJSON *POSITION;
     cJSON *VOICE_ID;
     cJSON *VOICE_NAME;
     cJSON *USER_NAME;
     cJSON *MESSAGE_ID;
-    cJSON *XYI;
+    cJSON *VOICES_ID_ARR;
+    cJSON *VOICES_NAME_ARR;
+
 }              t_json;
 
 //struct for database
