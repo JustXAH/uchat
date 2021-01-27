@@ -50,4 +50,3 @@ void mx_add_new_message(t_server *serv, t_json *json, int user_index) {
     // mx_printstr("mx_add_new_message ended\n");
      write(1, "\nRABOTAET2\n", 11);
 }
-gi
