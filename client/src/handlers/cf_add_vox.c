@@ -34,7 +34,7 @@ static void relize () {
 }
 static void parsing () {
     int i = strlen(chat->sys->file_path);
-    char *buff = NULL;
+    char *buff_path = NULL;
 
     while (*buff_path) {
         buff_path++;
@@ -45,8 +45,6 @@ static void parsing () {
     buff_path++;
     chat->sys->filename = strdup(buff_path);
 //    mx_save_voice_file_request(chat->sys, chat->user, chat->json);
-}
-
 }
 
 static bool open_file_cooser(int i) {
