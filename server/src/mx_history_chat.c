@@ -24,15 +24,12 @@ void mx_history_chat(t_server *serv, t_json *json, int user_index) {
         json->MESSAGES_ID = cJSON_CreateIntArray(message->id, message->count);
         json->MESSAGES_TIME = cJSON_CreateIntArray((const int *) message->timestamp, message->count);
         json->SENDER_ID = cJSON_CreateIntArray(message->user, message->count);
-        json->USER_NAME = cJSON_CreateStringArray((const char *const *)message->login, message->count);
         mx_printstr("mx_his 3\n");
         cJSON_AddItemToObject(json->SEND, "MESSAGES_ARR", json->MESSAGES_ARR);
         cJSON_AddItemToObject(json->SEND, "COUNT_MESSAGES_ARR", json->COUNT_MESSAGES_ARR);
         cJSON_AddItemToObject(json->SEND, "MESSAGE_ID", json->MESSAGES_ID);
         cJSON_AddItemToObject(json->SEND, "MESSAGES_TIME", json->MESSAGES_TIME);
         cJSON_AddItemToObject(json->SEND, "SENDER_ID", json->SENDER_ID);
-        cJSON_AddItemToObject(json->SEND, "USER_NAME", json->USER_NAME);
-
     }
     cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
     cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);

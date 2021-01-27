@@ -47,16 +47,16 @@ void contacts_json_creator(sqlite3 *db, t_json **json, int user) {
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_LOGIN_ARR", (*json)->CONTACTS_LOGIN_ARR);
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_COUNT", (*json)->CONTACTS_COUNT);
 
-    if (contacts->count > 0) {
-        if (MALLOC_SIZE(contacts->id)) {
-            free(contacts->id);
-        }
-        if (MALLOC_SIZE(contacts->login)) {
-            mx_del_strarr(&contacts->login);
-        }
-    }
-    if (MALLOC_SIZE(contacts))
-        free(contacts);
+    // if (contacts->count > 0) {
+    //     if (MALLOC_SIZE(contacts->id)) {
+    //         //free(contacts->id);
+    //     }
+    //     if (MALLOC_SIZE(contacts->login)) {
+    //         // mx_del_strarr(&contacts->login);
+    //     }
+    // }
+    // if (MALLOC_SIZE(contacts))
+    //     //free(contacts);
 }
 
 void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_index) {

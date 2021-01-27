@@ -13,7 +13,7 @@ int mx_db_insert_new_user(sqlite3 *db, char *login, char *password) {
 
     char sql[1024];
     snprintf(sql, sizeof(sql),
-             "INSERT INTO Users(Login,Password) VALUES ('%s','%s');",login,password);
+             "INSERT INTO Users(Login,Password,Picture) VALUES ('%s','%s', '0');",login,password);
 
     rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
 
