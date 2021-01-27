@@ -66,6 +66,22 @@ void chat_win_init(t_system *sys) {
                                                         "friends_search_entry"));
     chat_win.csearch_entry = GTK_SEARCH_ENTRY(gtk_builder_get_object(sys->builder,
                                                         "chat_search_entry"));
+    chat_win.edit_vax1_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
+                                                                     "edit_vax1_entry"));
+    chat_win.edit_vax2_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
+                                                                     "edit_vax2_entry"));
+    chat_win.edit_vax3_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
+                                                                       "edit_vax3_entry"));
+    chat_win.edit_vax4_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
+                                                                       "edit_vax4_entry"));
+    chat_win.edit_vax5_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
+                                                                       "edit_vax5_entry"));
+    chat_win.edit_vax6_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
+                                                                       "edit_vax6_entry"));
+    chat_win.edit_vax7_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
+                                                                       "edit_vax7_entry"));
+    chat_win.edit_vax8_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
+                                                                       "edit_vax8_entry"));
     chat_win.fresults = NULL;
     /*
     chat_win.s_comp = gtk_entry_completion_new ();

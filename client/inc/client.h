@@ -75,6 +75,7 @@ typedef struct s_system {
     char *file_path;
     char *filename;
     char *filename_extension;
+    char *voice_name;
     int position;
     int argc;
     int sockfd;
@@ -185,6 +186,15 @@ typedef struct s_chat_win {
     GtkLabel            *welcome_user;
 
     GtkLabel            *friend_login;
+
+    GtkEntry     *edit_vax1_entry;
+    GtkEntry     *edit_vax2_entry;
+    GtkEntry     *edit_vax3_entry;
+    GtkEntry     *edit_vax4_entry;
+    GtkEntry     *edit_vax5_entry;
+    GtkEntry     *edit_vax6_entry;
+    GtkEntry     *edit_vax7_entry;
+    GtkEntry     *edit_vax8_entry;
 }                t_chat_win;
 
 typedef struct s_client_st {
