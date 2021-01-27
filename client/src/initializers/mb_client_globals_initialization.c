@@ -6,7 +6,7 @@ t_client_st cl_listener;
 t_message *incoming_msg_buffer;
 t_chat_list *contact_list;
 t_chat_list *chat_list;
-
+t_message *chat_history;
 
 void reg_win_init(t_system *sys) {
     reg_win.log_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
@@ -96,6 +96,8 @@ void mb_client_globals_initialization() {
         cl_listener.pending_requests[i] = false;
     
     incoming_msg_buffer = NULL;
+    chat_history = NULL;
     contact_list = NULL;
     chat_list = NULL;
+    
 }

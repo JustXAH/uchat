@@ -27,6 +27,7 @@ void on_chat_send_btn_clicked(GtkButton *btn, GtkBuilder *builder) {
         mx_add_message_request(chat->sys, chat->user, chat->json,
                                txt_msg, cl_listener.chat_in_focus, 0 /* ид юсера которому отправляем сообщение */);
 
+        gtk_entry_set_text(chat_win.msg_entry, "");
         //printf("%d\n", cl_listener.chat_in_focus);
         /*
         t_message *msg = mb_form_msg(cl_listener.chat_in_focus,
@@ -34,7 +35,6 @@ void on_chat_send_btn_clicked(GtkButton *btn, GtkBuilder *builder) {
                                         cl_listener.my_name,
                                         txt_msg, 
                                         true);
-        mb_send_msg(msg);
-        gtk_entry_set_text(chat_win.msg_entry, "");*/
+        mb_send_msg(msg);*/
     }
 }

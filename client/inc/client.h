@@ -199,7 +199,7 @@ typedef struct s_client_st {
 }               t_client_st;
 
 typedef struct s_message {
-    int id;
+    //int id;
     int user_id;
     int chat_id;
     int msg_id;
@@ -216,7 +216,7 @@ typedef struct s_chat_list {
     int *user_ids;
     char **user_names;
     int user_amount;
-    t_message *chat_history;
+    bool is_online;
     GtkWidget *contact_gui;
     struct s_chat_list *next_chat;
 }              t_chat_list;
@@ -280,13 +280,13 @@ gboolean mb_event_listener(gpointer data);
 void mb_auth_event_check();
 void mb_incoming_msg_check();
 
-void mb_contact_list_add(int chat_id, int user_id, char *user_name);
+void mb_contact_list_add(int chat_id, int user_id, char *user_name, bool is_online);
 void mb_msg_buffer_add(int msg_id, int chat_id, int user_id, char *user_name, char *time, char *msg_text);
 
-void mb_send_msg(t_message *msg);
+//void mb_send_msg(t_message *msg);
 void mb_display_msg(t_message *msg);
 void mb_display_chat_with_contact(int chat_id);
-void mb_add_msg_to_history(t_message **history, t_message *new_msg);
+//void mb_add_msg_to_history(t_message **history, t_message *new_msg);
 
 void mb_invalid_credentials_msg();
 void mb_reset_credentials_msg();
