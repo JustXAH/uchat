@@ -96,12 +96,12 @@ typedef struct s_json {
     cJSON *SENDER_ID;
     cJSON *MESSAGES_TIME;
     cJSON *MESSAGES_ID;
-    cJSON *EXTENSION;
     cJSON *FILENAME;
     cJSON *FILE_PATH;
     cJSON *POSITION;
     cJSON *VOICE_ID;
     cJSON *VOICE_NAME;
+    cJSON *USER_NAME;
 }              t_json;
 
 //struct for database
@@ -147,6 +147,7 @@ typedef struct s_message {
     int *id;
     int *user;
     char **text;
+    char **login;
     time_t *timestamp;
     int count;
 }               t_message;

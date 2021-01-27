@@ -43,7 +43,7 @@ void on_friends_search_entry_changed() {
     }
 }
 static void get_search_results() {
-    //while (cl_listener.awaiting_fs_res); //waiting to receive results
+    while (cl_listener.pending_requests[USER_SEARCH_BY_SUBSTRING]); //waiting to receive results
     int count = chat->sys->found_usernames_count;
 
     if (count) {

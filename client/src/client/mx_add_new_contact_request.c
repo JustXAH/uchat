@@ -4,7 +4,10 @@
 
 #include "client.h"
 
-void mx_add_new_contact_request(t_system *sys, t_user *user, t_json *json, int contact_id) {
+
+extern t_client_st cl_listener;
+
+void mx_add_new_contact_request(t_system *sys, t_user * user, t_json *json, int contact_id) {
     char *send_str = NULL;
 
     json->SERVER_JSON = cJSON_CreateObject();
@@ -23,4 +26,5 @@ void mx_add_new_contact_request(t_system *sys, t_user *user, t_json *json, int c
     
     free(send_str);
     cJSON_Delete(json->SERVER_JSON);
+    cl_listener.pending_requests[NEW_CONTACT] = true;
 }

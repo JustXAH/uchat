@@ -1,7 +1,6 @@
 //
-// Created by Dima Voichuck on 1/26/21.
+// Created by Dima Voichuck on 1/25/21.
 //
-
 
 #include "client.h"
 
@@ -16,20 +15,16 @@ static char *get_time(long time) {
 
 static void add_in_user_message(t_json *json, t_user *user, int count) {
     char *time_str;
+    int i = count - 1;
 
-    for (int i = 0; i < count; i++) {
-        time_str = get_time(
-                cJSON_GetArrayItem(json->MESSAGES_TIME, i)->valueint);
-        mb_msg_buffer_add(cJSON_GetArrayItem(json->MESSAGES_ID, i)->valueint,
-                          json->CHAT_ID->valueint,
-                          cJSON_GetArrayItem(json->USER_ID, i)->valueint,
-                          cJSON_GetArrayItem(json->USER_NAME, i)->valuestring,
-                          time_str, cJSON_GetArrayItem(json->MESSAGES_ARR,
-                                                       i)->valuestring);
-    }
+    time_str = get_time(cJSON_GetArrayItem(json->MESSAGES_TIME, i)->valueint);
+    mb_msg_buffer_add(cJSON_GetArrayItem(json->MESSAGES_ID, i)->valueint, json->CHAT_ID->valueint,
+                      cJSON_GetArrayItem(json->USER_ID, i)->valueint,
+                      cJSON_GetArrayItem(json->USER_NAME, i)->valuestring,
+                      time_str, cJSON_GetArrayItem(json->MESSAGES_ARR, i)->valuestring);
 }
 
-void mx_get_last_messages(t_system *sys, t_user *user, t_json *json) {
+void mx_add_new_message(t_system *sys, t_user *user, t_json *json) {
     json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "RESULT");
     if (cJSON_IsFalse(json->RESULT)) {
         // Error

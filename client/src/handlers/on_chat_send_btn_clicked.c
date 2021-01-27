@@ -9,12 +9,13 @@ static t_message *mb_form_msg(int chat_id,      int user_id,
     t_message *msg;
 
     msg = (t_message *) malloc(sizeof(t_message));
-    msg->outgoing = outgoing;
+    msg->outgoing = true;
+    msg->msg_id = 0;
     msg->chat_id = chat_id;
     msg->user_id = user_id;
     msg->user_name = mx_strdup(user_name);
-    msg->text = strdup(msg_text);
-    msg->timestamp = 0;
+    msg->text = mx_strdup(msg_text);
+    msg->timestamp = NULL;
     msg->next = NULL;
     return msg;
 }

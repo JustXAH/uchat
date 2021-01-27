@@ -1,8 +1,8 @@
 //
 // Created by mac on 24.01.2021.
 //
-
 #include "client.h"
+
 extern t_client_st cl_listener;
 
 void mx_user_search_by_substr_request(t_system *sys, t_json *json) {
@@ -25,5 +25,5 @@ void mx_user_search_by_substr_request(t_system *sys, t_json *json) {
 
     cJSON_Delete(json->SEND);
     free(send_str);
-    cl_listener.awaiting_fs_res = true;
+    cl_listener.pending_requests[USER_SEARCH_BY_SUBSTRING] = true;
 }

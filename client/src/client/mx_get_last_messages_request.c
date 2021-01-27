@@ -1,23 +1,21 @@
 //
-// Created by Dima Voichuck on 1/25/21.
+// Created by Dima Voichuck on 1/26/21.
 //
 
 #include "client.h"
 
-void mx_add_messages_request(t_system *sys, t_user *user, t_json *json, char *messages_str, int chat_id) {
+void mx_get_last_messages_request(t_system *sys, t_user *user, t_json *json, int chat_id) {
     char *send_str = NULL;
 
     json->SEND = cJSON_CreateObject();
-    json->TYPE = cJSON_CreateNumber(NEW_MESSAGE);
+    json->TYPE = cJSON_CreateNumber(LAST_MESSAGES);
 
     json->USER_ID = cJSON_CreateNumber(user->my_id);
     json->CHAT_ID = cJSON_CreateNumber(chat_id);
-    json->MESSAGE = cJSON_CreateString(messages_str);
 
     cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
     cJSON_AddItemToObject(json->SEND, "USER_ID", json->USER_ID);
     cJSON_AddItemToObject(json->SEND, "CHAT_ID", json->CHAT_ID);
-    cJSON_AddItemToObject(json->SEND, "MESSAGE", json->MESSAGE);
 
     send_str = cJSON_Print(json->SEND);
 
