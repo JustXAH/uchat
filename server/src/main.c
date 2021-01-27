@@ -65,12 +65,14 @@ int main(int argc , char *argv[]) {
     write(1, "Socket successfully binded!\n", 28);
 
     //database open
+
+
     serv->db = mx_db_open("uchat.db");
     if (!serv->db) {
         return -1;
     }
-//    printf("\nDB = %d\n", (int) serv->db);
-//    mx_db_init(serv->db);
+    printf("\nDB = %d\n", (int) serv->db);
+    mx_db_init(serv->db);
     //Listen
     listen(sockfd , 3);
 

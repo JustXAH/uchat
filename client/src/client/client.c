@@ -62,12 +62,14 @@ int main(int argc, char *argv[]) {
     //MB's shit (starting the client's listener function and initializing windows)//
     g_idle_add(mb_event_listener, NULL);
     gtk_window_initializtion(chat);
+    mx_printstr("closing time\n");
     //----------------------------------------------------------------------------//
 //    mx_chat_event(sys, user, thread_server);
 
     // close the socket
+    pthread_cancel(thread_server);
     close(sys->sockfd);
-    
+     mx_printstr("closing tim 2\n");
     system("leaks -q client");
 
     return 0;
