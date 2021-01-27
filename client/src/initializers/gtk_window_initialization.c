@@ -4,9 +4,12 @@
 
 #include "client.h"
 
+extern t_chat *chat;
 extern t_reg_win reg_win;
 
 void destroy(GtkBuilder *builder) {
+    chat->sys->exit = true;
+    printf("EXIT = TRUE\n");
     gtk_main_quit();
 }
 
@@ -40,7 +43,7 @@ void gtk_window_initializtion(t_chat *chat) {
     mb_client_globals_initialization();
     reg_win_init(chat->sys);
     chat_win_init(chat->sys);
-
+    mx_printstr("gtk_main_starting\n");
     gtk_main();
 }
 void gtk_show_chat_window(t_chat *chat) {
@@ -51,3 +54,5 @@ void gtk_show_log_window(t_chat *chat) {
     gtk_widget_hide(GTK_WIDGET(chat->sys->chat_window));
     gtk_widget_show_all(GTK_WIDGET(chat->sys->reg_window));
 }
+
+

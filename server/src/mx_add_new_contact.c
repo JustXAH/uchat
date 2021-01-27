@@ -13,41 +13,40 @@ void add_new_contact_and_json_create(sqlite3 *db, t_json **json) {
         (*json)->RESULT = cJSON_CreateFalse();
     }
     else {
-        (*json)->COUNT_CONTACTS = cJSON_CreateNumber(contacts->count);
-        (*json)->RESULT = cJSON_CreateTrue();
         contacts = mx_db_get_contacts_info(db, (*json)->USER_ID->valueint);
+        (*json)->CONTACTS_COUNT = cJSON_CreateNumber(contacts->count);
+        (*json)->RESULT = cJSON_CreateTrue();
         (*json)->CONTACTS_ID_ARR = cJSON_CreateIntArray(contacts->id, contacts->count);
         (*json)->CONTACTS_LOGIN_ARR = cJSON_CreateStringArray((const char * const *)contacts->login, contacts->count);
     }
     cJSON_AddItemToObject((*json)->SEND, "RESULT", (*json)->RESULT);
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_ID_ARR", (*json)->CONTACTS_ID_ARR);
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_LOGIN_ARR", (*json)->CONTACTS_LOGIN_ARR);
-    cJSON_AddItemToObject((*json)->SEND, "COUNT_CONTACTS", (*json)->COUNT_CONTACTS);
-
+    cJSON_AddItemToObject((*json)->SEND, "CONTACTS_COUNT", (*json)->CONTACTS_COUNT);
     if (MALLOC_SIZE(contacts->id)) {
         free(contacts->id);
     }
-    if (MALLOC_SIZE(contacts->login)) {
-        mx_del_strarr(&contacts->login);
+    if (MALLOC_SIZE(contacts->login) && contacts->count > 0) {
+        //Shit be segfaulting
+       // mx_del_strarr(&contacts->login);
     }
-    free(contacts);
+    if (MALLOC_SIZE(contacts)) {
+        free(contacts);
+    }
 }
 
-void mx_add_new_contact(t_server *serv, t_json *json, int user_sock) {
+void mx_add_new_contact(t_server *serv, t_json *json, int user_index) {
     char *send_str = NULL;
     json->USER_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "USER_ID");
     json->CONTACT_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "CONTACT_ID");
-
     json->SEND = cJSON_CreateObject();
     json->TYPE = cJSON_CreateNumber(NEW_CONTACT);
 
     cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
-
     add_new_contact_and_json_create(serv->db, &json);
 
     send_str = cJSON_Print(json->SEND);
-
-    write(user_sock, send_str, strlen(send_str));
+    write(serv->user_socket[user_index], send_str, strlen(send_str));
 
     cJSON_Delete(json->SEND);
     free(send_str);

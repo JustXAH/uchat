@@ -24,7 +24,10 @@ void mx_json_struct_initialization(t_json *json) {
     json->CHAT_ID = NULL;
     json->COUNT_MESSAGES_ARR = NULL;
     json->MESSAGE = NULL;
-    json->MESSAGE_TIME = NULL;
+    json->MESSAGES_TIME = NULL;
     json->MESSAGES_ARR = NULL;
-    json->MESSAGE_ID = NULL;
+    json->MESSAGES_ID = NULL;
+    json->FILENAME = NULL;
+    json->VOICE_ID = NULL;
+    json->POSITION = NULL;
 }

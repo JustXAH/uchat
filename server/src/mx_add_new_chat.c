@@ -21,19 +21,22 @@ void add_new_chat_and_json_create(sqlite3 *db, t_json **json) {
     cJSON_AddItemToObject((*json)->SEND, "RESULT", (*json)->RESULT);
     cJSON_AddItemToObject((*json)->SEND, "CHATS_ID_ARR", (*json)->CHATS_ID_ARR);
     cJSON_AddItemToObject((*json)->SEND, "CHATS_NAME_ARR", (*json)->CHATS_NAME_ARR);
-
     if (MALLOC_SIZE(chats->id)) {
         free(chats->id);
     }
     if (MALLOC_SIZE(chats->chat_name)) {
-        mx_del_strarr(&chats->chat_name);
+        //Shit be segfaulting as well
+        //mx_del_strarr(&chats->chat_name);
     }
     free(chats);
+
 }
 
-void mx_add_new_chat(t_server *serv, t_json *json, int user_sock) {
+void mx_add_new_chat(t_server *serv, t_json *json, int user_index) {
     char *send_str = NULL;
 
+    json->USER_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "USER_ID");
+    json->CONTACT_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "CONTACT_ID");
     json->SEND = cJSON_CreateObject();
     json->TYPE = cJSON_CreateNumber(NEW_CHAT);
 
@@ -43,8 +46,10 @@ void mx_add_new_chat(t_server *serv, t_json *json, int user_sock) {
 
     send_str = cJSON_Print(json->SEND);
 
-    write(user_sock, send_str, strlen(send_str));
+    mx_printstr(send_str);
 
+    write(serv->user_socket[user_index], send_str, strlen(send_str));
+    
     cJSON_Delete(json->SEND);
     free(send_str);
 }

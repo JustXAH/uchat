@@ -18,13 +18,13 @@ static cJSON *logins_arr_json_creator(const char * const *logins) {
     return LOGINS_ARR;
 }
 
-void mx_user_search_by_substr(t_server *serv, t_json *json, int user_sock) {
+void mx_user_search_by_substr(t_server *serv, t_json *json, int user_index) {
     char **buff_arr = NULL;
     char *send_str = NULL;
 
     json->SEND = cJSON_CreateObject();
     json->TYPE = cJSON_CreateNumber(USER_SEARCH_BY_SUBSTRING);
-    json->LOGIN = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "LOGIN");
+    json->LOGIN = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "LOGIN_SUBSTR");
 
     buff_arr = mx_db_search_logins_by_substr(serv->db, json->LOGIN->valuestring);
     if (buff_arr == NULL) { // "NULL" - no login matches
@@ -39,8 +39,8 @@ void mx_user_search_by_substr(t_server *serv, t_json *json, int user_sock) {
     cJSON_AddItemToObject(json->SEND, "FOUND_USERNAMES", json->FOUND_USERNAMES);
 
     send_str = cJSON_Print(json->SEND);
-
-    write(user_sock, send_str, strlen(send_str));
+//    printf("ser_socket[%d] = %d, %s\n", user_index, serv->user_socket[user_index], send_str);
+    write(serv->user_socket[user_index], send_str, strlen(send_str));
 
     cJSON_Delete(json->SEND);
     free(send_str);

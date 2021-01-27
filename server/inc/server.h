@@ -30,31 +30,39 @@
 #include <pthread.h>
 #include <time.h>
 #include <sqlite3.h>
+#include <sys/stat.h>
 
-#define MAX 4096
-#define PORT 5000
-#define MAX_CLIENTS 5
+#define MAX_LEN 1024
+#define PORT 5001
+#define MAX_USERS 5
 #define COUNT_MESSAGES 30
+#define NUMBER_VOICES 8
 
 //enum for type cjson
 typedef enum e_type_cJSON_message {
     AUTHENTICATION,
     REGISTRATION,
+    WHO_ONLINE,
     USER_SEARCH_BY_SUBSTRING,
     USER_SEARCH_BY_LOGIN,
     NEW_CONTACT,
     NEW_CHAT,
     GET_LOGIN,
     NEW_MESSAGE,
-    LAST_MESSAGES,
+    HISTORY_CHAT,
+    NEW_VOICE,
+    SEND_VOICE_TO_USER,
 }            e_type_cJSON;
 
 //struct for server
 typedef struct s_server {
     sqlite3 *db;
     int *user_socket;
+    int *users_id;
     int serv_sock_fd;
     int cli_connect;
+    bool update;
+//    bool update_first;
     bool exit;
     e_type_cJSON type_enum;
 }              t_server;
@@ -74,24 +82,36 @@ typedef struct s_json {
     cJSON *CHATS_ID_ARR;
     cJSON *CHATS_NAME_ARR;
     cJSON *CHATS_COUNT;
+    cJSON *LOGIN_SUBSTR;
+    cJSON *SEARCHED_LOGIN;
     cJSON *FOUND_USERNAMES;
+    cJSON *FOUND_USER_ID;
     cJSON *FOUND_LOGIN;
     cJSON *MESSAGE;
     cJSON *MESSAGES_ARR;
     cJSON *TO;
     cJSON *CHAT_ID;
     cJSON *COUNT_MESSAGES_ARR;
-    cJSON *COUNT_CONTACTS;
     cJSON *SENDER_ID;
+    cJSON *MESSAGES_TIME;
+    cJSON *MESSAGES_ID;
+    cJSON *FILENAME;
+    cJSON *POSITION;
+    cJSON *VOICE_ID;
+    cJSON *VOICE_NAME;
+    cJSON *USER_NAME;
     cJSON *MESSAGE_TIME;
     cJSON *MESSAGE_ID;
+    cJSON *VOICES_ID_ARR;
+    cJSON *VOICES_NAME_ARR;
+
 }              t_json;
 
-//struct for database
 typedef struct s_user {
     int id;
     char *login;
     char *password;
+    int photo_file_id;
     struct s_user *next;
 }              t_user;
 
@@ -104,17 +124,20 @@ typedef struct s_contact {
 typedef struct s_chat {
     int *id;
     char **chat_name;
+    int *notification;
     int count;
 }              t_chat;
 
 typedef struct s_user_info {
     int id;
     char *login;
+    int photo_file_id;
 }              t_user_info;
 
 typedef struct s_chat_info {
     int id;
     char *chat_name;
+    int notification;
     struct s_chat_info *next;
 }               t_chat_info;
 
@@ -134,64 +157,40 @@ typedef struct s_message {
     int count;
 }               t_message;
 
-//
-//typedef struct s_user {
-//    int id;
-//    char *login;
-//    char *password;
-//    struct s_user *next;
-//}              t_user;
-//
-//typedef struct s_contact {
-//    int *id;
-//    char **login;
-//    int count;
-//}              t_contact;
-//
-//typedef struct s_chat {
-//    int *id;
-//    char **chat_name;
-//    int count;
-//}              t_chat;
-//
-//typedef struct s_user_info {
-//    int id;
-//    char *login;
-//    struct s_user_info *next;
-//}              t_user_info;
-//
-//typedef struct s_chat_info {
-//    int id;
-//    char *chat_name;
-//    struct s_chat_info *next;
-//}               t_chat_info;
-//
-//typedef struct s_message {
-//    int id;
-//    int user;
-//    char *text;
-//    time_t timestamp;
-//    struct s_message *next;
-//} t_message;
+typedef struct s_voice {
+    int *id;
+    char **filename;
+    char **voice_name;
+}               t_voice;
+
 
 /*
  * SERVER
  */
 void mx_serv_struct_initialization(t_server *serv);
+void mx_media_dirs_creator();
 void mx_json_struct_initialization(t_json *json);
+void mx_sorting_users_and_sockets(t_server *serv);
+void mx_update_handler(t_server *serv);
+void mx_sending_who_online(t_server *serv, int user_index);
 //cJSON *mx_database_stub(cJSON *user);
 //void mx_read_server(t_server *serv);
-void mx_check_read(t_server *serv, int i);
-void mx_check_disconnect(t_server *server, int i);
-void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_sock);
-void mx_user_registration(t_server *serv, t_json *json, int user_sock);
-void mx_user_search_by_substr(t_server *serv, t_json *json, int user_sock);
-void mx_user_search_by_login(t_server *serv, t_json *json, int user_sock);
-void mx_add_new_contact(t_server *serv, t_json *json, int user_sock);
-void mx_add_new_chat(t_server *serv, t_json *json, int user_sock);
-void mx_add_new_message(t_server *serv, t_json *json, int user_sock);
-void mx_get_login(t_server *serv, t_json *json, int user_sock);
-void mx_last_messages(t_server *serv, t_json *json, int user_sock);
+void mx_check_read(t_server *serv, int user_index);
+void mx_check_disconnect(t_server *serv, int user_index);
+void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_index);
+void mx_user_registration(t_server *serv, t_json *json, int user_index);
+void mx_user_search_by_substr(t_server *serv, t_json *json, int user_index);
+void mx_user_search_by_login(t_server *serv, t_json *json, int user_index);
+void mx_add_new_contact(t_server *serv, t_json *json, int user_index);
+void mx_add_new_chat(t_server *serv, t_json *json, int user_index);
+void mx_add_new_message(t_server *serv, t_json *json, int user_index);
+void mx_get_login(t_server *serv, t_json *json, int user_index);
+void mx_history_chat(t_server *serv, t_json *json, int user_index);
+void mx_save_voice_file_and_get_id(t_server *serv, t_json *json, int user_index);
+void mx_voice_file_receiver(t_server *serv, char *unique_name,
+                            int user_index);
+void mx_send_voice_file_handler(t_server *serv, t_json *json, int user_index);
+void mx_send_voice_file_to_user(char *filename, int user_socket);
 
 /*
  * DATABASE
@@ -203,6 +202,7 @@ int mx_db_check_login(sqlite3 *db, char *login, char *password); //returns id; "
 int mx_db_check_login_exist(sqlite3 *db, char *login); //returns id; "0" - login doesn't exist
 int mx_db_init(sqlite3 *db); //clean db and init tables
 int mx_db_create_new_contact(sqlite3 *db, int user, int contact); //
+int mx_db_set_user_picture(sqlite3 *db, int user, char *filename); //
 int mx_db_create_new_chat(sqlite3 *db, int user, int contact); //return chat_id
 int *mx_db_get_contacts(sqlite3 *db, int user); // 0-ended array of users_id; NULL if contact list is empty
 t_contact *mx_db_get_contacts_info(sqlite3 *db, int user); //
@@ -215,5 +215,14 @@ int mx_db_get_chat_by_users(sqlite3 *db, int user_1, int user_2); //return chat_
 t_chat *mx_db_get_chats_info(sqlite3 *db, int user);
 int mx_db_create_new_message(sqlite3 *db, int user, int chat, char *text);
 t_message *mx_db_get_last_messages(sqlite3 *db, int chat);
+t_message_info *mx_db_get_message(sqlite3 *db, int mes_id);
+
+int mx_db_insert_new_file(sqlite3 *db, char *filename);
+int mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename, char *voice_name);
+t_voice *mx_db_get_users_voices(sqlite3 *db, int user);
+char* mx_db_get_filename(sqlite3 *db, int id);
+
+//int mx_db_get_notification(sqlite3 *db, int chat_id, int user_id);
+int mx_db_clear_notification(sqlite3 *db, int chat_id, int user_id);
 
 #endif //UCHAT_MAIN_H

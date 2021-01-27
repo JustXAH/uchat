@@ -15,8 +15,8 @@ static int check_login_exist_callback(void *NotUsed, int argc, char **argv, char
 int mx_db_check_login_exist(sqlite3 *db, char *login) {
     char *err_msg = 0;
     int rc;
-
     char sql[1024];
+    le_login_id = 0;
     snprintf(sql, sizeof(sql),
              "SELECT Id FROM Users WHERE Login = '%s';",login);
 
