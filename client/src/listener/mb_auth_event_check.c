@@ -14,14 +14,10 @@ void mb_auth_event_check() {
             mx_printstr("logging in\n");
         gtk_show_chat_window(chat);
         cl_listener.logged_in = 1;
-        //test lines below
-        //cl_listener.my_id = 69;
-        //cl_listener.my_name = mx_strdup("Horsecock");
-        gtk_label_set_text(chat_win.welcome_user, cl_listener.my_name);
-        mb_contact_list_add(1, 1, "Ckif");
-        mb_contact_list_add(2, 2, "Prick");
 
-    } else if (cl_listener.authentication == 2) {
+        gtk_label_set_text(chat_win.welcome_user, cl_listener.my_name);
+    } 
+    else if (cl_listener.authentication == 2) {
     //Failed log in
         mb_invalid_credentials_msg();
         cl_listener.authentication = 0;

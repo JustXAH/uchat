@@ -916,8 +916,8 @@ Have a nice adventure, traveler.</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="ban_user">
-                    <property name="label" translatable="yes">Ban list</property>
+                  <object class="GtkButton" id="remove_user">
+                    <property name="label" translatable="yes">Remove friend</property>
                     <property name="width-request">110</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>

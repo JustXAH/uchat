@@ -15,6 +15,7 @@ static void which_user_online(t_server *serv, t_json *json, char *send_str) {
 void mx_add_new_message(t_server *serv, t_json *json, int user_index) {
     char *send_str = NULL;
 
+
     json->USER_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON,"USER_ID");
     json->CHAT_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON,"CHAT_ID");
     json->MESSAGE = cJSON_GetObjectItemCaseSensitive(json->USER_JSON,"MESSAGE");
@@ -27,6 +28,14 @@ void mx_add_new_message(t_server *serv, t_json *json, int user_index) {
     cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
 
     json->MESSAGE_ID = cJSON_CreateNumber(mx_db_create_new_message(serv->db, json->USER_ID->valueint, json->CHAT_ID->valueint, json->MESSAGE->valuestring));
+    
+    t_message_info *message_info = mx_db_get_message(serv->db, json->MESSAGE_ID->valueint);
+
+    cJSON *USER_ID = cJSON_CreateNumber(message_info->user);
+    cJSON *CHAT_ID = cJSON_CreateNumber(json->CHAT_ID->valueint);
+    cJSON *MESSAGE_ID = cJSON_CreateNumber(message_info->id);
+    cJSON *MESSAGE = cJSON_CreateString(message_info->text);
+    cJSON *MESSAGE_TIME =  cJSON_CreateNumber(message_info->timestamp);;
 
     if (json->MESSAGE_ID->valueint == 0) {
         json->RESULT = cJSON_CreateFalse();
@@ -34,7 +43,11 @@ void mx_add_new_message(t_server *serv, t_json *json, int user_index) {
     }
     else {
         json->RESULT = cJSON_CreateTrue();
-        cJSON_AddItemToObject(json->SEND, "MESSAGE_ID", json->MESSAGE_ID);
+        cJSON_AddItemToObject(json->SEND, "MESSAGE_TIME", MESSAGE_TIME);
+        cJSON_AddItemToObject(json->SEND, "MESSAGE_ID", MESSAGE_ID);
+        cJSON_AddItemToObject(json->SEND, "MESSAGE", MESSAGE);
+        cJSON_AddItemToObject(json->SEND, "CHAT_ID", CHAT_ID);
+        cJSON_AddItemToObject(json->SEND, "USER_ID", USER_ID);
     }
 
     send_str = cJSON_Print(json->SEND);

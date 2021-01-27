@@ -7,42 +7,34 @@
 extern t_chat_win chat_win;
 extern t_chat *chat;
 
-static bool credentieal_file_type() {
-    char *buff_str = chat->sys->file_path;
-    char *extension = NULL;
+static void get_filename() {
+    char *filename = NULL;
+    char *buff_path = chat->sys->file_path;
 
-    while (*buff_str) {
-        buff_str++;
+    while (*buff_path) {
+        buff_path++;
     }
-    while (*buff_str != '.') {
-        buff_str--;
+    while (*buff_path != '/') {
+        buff_path--;
     }
-    extension = strdup(buff_str);
-    if(strcmp(extension, ".wav") == 0 || strcmp(extension, ".mp3") == 0
-      || strcmp(extension, ".aif") == 0 || strcmp(extension, ".mid") == 0) {
-        free(extension);
-        return true;
-    }
-    free(extension);
-    return false;
+    buff_path++;
+    chat->sys->filename = strdup(buff_path);
 }
 
 static void relize () {
-    mx_printstr("\nVoice path - ");
-    mx_printint(chat->sys->position);
+    mx_printstr("\nVoice name - ");
+  mx_printint(chat->sys->position);
     mx_printstr("\nFile path - ");
     mx_printstr(chat->sys->file_path);
     mx_printstr("\nVoice name - ");
     mx_printstr(chat->sys->voice_name);
-    mx_printstr("\nFile name - ");
-    mx_printstr(chat->sys->filename);
     mx_printstr("\n");
 //    mx_strdel(&chat->sys->file_path);
 //    mx_strdel(&chat->sys->voice_name);
-//    mx_strdel(&chat->sys->filename);
 }
-static void get_filename() {
-    char *buff_path = chat->sys->file_path;
+static void parsing () {
+    int i = strlen(chat->sys->file_path);
+    char *buff = NULL;
 
     while (*buff_path) {
         buff_path++;
@@ -55,6 +47,7 @@ static void get_filename() {
 //    mx_save_voice_file_request(chat->sys, chat->user, chat->json);
 }
 
+}
 
 static bool open_file_cooser(int i) {
 
@@ -67,13 +60,14 @@ static bool open_file_cooser(int i) {
     if (gtk_dialog_run(GTK_DIALOG (chat_win.file_choose_window)) == 1) {
         // Get the file name from the dialog box
        chat->sys->file_path = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(chat_win.file_choose_window));
-        if (chat->sys->file_path != NULL && credentieal_file_type()) {
+        if (chat->sys->file_path != NULL) {
             chat->sys->position = i;
             get_filename();
             gtk_widget_hide(chat_win.file_choose_window);
             return true;
         }
     }
+
     // Finished with the "Open Text File" dialog box, so hide it
     return false;
     gtk_widget_hide(chat_win.file_choose_window);

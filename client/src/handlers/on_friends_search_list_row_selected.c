@@ -9,7 +9,7 @@ static void load_recieved_profile();
 void on_search_list_row_selected(GtkListBox *listbox, GtkListBoxRow *row) {
     gtk_stack_set_visible_child(chat_win.all_stack, 
                                 GTK_WIDGET(chat_win.u_profile_box));
-    mx_printstr("1\n");
+    //mx_printstr("1\n");
     int index = gtk_list_box_row_get_index(row);
     char *user_name = strdup(chat->sys->found_usernames[index]);
     //gtk_label_set_text(chat_win.friend_login, user_name);

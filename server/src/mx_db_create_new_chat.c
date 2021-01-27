@@ -6,7 +6,7 @@ int mx_db_create_new_chat(sqlite3 *db, int user, int contact) {
 
     char sql[1024];
     snprintf(sql, sizeof(sql),
-             "INSERT INTO Chats(User,User2) VALUES ('%d','%d');",user,contact);
+             "INSERT INTO Chats(User,User2,Notification,Notification2) VALUES ('%d','%d', '0', '0');",user,contact);
 
     rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
 

@@ -33,7 +33,7 @@ t_message *mx_db_get_last_messages(sqlite3 *db, int chat) {
     glm_count = 0;
     char sql[1024];
     snprintf(sql, sizeof(sql),
-             "SELECT Id, User, Text, Time FROM glm_messages WHERE Chat = '%d';",chat);
+             "SELECT Id, User, Text, Time FROM Messages WHERE Chat = '%d';",chat);
     rc = sqlite3_exec(db, sql, get_last_glm_messages_callback, 0, &err_msg);
     if (rc != SQLITE_OK ) {
         fprintf(stderr, "Failed to select data\n");
@@ -56,4 +56,3 @@ t_message *mx_db_get_last_messages(sqlite3 *db, int chat) {
     }
     return mes;
 }
-

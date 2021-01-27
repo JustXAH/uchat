@@ -63,7 +63,7 @@ static bool check_pass_valid() {
         gtk_label_set_text(reg_win.reg_pas_label2, "Passwords do not match");
          return false;
     }
-    if (strlen(pass1) < 6 ) {
+    if (strlen(pass1) < 1 ) {
         gtk_label_set_text(reg_win.reg_pas_label1, "Password is less than 6 chars");
         gtk_label_set_text(reg_win.reg_pas_label2, "Password is less than 6 chars");
         return false;

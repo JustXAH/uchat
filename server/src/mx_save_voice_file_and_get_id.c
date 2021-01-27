@@ -20,23 +20,22 @@ void mx_save_voice_file_and_get_id(t_server *serv, t_json *json,
     json->SEND = cJSON_CreateObject();
     json->TYPE = cJSON_CreateNumber(NEW_VOICE);
 
-    unique_voice_name = mx_db_insert_new_voice(serv->db,
+    json->VOICE_ID = cJSON_CreateNumber(mx_db_insert_new_voice(serv->db,
                                                json->USER_ID->valueint,
                                                json->POSITION->valueint,
                                                json->FILENAME->valuestring,
-                                               json->VOICE_NAME->valuestring);
-    if (json->VOICE_ID->valueint == 0) {
+                                               json->VOICE_NAME->valuestring));
+    unique_voice_name = mx_db_get_filename(serv->db, json->VOICE_ID->valueint);
+    if (json->VOICE_ID == 0) {
         // "0" - ошибка при сохранении имени файла в БД и получении уникального ID файла
         json->RESULT = cJSON_CreateFalse();
     } else {
         // аудизапись сохранена успешно и ей присвоен уникальный айди
         json->RESULT = cJSON_CreateTrue();
     }
-
     cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
     cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
     cJSON_AddItemToObject(json->SEND, "VOICE_ID", json->VOICE_ID);
-
     send_str = cJSON_Print(json->SEND);
 
     write(serv->user_socket[user_index], send_str, strlen(send_str));

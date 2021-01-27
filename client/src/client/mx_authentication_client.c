@@ -73,8 +73,8 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
     }
     else { //RESULT = TRUE (login and password are confirmed - successful LOG IN)
         user->my_id = json->USER_ID->valueint;
-        //user_contacts_parse_and_save(user, json);
-        //user_chats_parse_and_save(user, json);
+        user_contacts_parse_and_save(user, json);
+        user_chats_parse_and_save(user, json);
 //        user->contacts = cJSON_(SERVER_JSON
         sys->authentication = true;
         sys->menu = true;
@@ -82,6 +82,10 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
         cl_listener.authentication = 1;
         cl_listener.my_id = json->USER_ID->valueint;
         
+        for (int i = 0; i != user->contacts_count; i++) {
+            mx_printstr("adding contact");
+            mb_contact_list_add(user->chats_id[i], user->contacts_id[i], user->contacts_login[i], false);
+        }
     }
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "RESULT");
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "USER_ID");
