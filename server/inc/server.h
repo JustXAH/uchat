@@ -123,6 +123,7 @@ typedef struct s_contact {
 typedef struct s_chat {
     int *id;
     char **chat_name;
+    int *notification;
     int count;
 }              t_chat;
 
@@ -134,6 +135,7 @@ typedef struct s_user_info {
 typedef struct s_chat_info {
     int id;
     char *chat_name;
+    int notification;
     struct s_chat_info *next;
 }               t_chat_info;
 
@@ -252,8 +254,11 @@ t_message *mx_db_get_last_messages(sqlite3 *db, int chat);
 t_message_info *mx_db_get_message(sqlite3 *db, int mes_id);
 
 int mx_db_insert_new_file(sqlite3 *db, char *filename);
-char *mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename, char *voice_name);
+int mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename, char *voice_name);
 t_voice *mx_db_get_users_voices(sqlite3 *db, int user);
 char* mx_db_get_filename(sqlite3 *db, int id);
+
+//int mx_db_get_notification(sqlite3 *db, int chat_id, int user_id);
+int mx_db_clear_notification(sqlite3 *db, int chat_id, int user_id);
 
 #endif //UCHAT_MAIN_H
