@@ -4,8 +4,7 @@
 
 #include "server.h"
 
-t_message *gm_mes_info;
-
+t_message_info *gm_mes_info;
 
 static int get_last_glm_messages_callback(void *NotUsed, int argc, char **argv, char **azColName) {
 
@@ -23,11 +22,12 @@ static int get_last_glm_messages_callback(void *NotUsed, int argc, char **argv, 
     return 0;
 }
 
-t_message *mx_db_get_message(sqlite3 *db, int mes_id) {
+t_message_info *mx_db_get_message(sqlite3 *db, int mes_id) {
     char *err_msg = 0;
     int rc;
     char sql[1024];
     gm_mes_info = (t_message*) malloc (sizeof(t_message));
+    gm_mes_info->next = NULL;
     snprintf(sql, sizeof(sql),
              "SELECT Id, User, Text, Time FROM glm_messages WHERE Id = '%d';",mes_id);
     rc = sqlite3_exec(db, sql, get_last_glm_messages_callback, 0, &err_msg);
