@@ -39,10 +39,10 @@
 #include <gio/gio.h>
 
 #define MAX_LEN 1024
-#define PORT 5000
+#define PORT 5001
 #define SA struct sockaddr
 #define NUMBER_VOICES 8
-#define ACCESS 0777
+
 
 //enum for type cjson
 typedef enum e_type_cJSON_message {
