@@ -96,6 +96,7 @@ typedef struct s_system {
 typedef struct s_user {
     char *login;
     char *password;
+    char *hash_password;
     int *contacts_id;
     char **contacts_login;
     int *chats_id;
@@ -138,7 +139,6 @@ typedef struct s_json {
     cJSON *MESSAGES_TIME;
     cJSON *SENDER_ID;
     cJSON *FILENAME;
-    cJSON *FILE_PATH;
     cJSON *POSITION;
     cJSON *VOICE_ID;
     cJSON *VOICE_NAME;
@@ -146,6 +146,8 @@ typedef struct s_json {
     cJSON *MESSAGE_ID;
     cJSON *MESSAGE_TIME;
     cJSON *CONTACT_NAME;
+    cJSON *VOICES_ID_ARR;
+    cJSON *VOICES_NAME_ARR;
 }              t_json;
 
 typedef struct s_chat {
@@ -286,10 +288,6 @@ void mx_send_voice_file_to_user_request(t_system *sys, t_json *json,
                                         int voice_id, int contact_id);
 void mx_send_voice_file_to_server(t_system *sys, char *file_path);
 
-void mx_login_or_register(t_system *sys, t_user *user);
-char *mx_create_user_profile(t_system *sys, t_user *user);
-void mx_account_login_request(t_system *sys, t_user *user);
-void mx_registration_request(t_system *sys, t_user *user);
 void mx_chat_event(t_system *sys, t_user *user, pthread_t thread);
 void mx_client_menu(t_system *sys, t_user *user);
 void mx_sending_messages(t_system *sys, t_user *user, char *buff);

@@ -6,6 +6,42 @@
 
 extern t_client_st cl_listener;
 
+void user_voices_parse_and_save(t_user *user, t_json *json) {
+    json->VOICES_ID_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
+                                                           "VOICES_ID_ARR");
+    json->VOICES_NAME_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
+                                                             "VOICES_NAME_ARR");
+
+    user->voices_id = (int *) malloc(sizeof(int) * NUMBER_VOICES);
+    user->voices_name = (char **) malloc(sizeof(char *) * NUMBER_VOICES + 1);
+
+    for (int i = 0; i != NUMBER_VOICES; i++) {
+        if (json->VOICES_ID_ARR == NULL) {
+            user->voices_id[i] = 0;
+        }
+        else {
+            user->voices_id[i] = cJSON_GetArrayItem(json->VOICES_ID_ARR,
+                                                    i)->valueint;
+        }
+        if (json->VOICES_NAME_ARR == NULL) {
+            user->voices_name[i] = mx_strjoin("VOX ", mx_itoa(i + 1));
+        }
+        else if (cJSON_GetArrayItem(json->VOICES_NAME_ARR, i)->valuestring ==
+                   NULL) {
+            user->voices_name[i] = mx_strjoin("VOX ", mx_itoa(i + 1));
+        }
+        else {
+            user->voices_name[i] = strdup(
+                    cJSON_GetArrayItem(json->VOICES_NAME_ARR, i)->valuestring);
+        }
+    }
+    user->voices_name[NUMBER_VOICES] = NULL;
+}
+//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_COUNT");
+//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_ID_ARR");
+//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_NAME_ARR");
+
+
 void user_chats_parse_and_save(t_user *user, t_json *json) {
     user->chats_count = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
                                                             "CHATS_COUNT")->valueint;
@@ -24,9 +60,9 @@ void user_chats_parse_and_save(t_user *user, t_json *json) {
         }
         user->chats_name[user->contacts_count] = NULL;
     }
-    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_COUNT");
-    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_ID_ARR");
-    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_NAME_ARR");
+//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_COUNT");
+//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_ID_ARR");
+//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_NAME_ARR");
 }
 
 void user_contacts_parse_and_save(t_user *user, t_json *json) {
@@ -47,9 +83,9 @@ void user_contacts_parse_and_save(t_user *user, t_json *json) {
         }
         user->contacts_login[user->contacts_count] = NULL;
     }
-    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CONTACTS_COUNT");
-    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CONTACTS_ID_ARR");
-    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CONTACTS_LOGIN_ARR");
+//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CONTACTS_COUNT");
+//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CONTACTS_ID_ARR");
+//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CONTACTS_LOGIN_ARR");
 }
 
 void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
@@ -75,6 +111,7 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
         user->my_id = json->USER_ID->valueint;
         user_contacts_parse_and_save(user, json);
         user_chats_parse_and_save(user, json);
+        user_voices_parse_and_save(user, json);
 //        user->contacts = cJSON_(SERVER_JSON
         sys->authentication = true;
         sys->menu = true;
@@ -87,6 +124,6 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
             mb_contact_list_add(user->chats_id[i], user->contacts_id[i], user->contacts_login[i], false);
         }
     }
-    cJSON_DeleteItemFromObject(json->SERVER_JSON, "RESULT");
-    cJSON_DeleteItemFromObject(json->SERVER_JSON, "USER_ID");
+//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "RESULT");
+//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "USER_ID");
 }

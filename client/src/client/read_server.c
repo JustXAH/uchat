@@ -13,7 +13,7 @@ void *read_server(void *data) {
     t_json *json = (t_json *)malloc(sizeof(t_json));
     char buff[MAX_LEN];
 
-    while (sys->exit != true) {
+    while (chat->sys->exit != true) {
         read(sys->sockfd, buff, sizeof(buff));
 //        write(1, "YUHU! I just received a response from the server\n", 49);
         json->SERVER_JSON = cJSON_Parse(buff);
