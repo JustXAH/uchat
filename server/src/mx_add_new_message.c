@@ -27,6 +27,11 @@ void mx_add_new_message(t_server *serv, t_json *json, int user_index) {
     cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
 
     json->MESSAGE_ID = cJSON_CreateNumber(mx_db_create_new_message(serv->db, json->USER_ID->valueint, json->CHAT_ID->valueint, json->MESSAGE->valuestring));
+    
+    t_message_info *message_info = mx_db_get_message(serv->db, json->MESSAGE_ID->valueint);
+
+    json->MESSAGE_TIME = cJSON_CreateNumber(message_info->timestamp);
+    // json->
 
     if (json->MESSAGE_ID->valueint == 0) {
         json->RESULT = cJSON_CreateFalse();

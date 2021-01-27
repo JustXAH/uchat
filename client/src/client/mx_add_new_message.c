@@ -32,7 +32,7 @@ void mx_add_new_message(t_system *sys, t_user *user, t_json *json) {
     }
     else {
         json->CHAT_ID = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "CHAT_ID");
-§       json->MESSAGE_ID = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGES_ID");
+        json->MESSAGE_ID = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGES_ID");
         json->MESSAGE = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGE");
         json->MESSAGE_TIME = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGE_TIME");
         json->CONTACT_ID = cJSON_GetObjectItemCaseSensitive(json->SENDER_ID, "CONTACT_ID");
