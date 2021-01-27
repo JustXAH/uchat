@@ -31,16 +31,18 @@
 #include <poll.h>
 #include <ctype.h>
 #include <unistd.h>
-
+#include <sys/stat.h>
 
 // glade
 #include <gtk/gtk.h>
 #include <glib.h>
 #include <gio/gio.h>
 
-#define MAX_LEN 4096
+#define MAX_LEN 1024
 #define PORT 5000
 #define SA struct sockaddr
+#define NUMBER_VOICES 8
+#define ACCESS 0777
 
 //enum for type cjson
 typedef enum e_type_cJSON_message {
@@ -54,8 +56,8 @@ typedef enum e_type_cJSON_message {
     GET_LOGIN,
     NEW_MESSAGE,
     LAST_MESSAGES,
-    SAVE_AUDIO,
-    SEND_AUDIO,
+    NEW_VOICE,
+    SEND_VOICE_TO_USER,
 }            e_type_cJSON;
 
 typedef struct s_system {
@@ -72,6 +74,10 @@ typedef struct s_system {
     char *login_substr;
     char *searched_login;
     char *found_user_login;
+    char *file_path;
+    char *filename;
+    char *voice_name;
+    int position;
     int argc;
     int sockfd;
     int found_user_id;
@@ -95,6 +101,8 @@ typedef struct s_user {
     int *chats_id;
     char **chats_name;
     int *who_online; // users with online status
+    char **voices_name;
+    int *voices_id;
     int who_online_count;
     int my_id;
     int contacts_count;
@@ -129,6 +137,12 @@ typedef struct s_json {
     cJSON *MESSAGES_ID;
     cJSON *MESSAGES_TIME;
     cJSON *SENDER_ID;
+    cJSON *EXTENSION;
+    cJSON *FILENAME;
+    cJSON *FILE_PATH;
+    cJSON *POSITION;
+    cJSON *VOICE_ID;
+    cJSON *VOICE_NAME;
 }              t_json;
 
 typedef struct s_chat {
@@ -214,13 +228,19 @@ typedef struct s_chat_list {
 /*typedef struct s_contact_list {
     
 }              t_contact_list;*/
+
+/*
+ * MAIN
+ */
 void mx_structs_initialization(t_system *sys, t_user *user);
+
 /*
  * READ SERVER ANSWER
  */
 void *read_server(void *data); // second thread to read server responses
 void mx_authentication_client(t_system *sys, t_user *user, t_json *json);
-void mx_confirmation_of_registration(t_system *sys, t_user *user, t_json *json);
+void mx_confirmation_of_registration(t_system *sys, t_user *user,
+                                     t_json *json);
 void mx_who_online_update(t_system *sys, t_user *user, t_json *json);
 void mx_found_users_by_substr(t_system *sys, t_user *user, t_json *json);
 void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json);
@@ -228,15 +248,27 @@ void mx_add_new_contact(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_chat(t_system *sys, t_user *user, t_json *json);
 void mx_get_login(t_system *sys, t_user *user, t_json *json);
 void mx_get_last_messages(t_system *sys, t_user *user, t_json *json);
+void mx_get_voice_file_from_user(t_system *sys, t_user *user, t_json *json);
+void mx_get_voice_file_id(t_system *sys, t_user *user, t_json *json);
+void mx_voice_file_receiving(t_system *sys);
+
 /*
  * REQUEST TO SERVER
  */
-void mx_registration_or_login_request(t_system *sys, t_user *user, t_json *json);
+void mx_registration_or_login_request(t_system *sys, t_user *user,
+                                      t_json *json);
 void mx_user_search_by_substr_request(t_system *sys, t_json *json);
 void mx_user_search_by_login_request(t_system *sys, t_json *json);
-void mx_add_new_contact_request(t_system *sys, t_user * user, t_json *json, int contact_id);
-void mx_add_new_chat_request(t_system *sys, t_user * user, t_json *json, int contact_id);
-void mx_add_messages_request(t_system *sys, t_user *user, t_json *json, char *messages_str, int chat_id);
+void mx_add_new_contact_request(t_system *sys, t_user *user, t_json *json,
+                                int contact_id);
+void mx_add_new_chat_request(t_system *sys, t_user *user, t_json *json,
+                             int contact_id);
+void mx_add_messages_request(t_system *sys, t_user *user, t_json *json,
+                             char *messages_str, int chat_id);
+void mx_save_voice_file_request(t_system *sys, t_user *user, t_json *json);
+void mx_send_voice_file_to_user_request(t_system *sys, t_json *json,
+                                        int voice_id, int contact_id);
+void mx_send_voice_file_to_server(t_system *sys, char *file_path);
 
 void mx_login_or_register(t_system *sys, t_user *user);
 char *mx_create_user_profile(t_system *sys, t_user *user);
@@ -244,7 +276,7 @@ void mx_account_login_request(t_system *sys, t_user *user);
 void mx_registration_request(t_system *sys, t_user *user);
 void mx_chat_event(t_system *sys, t_user *user, pthread_t thread);
 void mx_client_menu(t_system *sys, t_user *user);
-void mx_sending_messages(t_system *sys, t_user *user, char *buff); // нужно переделать сначала сервер-бд, потом здесь
+void mx_sending_messages(t_system *sys, t_user *user, char *buff);
 
 
 /*
@@ -270,7 +302,8 @@ void mb_auth_event_check();
 void mb_incoming_msg_check();
 
 void mb_contact_list_add(int chat_id, int user_id, char *user_name);
-void mb_msg_buffer_add(int chat_id, int user_id, char *user_name, time_t time, char *msg_text);
+void mb_msg_buffer_add(int chat_id, int user_id, char *user_name, time_t time,
+                       char *msg_text);
 
 void mb_send_msg(t_message *msg);
 void mb_display_msg(t_message *msg);

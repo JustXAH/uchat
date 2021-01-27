@@ -89,8 +89,8 @@ void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_ind
 
     write(serv->user_socket[user_index], send_str, strlen(send_str));
 
-    cJSON_DeleteItemFromObject(json->SEND, "LOGIN");
-    cJSON_DeleteItemFromObject(json->SEND, "PASS");
+    cJSON_DeleteItemFromObject(json->USER_JSON, "LOGIN");
+    cJSON_DeleteItemFromObject(json->USER_JSON, "PASS");
     cJSON_Delete(json->SEND);
     free(send_str);
 }

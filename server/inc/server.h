@@ -30,11 +30,13 @@
 #include <pthread.h>
 #include <time.h>
 #include <sqlite3.h>
+#include <sys/stat.h>
 
-#define MAX 4096
+#define MAX_LEN 1024
 #define PORT 5000
 #define MAX_USERS 5
 #define COUNT_MESSAGES 30
+#define NUMBER_VOICES 8
 
 //enum for type cjson
 typedef enum e_type_cJSON_message {
@@ -48,8 +50,8 @@ typedef enum e_type_cJSON_message {
     GET_LOGIN,
     NEW_MESSAGE,
     LAST_MESSAGES,
-    SAVE_AUDIO,
-    SEND_AUDIO,
+    NEW_VOICE,
+    SEND_VOICE_TO_USER,
 }            e_type_cJSON;
 
 //struct for server
@@ -94,6 +96,12 @@ typedef struct s_json {
     cJSON *SENDER_ID;
     cJSON *MESSAGES_TIME;
     cJSON *MESSAGES_ID;
+    cJSON *EXTENSION;
+    cJSON *FILENAME;
+    cJSON *FILE_PATH;
+    cJSON *POSITION;
+    cJSON *VOICE_ID;
+    cJSON *VOICE_NAME;
 }              t_json;
 
 //struct for database
@@ -143,6 +151,13 @@ typedef struct s_message {
     int count;
 }               t_message;
 
+typedef struct s_voice {
+    int *id;
+    char **filename;
+    char **voice_name;
+}               t_voice;
+
+
 //
 //typedef struct s_user {
 //    int id;
@@ -187,6 +202,7 @@ typedef struct s_message {
  * SERVER
  */
 void mx_serv_struct_initialization(t_server *serv);
+void mx_media_dirs_creator();
 void mx_json_struct_initialization(t_json *json);
 void mx_sorting_users_and_sockets(t_server *serv);
 void mx_update_handler(t_server *serv);
@@ -204,6 +220,11 @@ void mx_add_new_chat(t_server *serv, t_json *json, int user_index);
 void mx_add_new_message(t_server *serv, t_json *json, int user_index);
 void mx_get_login(t_server *serv, t_json *json, int user_index);
 void mx_last_messages(t_server *serv, t_json *json, int user_index);
+void mx_save_voice_file_and_get_id(t_server *serv, t_json *json, int user_index);
+void mx_voice_file_receiver(t_server *serv, char *unique_name,
+                            int user_index);
+void mx_send_voice_file_handler(t_server *serv, t_json *json, int user_index);
+void mx_send_voice_file_to_user(char *filename, int user_socket);
 
 /*
  * DATABASE
@@ -227,10 +248,11 @@ int mx_db_get_chat_by_users(sqlite3 *db, int user_1, int user_2); //return chat_
 t_chat *mx_db_get_chats_info(sqlite3 *db, int user);
 int mx_db_create_new_message(sqlite3 *db, int user, int chat, char *text);
 t_message *mx_db_get_last_messages(sqlite3 *db, int chat);
+t_message_info *mx_db_get_message(sqlite3 *db, int mes_id);
 
 int mx_db_insert_new_file(sqlite3 *db, char *filename);
-char* mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename);
-int* mx_db_get_users_voices(sqlite3 *db, int user);
+char *mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename, char *voice_name);
+t_voice *mx_db_get_users_voices(sqlite3 *db, int user);
 char* mx_db_get_filename(sqlite3 *db, int id);
 
 #endif //UCHAT_MAIN_H

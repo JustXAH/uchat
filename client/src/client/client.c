@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
     gtk_window_initializtion(chat);
     //----------------------------------------------------------------------------//
 //    mx_chat_event(sys, user, thread_server);
-
+    pthread_cancel(thread_server);
     // close the socket
     close(sys->sockfd);
     

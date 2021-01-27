@@ -15,7 +15,7 @@ int mx_db_init(sqlite3 *db) {
                 "CREATE TABLE Chats(Id INTEGER PRIMARY KEY, User INTEGER, User2 INTEGER);"
                 "CREATE TABLE Messages(Id INTEGER PRIMARY KEY, User INTEGER, Chat INTEGER, Text TEXT, Time INTEGER);"
                 "CREATE TABLE Files(Id INTEGER PRIMARY KEY, Filename TEXT);"
-                "CREATE TABLE Voices(Id INTEGER PRIMARY KEY, User INTEGER, Number INTEGER, FileId INTEGER)";
+                "CREATE TABLE Voices(Id INTEGER PRIMARY KEY, User INTEGER, Number INTEGER, FileId INTEGER, VoiceName TEXT)";
 
 
     rc = sqlite3_exec(db, sql, 0, 0, &err_msg);

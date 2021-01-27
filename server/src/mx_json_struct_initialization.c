@@ -27,4 +27,8 @@ void mx_json_struct_initialization(t_json *json) {
     json->MESSAGES_TIME = NULL;
     json->MESSAGES_ARR = NULL;
     json->MESSAGES_ID = NULL;
+    json->FILENAME = NULL;
+    json->FILE_PATH = NULL;
+    json->VOICE_ID = NULL;
+    json->POSITION = NULL;
 }
