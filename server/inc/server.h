@@ -103,7 +103,6 @@ typedef struct s_json {
     cJSON *VOICE_ID;
     cJSON *VOICE_NAME;
     cJSON *USER_NAME;
-    cJSON *MESSAGE_TIME;
     cJSON *MESSAGE_ID;
     cJSON *XYI;
 }              t_json;
