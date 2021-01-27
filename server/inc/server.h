@@ -33,7 +33,7 @@
 #include <sys/stat.h>
 
 #define MAX_LEN 1024
-#define PORT 5000
+#define PORT 5001
 #define MAX_USERS 5
 #define COUNT_MESSAGES 30
 #define NUMBER_VOICES 8
@@ -49,7 +49,7 @@ typedef enum e_type_cJSON_message {
     NEW_CHAT,
     GET_LOGIN,
     NEW_MESSAGE,
-    LAST_MESSAGES,
+    HISTORY_CHAT,
     NEW_VOICE,
     SEND_VOICE_TO_USER,
 }            e_type_cJSON;
@@ -102,6 +102,8 @@ typedef struct s_json {
     cJSON *VOICE_ID;
     cJSON *VOICE_NAME;
     cJSON *USER_NAME;
+    cJSON *MESSAGE_ID;
+    cJSON *XYI;
 }              t_json;
 
 //struct for database
@@ -121,6 +123,7 @@ typedef struct s_contact {
 typedef struct s_chat {
     int *id;
     char **chat_name;
+    int *notification;
     int count;
 }              t_chat;
 
@@ -132,6 +135,7 @@ typedef struct s_user_info {
 typedef struct s_chat_info {
     int id;
     char *chat_name;
+    int notification;
     struct s_chat_info *next;
 }               t_chat_info;
 
@@ -157,8 +161,6 @@ typedef struct s_voice {
     char **filename;
     char **voice_name;
 }               t_voice;
-
-
 //
 //typedef struct s_user {
 //    int id;
@@ -220,7 +222,7 @@ void mx_add_new_contact(t_server *serv, t_json *json, int user_index);
 void mx_add_new_chat(t_server *serv, t_json *json, int user_index);
 void mx_add_new_message(t_server *serv, t_json *json, int user_index);
 void mx_get_login(t_server *serv, t_json *json, int user_index);
-void mx_last_messages(t_server *serv, t_json *json, int user_index);
+void mx_history_chat(t_server *serv, t_json *json, int user_index);
 void mx_save_voice_file_and_get_id(t_server *serv, t_json *json, int user_index);
 void mx_voice_file_receiver(t_server *serv, char *unique_name,
                             int user_index);
@@ -252,8 +254,11 @@ t_message *mx_db_get_last_messages(sqlite3 *db, int chat);
 t_message_info *mx_db_get_message(sqlite3 *db, int mes_id);
 
 int mx_db_insert_new_file(sqlite3 *db, char *filename);
-char *mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename, char *voice_name);
+int mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename, char *voice_name);
 t_voice *mx_db_get_users_voices(sqlite3 *db, int user);
 char* mx_db_get_filename(sqlite3 *db, int id);
+
+//int mx_db_get_notification(sqlite3 *db, int chat_id, int user_id);
+int mx_db_clear_notification(sqlite3 *db, int chat_id, int user_id);
 
 #endif //UCHAT_MAIN_H

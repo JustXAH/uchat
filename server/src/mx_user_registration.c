@@ -29,11 +29,6 @@ void mx_user_registration(t_server *serv, t_json *json, int user_index) {
     //send string-JSON to client
     write(serv->user_socket[user_index], send_str, strlen(send_str));
 
-//    if (MALLOC_SIZE(json->SEND)) {
-//
-//    }
-    cJSON_DeleteItemFromObject(json->SEND, "LOGIN");
-    cJSON_DeleteItemFromObject(json->SEND, "PASS");
     cJSON_Delete(json->SEND);
     free(send_str);
 }

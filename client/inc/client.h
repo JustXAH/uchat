@@ -39,10 +39,10 @@
 #include <gio/gio.h>
 
 #define MAX_LEN 1024
-#define PORT 5000
+#define PORT 5001
 #define SA struct sockaddr
 #define NUMBER_VOICES 8
-#define ACCESS 0777
+
 
 //enum for type cjson
 typedef enum e_type_cJSON_message {
@@ -55,7 +55,7 @@ typedef enum e_type_cJSON_message {
     NEW_CHAT,
     GET_LOGIN,
     NEW_MESSAGE,
-    LAST_MESSAGES,
+    HISTORY_CHAT,
     NEW_VOICE,
     SEND_VOICE_TO_USER,
 }            e_type_cJSON;
@@ -179,6 +179,7 @@ typedef struct s_chat_win {
     GtkStack           *search_stack;
     GtkStack              *all_stack;
     GtkFixed         *my_profile_box;
+    GtkBox         *edit_vax_box;
     GtkFixed          *u_profile_box;
 
     GtkBox                  *msg_box;
@@ -188,10 +189,20 @@ typedef struct s_chat_win {
     GtkSearchEntry     *csearch_entry;
     GtkSearchEntry     *fsearch_entry;
     GtkWidget              **fresults;
+    GtkWidget              *file_choose_window;
 
     GtkLabel            *welcome_user;
 
     GtkLabel            *friend_login;
+
+    GtkEntry     *edit_vax1_entry;
+    GtkEntry     *edit_vax2_entry;
+    GtkEntry     *edit_vax3_entry;
+    GtkEntry     *edit_vax4_entry;
+    GtkEntry     *edit_vax5_entry;
+    GtkEntry     *edit_vax6_entry;
+    GtkEntry     *edit_vax7_entry;
+    GtkEntry     *edit_vax8_entry;
 }                t_chat_win;
 
 typedef struct s_client_st {
@@ -202,7 +213,7 @@ typedef struct s_client_st {
     int my_id;
     char *my_name;
     bool fsearch;
-    bool pending_requests[10];
+    bool *pending_requests;
 }               t_client_st;
 
 typedef struct s_message {
@@ -249,7 +260,7 @@ void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_contact(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_chat(t_system *sys, t_user *user, t_json *json);
 void mx_get_login(t_system *sys, t_user *user, t_json *json);
-void mx_get_last_messages(t_system *sys, t_user *user, t_json *json);
+void mx_get_history_chat(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_message(t_system *sys, t_user *user, t_json *json);
 void mx_get_voice_file_from_user(t_system *sys, t_user *user, t_json *json);
 void mx_get_voice_file_id(t_system *sys, t_user *user, t_json *json);
@@ -265,8 +276,8 @@ void mx_user_search_by_substr_request(t_system *sys, t_json *json);
 void mx_user_search_by_login_request(t_system *sys, t_json *json);
 void mx_add_new_contact_request(t_system *sys, t_user * user, t_json *json, int contact_id);
 void mx_add_new_chat_request(t_system *sys, t_user * user, t_json *json, int contact_id);
-void mx_add_messages_request(t_system *sys, t_user *user, t_json *json, char *messages_str, int chat_id);
-void mx_get_last_messages_request(t_system *sys, t_user *user, t_json *json, int chat_id);
+void mx_add_message_request(t_system *sys, t_user *user, t_json *json, char *messages_str, int chat_id, int contact_id);
+void mx_get_history_chat_request(t_system *sys, t_user *user, t_json *json, int chat_id);
 void mx_save_voice_file_request(t_system *sys, t_user *user, t_json *json);
 void mx_send_voice_file_to_user_request(t_system *sys, t_json *json,
                                         int voice_id, int contact_id);

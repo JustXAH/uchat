@@ -13,7 +13,7 @@ void mx_user_search_by_login(t_server *serv, t_json *json, int user_index) {
     json->SEARCHED_LOGIN = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "SEARCHED_LOGIN");
 
     json->FOUND_USER_ID = cJSON_CreateNumber(mx_db_check_login_exist(serv->db, json->SEARCHED_LOGIN->valuestring));
-    if (json->USER_ID->valueint == 0) { // "0" - login doesn't exist
+    if (json->FOUND_USER_ID->valueint == 0) { // "0" - login doesn't exist
         json->RESULT = cJSON_CreateFalse();
     }
     else {

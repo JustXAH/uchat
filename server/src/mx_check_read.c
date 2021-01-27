@@ -17,7 +17,8 @@ static void read_and_write(t_server *serv, int user_index) {
 
         json->USER_JSON = cJSON_Parse(buff_message);
         json->TYPE = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "TYPE");
-
+        mx_printstr(buff_message);
+        mx_printstr("\n");
         serv->type_enum = json->TYPE->valueint;
         switch (serv->type_enum) {
             case AUTHENTICATION:
@@ -36,10 +37,14 @@ static void read_and_write(t_server *serv, int user_index) {
                 mx_user_search_by_login(serv, json, user_index);
                 break;
             case NEW_CONTACT:
+                mx_printstr("about to add a new contact\n");
                 mx_add_new_contact(serv, json, user_index);
+                mx_printstr("succesfully added a new contact\n");
                 break;
             case NEW_CHAT:
+                mx_printstr("about to add a new chat\n");
                 mx_add_new_chat(serv, json, user_index);
+                mx_printstr("succesfully added a new chat\n");
                 break;
             case GET_LOGIN:
                 mx_get_login(serv, json, user_index);
@@ -47,8 +52,8 @@ static void read_and_write(t_server *serv, int user_index) {
             case NEW_MESSAGE:
                 mx_add_new_message(serv, json, user_index);
                 break;
-            case LAST_MESSAGES:
-                mx_last_messages(serv, json, user_index);
+            case HISTORY_CHAT:
+                mx_history_chat(serv, json, user_index);
                 break;
             case NEW_VOICE:
                 mx_save_voice_file_and_get_id(serv, json, user_index);

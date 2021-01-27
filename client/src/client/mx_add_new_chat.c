@@ -24,18 +24,17 @@ void mx_add_new_chat(t_system *sys, t_user *user, t_json *json) {
         json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "RESULT");
         json->CHATS_ID_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "CHATS_ID_ARR");
         json->CHATS_NAME_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "CHATS_NAME_ARR");
-        json->CHATS_COUNT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "CHATS_COUNT");
+        //json->CHATS_COUNT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "CHATS_COUNT");
 
         if (cJSON_IsFalse(json->RESULT)) {
             // вызов всплывающего текста c ошибкой
         }
         else {
-            user->chats_count = json->CHATS_COUNT->valueint;
+            user->chats_count = cJSON_GetArraySize(json->CHATS_NAME_ARR);
             if (MALLOC_SIZE(user->chats_id)) {
                 free(user->chats_id);
             }
             add_chats_id(user, json->CHATS_ID_ARR);
-
             if (MALLOC_SIZE(user->chats_name)) {
                 free(user->chats_name);
             }
@@ -45,5 +44,5 @@ void mx_add_new_chat(t_system *sys, t_user *user, t_json *json) {
         cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_COUNT");
         cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_ID_ARR");
         cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_NAME_ARR");
-
+    
 }

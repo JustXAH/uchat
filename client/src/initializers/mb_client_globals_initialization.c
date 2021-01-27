@@ -59,11 +59,29 @@ void chat_win_init(t_system *sys) {
                                                         "profile_fixed"));
      chat_win.u_profile_box = GTK_FIXED(gtk_builder_get_object(sys->builder,
                                                         "add_ban_profile"));
+    chat_win.edit_vax_box = GTK_BOX(gtk_builder_get_object(sys->builder,
+                                                              "edit_vax"));
     //Search                                                    
     chat_win.fsearch_entry = GTK_SEARCH_ENTRY(gtk_builder_get_object(sys->builder,
                                                         "friends_search_entry"));
     chat_win.csearch_entry = GTK_SEARCH_ENTRY(gtk_builder_get_object(sys->builder,
                                                         "chat_search_entry"));
+    chat_win.edit_vax1_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
+                                                                     "edit_vax1_entry"));
+    chat_win.edit_vax2_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
+                                                                     "edit_vax2_entry"));
+    chat_win.edit_vax3_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
+                                                                       "edit_vax3_entry"));
+    chat_win.edit_vax4_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
+                                                                       "edit_vax4_entry"));
+    chat_win.edit_vax5_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
+                                                                       "edit_vax5_entry"));
+    chat_win.edit_vax6_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
+                                                                       "edit_vax6_entry"));
+    chat_win.edit_vax7_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
+                                                                       "edit_vax7_entry"));
+    chat_win.edit_vax8_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
+                                                                       "edit_vax8_entry"));
     chat_win.fresults = NULL;
     /*
     chat_win.s_comp = gtk_entry_completion_new ();
@@ -75,8 +93,10 @@ void chat_win_init(t_system *sys) {
     */
     chat_win.welcome_user = GTK_LABEL(gtk_builder_get_object(sys->builder,
                                                         "welcome_user"));
-     chat_win.friend_login = GTK_LABEL(gtk_builder_get_object(sys->builder,
-                                                        "friend_login"));   
+    chat_win.friend_login = GTK_LABEL(gtk_builder_get_object(sys->builder,
+                                                        "friend_login"));
+    chat_win.file_choose_window = GTK_WIDGET(gtk_builder_get_object(sys->builder,
+                                                           "file_choose"));
 }
 void mb_client_globals_initialization() {
     cl_listener.logged_in = 0;
@@ -86,7 +106,9 @@ void mb_client_globals_initialization() {
     cl_listener.chat_in_focus = 0;
 
     cl_listener.fsearch = false;
-    for (int i = 0; i < 10; i++)
+
+    cl_listener.pending_requests = (bool *)malloc(HISTORY_CHAT + 1);
+    for (int i = 0; i <= HISTORY_CHAT; i++)
         cl_listener.pending_requests[i] = false;
     
     incoming_msg_buffer = NULL;

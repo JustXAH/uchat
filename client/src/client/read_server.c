@@ -42,12 +42,16 @@ void *read_server(void *data) {
                 cl_listener.pending_requests[USER_SEARCH_BY_LOGIN] = false;
                 break;
             case NEW_CONTACT:
+                mx_printstr("new contact about to be recieved from the server\n");
                 mx_add_new_contact(sys, user, json);
                 cl_listener.pending_requests[NEW_CONTACT] = false;
+                mx_printstr("new contact recieved from the server\n");
                 break;
             case NEW_CHAT:
+                mx_printstr("new chat  about to be recieved from the server\n");
                 mx_add_new_chat(sys, user, json);
                 cl_listener.pending_requests[NEW_CHAT] = false;
+                mx_printstr("new chat recieved from the server\n");
                 break;
             case GET_LOGIN:
                 mx_get_login(sys, user, json);
@@ -57,14 +61,14 @@ void *read_server(void *data) {
                 mx_add_new_message(sys, user, json);
                 cl_listener.pending_requests[NEW_MESSAGE] = false;
                 break;
-            case LAST_MESSAGES:
-                mx_get_last_messages(sys, user, json);
+            case HISTORY_CHAT:
+                mx_get_history_chat(sys, user, json);
                 write(1, "LAST MESSAGES\n", 14);
-                cl_listener.pending_requests[LAST_MESSAGES] = false;
+                cl_listener.pending_requests[HISTORY_CHAT] = false;
                 // функция, которая принимает ответ от запроса на подгрузку последних сообщений
                 break;
             case NEW_VOICE:
-                write(1, "SAVE AUDIO\n", 11);
+                write(1, "SAVE VOICE JSON PARSE START..\n", 11);
                 mx_get_voice_file_id(sys, user, json);
                 break;
             case SEND_VOICE_TO_USER:

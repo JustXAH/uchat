@@ -4,33 +4,46 @@
 
 #include "server.h"
 
+static void which_user_online(t_server *serv, t_json *json, char *send_str) {
+    int contact_id = json->CONTACT_ID->valueint;
+
+    for (int i = 0; serv->users_id[i]; i++)
+        if (serv->users_id[i] == contact_id)
+            write(serv->user_socket[i], send_str, strlen(send_str));
+}
 
 void mx_add_new_message(t_server *serv, t_json *json, int user_index) {
-    cJSON *MESSAGE_ID = NULL;
     char *send_str = NULL;
-    json->SEND = cJSON_CreateObject();
+
+    json->USER_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON,"USER_ID");
     json->CHAT_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON,"CHAT_ID");
     json->MESSAGE = cJSON_GetObjectItemCaseSensitive(json->USER_JSON,"MESSAGE");
-    json->USER_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON,"USER_ID");
+    json->CONTACT_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON,"CONTACT_ID");
 
-
-    MESSAGE_ID = cJSON_CreateNumber(mx_db_create_new_message(serv->db, json->USER_ID->valueint, json->CHAT_ID->valueint, json->MESSAGE->valuestring));
-    json->RESULT = MESSAGE_ID == NULL ? cJSON_CreateFalse() : cJSON_CreateTrue();
-
+    json->SEND = cJSON_CreateObject();
     json->TYPE = cJSON_CreateNumber(NEW_MESSAGE);
-    cJSON_AddItemToObject(json->SEND, "CHAT_ID", json->CHAT_ID);
 
-    if (cJSON_IsFalse(json->RESULT)) {
+    cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
+    cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
 
-        cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
-        cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
+    json->MESSAGE_ID = cJSON_CreateNumber(mx_db_create_new_message(serv->db, json->USER_ID->valueint, json->CHAT_ID->valueint, json->MESSAGE->valuestring));
+
+    if (json->MESSAGE_ID->valueint == 0) {
+        json->RESULT = cJSON_CreateFalse();
+
     }
     else {
-        cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
-        cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
-        cJSON_AddItemToObject(json->SEND, "MESSAGE", json->MESSAGE);
-        cJSON_AddItemToObject(json->SEND, "USER_ID", json->USER_ID);
+        json->RESULT = cJSON_CreateTrue();
+        cJSON_AddItemToObject(json->SEND, "MESSAGE_ID", json->MESSAGE_ID);
     }
+
     send_str = cJSON_Print(json->SEND);
+//    write(1, send_str, strlen(send_str));
+
+//    serv->users_id;
     write(serv->user_socket[user_index], send_str, strlen(send_str));
+    which_user_online(serv, json, send_str);
+
+    cJSON_Delete(json->SEND);
+    free(send_str);
 }

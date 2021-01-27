@@ -13,6 +13,7 @@ void mx_json_struct_initialization(t_json *json) {
     json->PASS = NULL;
     json->TYPE = NULL;
     json->SEND = NULL;
+    json->XYI = NULL;
     json->CONTACT_ID = NULL;
     json->CONTACTS_COUNT = NULL;
     json->CONTACTS_LOGIN_ARR = NULL;

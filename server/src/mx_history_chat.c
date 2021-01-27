@@ -4,11 +4,11 @@
 
 #include "server.h"
 
-void mx_last_messages(t_server *serv, t_json *json, int user_index) {
+void mx_history_chat(t_server *serv, t_json *json, int user_index) {
     char *send_str = NULL;
     t_message *message = mx_db_get_last_messages(serv->db, json->CHAT_ID->valueint);
     json->SEND = cJSON_CreateObject();
-    json->TYPE = cJSON_CreateNumber(LAST_MESSAGES);
+    json->TYPE = cJSON_CreateNumber(HISTORY_CHAT);
 
     if (message == NULL) {
         json->RESULT = cJSON_CreateFalse();
