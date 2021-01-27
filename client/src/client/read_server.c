@@ -67,11 +67,13 @@ void *read_server(void *data) {
                 cl_listener.pending_requests[HISTORY_CHAT] = false;
                 // функция, которая принимает ответ от запроса на подгрузку последних сообщений
                 break;
-            case SAVE_AUDIO:
+            case NEW_VOICE:
                 write(1, "SAVE AUDIO\n", 11);
+                mx_get_voice_file_id(sys, user, json);
                 break;
-            case SEND_AUDIO:
+            case SEND_VOICE_TO_USER:
                 write(1, "SEND AUDIO\n", 11);
+                mx_get_voice_file_from_user(sys, user, json);
                 break;
         }
         printf("Switch ending\n");

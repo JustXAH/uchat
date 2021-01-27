@@ -1165,6 +1165,7 @@ Have a nice adventure, traveler.</property>
                     <property name="column-spacing">5</property>
                     <child>
                       <object class="GtkEntry" id="edit_vax1_entry">
+                        <property name="name">edit_vax1_entry</property>
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
                         <property name="hexpand">True</property>
@@ -1178,6 +1179,7 @@ Have a nice adventure, traveler.</property>
                     </child>
                     <child>
                       <object class="GtkEntry" id="edit_vax2_entry">
+                        <property name="name">edit_vax2_entry</property>
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
                         <property name="text" translatable="yes">Vax 2</property>
@@ -1190,6 +1192,7 @@ Have a nice adventure, traveler.</property>
                     </child>
                     <child>
                       <object class="GtkEntry" id="edit_vax3_entry">
+                        <property name="name">edit_vax3_entry</property>
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
                         <property name="text" translatable="yes">Vax 3</property>
@@ -1202,6 +1205,7 @@ Have a nice adventure, traveler.</property>
                     </child>
                     <child>
                       <object class="GtkEntry" id="edit_vax4_entry">
+                        <property name="name">edit_vax4_entry</property>
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
                         <property name="text" translatable="yes">Vax 4</property>
@@ -1214,6 +1218,7 @@ Have a nice adventure, traveler.</property>
                     </child>
                     <child>
                       <object class="GtkEntry" id="edit_vax5_entry">
+                        <property name="name">edit_vax5_entry</property>
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
                         <property name="text" translatable="yes">Vax 5</property>
@@ -1226,6 +1231,7 @@ Have a nice adventure, traveler.</property>
                     </child>
                     <child>
                       <object class="GtkEntry" id="edit_vax6_entry">
+                        <property name="name">edit_vax6_entry</property>
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
                         <property name="text" translatable="yes">Vax 6</property>
@@ -1238,6 +1244,7 @@ Have a nice adventure, traveler.</property>
                     </child>
                     <child>
                       <object class="GtkEntry" id="edit_vax7_entry">
+                        <property name="name">edit_vax7_entry</property>
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
                         <property name="text" translatable="yes">Vax 7</property>
@@ -1250,6 +1257,7 @@ Have a nice adventure, traveler.</property>
                     </child>
                     <child>
                       <object class="GtkEntry" id="edit_vax8_entry">
+                        <property name="name">edit_vax8_entry</property>
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
                         <property name="text" translatable="yes">Vax 8</property>

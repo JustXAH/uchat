@@ -4,6 +4,7 @@ NAME = uchat_server
 SRC_DIR = src/
 OBJ_DIR = obj/
 INC_DIR = inc/
+MEDIA_DIR = media/
 
 
 SRC = $(wildcard $(SRC_DIR)/*.c)
@@ -58,6 +59,7 @@ clean:
 uninstall:
 	@$(MAKE_M) $(LIB_DIR)/$(LIB_LIST) $@
 	@$(RM) $(OBJ_DIR) $(NAME)
+	@$(RM) $(MEDIA_DIR)
 	@printf "$(NAME)\t \033[31;1muninstalled\033[0m\n"
 
 reinstall: uninstall all

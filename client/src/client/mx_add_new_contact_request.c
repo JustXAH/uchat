@@ -4,6 +4,7 @@
 
 #include "client.h"
 
+
 extern t_client_st cl_listener;
 
 void mx_add_new_contact_request(t_system *sys, t_user * user, t_json *json, int contact_id) {
