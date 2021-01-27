@@ -35,6 +35,9 @@ void mx_add_new_message(t_server *serv, t_json *json, int user_index) {
     else {
         json->RESULT = cJSON_CreateTrue();
         cJSON_AddItemToObject(json->SEND, "MESSAGE_ID", json->MESSAGE_ID);
+        cJSON_AddItemToObject(json->SEND, "MESSAGE", json->MESSAGE_ID);
+        cJSON_AddItemToObject(json->SEND, "CHAT_ID", json->CHAT_ID);
+        cJSON_AddItemToObject(json->SEND, "CONTACT_ID", json->CONTACT_ID);
     }
 
     send_str = cJSON_Print(json->SEND);

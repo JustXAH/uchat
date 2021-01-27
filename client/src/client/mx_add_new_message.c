@@ -25,18 +25,18 @@ static void add_in_user_message(t_json *json, t_user *user, int count) {
 }
 
 void mx_add_new_message(t_system *sys, t_user *user, t_json *json) {
+    //m_printstr("")
     json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "RESULT");
     if (cJSON_IsFalse(json->RESULT)) {
         // Error
     }
     else {
         json->CHAT_ID = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "CHAT_ID");
-        json->MESSAGES_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGES_ARR");
-        json->COUNT_MESSAGES_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "COUNT_MESSAGES_ARR");
-        json->MESSAGES_ID = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGES_ID");
-        json->MESSAGES_TIME = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGE_TIME");
-        json->CHAT_ID = cJSON_GetObjectItemCaseSensitive(json->SENDER_ID, "SENDER_ID");
-        json->USER_NAME = cJSON_GetObjectItemCaseSensitive(json->USER_NAME, "USER_NAME");
+§       json->MESSAGE_ID = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGES_ID");
+        json->MESSAGE = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGE");
+        json->MESSAGE_TIME = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGE_TIME");
+        json->CONTACT_ID = cJSON_GetObjectItemCaseSensitive(json->SENDER_ID, "CONTACT_ID");
+        json->CONTACT_NAME = cJSON_GetObjectItemCaseSensitive(json->USER_NAME, "USER_NAME");
         add_in_user_message(json, user, json->COUNT_MESSAGES_ARR->valueint);
     }
 }
