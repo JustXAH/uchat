@@ -68,7 +68,8 @@ int main(int argc , char *argv[]) {
     pthread_t thread;
 
     mx_serv_struct_initialization(serv);
-//    mx_db_init(serv->db);
+
+
 
     // creater directory for media files
     mx_media_dirs_creator();
@@ -103,6 +104,7 @@ int main(int argc , char *argv[]) {
     if (!serv->db) {
         return -1;
     }
+    mx_db_init(serv->db);
     printf("\nDB = %d\n", (int) serv->db);
     mx_db_init(serv->db);
     //Listen
