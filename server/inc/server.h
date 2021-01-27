@@ -235,7 +235,7 @@ t_message *mx_db_get_message(sqlite3 *db, int mes_id);
 
 int mx_db_insert_new_file(sqlite3 *db, char *filename);
 char *mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename, char *voice_name);
-t_voice *mx_db_get_users_voices(sqlite3 *db, int user);
+//t_voice *mx_db_get_users_voices(sqlite3 *db, int user);
 char* mx_db_get_filename(sqlite3 *db, int id);
 
 #endif //UCHAT_MAIN_H
