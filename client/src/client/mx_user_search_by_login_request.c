@@ -6,10 +6,13 @@
 extern t_client_st cl_listener;
 
 void mx_user_search_by_login_request(t_system *sys, t_json *json) {
+    mx_printstr("1\n");
     char *send_str = NULL;
 
     json->SEND = cJSON_CreateObject();
+    mx_printstr("2\n");
     json->TYPE = cJSON_CreateNumber(USER_SEARCH_BY_LOGIN);
+    mx_printstr("3\n");
     json->LOGIN_SUBSTR = cJSON_CreateString(sys->searched_login);
 
     printf("SEARCHED_LOGIN = %s\n", json->SEARCHED_LOGIN->valuestring);

@@ -7,13 +7,13 @@ static void mb_display_new_contact(t_chat_list *new_cont) {
     GtkStyleContext *context_contact;
 
     new_cont->contact_gui = gtk_label_new((const gchar *)new_cont->user_names[0]);
-    //context_contact = gtk_widget_get_style_context(new_cont->contact_gui);
+    context_contact = gtk_widget_get_style_context(new_cont->contact_gui);
 //    //check client online
 //    if (client online)
 //        gtk_style_context_add_class(context_contact, "cont_list_online");
 //    else
 //        gtk_style_context_add_class(context_contact, "cont_list_ofline");
-    //gtk_style_context_add_class(context_contact, "cont_list_ofline");
+    gtk_style_context_add_class(context_contact, "cont_list_ofline");
 
     gtk_container_add(GTK_CONTAINER(chat_win.contacts_list), new_cont->contact_gui);
     gtk_widget_show(new_cont->contact_gui);

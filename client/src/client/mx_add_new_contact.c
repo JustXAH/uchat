@@ -6,7 +6,7 @@
 #include "client.h"
 
 static void add_contacts_login(t_user *user, cJSON *CONTACTS_LOGIN_ARR) {
-    user->contacts_login = (char **)malloc(sizeof(char *) * user->contacts_count);
+    user->contacts_login = (char **)malloc(sizeof(char *) * (user->contacts_count + 1));
     for (int i = 0; i != user->contacts_count; i++) {
         user->contacts_login[i] = mx_strdup(cJSON_GetArrayItem(CONTACTS_LOGIN_ARR, i)->valuestring);
     }
