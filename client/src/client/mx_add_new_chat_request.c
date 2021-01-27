@@ -22,7 +22,7 @@ void mx_add_new_chat_request(t_system *sys, t_user * user, t_json *json, int con
     send_str = cJSON_Print(json->SERVER_JSON);
 
     write(sys->sockfd, send_str, strlen(send_str));
-
+    mx_printstr(send_str);
     free(send_str);
     cJSON_Delete(json->SERVER_JSON);
     cl_listener.pending_requests[NEW_CHAT] = true;
