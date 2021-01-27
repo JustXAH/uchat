@@ -1,5 +1,4 @@
 #pragma once
-
 /*
  *	STANDART LIBRARIES
  */
@@ -9,7 +8,6 @@
 #include <string.h>
 #include <fcntl.h>
 
-
 #ifdef __APPLE__
 #define MALLOC_SIZE malloc_size
 #include <malloc/malloc.h>
@@ -17,6 +15,7 @@
 #define MALLOC_SIZE malloc_usable_size
 #include <malloc.h>
 #endif
+
 #define INT_MIN -2147483648
 #define LONG_MAX 9223372036854775807
 #define LONG_MIN -9223372036854775807
@@ -148,4 +147,4 @@ char *mx_substr(const char *str, int a, int b);
 void mx_del_char(char *str, int id, char ch);
 void mx_push_penultimate(t_list **list, void *data);
 void mx_int_bubble_sort_reverse(int *arr, int size);
-bool mx_int_search(int *arr, int num);
+bool mx_int_search(int *array, int num);

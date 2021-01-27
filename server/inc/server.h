@@ -47,7 +47,7 @@ typedef enum e_type_cJSON_message {
     NEW_CHAT,
     GET_LOGIN,
     NEW_MESSAGE,
-    LAST_MESSAGES,
+    HISTORY_CHAT,
     SAVE_AUDIO,
     SEND_AUDIO,
 }            e_type_cJSON;
@@ -207,7 +207,7 @@ void mx_add_new_contact(t_server *serv, t_json *json, int user_index);
 void mx_add_new_chat(t_server *serv, t_json *json, int user_index);
 void mx_add_new_message(t_server *serv, t_json *json, int user_index);
 void mx_get_login(t_server *serv, t_json *json, int user_index);
-void mx_last_messages(t_server *serv, t_json *json, int user_index);
+void mx_history_chat(t_server *serv, t_json *json, int user_index);
 
 /*
  * DATABASE

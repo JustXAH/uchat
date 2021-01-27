@@ -29,7 +29,7 @@ static void add_in_user_message(t_json *json, t_user *user, int count) {
     }
 }
 
-void mx_get_last_messages(t_system *sys, t_user *user, t_json *json) {
+void mx_get_history_chat(t_system *sys, t_user *user, t_json *json) {
     json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "RESULT");
     if (cJSON_IsFalse(json->RESULT)) {
         // Error

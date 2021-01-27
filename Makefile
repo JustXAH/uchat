@@ -44,6 +44,7 @@ uninstall: clean
 	@make -sC $(CLIENTD) $@
 	@make -sC $(SERVERD) $@
 	@rm -rf $(LIB_DIR)
+# 	@rm -rf uchat.db
 
 clean:
 	@rm -rf $(CLIENT)

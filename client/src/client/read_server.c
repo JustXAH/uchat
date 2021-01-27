@@ -61,10 +61,10 @@ void *read_server(void *data) {
                 mx_add_new_message(sys, user, json);
                 cl_listener.pending_requests[NEW_MESSAGE] = false;
                 break;
-            case LAST_MESSAGES:
-                mx_get_last_messages(sys, user, json);
+            case HISTORY_CHAT:
+                mx_get_history_chat(sys, user, json);
                 write(1, "LAST MESSAGES\n", 14);
-                cl_listener.pending_requests[LAST_MESSAGES] = false;
+                cl_listener.pending_requests[HISTORY_CHAT] = false;
                 // функция, которая принимает ответ от запроса на подгрузку последних сообщений
                 break;
             case SAVE_AUDIO:
