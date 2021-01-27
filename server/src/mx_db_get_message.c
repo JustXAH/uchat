@@ -6,7 +6,7 @@
 
 t_message_info *gm_mes_info;
 
-static int get_last_glm_messages_callback(void *NotUsed, int argc, char **argv, char **azColName) {
+static int get_message_callback(void *NotUsed, int argc, char **argv, char **azColName) {
 
     NotUsed = 0;
     for (int i = 0; i < argc; i++) {
@@ -30,7 +30,7 @@ t_message_info *mx_db_get_message(sqlite3 *db, int mes_id) {
     gm_mes_info->next = NULL;
     snprintf(sql, sizeof(sql),
              "SELECT Id, User, Text, Time FROM glm_messages WHERE Id = '%d';",mes_id);
-    rc = sqlite3_exec(db, sql, get_last_glm_messages_callback, 0, &err_msg);
+    rc = sqlite3_exec(db, sql, get_message_callback, 0, &err_msg);
     if (rc != SQLITE_OK ) {
         fprintf(stderr, "Failed to select data\n");
         fprintf(stderr, "SQL error: %s\n", err_msg);
