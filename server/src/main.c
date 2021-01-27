@@ -3,34 +3,6 @@
 //
 
 #include "server.h"
-void* poll_and_rw2(void *data) {
-    t_server *serv = (t_server *) data;
-
-    for (int i = 0; serv->exit != true; ) {
-        if (serv->cli_connect == 0) {
-            serv->update = false;
-        }
-        if (serv->cli_connect > 0) {
-            if (i == serv->cli_connect) {
-                i = 0;
-            }
-            printf("\nPOTOK 2\n");
-            mx_check_disconnect(serv, i);
-            mx_check_read(serv, i);
-            if (serv->cli_connect != 0) {
-                if (serv->update == true) {
-                    mx_update_handler(serv);
-//                    mx_sending_who_online(serv, i);
-//                    printf("\nSent int array with ONLINE users ID to this User(ID: %d; Socket: %d)\n",
-//                           serv->users_id[i], serv->user_socket[i]);
-                    serv->update = false;
-                }
-                i++;
-            }
-        }
-    }
-    return 0;
-}
 
 void* poll_and_rw(void *data) {
     t_server *serv = (t_server *) data;
@@ -115,7 +87,7 @@ int main(int argc , char *argv[]) {
     c = sizeof(struct sockaddr_in);
 
     pthread_create(&thread, NULL, poll_and_rw, serv);
-    pthread_create(&thread, NULL, poll_and_rw2, serv);
+
     //Receive a message from client
     for (int i = 0; serv->exit != true; i++) {
         if (i == MAX_USERS - 1)
