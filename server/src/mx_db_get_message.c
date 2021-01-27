@@ -26,7 +26,7 @@ t_message_info *mx_db_get_message(sqlite3 *db, int mes_id) {
     char *err_msg = 0;
     int rc;
     char sql[1024];
-    gm_mes_info = (t_message*) malloc (sizeof(t_message));
+    gm_mes_info = (t_message_info*) malloc (sizeof(t_message_info));
     gm_mes_info->next = NULL;
     snprintf(sql, sizeof(sql),
              "SELECT Id, User, Text, Time FROM glm_messages WHERE Id = '%d';",mes_id);
