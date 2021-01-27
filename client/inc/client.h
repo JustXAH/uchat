@@ -58,6 +58,7 @@ typedef enum e_type_cJSON_message {
     HISTORY_CHAT,
     NEW_VOICE,
     SEND_VOICE_TO_USER,
+    NEW_USER_PIC,
 }            e_type_cJSON;
 
 typedef struct s_system {
@@ -145,6 +146,7 @@ typedef struct s_json {
     cJSON *USER_NAME;
     cJSON *VOICES_ID_ARR;
     cJSON *VOICES_NAME_ARR;
+    cJSON *USER_PIC_ID;
 }              t_json;
 
 typedef struct s_chat {
