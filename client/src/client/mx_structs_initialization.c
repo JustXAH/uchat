@@ -13,10 +13,18 @@ void mx_structs_initialization(t_system *sys, t_user *user) {
     sys->menu = false;
     sys->chat = false;
     sys->exit = false;
+    sys->filename = NULL;
+    sys->file_path = NULL;
+    sys->voice_name = NULL;
 
     user->login = NULL;
     user->password = NULL;
     user->my_id = 0;
     user->who_online_count = 0;
     user->who_online = NULL;
+    user->voices_name = NULL;
+    user->voices_id = (int *)malloc(sizeof(int) * NUMBER_VOICES);
+    for (int i = 0; i != NUMBER_VOICES; i++) {
+        user->voices_id[i] = 0;
+    }
 }

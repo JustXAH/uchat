@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
     mx_printstr("closing time\n");
     //----------------------------------------------------------------------------//
 //    mx_chat_event(sys, user, thread_server);
-
+    pthread_cancel(thread_server);
     // close the socket
     pthread_cancel(thread_server);
     close(sys->sockfd);

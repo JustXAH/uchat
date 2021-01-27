@@ -6,11 +6,11 @@
 
 static void read_and_write(t_server *serv, int user_index) {
     t_json *json = (t_json *)malloc(sizeof(t_json));
-    char buff_message[MAX];
+    char buff_message[MAX_LEN];
 
     mx_json_struct_initialization(json);
     write(1, "Waiting for a json from client...\n", 25);
-    read(serv->user_socket[user_index], buff_message, MAX);
+    read(serv->user_socket[user_index], buff_message, MAX_LEN);
 
 //        Send the message back to client
     if (buff_message[0] != '\0') {
@@ -55,11 +55,12 @@ static void read_and_write(t_server *serv, int user_index) {
             case HISTORY_CHAT:
                 mx_history_chat(serv, json, user_index);
                 break;
-            case SAVE_AUDIO:
-                write(1, "SAVE AUDIO\n", 11);
+            case NEW_VOICE:
+                mx_save_voice_file_and_get_id(serv, json, user_index);
                 break;
-            case SEND_AUDIO:
+            case SEND_VOICE_TO_USER:
                 write(1, "SEND AUDIO\n", 11);
+                mx_send_voice_file_handler(serv, json, user_index);
                 break;
         }
         printf("\nServer sent a response to the USER (SOCKET: %d ID: %d)\n",

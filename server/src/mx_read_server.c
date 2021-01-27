@@ -5,7 +5,7 @@
 #include "server.h"
 
 void mx_read_server(t_server *serv) {
-    char buff[MAX];
+    char buff[MAX_LEN];
 
     while (read(0, buff, sizeof(buff))) {
         write(1, buff, strlen(buff));
