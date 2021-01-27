@@ -35,6 +35,7 @@
 #define PORT 5000
 #define MAX_USERS 5
 #define COUNT_MESSAGES 30
+#define NUMBER_VOICES 8
 
 //enum for type cjson
 typedef enum e_type_cJSON_message {
@@ -146,7 +147,11 @@ typedef struct s_message {
     time_t *timestamp;
     int count;
 }               t_message;
-
+typedef struct s_voice {
+    int *id;
+    char **filename;
+    char **voice_name;
+}               t_voice;
 //
 //typedef struct s_user {
 //    int id;

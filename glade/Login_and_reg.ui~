@@ -92,8 +92,8 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <signal name="clicked" handler="on_log_login_btn_clicked" swapped="no"/>
-                <accelerator key="Return" signal="activate"/>
                 <accelerator key="KP_Enter" signal="activate"/>
+                <accelerator key="Return" signal="activate"/>
               </object>
               <packing>
                 <property name="x">131</property>
@@ -644,8 +644,8 @@ Have a nice adventure, traveler.</property>
                             <property name="has-focus">True</property>
                             <property name="receives-default">False</property>
                             <signal name="clicked" handler="on_chat_send_btn_clicked" swapped="no"/>
-                            <accelerator key="Return" signal="activate"/>
                             <accelerator key="KP_Enter" signal="activate"/>
+                            <accelerator key="Return" signal="activate"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1285,6 +1285,8 @@ Have a nice adventure, traveler.</property>
                         <property name="use-stock">True</property>
                         <property name="always-show-image">True</property>
                         <signal name="clicked" handler="on_edit_vax1_play_btn_clicked" swapped="no"/>
+                        <accelerator key="1" signal="activate" modifiers="GDK_CONTROL_MASK"/>
+                        <accelerator key="1" signal="grab-focus" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                       <packing>
                         <property name="left-attach">3</property>

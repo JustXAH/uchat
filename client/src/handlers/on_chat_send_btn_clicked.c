@@ -24,7 +24,7 @@ void on_chat_send_btn_clicked(GtkButton *btn, GtkBuilder *builder) {
     char *txt_msg = (char *)gtk_entry_get_text(chat_win.msg_entry);
 
     if (strlen(txt_msg) > 0) {
-        mx_add_messages_request(chat->sys, chat->user, chat->json, 
+        mx_add_message_request(chat->sys, chat->user, chat->json,
                                 txt_msg, cl_listener.chat_in_focus);
 
         //printf("%d\n", cl_listener.chat_in_focus);

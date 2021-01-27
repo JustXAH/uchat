@@ -10,16 +10,16 @@ t_message *gm_mes_info;
 static int get_last_glm_messages_callback(void *NotUsed, int argc, char **argv, char **azColName) {
 
     NotUsed = 0;
-    for (int i = 0; i < argc; i++) {
-        if (!mx_strcmp(azColName[i],"Id"))
-            gm_mes_info->id = argv[i] ? mx_atoi(argv[i]) : 0;
-        if (!mx_strcmp(azColName[i],"User"))
-            gm_mes_info->user = argv[i] ? mx_atoi(argv[i]) : 0;
-        if (!mx_strcmp(azColName[i],"Text"))
-            gm_mes_info->text = mx_strdup(argv[i]);
-        if (!mx_strcmp(azColName[i],"Time"))
-            gm_mes_info->timestamp = mx_atoi(argv[i]);
-    }
+//    for (int i = 0; i < argc; i++) {
+//        if (!mx_strcmp(azColName[i],"Id"))
+//            gm_mes_info->id = argv[i] ? mx_atoi(argv[i]) : 0;
+//        if (!mx_strcmp(azColName[i],"User"))
+//            gm_mes_info->user = argv[i] ? mx_atoi(argv[i]) : 0;
+//        if (!mx_strcmp(azColName[i],"Text"))
+//            gm_mes_info->text = mx_strdup(argv[i]);
+//        if (!mx_strcmp(azColName[i],"Time"))
+//            gm_mes_info->timestamp = mx_atoi(argv[i]);
+//    }
     return 0;
 }
 
