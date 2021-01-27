@@ -100,6 +100,7 @@ typedef struct s_user {
     int id;
     char *login;
     char *password;
+    int photo_file_id;
     struct s_user *next;
 }              t_user;
 
@@ -119,6 +120,7 @@ typedef struct s_chat {
 typedef struct s_user_info {
     int id;
     char *login;
+    int photo_file_id;
 }              t_user_info;
 
 typedef struct s_chat_info {
@@ -182,6 +184,7 @@ int mx_db_check_login(sqlite3 *db, char *login, char *password); //returns id; "
 int mx_db_check_login_exist(sqlite3 *db, char *login); //returns id; "0" - login doesn't exist
 int mx_db_init(sqlite3 *db); //clean db and init tables
 int mx_db_create_new_contact(sqlite3 *db, int user, int contact); //
+int mx_db_set_user_picture(sqlite3 *db, int user, char *filename); //
 int mx_db_create_new_chat(sqlite3 *db, int user, int contact); //return chat_id
 int *mx_db_get_contacts(sqlite3 *db, int user); // 0-ended array of users_id; NULL if contact list is empty
 t_contact *mx_db_get_contacts_info(sqlite3 *db, int user); //

@@ -4,7 +4,7 @@ int mx_db_init(sqlite3 *db) {
     char *err_msg = 0;
     int rc;
 
-    char *sql = "CREATE TABLE IF NOT EXISTS Users(Id INTEGER PRIMARY KEY, Login TEXT, Password TEXT);"
+    char *sql = "CREATE TABLE IF NOT EXISTS Users(Id INTEGER PRIMARY KEY, Login TEXT, Password TEXT, Picture INTEGER);"
                 "CREATE TABLE IF NOT EXISTS Contacts(Id INTEGER PRIMARY KEY, User INTEGER, Contact INTEGER);"
                 "CREATE TABLE IF NOT EXISTS Chats(Id INTEGER PRIMARY KEY, User INTEGER, User2 INTEGER, Notification INTEGER, Notification2);"
                 "CREATE TABLE IF NOT EXISTS Messages(Id INTEGER PRIMARY KEY, User INTEGER, Chat INTEGER, Text TEXT, Time INTEGER);"
