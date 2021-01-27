@@ -68,7 +68,7 @@ void *read_server(void *data) {
                 // функция, которая принимает ответ от запроса на подгрузку последних сообщений
                 break;
             case NEW_VOICE:
-                write(1, "SAVE VOICE JSON PARSE START..\n", 11);
+                write(1, "SAVE AUDIO\n", 11);
                 mx_get_voice_file_id(sys, user, json);
                 break;
             case SEND_VOICE_TO_USER:

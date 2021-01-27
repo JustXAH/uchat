@@ -1,6 +1,6 @@
 #include "server.h"
 
-int mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename, char *voice_name){
+char* mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename, char *voice_name){
     char *err_msg = 0;
     int rc;
 
@@ -25,5 +25,5 @@ int mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename, ch
     }
 
     //int last_id = sqlite3_last_insert_rowid(db);
-    return file_id;
+    return mx_db_get_filename(db, file_id);;
 }

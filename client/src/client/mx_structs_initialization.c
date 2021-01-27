@@ -16,7 +16,6 @@ void mx_structs_initialization(t_system *sys, t_user *user) {
     sys->filename = NULL;
     sys->file_path = NULL;
     sys->voice_name = NULL;
-    sys->position = -1;
 
     user->login = NULL;
     user->password = NULL;
