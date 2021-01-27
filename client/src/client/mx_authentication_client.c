@@ -83,7 +83,6 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
         cl_listener.my_id = json->USER_ID->valueint;
         
         for (int i = 0; i != user->contacts_count; i++) {
-            mx_printstr("adding contact");
             mb_contact_list_add(user->chats_id[i], user->contacts_id[i], user->contacts_login[i], false);
         }
     }
