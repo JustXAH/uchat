@@ -143,6 +143,9 @@ typedef struct s_json {
     cJSON *VOICE_ID;
     cJSON *VOICE_NAME;
     cJSON *USER_NAME;
+    cJSON *MESSAGE_ID;
+    cJSON *MESSAGE_TIME;
+    cJSON *CONTACT_NAME;
 }              t_json;
 
 typedef struct s_chat {
