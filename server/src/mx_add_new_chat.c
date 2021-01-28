@@ -4,6 +4,8 @@
 
 #include "server.h"
 
+
+
 void add_new_chat_and_json_create(sqlite3 *db, t_json **json) {
     t_chat *chats = NULL;
     int answer = mx_db_get_chat_by_users(db, (*json)->CONTACT_ID->valueint, (*json)->USER_ID->valueint);

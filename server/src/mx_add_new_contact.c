@@ -4,6 +4,14 @@
 
 #include "server.h"
 
+static void which_user_online(t_server *serv, t_json *json, char *send_str) {
+    int contact_id = json->CONTACT_ID->valueint;
+
+    for (int i = 0; serv->users_id[i]; i++)
+        if (serv->users_id[i] == contact_id)
+            write(serv->user_socket[i], send_str, strlen(send_str));
+}
+
 void add_new_contact_and_json_create(sqlite3 *db, t_json **json) {
     t_contact *contacts = NULL;
     int answer;
