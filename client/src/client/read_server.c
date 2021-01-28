@@ -76,6 +76,7 @@ void *read_server(void *data) {
         }
         printf("Switch ending\n");
         cJSON_Delete(json->SERVER_JSON);
+        printf("OOPS\n");
         memset(buff, '\0', sizeof(buff));
     }
     free(json);

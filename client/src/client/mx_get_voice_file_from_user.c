@@ -20,16 +20,17 @@ void mx_get_voice_file_from_user(t_system *sys, t_user *user, t_json *json) {
     else { // RESULT = TRUE
 //        user->voices_id[json->POSITION->valueint] = json->VOICE_ID->valueint;
         printf("You have been sent a voice file. Voice file receiving...\n");
-        file_path = mx_file_receiving(sys, json);
+        file_path = mx_file_receiving(sys, json->FILENAME->valuestring, json->FILE_SIZE->valueint);
+
         printf("Successfully received and save voice file from USER!\n");
 
-        sprintf(command, "afplay %s", file_path);
-        status = system( command );
+        sprintf(command, "afplay -t 3 %s", file_path);
+        status = system(command);
 
         printf("Successfully played voice message!\n");
 
          // удаление голосового файла и папки cash
-        if (remove(file_path) == 0) {
+        if (unlink(file_path) == 0) {
             printf("Successfully removed voice_message from cache directory\n");
         }
         else {

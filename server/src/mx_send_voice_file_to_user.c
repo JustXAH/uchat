@@ -14,7 +14,8 @@
 //    return file_path;
 //}
 
-void mx_send_voice_file_to_user(char *file_path, int user_socket) {
+void mx_send_voice_file_to_user(t_server *serv, char *file_path,
+                                int user_socket) {
     FILE *fp = fopen(file_path, "rb");
     char buffer[MAX_LEN];
     size_t file_len_read = 0;

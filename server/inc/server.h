@@ -61,6 +61,7 @@ typedef struct s_server {
     sqlite3 *db;
     int *user_socket;
     int *users_id;
+    time_t *last_voice_send;
     int serv_sock_fd;
     int cli_connect;
     bool update;
@@ -198,7 +199,8 @@ void mx_save_voice_file_and_get_id(t_server *serv, t_json *json, int user_index)
 void mx_voice_file_receiver(t_server *serv, char *unique_name, int file_size,
                             int user_index);
 void mx_send_voice_file_handler(t_server *serv, t_json *json, int user_index);
-void mx_send_voice_file_to_user(char *file_path, int user_socket);
+void mx_send_voice_file_to_user(t_server *serv, char *file_path,
+                                int user_socket);
 void mx_save_user_pic_and_get_id(t_server *serv, t_json *json,
                                  int user_index);
 void mx_user_pic_receiver(t_server *serv, char *unique_name, int file_size,
