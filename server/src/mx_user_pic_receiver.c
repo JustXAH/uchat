@@ -1,5 +1,5 @@
 //
-// Created by Igor Khanenko on 1/26/21.
+// Created by Igor Khanenko on 1/28/21.
 //
 
 #include "server.h"
@@ -7,12 +7,12 @@
 static char *get_file_path(char *filename) {
     char *file_path = NULL;
 
-    file_path = mx_strjoin("server/media/voices/", filename);
+    file_path = mx_strjoin("server/media/users_pic/", filename);
 
     return file_path;
 }
 
-void mx_voice_file_receiver(t_server *serv, char *unique_name,
+void mx_user_pic_receiver(t_server *serv, char *unique_name,
                             int user_index) {
     FILE *fp;
     char buffer[MAX_LEN];
@@ -22,5 +22,5 @@ void mx_voice_file_receiver(t_server *serv, char *unique_name,
         memset(buffer, '\0', MAX_LEN);
     }
     fclose(fp);
-    printf("Voice file receiving was successful!\n");
+    printf("User pic receiving was successful!\n");
 }

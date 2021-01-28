@@ -4,15 +4,15 @@
 
 #include "client.h"
 
-void mx_send_voice_file_to_server(t_system *sys, char *file_path) {
+void mx_send_file_to_server(t_system *sys, char *file_path) {
+
     FILE *fp = fopen(file_path, "rb");
     char buffer[MAX_LEN];
     size_t file_len_read = 0;
 
 
     if (fp == NULL) {
-        perror("[-]Error in reading file.");
-        exit(1);
+        printf("[-]Error in reading file!\n");
     }
 
     while (!feof(fp)) {

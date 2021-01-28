@@ -6,9 +6,11 @@
 
 void mx_get_voice_file_from_user(t_system *sys, t_user *user, t_json *json) {
     char command[256];
+    char *file_path = NULL;
     int status;
 
     json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "RESULT");
+    json->FILENAME = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "FILENAME");
 
     if (cJSON_IsFalse(json->RESULT)) {
         printf("ERROR sending voice file!\n");
@@ -16,29 +18,21 @@ void mx_get_voice_file_from_user(t_system *sys, t_user *user, t_json *json) {
     else { // RESULT = TRUE
         user->voices_id[json->POSITION->valueint] = json->VOICE_ID->valueint;
         printf("You have been sent a voice file. Voice file receiving...\n");
-        mx_voice_file_receiving(sys);
-        printf("Successfully received voice file from USER!\n");
-        /*
-         * тут должна быть функция воспроизведения войса
-         */
-        sprintf( command, "afplay %s", "client/cache/voice_message" );
+        file_path = mx_file_receiving(sys, json);
+        printf("Successfully received and save voice file from USER!\n");
+
+        sprintf(command, "afplay %s", file_path);
         status = system( command );
 
         printf("Successfully played voice message!\n");
 
          // удаление голосового файла и папки cash
-        if (remove("client/cache/voice_message") == 0) {
+        if (remove(file_path) == 0) {
             printf("Successfully removed voice_message from cache directory\n");
         }
         else {
             printf("ERROR while deleting voice message!\n");
         }
-        if (rmdir("client/cache") == 0) {
-            printf("Successfully removed cache directory\n");
-        }
-        else {
-            printf("ERROR deleting the cache folder!\n");
-        }
     }
-    cJSON_DeleteItemFromObject(json->SERVER_JSON, "RESULT");
+    free(file_path);
 }

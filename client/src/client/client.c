@@ -9,12 +9,26 @@ extern t_reg_win reg__win;
 extern t_client_st cl_listener;
 extern t_message *incoming_msg_buffer;
 
+static void cache_dir_removing() {
+    struct stat st = {0};
+
+    if (stat("client/cache", &st) != -1) {
+        // removing cache folder
+        if (rmdir("client/cache") == 0) {
+            printf("Successfully removed cache directory.\n");
+        }
+        else {
+            printf("ERROR deleting the cache folder!\n");
+        }
+    }
+}
+
 int main(int argc, char *argv[]) {
     t_system *sys = (t_system *)malloc(sizeof(t_system));
     t_user *user = (t_user *)malloc(sizeof(t_user));
     struct sockaddr_in servaddr;
     pthread_t thread_server;
-    int cli_socket = 0;
+//    int cli_socket = 0;
 
     chat = (t_chat *)malloc(sizeof(t_chat));
     mx_structs_initialization(sys, user);
@@ -22,8 +36,8 @@ int main(int argc, char *argv[]) {
 //    printf("\nLOGIN = %s\nPASS = %s\n", user->login, user->password);
 
     // socket create and varification
-    cli_socket = socket(AF_INET, SOCK_STREAM, 0);
-    sys->sockfd = cli_socket;
+    sys->sockfd = socket(AF_INET, SOCK_STREAM, 0);
+
     if (sys->sockfd == -1) {
         write(2, "ERROR, socket creation failed\n", 30);
         exit(0);
@@ -50,7 +64,9 @@ int main(int argc, char *argv[]) {
     else
         write(1, "Successfully connected to the server...\n\n", 41);
 
-    printf("/nSocket = %d\n2", sys->sockfd);
+    printf("/nSOCKET = %d\n", sys->sockfd);
+
+    mx_cache_dir_creator();
 
 //    mx_login_or_register(sys, user);
 //    pthread_mutex_init(&sys->mutex, NULL);
@@ -65,15 +81,22 @@ int main(int argc, char *argv[]) {
     g_idle_add(mb_event_listener, NULL);
     gtk_window_initializtion(chat);
     printf("Waiting for finish thread read_server process...\n");
+
     sleep(4);
-    //----------------------------------------------------------------------------//
-//    mx_chat_event(sys, user, thread_server);
+
+    cache_dir_removing();
+
     // read server thread closing
     pthread_cancel(thread_server);
-    printf("Thread read_server closed!\n");
-    // close the socket
-    close(cli_socket);
-    printf("Socket closed!\n");
+    printf("Thread read_server closed.\n");
+
+//    // close the socket
+    printf("Socket closed.\n");
+    close(sys->sockfd);
+
+
+    printf("GG WP!\n");
+
 
     system("leaks -q uchat");
 

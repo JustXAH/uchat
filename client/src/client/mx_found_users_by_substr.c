@@ -5,7 +5,7 @@
 #include "client.h"
 
 void mx_found_users_by_substr(t_system *sys, t_user *user, t_json *json) {
-//    mx_printstr("recieved results from server\n");
+
     json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
                                                     "RESULT");
     //Cleaning memory from previous searches
@@ -33,10 +33,5 @@ void mx_found_users_by_substr(t_system *sys, t_user *user, t_json *json) {
             sys->found_usernames[i] = strdup(cJSON_GetArrayItem(json->FOUND_USERNAMES, i)->valuestring);
         }
         sys->found_usernames[sys->found_usernames_count] = NULL;
-        // дальше нужно вывести эти логины пользователей в всплывающем окошке поиска
-        
-        cJSON_DeleteItemFromObject(json->SERVER_JSON, "FOUND_USERNAMES");
     }
-    cJSON_DeleteItemFromObject(json->SERVER_JSON, "RESULT");
-//    mx_printstr("users_found\n");
 }
