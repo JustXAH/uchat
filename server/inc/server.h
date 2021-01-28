@@ -127,6 +127,7 @@ typedef struct s_chat {
     int *id;
     char **chat_name;
     int *notification;
+    time_t *timestamp;
     int count;
 }              t_chat;
 
@@ -140,6 +141,7 @@ typedef struct s_chat_info {
     int id;
     char *chat_name;
     int notification;
+    time_t timestamp;
     struct s_chat_info *next;
 }               t_chat_info;
 
