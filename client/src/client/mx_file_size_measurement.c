@@ -2,7 +2,7 @@
 // Created by Igor Khanenko on 1/28/21.
 //
 
-#include "server.h"
+#include "client.h"
 
 int mx_file_size_measurement(char *file_path) {
     struct stat lt;

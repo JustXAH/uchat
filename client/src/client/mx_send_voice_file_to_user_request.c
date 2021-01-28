@@ -13,6 +13,9 @@ void mx_send_voice_file_to_user_request(t_system *sys, t_json *json,
     json->VOICE_ID = cJSON_CreateNumber(voice_id);
     json->CONTACT_ID = cJSON_CreateNumber(contact_id);
 
+    printf("\nVOICE_ID: |%d|\n", voice_id);
+    printf("\nCONTACT_ID: |%d|\n", contact_id);
+
     cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
     cJSON_AddItemToObject(json->SEND, "VOICE_ID", json->VOICE_ID);
     cJSON_AddItemToObject(json->SEND, "CONTACT_ID", json->CONTACT_ID);

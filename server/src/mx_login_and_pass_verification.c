@@ -15,7 +15,11 @@ static void voices_json_creator(sqlite3 *db, t_json **json, int user) {
                           (*json)->VOICES_ID_ARR);
     cJSON_AddItemToObject((*json)->SEND, "VOICES_NAME_ARR",
                           (*json)->VOICES_NAME_ARR);
-
+//    for (int i = 0; i != NUMBER_VOICES; i++) {
+//        if (voice->voice_name) {
+//            printf("\nvoice->voice_name[%d] = |%s|\n", i, voice->voice_name[i]);
+//        }
+//    }
     if (MALLOC_SIZE(voice->id)) {
         free(voice->id);
     }
@@ -78,26 +82,19 @@ static void contacts_json_creator(sqlite3 *db, t_json **json, int user) {
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_COUNT",
                           (*json)->CONTACTS_COUNT);
 
-    printf("\n1\n");
     if (contacts->count > 0) {
         if (MALLOC_SIZE(contacts->id)) {
-            printf("\n2\n");
             free(contacts->id);
         }
         if (MALLOC_SIZE(contacts->login)) {
-            printf("\n3\n");
             for (int i = 0; i != contacts->count; i++) {
-                printf("\n4\n");
                 if (contacts->login[i] != NULL) {
-                    printf("\n5\n");
                     mx_strdel(&contacts->login[i]);
                 }
             }
-            printf("\n5\n");
             free(contacts->login);
         }
     }
-    printf("\n6\n");
     if (MALLOC_SIZE(contacts))
         free(contacts);
 }
@@ -120,6 +117,7 @@ void mx_login_and_pass_authentication(t_server *serv, t_json *json, int user_ind
         json->RESULT = cJSON_CreateTrue(); //аунтентификация прошла успешно
         contacts_json_creator(serv->db, &json, json->USER_ID->valueint);
         chats_json_creator(serv->db, &json, json->USER_ID->valueint);
+        voices_json_creator(serv->db, &json, json->USER_ID->valueint);
         serv->users_id[user_index] = json->USER_ID->valueint;
         if (serv->cli_connect > 1) {
             serv->update = true;
