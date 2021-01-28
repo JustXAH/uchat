@@ -5,10 +5,10 @@
 #include "server.h"
 
 void mx_user_search_by_login(t_server *serv, t_json *json, int user_index) {
-    char *send_str = NULL;
     t_user_info *user = NULL;
-
+    char *send_str = NULL;
     char *filename = NULL;
+    char *file_path = NULL;
 
     json->SEND = cJSON_CreateObject();
     json->TYPE = cJSON_CreateNumber(USER_SEARCH_BY_LOGIN);
@@ -16,6 +16,7 @@ void mx_user_search_by_login(t_server *serv, t_json *json, int user_index) {
                                                             "SEARCHED_LOGIN");
     json->FOUND_USER_ID = cJSON_CreateNumber(mx_db_check_login_exist(serv->db,
                                                                      json->SEARCHED_LOGIN->valuestring));
+
     if (json->FOUND_USER_ID->valueint == 0) { // "0" - login doesn't exist
         json->RESULT = cJSON_CreateFalse();
     }
@@ -24,16 +25,20 @@ void mx_user_search_by_login(t_server *serv, t_json *json, int user_index) {
         json->RESULT = cJSON_CreateTrue();
         json->FOUND_LOGIN = cJSON_CreateString(user->login);
 
-        cJSON_AddItemToObject(json->SEND, "FOUND_USER_ID", json->FOUND_USER_ID);
+        cJSON_AddItemToObject(json->SEND, "FOUND_USER_ID",
+                              json->FOUND_USER_ID);
         cJSON_AddItemToObject(json->SEND, "FOUND_LOGIN", json->FOUND_LOGIN);
         if (user->photo_file_id != 0) {
             filename = mx_db_get_filename(serv->db, user->photo_file_id);
+            file_path = mx_get_file_path("server/media/users_pic/", filename);
+
             json->FILENAME = cJSON_CreateString(filename);
+            json->FILE_SIZE = cJSON_CreateNumber(mx_file_size_measurement(file_path));
             json->DISPATCH = cJSON_CreateTrue();
 
             cJSON_AddItemToObject(json->SEND, "FILENAME", json->FILENAME);
-        }
-        else {
+            cJSON_AddItemToObject(json->SEND, "FILE_SIZE", json->FILE_SIZE);
+        } else {
             json->DISPATCH = cJSON_CreateFalse();
         }
     }
@@ -48,11 +53,12 @@ void mx_user_search_by_login(t_server *serv, t_json *json, int user_index) {
 
     if (cJSON_IsTrue(json->DISPATCH)) {
         // функция отправки аватарки на клиент для просмотра профайла
-        mx_send_user_pic_to_user(filename, serv->user_socket[user_index]);
+        mx_send_user_pic_to_user(file_path, serv->user_socket[user_index]);
     }
 
     cJSON_Delete(json->SEND);
     free(filename);
+    free(file_path);
     free(send_str);
-    mx_printstr("mx_suer_search_by_login finished\n");
+    mx_printstr("mx_user_search_by_login finished\n");
 }

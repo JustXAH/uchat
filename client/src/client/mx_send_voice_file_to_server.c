@@ -12,9 +12,9 @@ void mx_send_file_to_server(t_system *sys, char *file_path) {
     if (fp == NULL) {
         printf("[-]Error in reading file!\n");
     }
-    printf("\nOTPRAVKA 1\n");
+
+    printf("\nOTPRAVKA START\n");
     while (!feof(fp)) {
-        printf("\nOTPRAVKA CICLE\n");
         file_len_read = fread(buffer, 1, MAX_LEN, fp);
         send(sys->sockfd, buffer, file_len_read, 0);
         memset(buffer, '\0', MAX_LEN);

@@ -52,10 +52,8 @@ typedef enum e_type_cJSON_message {
     HISTORY_CHAT,
     NEW_VOICE,
     SEND_VOICE_TO_USER,
-<<<<<<< HEAD
     NEW_USER_PIC,
-=======
->>>>>>> origin/client
+
 }            e_type_cJSON;
 
 //struct for server
@@ -108,13 +106,9 @@ typedef struct s_json {
     cJSON *MESSAGE_ID;
     cJSON *VOICES_ID_ARR;
     cJSON *VOICES_NAME_ARR;
-<<<<<<< HEAD
     cJSON *USER_PIC_ID;
     cJSON *DISPATCH;
     cJSON *FILE_SIZE;
-=======
-
->>>>>>> origin/client
 }              t_json;
 
 typedef struct s_user {
@@ -200,13 +194,14 @@ void mx_save_voice_file_and_get_id(t_server *serv, t_json *json, int user_index)
 void mx_voice_file_receiver(t_server *serv, char *unique_name, int file_size,
                             int user_index);
 void mx_send_voice_file_handler(t_server *serv, t_json *json, int user_index);
-void mx_send_voice_file_to_user(char *filename, int user_socket);
+void mx_send_voice_file_to_user(char *file_path, int user_socket);
 void mx_save_user_pic_and_get_id(t_server *serv, t_json *json,
                                  int user_index);
-void mx_user_pic_receiver(t_server *serv, char *unique_name,
+void mx_user_pic_receiver(t_server *serv, char *unique_name, int file_size,
                           int user_index);
-void mx_send_user_pic_to_user(char *filename, int user_socket);
+void mx_send_user_pic_to_user(char *file_path, int user_socket);
 int mx_file_size_measurement(char *file_path);
+char *mx_get_file_path(char *path_to_dir, char *filename);
 
 
 /*

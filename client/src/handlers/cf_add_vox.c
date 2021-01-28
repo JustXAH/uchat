@@ -36,7 +36,11 @@ static void relize () {
     mx_printstr("\nFile name - ");
     mx_printstr(chat->sys->filename);
     mx_printstr("\n");
+
+    // запрос на сохранение голосового файла в БД и на сервере
     mx_save_voice_file_request(chat->sys, chat->user, chat->json);
+
+//    mx_save_voice_file_request(chat->sys, chat->user, chat->json);
 //    mx_strdel(&chat->sys->file_path);
 //    mx_strdel(&chat->sys->voice_name);
 //    mx_strdel(&chat->sys->filename);
@@ -52,8 +56,6 @@ static void get_filename() {
     }
     buff_path++;
     chat->sys->filename = strdup(buff_path);
-
-//    mx_save_voice_file_request(chat->sys, chat->user, chat->json);
 }
 
 

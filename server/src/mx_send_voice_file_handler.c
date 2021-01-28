@@ -19,6 +19,7 @@ static int checking_contact_status_and_taking_socket(t_server *serv,
 void mx_send_voice_file_handler(t_server *serv, t_json *json, int user_index) {
     char *send_str = NULL;
     char *filename = NULL;
+    char *file_path = NULL;
     int to_whom_socket = 0;
 
     json->VOICE_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "VOICE_ID");
@@ -38,19 +39,24 @@ void mx_send_voice_file_handler(t_server *serv, t_json *json, int user_index) {
     }
     else {
         filename = mx_db_get_filename(serv->db, json->VOICE_ID->valueint);
+        file_path = mx_get_file_path("server/media/voices/", filename);
 
         json->RESULT = cJSON_CreateTrue();
         json->FILENAME = cJSON_CreateString(filename);
+        json->FILE_SIZE = cJSON_CreateNumber(mx_file_size_measurement(file_path));
 
         cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
         cJSON_AddItemToObject(json->SEND, "FILENAME", json->FILENAME);
+        cJSON_AddItemToObject(json->SEND, "FILE_SIZE", json->FILE_SIZE);
 
         send_str = cJSON_Print(json->SEND);
         write(to_whom_socket, send_str, strlen(send_str));
 
         // функция отправки голосового файла юзеру
-        mx_send_voice_file_to_user(filename, to_whom_socket);
+        mx_send_voice_file_to_user(file_path, to_whom_socket);
     }
     cJSON_Delete(json->SEND);
+    free(file_path);
+    free(filename);
     free(send_str);
 }
