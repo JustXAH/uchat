@@ -4,8 +4,12 @@
 
 #include "client.h"
 
+extern t_chat_list *contact_list;
+
 static void update_online_users_arr(t_user *user, cJSON *WHO_ONLINE,
                                     int max_users) {
+    t_chat_list *con_buf;
+    GtkStyleContext *context_contact;
     int users_online = 0;
     int friends_online = 0;
     int i;
@@ -27,9 +31,21 @@ static void update_online_users_arr(t_user *user, cJSON *WHO_ONLINE,
     user->who_online_count = 0;
     for (i = 0; i != users_online; i++) {
         for (j = 0; j != user->contacts_count; j++) {
+            con_buf = contact_list;
             if (cJSON_GetArrayItem(WHO_ONLINE, i)->valueint == user->contacts_id[j]) {
                 user->who_online[user->who_online_count++] = cJSON_GetArrayItem(
                         WHO_ONLINE, i)->valueint;
+                while (con_buf) {
+                    if (cJSON_GetArrayItem(WHO_ONLINE, i)->valueint ==  con_buf->user_id) {
+                        con_buf->is_online = true;
+                        context_contact = gtk_widget_get_style_context(con_buf->contact_gui);
+                        if (con_buf->is_online)
+                            gtk_style_context_add_class(context_contact, "cont_list_online");
+                        else
+                            gtk_style_context_add_class(context_contact, "cont_list_ofline");
+                    }
+                    con_buf= con_buf->next_chat;
+                }
             }
         }
     }
