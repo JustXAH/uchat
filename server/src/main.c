@@ -4,6 +4,7 @@
 
 #include "server.h"
 
+
 void* poll_and_rw(void *data) {
     t_server *serv = (t_server *) data;
 
@@ -76,9 +77,10 @@ int main(int argc , char *argv[]) {
     if (!serv->db) {
         return -1;
     }
-    mx_db_init(serv->db);
-    printf("\nDB = %d\n", (int)serv->db);
-    mx_db_init(serv->db);
+     mx_db_init(serv->db);
+    // printf("\nDB = %d\n", (int)serv->db);
+//    mx_db_drop_init_fill(serv->db);
+
     //Listen
     listen(sockfd , 3);
 

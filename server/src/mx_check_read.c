@@ -60,8 +60,10 @@ static void read_and_write(t_server *serv, int user_index) {
                 mx_save_voice_file_and_get_id(serv, json, user_index);
                 break;
             case SEND_VOICE_TO_USER:
-                write(1, "SEND AUDIO\n", 11);
                 mx_send_voice_file_handler(serv, json, user_index);
+                break;
+            case NEW_USER_PIC:
+                mx_save_user_pic_and_get_id(serv, json, user_index);
                 break;
         }
         printf("\nServer sent a response to the USER (SOCKET: %d ID: %d)\n",

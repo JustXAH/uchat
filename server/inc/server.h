@@ -52,6 +52,7 @@ typedef enum e_type_cJSON_message {
     HISTORY_CHAT,
     NEW_VOICE,
     SEND_VOICE_TO_USER,
+    NEW_USER_PIC,
 }            e_type_cJSON;
 
 //struct for server
@@ -104,7 +105,8 @@ typedef struct s_json {
     cJSON *MESSAGE_ID;
     cJSON *VOICES_ID_ARR;
     cJSON *VOICES_NAME_ARR;
-
+    cJSON *USER_PIC_ID;
+    cJSON *DISPATCH;
 }              t_json;
 
 typedef struct s_user {
@@ -191,38 +193,48 @@ void mx_voice_file_receiver(t_server *serv, char *unique_name,
                             int user_index);
 void mx_send_voice_file_handler(t_server *serv, t_json *json, int user_index);
 void mx_send_voice_file_to_user(char *filename, int user_socket);
+void mx_save_user_pic_and_get_id(t_server *serv, t_json *json,
+                                 int user_index);
+void mx_user_pic_receiver(t_server *serv, char *unique_name,
+                          int user_index);
+void mx_send_user_pic_to_user(char *filename, int user_socket);
+
 
 /*
  * DATABASE
  */
-sqlite3* mx_db_open(char *filename);
-int mx_db_close(sqlite3 *db);
-int mx_db_insert_new_user(sqlite3 *db, char *login, char *password); // return id of new user; 0 - login already exist
-int mx_db_check_login(sqlite3 *db, char *login, char *password); //returns id; "0" - login doesn't exist; "-1" - wrong password
-int mx_db_check_login_exist(sqlite3 *db, char *login); //returns id; "0" - login doesn't exist
-int mx_db_init(sqlite3 *db); //clean db and init tables
-int mx_db_create_new_contact(sqlite3 *db, int user, int contact); //
-int mx_db_set_user_picture(sqlite3 *db, int user, char *filename); //
-int mx_db_create_new_chat(sqlite3 *db, int user, int contact); //return chat_id
-int *mx_db_get_contacts(sqlite3 *db, int user); // 0-ended array of users_id; NULL if contact list is empty
-t_contact *mx_db_get_contacts_info(sqlite3 *db, int user); //
-int *mx_db_get_chats(sqlite3 *db, int user);
-char *mx_db_get_login(sqlite3 *db, int user);
-t_user_info *mx_db_get_user(sqlite3 *db, int user);
-int *mx_db_search_users_by_substr(sqlite3 *db, char *str); // 0-ended array of users_id; NULL if found nothing
-char **mx_db_search_logins_by_substr(sqlite3 *db, char *str);
-int mx_db_get_chat_by_users(sqlite3 *db, int user_1, int user_2); //return chat_id; 0 if chat doesn't exist
-t_chat *mx_db_get_chats_info(sqlite3 *db, int user);
-int mx_db_create_new_message(sqlite3 *db, int user, int chat, char *text);
-t_message *mx_db_get_last_messages(sqlite3 *db, int chat);
-t_message_info *mx_db_get_message(sqlite3 *db, int mes_id);
+ sqlite3* mx_db_open(char *filename);
+ int mx_db_close(sqlite3 *db);
+ int mx_db_insert_new_user(sqlite3 *db, char *login, char *password); // return id of new user; 0 - login already exist
+ int mx_db_check_login(sqlite3 *db, char *login, char *password); //returns id; "0" - login doesn't exist; "-1" - wrong password
+ int mx_db_check_login_exist(sqlite3 *db, char *login); //returns id; "0" - login doesn't exist
+ int mx_db_init(sqlite3 *db); //clean db and init tables
+ int mx_db_drop_init_fill(sqlite3 *db); //clean db and init tables
+ int mx_db_create_new_contact(sqlite3 *db, int user, int contact); //
+ int mx_db_delete_contact(sqlite3 *db, int user, int contact);
+ int mx_db_set_user_picture(sqlite3 *db, int user, char *filename); //
+ int mx_db_create_new_chat(sqlite3 *db, int user, int contact); //return chat_id
+ int mx_db_delete_chat(sqlite3 *db, int chat);
+ int *mx_db_get_contacts(sqlite3 *db, int user); // 0-ended array of users_id; NULL if contact list is empty
+ t_contact *mx_db_get_contacts_info(sqlite3 *db, int user); //
+ int *mx_db_get_chats(sqlite3 *db, int user);
+ char *mx_db_get_login(sqlite3 *db, int user);
+ t_user_info *mx_db_get_user(sqlite3 *db, int user);
+ int *mx_db_search_users_by_substr(sqlite3 *db, char *str); // 0-ended array of users_id; NULL if found nothing
+ char **mx_db_search_logins_by_substr(sqlite3 *db, char *str);
+ int mx_db_get_chat_by_users(sqlite3 *db, int user_1, int user_2); //return chat_id; 0 if chat doesn't exist
+ t_chat *mx_db_get_chats_info(sqlite3 *db, int user);
+ int mx_db_create_new_message(sqlite3 *db, int user, int chat, char *text);
+ t_message *mx_db_get_last_messages(sqlite3 *db, int chat);
+ t_message_info *mx_db_get_message(sqlite3 *db, int mes_id);
+ int mx_db_clear_history(sqlite3 *db, int chat);
 
-int mx_db_insert_new_file(sqlite3 *db, char *filename);
-int mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename, char *voice_name);
-t_voice *mx_db_get_users_voices(sqlite3 *db, int user);
-char* mx_db_get_filename(sqlite3 *db, int id);
+ int mx_db_insert_new_file(sqlite3 *db, char *filename);
+ int mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename, char *voice_name);
+ t_voice *mx_db_get_users_voices(sqlite3 *db, int user);
+ char* mx_db_get_filename(sqlite3 *db, int id);
 
-//int mx_db_get_notification(sqlite3 *db, int chat_id, int user_id);
-int mx_db_clear_notification(sqlite3 *db, int chat_id, int user_id);
+ //int mx_db_get_notification(sqlite3 *db, int chat_id, int user_id);
+ int mx_db_clear_notification(sqlite3 *db, int chat_id, int user_id);
 
 #endif //UCHAT_MAIN_H
