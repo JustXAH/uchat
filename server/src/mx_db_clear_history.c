@@ -1,4 +1,4 @@
-##include "server.h"
+#include "server.h"
 
 int mx_db_clear_history(sqlite3 *db, int chat) {
     char *err_msg = 0;

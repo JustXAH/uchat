@@ -1,6 +1,6 @@
-##include "server.h"
+#include "server.h"
 
-int *mx_db_delete_chat(sqlite3 *db, int chat) {
+int mx_db_delete_chat(sqlite3 *db, int chat) {
     char *err_msg = 0;
     int rc;
     char sql[1024];
