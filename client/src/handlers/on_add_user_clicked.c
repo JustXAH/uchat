@@ -22,6 +22,7 @@ void on_add_user_clicked(GtkButton *btn) {
                         chat->user->contacts_id[chat->user->contacts_count - 1],
                         chat->user->contacts_login[chat->user->contacts_count - 1], false);
 
+    mx_printstr("on_add_user_clicked 2\n");
     //Show Chat window
     gtk_stack_set_visible_child(chat_win.all_stack, 
                                 GTK_WIDGET(chat_win.msg_box));
@@ -39,6 +40,8 @@ void on_add_user_clicked(GtkButton *btn) {
                             GTK_LIST_BOX_ROW(
                                 gtk_widget_get_parent(
                                     GTK_WIDGET(contact_list->contact_gui))));
+
+    mx_printstr("on_add_user_clicked 5\n");
 
     //Set the new chat in focus and display it;
     cl_listener.chat_in_focus = contact_list->chat_id;

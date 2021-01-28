@@ -8,7 +8,6 @@ void on_chat_search_entry_changed() {
     //printf("search entry changed\n"); 
     // char *query = (char *)gtk_entry_get_text(GTK_ENTRY(chat_win.fsearch_entry));
     // t_chat_list *con_buf = contact_list;
-
     // do {
     //     if (!mx_count_substr(con_buf->user_name, query) && strlen(query) > 0)
     //         gtk_widget_hide(con_buf->contact_gui);

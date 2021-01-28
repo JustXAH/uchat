@@ -52,6 +52,8 @@ static void get_filename() {
     }
     buff_path++;
     chat->sys->filename = strdup(buff_path);
+
+//    mx_save_voice_file_request(chat->sys, chat->user, chat->json);
 }
 
 

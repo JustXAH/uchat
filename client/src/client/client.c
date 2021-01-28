@@ -83,6 +83,7 @@ int main(int argc, char *argv[]) {
     printf("Waiting for finish thread read_server process...\n");
 
     sleep(4);
+<<<<<<< HEAD
 
     cache_dir_removing();
 
@@ -96,7 +97,6 @@ int main(int argc, char *argv[]) {
 
 
     printf("GG WP!\n");
-
 
     system("leaks -q uchat");
 

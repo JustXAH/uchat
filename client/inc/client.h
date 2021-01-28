@@ -59,6 +59,7 @@ typedef enum e_type_cJSON_message {
     NEW_VOICE,
     SEND_VOICE_TO_USER,
     NEW_USER_PIC,
+
 }            e_type_cJSON;
 
 typedef struct s_system {

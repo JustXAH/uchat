@@ -44,8 +44,7 @@ void mx_get_history_chat(t_system *sys, t_user *user, t_json *json) {
         mx_printstr("his 2\n");
         json->MESSAGES_TIME = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGES_TIME");
         mx_printstr("his 3\n");
-        json->SENDER_ID = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "SENDER_ID");
-        mx_printstr("his 3\n");
+        json->SENDER_ID = cJSON_GetObjectItemCaseSensitive(json->SENDER_ID, "SENDER_ID");
         //json->USER_NAME = cJSON_GetObjectItemCaseSensitive(json->USER_NAME, "USER_NAME");
         add_in_user_message(json, user, json->COUNT_MESSAGES_ARR->valueint);
     }
