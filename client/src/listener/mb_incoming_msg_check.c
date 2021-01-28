@@ -4,6 +4,7 @@ extern t_message *incoming_msg_buffer;
 extern t_chat_list *contact_list;
 extern t_client_st cl_listener;
 extern t_message *chat_history;
+extern t_chat_win chat_win;
 
 static void delete_top_msg_in_buffer() {
     t_message *temp = incoming_msg_buffer->next;;
@@ -37,11 +38,9 @@ void mb_incoming_msg_check() {
     t_chat_list * con_buf = contact_list;
     if (incoming_msg_buffer != NULL) {
         while (incoming_msg_buffer) {
-             printf("id in focus = %d, id incoming = %d\n", 
-                                                cl_listener.chat_in_focus, 
-                                                incoming_msg_buffer->chat_id);
             if (cl_listener.chat_in_focus == incoming_msg_buffer->chat_id)
                 mb_display_msg(incoming_msg_buffer);
+
                 //mb_add_msg_to_history(&(chat_history), incoming_msg_buffer);
             delete_top_msg_in_buffer();
         }

@@ -10,12 +10,14 @@ static void load_recieved_chat();
 void on_add_user_clicked(GtkButton *btn) {
     mx_add_new_contact_request(chat->sys,  chat->user, 
                                chat->json, chat->sys->found_user_id);
+    mx_printstr("add_con 1\n");
     load_recieved_contact();
     mx_add_new_chat_request(chat->sys,  chat->user, 
                                chat->json, chat->sys->found_user_id);
+    mx_printstr("add_con 2\n");
     load_recieved_chat();
 
-
+    mx_printstr("add_con 3\n");
     //printf("chats count : %d ", chat->user->chats_count)
     mb_contact_list_add(chat->user->chats_id[chat->user->chats_count - 1],
                         chat->user->contacts_id[chat->user->contacts_count - 1],
