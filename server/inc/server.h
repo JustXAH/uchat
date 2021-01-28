@@ -107,6 +107,7 @@ typedef struct s_json {
     cJSON *VOICES_NAME_ARR;
     cJSON *USER_PIC_ID;
     cJSON *DISPATCH;
+    cJSON *NOTIFICATION;
 }              t_json;
 
 typedef struct s_user {

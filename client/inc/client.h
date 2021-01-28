@@ -110,6 +110,7 @@ typedef struct s_user {
     int contacts_count;
     int chats_count;
     int user_pic_id;
+    int *notification;
 }              t_user;
 typedef struct s_json {
     cJSON *SERVER_JSON;
@@ -152,6 +153,7 @@ typedef struct s_json {
     cJSON *VOICES_NAME_ARR;
     cJSON *USER_PIC_ID;
     cJSON *DISPATCH;
+    cJSON *NOTIFICATION;
 }              t_json;
 
 typedef struct s_chat {
