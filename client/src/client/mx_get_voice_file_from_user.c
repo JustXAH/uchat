@@ -13,11 +13,12 @@ void mx_get_voice_file_from_user(t_system *sys, t_user *user, t_json *json) {
     json->FILENAME = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "FILENAME");
     json->FILE_SIZE = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "FILE_SIZE");
 
+
     if (cJSON_IsFalse(json->RESULT)) {
         printf("ERROR sending voice file!\n");
     }
     else { // RESULT = TRUE
-        user->voices_id[json->POSITION->valueint] = json->VOICE_ID->valueint;
+//        user->voices_id[json->POSITION->valueint] = json->VOICE_ID->valueint;
         printf("You have been sent a voice file. Voice file receiving...\n");
         file_path = mx_file_receiving(sys, json);
         printf("Successfully received and save voice file from USER!\n");
