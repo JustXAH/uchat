@@ -12,6 +12,7 @@ void mx_structs_initialization(t_system *sys, t_user *user) {
     sys->authentication = false;
     sys->menu = false;
     sys->chat = false;
+    sys->voice_play = true;
     sys->exit = false;
     sys->filename = NULL;
     sys->file_path = NULL;

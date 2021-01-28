@@ -31,7 +31,18 @@ void mx_send_voice_file_handler(t_server *serv, t_json *json, int user_index) {
 
     to_whom_socket = checking_contact_status_and_taking_socket(serv, json);
 
+    printf("\n/t/t/tTIME DIFF = %f\n", difftime(time(0), serv->last_voice_send[user_index]));
+    printf("\n/t/t/tTIME DIFF = %f\n", difftime(time(0), serv->last_voice_send[user_index]));
+
     if (to_whom_socket == 0) { // user is offline and we can't send voice file
+        json->RESULT = cJSON_CreateFalse();
+        cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
+        send_str = cJSON_Print(json->SEND);
+        write(serv->user_socket[user_index], send_str, strlen(send_str));
+    }
+     // если время отправки последнего голосового сообщения данному юзеру
+     // меньше 6 секунд, то отправка не осуществляется
+    else if (difftime(time(0), serv->last_voice_send[user_index]) < 6) {
         json->RESULT = cJSON_CreateFalse();
         cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
         send_str = cJSON_Print(json->SEND);
@@ -53,10 +64,13 @@ void mx_send_voice_file_handler(t_server *serv, t_json *json, int user_index) {
         write(to_whom_socket, send_str, strlen(send_str));
 
         // функция отправки голосового файла юзеру
-        mx_send_voice_file_to_user(file_path, to_whom_socket);
+        mx_send_voice_file_to_user(serv, file_path, to_whom_socket);
+        serv->last_voice_send[user_index] = time(0);
+
+        free(file_path);
+        free(filename);
     }
     cJSON_Delete(json->SEND);
-    free(file_path);
-    free(filename);
+
     free(send_str);
 }

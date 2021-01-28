@@ -38,10 +38,12 @@ void mx_check_disconnect(t_server *serv, int user_index) {
             printf("Socket disconnected!!!\n");
             serv->user_socket[user_index] = -1;
             serv->users_id[user_index] = -1;
+            serv->last_voice_send[user_index] = time(0);
             mx_sorting_users_and_sockets(serv);
 //            mx_int_bubble_sort_reverse(serv->user_socket, MAX_CLIENTS);
             serv->cli_connect -= 1;
             serv->update = true;
+            printf("Client connected: %d!!!\n", serv->cli_connect);
         }
     }
     printf("------------------------------\n");

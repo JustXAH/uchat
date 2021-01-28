@@ -40,7 +40,7 @@
 #include <gio/gio.h>
 
 #define MAX_LEN 1024
-#define PORT 5001
+#define PORT 5000
 #define SA struct sockaddr
 #define NUMBER_VOICES 8
 
@@ -93,6 +93,7 @@ typedef struct s_system {
     bool menu;
     bool message_sent;
     bool chat;
+    bool voice_play;
     char exit;
 }              t_system;
 typedef struct s_user {
@@ -284,7 +285,7 @@ void mx_get_history_chat(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_message(t_system *sys, t_user *user, t_json *json);
 void mx_get_voice_file_from_user(t_system *sys, t_user *user, t_json *json);
 void mx_get_voice_file_id(t_system *sys, t_user *user, t_json *json);
-char *mx_file_receiving(t_system *sys, t_json *json);
+char *mx_file_receiving(t_system *sys, char *filename, int file_size);
 void mx_get_user_pic_id(t_system *sys, t_user *user, t_json *json);
 
 
