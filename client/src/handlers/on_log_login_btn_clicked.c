@@ -35,7 +35,7 @@ static bool check_credentials() {
     char *lbuffer = (char *)gtk_entry_get_text(reg_win.log_entry);
     char *pbuffer = (char *)gtk_entry_get_text(reg_win.pass_entry);
     bool valid = true;
-    if (strlen(lbuffer) < 3 || strlen(pbuffer) < 2 )
+    if (strlen(lbuffer) < 3 || strlen(pbuffer) < 1 )
         valid = false;
     for (int i = 0; lbuffer[i]; i++) {
         if (!isdigit(lbuffer[i]) && !isalpha(lbuffer[i]))

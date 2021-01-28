@@ -7,8 +7,41 @@
 extern t_chat_win chat_win;
 extern t_chat *chat;
 
+static bool credentieal_file_type(char *buffer) {
+    char *extension = NULL;
+
+    while (*buffer) {
+        buffer++;
+    }
+    while (*buffer != '.') {
+        buffer--;
+    }
+    extension = strdup(buffer);
+    if(strcmp(extension, ".wav") == 0 || strcmp(extension, ".mp3") == 0
+       || strcmp(extension, ".aif") == 0 || strcmp(extension, ".mid") == 0) {
+        free(extension);
+        return true;
+    }
+    free(extension);
+    return false;
+}
+
+static void relize () {
+    mx_printstr("\nVoice path - ");
+    mx_printint(chat->sys->position);
+    mx_printstr("\nFile path - ");
+    mx_printstr(chat->sys->file_path);
+    mx_printstr("\nVoice name - ");
+    mx_printstr(chat->sys->voice_name);
+    mx_printstr("\nFile name - ");
+    mx_printstr(chat->sys->filename);
+    mx_printstr("\n");
+    mx_save_voice_file_request(chat->sys, chat->user, chat->json);
+//    mx_strdel(&chat->sys->file_path);
+//    mx_strdel(&chat->sys->voice_name);
+//    mx_strdel(&chat->sys->filename);
+}
 static void get_filename() {
-    char *filename = NULL;
     char *buff_path = chat->sys->file_path;
 
     while (*buff_path) {
@@ -21,34 +54,9 @@ static void get_filename() {
     chat->sys->filename = strdup(buff_path);
 }
 
-static void relize () {
-    mx_printstr("\nVoice name - ");
-  mx_printint(chat->sys->position);
-    mx_printstr("\nFile path - ");
-    mx_printstr(chat->sys->file_path);
-    mx_printstr("\nVoice name - ");
-    mx_printstr(chat->sys->voice_name);
-    mx_printstr("\n");
-//    mx_strdel(&chat->sys->file_path);
-//    mx_strdel(&chat->sys->voice_name);
-}
-static void parsing () {
-    int i = strlen(chat->sys->file_path);
-    char *buff_path = NULL;
-
-    while (*buff_path) {
-        buff_path++;
-    }
-    while (*buff_path != '/') {
-        buff_path--;
-    }
-    buff_path++;
-    chat->sys->filename = strdup(buff_path);
-//    mx_save_voice_file_request(chat->sys, chat->user, chat->json);
-}
 
 static bool open_file_cooser(int i) {
-
+    char *buffer = NULL;
     // Show the "Open Text File" dialog box
 //    gtk_window_set_transient_for(GTK_WINDOW(chat_win.file_choose_window), GTK_WINDOW(chat->sys->chat_window));
     gtk_widget_show_all(chat_win.file_choose_window);
@@ -57,18 +65,20 @@ static bool open_file_cooser(int i) {
     // Check return value from Open Text File dialog box to see if user clicked the Open button
     if (gtk_dialog_run(GTK_DIALOG (chat_win.file_choose_window)) == 1) {
         // Get the file name from the dialog box
-       chat->sys->file_path = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(chat_win.file_choose_window));
-        if (chat->sys->file_path != NULL) {
+        buffer = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(chat_win.file_choose_window));
+        if (buffer != NULL && credentieal_file_type(buffer)) {
+            chat->sys->file_path = strdup(buffer);
             chat->sys->position = i;
             get_filename();
+            free(buffer);
             gtk_widget_hide(chat_win.file_choose_window);
             return true;
         }
     }
-
     // Finished with the "Open Text File" dialog box, so hide it
-    return false;
+    free(buffer);
     gtk_widget_hide(chat_win.file_choose_window);
+    return false;
 
 }
 

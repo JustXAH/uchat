@@ -6,9 +6,13 @@
 
 void add_new_chat_and_json_create(sqlite3 *db, t_json **json) {
     t_chat *chats = NULL;
-    int answer;
-
-    answer = mx_db_create_new_chat(db, (*json)->USER_ID->valueint, (*json)->CONTACT_ID->valueint);
+    int answer = mx_db_get_chat_by_users(db, (*json)->CONTACT_ID->valueint, (*json)->USER_ID->valueint);
+    mx_printint(answer);
+    mx_printstr("<- chat_id\n");
+    if (answer == 0)
+        answer = mx_db_create_new_chat(db, (*json)->USER_ID->valueint, (*json)->CONTACT_ID->valueint);
+    mx_printint(answer);
+    mx_printstr("<- chat_id\n");
     if (answer == -1) {
         (*json)->RESULT = cJSON_CreateFalse();
     }

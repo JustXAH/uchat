@@ -7,6 +7,8 @@ extern t_chat *chat;
 extern t_message *chat_history;
 
 void on_contact_list_row_selected(GtkListBox *listbox, GtkListBoxRow *row) {
+    if (cl_listener.just_added_new_friend)
+        return;
     t_chat_list *con_buff = contact_list;
     int index = gtk_list_box_row_get_index(row);
 

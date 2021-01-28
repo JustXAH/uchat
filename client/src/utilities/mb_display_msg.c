@@ -29,7 +29,7 @@ void mb_display_msg(t_message *msg) {
     gtk_label_set_xalign(GTK_LABEL(view_msg), 1);
 
     //add time
-    view_time = gtk_label_new(msg->text);
+    view_time = gtk_label_new(msg->timestamp);
     context_time = gtk_widget_get_style_context(view_time);
     gtk_style_context_add_class(context_time, "msg_time");
     gtk_label_set_xalign(GTK_LABEL(view_time), 1);
