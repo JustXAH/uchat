@@ -53,6 +53,13 @@ void on_add_user_clicked(GtkButton *btn) {
 
     mb_display_chat_with_contact(contact_list->chat_id);
     cl_listener.just_added_new_friend = false;
+    gtk_entry_set_text(GTK_ENTRY(chat_win.fsearch_entry), "");
+    gtk_stack_set_visible_child(chat_win.search_stack, 
+                                gtk_widget_get_parent(
+                                    gtk_widget_get_parent(
+                                        GTK_WIDGET(chat_win.contacts_list))));
+
+    cl_listener.fsearch = false;
 
     mx_printstr("on_add_user_clicked finished\n");
 }

@@ -49,15 +49,14 @@ void mx_add_new_chat(t_system *sys, t_user *user, t_json *json) {
         cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_NAME_ARR");
 
 
-    int chat_i = chat->user->chats_count;
-    int cont_i = chat->user->contacts_count;
+    int chat_i = chat->user->chats_count - 1;
+    int cont_i = chat->user->contacts_count - 1;
 
-    if (cl_listener.new_contact_received) {
-        //mx_printstr("important test 1\n");
-        mb_contact_list_add(chat->user->chats_id[chat_i], chat->user->contacts_id[cont_i], chat->user->contacts_login[cont_i], false);
-        //mx_printstr("important test 2\n");
-        cl_listener.message_in_buffer = false;
-    }
+
+    printf("about to display %s as a contact\n", chat->user->contacts_login[cont_i]);
+    mb_contact_list_add(chat->user->chats_id[chat_i], chat->user->contacts_id[cont_i], chat->user->contacts_login[cont_i], false);
+    printf("should have displayed %s as a contact\n", chat->user->contacts_login[cont_i]);
+
     //cl_listener.new_contact_received = true;
     mx_printstr("recieved new chat id\n");
     
