@@ -117,6 +117,8 @@ void mb_client_globals_initialization() {
 
     cl_listener.fsearch = false;
 
+    cl_listener.new_contact_received = false;
+
     cl_listener.just_added_new_friend = 0;
 
     cl_listener.pending_requests = (bool *)malloc(HISTORY_CHAT + 1);

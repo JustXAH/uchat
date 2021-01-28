@@ -244,6 +244,7 @@ typedef struct s_client_st {
     bool fsearch;
     bool *pending_requests;
     bool just_added_new_friend;
+    bool new_contact_received;
 }               t_client_st;
 
 typedef struct s_message {
@@ -349,6 +350,7 @@ void mb_client_globals_initialization();
 gboolean mb_event_listener(gpointer data);
 void mb_auth_event_check();
 void mb_incoming_msg_check();
+void mb_new_contact_check();
 
 void mb_contact_list_add(int chat_id, int user_id, char *user_name, bool is_online);
 void mb_msg_buffer_add(int msg_id, int chat_id, int user_id, char *user_name, char *time, char *msg_text, bool outgoing);

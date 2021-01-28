@@ -18,9 +18,9 @@ void on_add_user_clicked(GtkButton *btn) {
 
 
     //printf("chats count : %d ", chat->user->chats_count)
-    mb_contact_list_add(chat->user->chats_id[chat->user->chats_count - 1],
-                        chat->user->contacts_id[chat->user->contacts_count - 1],
-                        chat->user->contacts_login[chat->user->contacts_count - 1], false);
+    //mb_contact_list_add(chat->user->chats_id[chat->user->chats_count - 1],
+    //                    chat->user->contacts_id[chat->user->contacts_count - 1],
+    //                    chat->user->contacts_login[chat->user->contacts_count - 1], false);
 
     //Show Chat window
     gtk_stack_set_visible_child(chat_win.all_stack, 
