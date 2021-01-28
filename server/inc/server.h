@@ -206,6 +206,7 @@ void mx_send_user_pic_to_user(char *filename, int user_socket);
 /*
  * DATABASE
  */
+
  sqlite3* mx_db_open(char *filename);
  int mx_db_close(sqlite3 *db);
  int mx_db_insert_new_user(sqlite3 *db, char *login, char *password); // return id of new user; 0 - login already exist
