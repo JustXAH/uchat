@@ -128,4 +128,8 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
     }
 //    cJSON_DeleteItemFromObject(json->SERVER_JSON, "RESULT");
 //    cJSON_DeleteItemFromObject(json->SERVER_JSON, "USER_ID");
+//void user_take_vox_names(t_user *user, t_json *json) {
+//
+//    }
+//    void gtk_menu_item_set_label (GtkMenuItem *menu_item, const gchar *label);
 }

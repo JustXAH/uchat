@@ -16,7 +16,8 @@ void on_Vox_1_activate(GtkButton *btn) {
         if (con_buf->chat_id == cl_listener.chat_in_focus)
             con_id = con_buf->user_id;
     } while ((con_buf = con_buf->next_chat));
-
     mx_send_voice_file_to_user_request(chat->sys, chat->json, 0, con_id);
-    printf("Vox 1 sended");
+    printf("\nVox 1 sended\n");
 }
+
+//user.voices_name
