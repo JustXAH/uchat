@@ -209,6 +209,8 @@ void mx_send_user_pic_to_user(char *filename, int user_socket);
  int mx_db_insert_new_user(sqlite3 *db, char *login, char *password); // return id of new user; 0 - login already exist
  int mx_db_check_login(sqlite3 *db, char *login, char *password); //returns id; "0" - login doesn't exist; "-1" - wrong password
  int mx_db_check_login_exist(sqlite3 *db, char *login); //returns id; "0" - login doesn't exist
+ int mx_db_change_login(sqlite3* db, int user, char* new_login); //return 1 - login already taken, 0 - success
+ int mx_db_change_password(sqlite3* db, int user, char* new_password); // 0 - success
  int mx_db_init(sqlite3 *db); //clean db and init tables
  int mx_db_drop_init_fill(sqlite3 *db); //clean db and init tables
  int mx_db_create_new_contact(sqlite3 *db, int user, int contact); //
