@@ -153,6 +153,7 @@ typedef struct s_json {
     cJSON *VOICES_NAME_ARR;
     cJSON *USER_PIC_ID;
     cJSON *DISPATCH;
+    cJSON *FILE_SIZE;
 }              t_json;
 
 typedef struct s_chat {
@@ -230,6 +231,7 @@ typedef struct s_client_st {
     char *my_name;
     bool fsearch;
     bool *pending_requests;
+    bool just_added_new_friend;
 }               t_client_st;
 
 typedef struct s_message {
@@ -308,6 +310,7 @@ void mx_chat_event(t_system *sys, t_user *user, pthread_t thread);
 void mx_client_menu(t_system *sys, t_user *user);
 void mx_sending_messages(t_system *sys, t_user *user, char *buff);
 void mx_save_user_pic_file_request(t_system *sys, t_user *user, t_json *json);
+int mx_file_size_measurement(char *file_path);
 
 
 

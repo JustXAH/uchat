@@ -4,10 +4,6 @@ int mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename, ch
     char *err_msg = 0;
     int rc;
 
-    //ckeck voice EXISTS
-
-    //
-
     int file_id = mx_db_insert_new_file(db, filename);
 
     char sql[1024];

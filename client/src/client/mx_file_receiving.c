@@ -16,13 +16,20 @@ static char *get_file_path(char *filename) {
 
 char *mx_file_receiving(t_system *sys, t_json *json) {
     char *file_path = get_file_path(json->FILENAME->valuestring);
-    FILE *fp = fopen(file_path, "wb");
     char buffer[MAX_LEN];
+    FILE *fp = fopen(file_path, "wb");
+    int len_recv = 0;
+    int total = 0;
 
-    while (recv(sys->sockfd, buffer, MAX_LEN, 0)) {
+    printf("\nPRIEM START\n");
+    while (total != json->FILE_SIZE->valueint) {
+        len_recv = recv(sys->sockfd, buffer, MAX_LEN, 0);
+        total += len_recv;
+        printf("FILE_SIZe: |%d|\nTOTAL RECV: |%d|\n", json->FILE_SIZE->valueint, total);
         fwrite(buffer, 1, MAX_LEN, fp);
         memset(buffer, '\0', MAX_LEN);
     }
+    printf("\nPRIEM END\n");
     fclose(fp);
     return file_path;
 }

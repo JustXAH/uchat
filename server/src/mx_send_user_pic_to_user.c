@@ -4,18 +4,18 @@
 
 #include "server.h"
 
-static char *get_user_pic_path(char *filename) {
-    char *file_path = NULL;
-    char path_to_dir[24] = "server/media/users_pic/\0";
+//static char *get_user_pic_path(char *filename) {
+//    char *file_path = NULL;
+//    char path_to_dir[24] = "server/media/users_pic/\0";
+//
+//    file_path = mx_strjoin(path_to_dir, filename);
+//
+//    memset(path_to_dir, '\0', 24);
+//    return file_path;
+//}
 
-    file_path = mx_strjoin(path_to_dir, filename);
-
-    memset(path_to_dir, '\0', 24);
-    return file_path;
-}
-
-void mx_send_user_pic_to_user(char *filename, int user_socket) {
-    FILE *fp = fopen(get_user_pic_path(filename), "rb");
+void mx_send_user_pic_to_user(char *file_path, int user_socket) {
+    FILE *fp = fopen(file_path, "rb");
     char buffer[MAX_LEN];
     size_t file_len_read = 0;
 

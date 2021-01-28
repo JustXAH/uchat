@@ -20,6 +20,7 @@ static void delete_top_msg_in_buffer() {
     incoming_msg_buffer = temp;
 }
 static void mb_add_msg_to_history(t_message **history, t_message *new_msg) {
+    mx_printstr("mb_add_msg_to_his\n");
     if (*history == NULL) {
         *history = new_msg;
     } else {
@@ -31,6 +32,7 @@ static void mb_add_msg_to_history(t_message **history, t_message *new_msg) {
         new_msg->next = temp->next;
         temp->next = new_msg;
     }
+    mx_printstr("mb_add_msg_to_his 2\n");
     mb_display_msg(new_msg);
 }
 void mb_incoming_msg_check() {
