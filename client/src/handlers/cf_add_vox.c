@@ -7,6 +7,19 @@
 extern t_chat_win chat_win;
 extern t_chat *chat;
 
+
+static void err_msg() {
+    gtk_window_set_transient_for(GTK_WINDOW(chat_win.err_pop), GTK_WINDOW(chat->sys->chat_window));
+    gtk_widget_show_all(GTK_WIDGET(chat_win.err_pop));
+
+    gtk_label_set_text(GTK_LABEL(chat_win.err_msg_lbl), "Expeckt .wav, .mp3, .aif, .mid files!!!");
+    int responce = gtk_dialog_run(GTK_DIALOG(GTK_WIDGET(chat_win.err_pop)));
+    if (responce == 1) {
+        gtk_widget_hide(GTK_WIDGET(chat_win.err_pop));
+    } else {
+        gtk_widget_hide(GTK_WIDGET(chat_win.err_pop));
+    }
+}
 static bool credentieal_file_type(char *buffer) {
     char *extension = NULL;
 
@@ -54,7 +67,6 @@ static void get_filename() {
 //    mx_save_voice_file_request(chat->sys, chat->user, chat->json);
 }
 
-
 static bool open_file_cooser(int i) {
     char *buffer = NULL;
     // Show the "Open Text File" dialog box
@@ -76,6 +88,7 @@ static bool open_file_cooser(int i) {
         }
     }
     // Finished with the "Open Text File" dialog box, so hide it
+    err_msg();
     free(buffer);
     gtk_widget_hide(chat_win.file_choose_window);
     return false;

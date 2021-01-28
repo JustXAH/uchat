@@ -3,6 +3,96 @@
 <interface>
   <requires lib="gtk+" version="3.24"/>
   <!-- interface-css-provider-path style.css -->
+  <object class="GtkDialog">
+    <property name="can-focus">False</property>
+    <property name="type">popup</property>
+    <property name="type-hint">dialog</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can-focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can-focus">False</property>
+            <property name="layout-style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkDialog" id="err_pop">
+    <property name="width-request">200</property>
+    <property name="height-request">100</property>
+    <property name="can-focus">False</property>
+    <property name="title" translatable="yes">Error</property>
+    <property name="type-hint">dialog</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can-focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can-focus">False</property>
+            <property name="layout-style">center</property>
+            <child>
+              <object class="GtkButton" id="err_btn">
+                <property name="label" translatable="yes">Close</property>
+                <property name="name">err_btn</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <signal name="clicked" handler="on_err_btn_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="err_msg_lbl">
+            <property name="name">err_msg_lbl</property>
+            <property name="width-request">150</property>
+            <property name="height-request">70</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">label</property>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="1">err_btn</action-widget>
+    </action-widgets>
+  </object>
   <object class="GtkWindow" id="log_and_reg_window">
     <property name="name">log_and_reg_window</property>
     <property name="can-focus">False</property>
@@ -92,8 +182,8 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <signal name="clicked" handler="on_log_login_btn_clicked" swapped="no"/>
-                <accelerator key="KP_Enter" signal="activate"/>
                 <accelerator key="Return" signal="activate"/>
+                <accelerator key="KP_Enter" signal="activate"/>
               </object>
               <packing>
                 <property name="x">131</property>
@@ -276,8 +366,8 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <signal name="clicked" handler="on_reg_new_btn_clicked" swapped="no"/>
-                <accelerator key="Return" signal="activate"/>
                 <accelerator key="KP_Enter" signal="activate"/>
+                <accelerator key="Return" signal="activate"/>
               </object>
               <packing>
                 <property name="x">135</property>
@@ -648,8 +738,8 @@ Have a nice adventure, traveler.</property>
                             <property name="has-focus">True</property>
                             <property name="receives-default">False</property>
                             <signal name="clicked" handler="on_chat_send_btn_clicked" swapped="no"/>
-                            <accelerator key="KP_Enter" signal="activate"/>
                             <accelerator key="Return" signal="activate"/>
+                            <accelerator key="KP_Enter" signal="activate"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -717,6 +807,7 @@ Have a nice adventure, traveler.</property>
                 <child>
                   <object class="GtkButton" id="profile_edit">
                     <property name="label" translatable="yes">Edit profile</property>
+                    <property name="name">profile_edit</property>
                     <property name="width-request">110</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
@@ -1298,8 +1389,8 @@ Have a nice adventure, traveler.</property>
                         <property name="use-stock">True</property>
                         <property name="always-show-image">True</property>
                         <signal name="clicked" handler="on_edit_vax1_play_btn_clicked" swapped="no"/>
-                        <accelerator key="1" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <accelerator key="1" signal="grab-focus" modifiers="GDK_CONTROL_MASK"/>
+                        <accelerator key="1" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                       <packing>
                         <property name="left-attach">3</property>
