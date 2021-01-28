@@ -35,7 +35,8 @@ void mx_add_new_message(t_server *serv, t_json *json, int user_index) {
     cJSON *CHAT_ID = cJSON_CreateNumber(json->CHAT_ID->valueint);
     cJSON *MESSAGE_ID = cJSON_CreateNumber(message_info->id);
     cJSON *MESSAGE = cJSON_CreateString(message_info->text);
-    cJSON *MESSAGE_TIME =  cJSON_CreateNumber(message_info->timestamp);;
+    cJSON *MESSAGE_TIME =  cJSON_CreateNumber(message_info->timestamp);
+    cJSON *CONTACT_ID = cJSON_CreateNumber(json->CONTACT_ID->valueint);
 
     if (json->MESSAGE_ID->valueint == 0) {
         json->RESULT = cJSON_CreateFalse();
@@ -48,6 +49,7 @@ void mx_add_new_message(t_server *serv, t_json *json, int user_index) {
         cJSON_AddItemToObject(json->SEND, "MESSAGE", MESSAGE);
         cJSON_AddItemToObject(json->SEND, "CHAT_ID", CHAT_ID);
         cJSON_AddItemToObject(json->SEND, "USER_ID", USER_ID);
+        cJSON_AddItemToObject(json->SEND, "CONTACT_ID", CONTACT_ID);
     }
 
     send_str = cJSON_Print(json->SEND);

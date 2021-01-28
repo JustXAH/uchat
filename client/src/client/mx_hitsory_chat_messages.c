@@ -38,10 +38,14 @@ void mx_get_history_chat(t_system *sys, t_user *user, t_json *json) {
         json->CHAT_ID = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "CHAT_ID");
         json->MESSAGES_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGES_ARR");
         json->COUNT_MESSAGES_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "COUNT_MESSAGES_ARR");
+        mx_printstr("his 1\n");
         json->MESSAGES_ID = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGES_ID");
-        json->MESSAGES_TIME = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGE_TIME");
-        json->CHAT_ID = cJSON_GetObjectItemCaseSensitive(json->SENDER_ID, "SENDER_ID");
-        json->USER_NAME = cJSON_GetObjectItemCaseSensitive(json->USER_NAME, "USER_NAME");
+        mx_printstr("his 2\n");
+        json->MESSAGES_TIME = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGES_TIME");
+        mx_printstr("his 3\n");
+        json->SENDER_ID = cJSON_GetObjectItemCaseSensitive(json->SENDER_ID, "SENDER_ID");
+        //json->USER_NAME = cJSON_GetObjectItemCaseSensitive(json->USER_NAME, "USER_NAME");
         add_in_user_message(json, user, json->COUNT_MESSAGES_ARR->valueint);
     }
+    mx_printstr("history recieved and loaded into buffer\n");
 }

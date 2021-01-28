@@ -236,8 +236,8 @@ typedef struct s_message {
 
 typedef struct s_chat_list {
     int chat_id;
-    int *user_ids;
-    char **user_names;
+    int user_id;
+    char *user_name;
     int user_amount;
     bool is_online;
     GtkWidget *contact_gui;

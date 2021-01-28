@@ -10,7 +10,7 @@ void on_chat_search_entry_changed() {
     t_chat_list *con_buf = contact_list;
 
     do {
-        if (!mx_count_substr(con_buf->user_names[0], query) && strlen(query) > 0)
+        if (!mx_count_substr(con_buf->user_name, query) && strlen(query) > 0)
             gtk_widget_hide(con_buf->contact_gui);
         else
             gtk_widget_show(con_buf->contact_gui);

@@ -63,7 +63,7 @@ void *read_server(void *data) {
                 break;
             case HISTORY_CHAT:
                 mx_get_history_chat(sys, user, json);
-                write(1, "LAST MESSAGES\n", 14);
+                write(1, "GOT HISTORY \n", 14);
                 cl_listener.pending_requests[HISTORY_CHAT] = false;
                 // функция, которая принимает ответ от запроса на подгрузку последних сообщений
                 break;
