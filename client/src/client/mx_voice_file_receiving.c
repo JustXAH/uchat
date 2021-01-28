@@ -31,5 +31,4 @@ void mx_voice_file_receiving(t_system *sys) {
     else {
         printf("ERROR while creating folder cache!\n");
     }
-
 }

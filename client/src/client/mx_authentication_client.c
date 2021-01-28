@@ -34,13 +34,10 @@ void user_voices_parse_and_save(t_user *user, t_json *json) {
             user->voices_name[i] = strdup(
                     cJSON_GetArrayItem(json->VOICES_NAME_ARR, i)->valuestring);
         }
+        printf("\nuser->voices_name[%d] = |%s|\n", i, user->voices_name[i]);
     }
     user->voices_name[NUMBER_VOICES] = NULL;
 }
-//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_COUNT");
-//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_ID_ARR");
-//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_NAME_ARR");
-
 
 void user_chats_parse_and_save(t_user *user, t_json *json) {
     user->chats_count = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
@@ -87,9 +84,6 @@ void user_contacts_parse_and_save(t_user *user, t_json *json) {
         }
         user->contacts_login[user->contacts_count] = NULL;
     }
-//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CONTACTS_COUNT");
-//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CONTACTS_ID_ARR");
-//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CONTACTS_LOGIN_ARR");
 }
 
 void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
