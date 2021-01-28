@@ -8,6 +8,14 @@
 extern t_chat_win chat_win;
 extern t_chat *chat;
 
+//void change_file_size(char *buffer) {
+//    GdkPixbuf *buf;
+//    GError *err = NULL;
+//    buf = gdk_pixbuf_new_from_file("test.jpg", &err);
+//    g_assert_no_error(err);
+//    g_object_unref(buf);
+//}
+//GdkPixbuf *temp=gdk_pixbuf_scale_simple((GdkPixbuf*)data, width, height, GDK_INTERP_BILINEAR);
 static void err_msg() {
     gtk_window_set_transient_for(GTK_WINDOW(chat_win.err_pop), GTK_WINDOW(chat->sys->chat_window));
     gtk_widget_show_all((GTK_WIDGET(chat_win.err_pop)));
@@ -20,7 +28,6 @@ static void err_msg() {
         gtk_widget_hide(GTK_WIDGET(chat_win.err_pop));
     }
 }
-
 static bool credentieal_file_type(char *buffer) {
     char *extension = NULL;
 
@@ -40,7 +47,6 @@ static bool credentieal_file_type(char *buffer) {
     free(extension);
     return false;
 }
-
 static void relize () {
     mx_printstr("\nFile path - ");
     mx_printstr(chat->sys->file_path);
@@ -64,8 +70,6 @@ static void get_filename() {
     chat->sys->filename = strdup(buff_path);
 //    mx_save_voice_file_request(chat->sys, chat->user, chat->json);
 }
-
-
 static bool open_file_cooser() {
     char *buffer = NULL;
 
@@ -90,7 +94,6 @@ static bool open_file_cooser() {
     return false;
 
 }
-
 void on_edit_profile_avatar_clicked(GtkButton *btn) {
     if (open_file_cooser()) {
         relize();

@@ -12,6 +12,8 @@ void mx_save_user_pic_and_get_id(t_server *serv, t_json *json,
                                                      "USER_ID");
     json->FILENAME = cJSON_GetObjectItemCaseSensitive(json->USER_JSON,
                                                       "FILENAME");
+        json->FILE_SIZE = cJSON_GetObjectItemCaseSensitive(json->USER_JSON,
+                                                      "FILE_SIZE");
     json->SEND = cJSON_CreateObject();
     json->TYPE = cJSON_CreateNumber(NEW_USER_PIC);
 
@@ -37,7 +39,7 @@ void mx_save_user_pic_and_get_id(t_server *serv, t_json *json,
     write(serv->user_socket[user_index], send_str, strlen(send_str));
 
     // функция приёма и сохранения аватарки
-    mx_user_pic_receiver(serv, unique_user_pic_name, user_index);
+    mx_user_pic_receiver(serv, unique_user_pic_name, json->FILE_SIZE->valueint, user_index);
 
     cJSON_Delete(json->SEND);
     free(unique_user_pic_name);

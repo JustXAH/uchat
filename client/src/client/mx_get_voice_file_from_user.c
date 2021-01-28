@@ -11,6 +11,7 @@ void mx_get_voice_file_from_user(t_system *sys, t_user *user, t_json *json) {
 
     json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "RESULT");
     json->FILENAME = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "FILENAME");
+    json->FILE_SIZE = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "FILE_SIZE");
 
     if (cJSON_IsFalse(json->RESULT)) {
         printf("ERROR sending voice file!\n");

@@ -82,6 +82,7 @@ int main(int argc, char *argv[]) {
     gtk_window_initializtion(chat);
     printf("Waiting for finish thread read_server process...\n");
 
+    sleep(4);
 
     cache_dir_removing();
 
@@ -98,7 +99,6 @@ int main(int argc, char *argv[]) {
 
 
     printf("GG WP!\n");
-
 
     system("leaks -q uchat");
     exit(0);

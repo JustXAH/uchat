@@ -26,4 +26,5 @@ ush
 libmx.a
 empty
 *.txt
-uchat.db
+*.db
+

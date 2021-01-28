@@ -7,6 +7,7 @@
 void mx_get_user_pic_id(t_system *sys, t_user *user, t_json *json) {
     json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "RESULT");
     json->USER_PIC_ID = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "USER_PIC_ID");
+
     if (cJSON_IsFalse(json->RESULT)) {
         printf("ERROR saving user pic\n");
     }
