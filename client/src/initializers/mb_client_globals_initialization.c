@@ -61,6 +61,8 @@ void chat_win_init(t_system *sys) {
                                                         "add_ban_profile"));
     chat_win.edit_vax_box = GTK_BOX(gtk_builder_get_object(sys->builder,
                                                               "edit_vax"));
+    chat_win.edit_profile = GTK_BOX(gtk_builder_get_object(sys->builder,
+                                                              "edit_profile"));
     //Search                                                    
     chat_win.fsearch_entry = GTK_SEARCH_ENTRY(gtk_builder_get_object(sys->builder,
                                                         "friends_search_entry"));
@@ -82,7 +84,13 @@ void chat_win_init(t_system *sys) {
                                                                        "edit_vax7_entry"));
     chat_win.edit_vax8_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
                                                                        "edit_vax8_entry"));
+    chat_win.err_msg_lbl = GTK_LABEL(gtk_builder_get_object(sys->builder,
+                                                           "err_msg_lbl"));
+    chat_win.err_pop = GTK_DIALOG(gtk_builder_get_object(sys->builder,
+                                                           "err_pop"));
     chat_win.fresults = NULL;
+
+
     /*
     chat_win.s_comp = gtk_entry_completion_new ();
     gtk_entry_set_completion (GTK_ENTRY (chat_win.search_entry), chat_win.s_comp);  

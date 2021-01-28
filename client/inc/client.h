@@ -191,6 +191,11 @@ typedef struct s_chat_win {
     GtkBox         *edit_vax_box;
     GtkFixed          *u_profile_box;
 
+    GtkBox         *edit_profile;
+    GtkLabel        *err_msg_lbl;
+
+    GtkDialog       *err_pop;
+
     GtkBox                  *msg_box;
     GtkEntry              *msg_entry;
     GtkListBox           *msg_viewer;
