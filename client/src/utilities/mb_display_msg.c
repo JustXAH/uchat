@@ -58,4 +58,5 @@ void mb_display_msg(t_message *msg) {
 
 //    free(txt_msg);
 //    free(txt_buff);
+    mx_printstr("msg displayed successfully\n");
 }

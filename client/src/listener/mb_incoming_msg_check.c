@@ -8,14 +8,18 @@ extern t_message *chat_history;
 static void delete_top_msg_in_buffer() {
     t_message *temp = incoming_msg_buffer->next;;
 
-    free(incoming_msg_buffer->user_name);
-    free(incoming_msg_buffer->text);
-    free(incoming_msg_buffer->timestamp);
+    if (!incoming_msg_buffer)
+        return;
+    if (incoming_msg_buffer->user_name)
+        free(incoming_msg_buffer->user_name);
+    if (incoming_msg_buffer->text)
+        free(incoming_msg_buffer->text);
+    if (incoming_msg_buffer->timestamp)
+        free(incoming_msg_buffer->timestamp);
     free(incoming_msg_buffer);
     incoming_msg_buffer = temp;
 }
 static void mb_add_msg_to_history(t_message **history, t_message *new_msg) {
-    mx_printstr("mb_add_msg_to_his\n");
     if (*history == NULL) {
         *history = new_msg;
     } else {
@@ -27,16 +31,12 @@ static void mb_add_msg_to_history(t_message **history, t_message *new_msg) {
         new_msg->next = temp->next;
         temp->next = new_msg;
     }
-    mx_printstr("mb_add_msg_to_his 2\n");
     mb_display_msg(new_msg);
 }
 void mb_incoming_msg_check() {
     t_chat_list * con_buf = contact_list;
-    //mx_printstr("mb_incoming_msg_check\n");
     if (incoming_msg_buffer != NULL) {
-            mx_printstr("mb_incoming_msg_check if1\n");
         while (incoming_msg_buffer) {
-             mx_printstr("mb_incoming_msg_check while\n");
              printf("id in focus = %d, id incoming = %d\n", 
                                                 cl_listener.chat_in_focus, 
                                                 incoming_msg_buffer->chat_id);
@@ -46,5 +46,4 @@ void mb_incoming_msg_check() {
             delete_top_msg_in_buffer();
         }
     }
-
 }

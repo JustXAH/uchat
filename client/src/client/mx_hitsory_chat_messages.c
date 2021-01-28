@@ -8,6 +8,8 @@
 extern t_client_st cl_listener;
 
 static void add_in_user_message(t_json *json, t_user *user, int count) {
+    if (count < 1)
+        return;
     char **time_str = mx_strsplit(json->MESSAGES_TIME->valuestring, '~');
     bool f = false;
 
