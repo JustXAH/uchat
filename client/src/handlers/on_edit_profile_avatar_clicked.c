@@ -8,14 +8,14 @@
 extern t_chat_win chat_win;
 extern t_chat *chat;
 
-void change_file_size(char *buffer) {
-    GdkPixbuf *buf;
-    GError *err = NULL;
-    buf = gdk_pixbuf_new_from_file("test.jpg", &err);
-    g_assert_no_error(err);
-    g_object_unref(buf);
-}
-GdkPixbuf *temp=gdk_pixbuf_scale_simple((GdkPixbuf*)data, width, height, GDK_INTERP_BILINEAR);
+//void change_file_size(char *buffer) {
+//    GdkPixbuf *buf;
+//    GError *err = NULL;
+//    buf = gdk_pixbuf_new_from_file("test.jpg", &err);
+//    g_assert_no_error(err);
+//    g_object_unref(buf);
+//}
+//GdkPixbuf *temp=gdk_pixbuf_scale_simple((GdkPixbuf*)data, width, height, GDK_INTERP_BILINEAR);
 static void err_msg() {
     gtk_window_set_transient_for(GTK_WINDOW(chat_win.err_pop), GTK_WINDOW(chat->sys->chat_window));
     gtk_widget_show_all((GTK_WIDGET(chat_win.err_pop)));

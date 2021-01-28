@@ -286,6 +286,7 @@ void mx_get_voice_file_from_user(t_system *sys, t_user *user, t_json *json);
 void mx_get_voice_file_id(t_system *sys, t_user *user, t_json *json);
 char *mx_file_receiving(t_system *sys, t_json *json);
 void mx_get_user_pic_id(t_system *sys, t_user *user, t_json *json);
+int mx_file_size_measurement(char *file_path);
 
 
 
