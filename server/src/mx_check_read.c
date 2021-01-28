@@ -65,6 +65,8 @@ static void read_and_write(t_server *serv, int user_index) {
             case NEW_USER_PIC:
                 mx_save_user_pic_and_get_id(serv, json, user_index);
                 break;
+            case REMOVE_NOTIFICATION:
+                mx_remove_notification(serv, json);
         }
         printf("\nServer sent a response to the USER (SOCKET: %d ID: %d)\n",
                serv->user_socket[user_index], serv->users_id[user_index]);

@@ -71,6 +71,8 @@ void *read_server(void *data) {
             case NEW_USER_PIC:
                 mx_get_user_pic_id(sys, user, json);
                 break;
+            case REMOVE_NOTIFICATION:
+                break;
         }
         printf("Switch ending\n");
         cJSON_Delete(json->SERVER_JSON);

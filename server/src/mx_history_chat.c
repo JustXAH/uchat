@@ -4,11 +4,16 @@
 
 #include "server.h"
 
-static char *get_time(long time) {
+static char *get_time(long time_mess) {
     char *time_str = NULL;
-    time_t time_2 = time;
+    time_t time_2 = time_mess;
+    long int time_3 = time(NULL);
 
-    time_str = mx_substr(ctime(&(time_2)), 12, 16);
+    if ((time_3 - time_mess) > 86400) {
+        time_str = mx_substr(ctime(&(time_2)), 4, 16);
+    }
+    else
+        time_str = mx_substr(ctime(&(time_2)), 11, 16);
     printf("%s\n", time_str);
     return time_str;
 }

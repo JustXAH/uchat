@@ -33,7 +33,7 @@
 #include <sys/stat.h>
 
 #define MAX_LEN 1024
-#define PORT 5001
+#define PORT 5000
 #define MAX_USERS 5
 #define COUNT_MESSAGES 30
 #define NUMBER_VOICES 8
@@ -53,6 +53,7 @@ typedef enum e_type_cJSON_message {
     NEW_VOICE,
     SEND_VOICE_TO_USER,
     NEW_USER_PIC,
+    REMOVE_NOTIFICATION,
 }            e_type_cJSON;
 
 //struct for server
@@ -189,6 +190,7 @@ void mx_add_new_chat(t_server *serv, t_json *json, int user_index);
 void mx_add_new_message(t_server *serv, t_json *json, int user_index);
 void mx_get_login(t_server *serv, t_json *json, int user_index);
 void mx_history_chat(t_server *serv, t_json *json, int user_index);
+void mx_remove_notification(t_server *serv, t_json *json);
 void mx_save_voice_file_and_get_id(t_server *serv, t_json *json, int user_index);
 void mx_voice_file_receiver(t_server *serv, char *unique_name,
                             int user_index);
@@ -236,8 +238,6 @@ void mx_send_user_pic_to_user(char *filename, int user_socket);
  int mx_db_insert_new_voice(sqlite3 *db, int user, int number, char *filename, char *voice_name);
  t_voice *mx_db_get_users_voices(sqlite3 *db, int user);
  char* mx_db_get_filename(sqlite3 *db, int id);
-
- //int mx_db_get_notification(sqlite3 *db, int chat_id, int user_id);
  int mx_db_clear_notification(sqlite3 *db, int chat_id, int user_id);
 
 #endif //UCHAT_MAIN_H
