@@ -32,6 +32,7 @@
 #include <ctype.h>
 #include <unistd.h>
 #include <sys/stat.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 
 // glade
 #include <gtk/gtk.h>
