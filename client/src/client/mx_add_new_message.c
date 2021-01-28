@@ -4,6 +4,7 @@
 
 #include "client.h"
 
+extern t_client_st cl_listener;
 
 static char *get_time(long time) {
     char *time_str = NULL;
@@ -17,11 +18,15 @@ static void add_in_user_message(t_json *json, t_user *user, int count) {
     char *time_str;
     int i = count - 1;
     time_str = get_time(json->MESSAGE_TIME->valueint);
+    bool f = false;
 
+    if (json->USER_ID->valueint == cl_listener.my_id)
+        f = true;
     mx_printint(json->MESSAGE_ID->valueint);
     mb_msg_buffer_add(json->MESSAGE_ID->valueint,   json->CHAT_ID->valueint, 
                         json->USER_ID->valueint,    "lol", 
-                        time_str,                   json->MESSAGE->valuestring);
+                        time_str,                   json->MESSAGE->valuestring,
+                        f);
 }
 
 void mx_add_new_message(t_system *sys, t_user *user, t_json *json) {

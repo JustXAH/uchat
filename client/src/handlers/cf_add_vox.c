@@ -7,6 +7,19 @@
 extern t_chat_win chat_win;
 extern t_chat *chat;
 
+
+static void err_msg() {
+    gtk_window_set_transient_for(GTK_WINDOW(chat_win.err_pop), GTK_WINDOW(chat->sys->chat_window));
+    gtk_widget_show_all(GTK_WIDGET(chat_win.err_pop));
+
+    gtk_label_set_text(GTK_LABEL(chat_win.err_msg_lbl), "Expeckt .wav, .mp3, .aif, .mid files!!!");
+    int responce = gtk_dialog_run(GTK_DIALOG(GTK_WIDGET(chat_win.err_pop)));
+    if (responce == 1) {
+        gtk_widget_hide(GTK_WIDGET(chat_win.err_pop));
+    } else {
+        gtk_widget_hide(GTK_WIDGET(chat_win.err_pop));
+    }
+}
 static bool credentieal_file_type(char *buffer) {
     char *extension = NULL;
 
@@ -58,7 +71,6 @@ static void get_filename() {
     chat->sys->filename = strdup(buff_path);
 }
 
-
 static bool open_file_cooser(int i) {
     char *buffer = NULL;
     // Show the "Open Text File" dialog box
@@ -80,6 +92,7 @@ static bool open_file_cooser(int i) {
         }
     }
     // Finished with the "Open Text File" dialog box, so hide it
+    err_msg();
     free(buffer);
     gtk_widget_hide(chat_win.file_choose_window);
     return false;
@@ -89,48 +102,64 @@ static bool open_file_cooser(int i) {
 void on_edit_vax1_open_btn_clicked (GtkButton *btn) {
     if (open_file_cooser(0)) {
         chat->sys->voice_name = strdup(gtk_entry_get_text(chat_win.edit_vax1_entry));
+        if(strcmp(chat->sys->voice_name, "") == 0)
+            chat->sys->voice_name = strdup("Vox 1");
         relize();
     }
 }
 void on_edit_vax2_open_btn_clicked (GtkButton *btn) {
     if (open_file_cooser(1)) {
         chat->sys->voice_name = strdup(gtk_entry_get_text(chat_win.edit_vax2_entry));
+        if(strcmp(chat->sys->voice_name, "") == 0)
+            chat->sys->voice_name = strdup("Vox 2");
         relize();
     }
 }
 void on_edit_vax3_open_btn_clicked (GtkButton *btn) {
     if (open_file_cooser(2)) {
         chat->sys->voice_name = strdup(gtk_entry_get_text(chat_win.edit_vax3_entry));
+        if(strcmp(chat->sys->voice_name, "") == 0)
+            chat->sys->voice_name = strdup("Vox 3");
         relize();
     }
 }
 void on_edit_vax4_open_btn_clicked (GtkButton *btn) {
     if (open_file_cooser(3)) {
         chat->sys->voice_name = strdup(gtk_entry_get_text(chat_win.edit_vax4_entry));
+        if(strcmp(chat->sys->voice_name, "") == 0)
+            chat->sys->voice_name = strdup("Vox 4");
         relize();
     }
 }
 void on_edit_vax5_open_btn_clicked (GtkButton *btn) {
     if (open_file_cooser(4)) {
         chat->sys->voice_name = strdup(gtk_entry_get_text(chat_win.edit_vax5_entry));
+        if(strcmp(chat->sys->voice_name, "") == 0)
+            chat->sys->voice_name = strdup("Vox 5");
         relize();
     }
 }
 void on_edit_vax6_open_btn_clicked (GtkButton *btn) {
     if (open_file_cooser(5)) {
         chat->sys->voice_name = strdup(gtk_entry_get_text(chat_win.edit_vax6_entry));
+        if(strcmp(chat->sys->voice_name, "") == 0)
+            chat->sys->voice_name = strdup("Vox 6");
         relize();
     }
 }
 void on_edit_vax7_open_btn_clicked (GtkButton *btn) {
     if (open_file_cooser(6)) {
         chat->sys->voice_name = strdup(gtk_entry_get_text(chat_win.edit_vax7_entry));
+        if(strcmp(chat->sys->voice_name, "") == 0)
+            chat->sys->voice_name = strdup("Vox 7");
         relize();
     }
 }
 void on_edit_vax8_open_btn_clicked (GtkButton *btn) {
     if (open_file_cooser(7)) {
         chat->sys->voice_name = strdup(gtk_entry_get_text(chat_win.edit_vax8_entry));
+        if(strcmp(chat->sys->voice_name, "") == 0)
+            chat->sys->voice_name = strdup("Vox 8");
         relize();
     }
 }

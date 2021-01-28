@@ -5,29 +5,27 @@
 
 #include "client.h"
 
-
-static char *get_time(long time) {
-    char *time_str = NULL;
-    time_t time_2 = time;
-
-    time_str = mx_substr(ctime(&(time_2)), 4, 16);
-    return time_str;
-}
+extern t_client_st cl_listener;
 
 static void add_in_user_message(t_json *json, t_user *user, int count) {
-    char *time_str;
-    mx_printint(count);
-    mx_printstr("   add_in_user_message\n");
+    if (count < 1)
+        return;
+    char **time_str = mx_strsplit(json->MESSAGES_TIME->valuestring, '~');
+    bool f = false;
+
     for (int i = 0; i < count; i++) {
-        time_str = get_time(
-                cJSON_GetArrayItem(json->MESSAGES_TIME, i)->valueint);
+        if (cJSON_GetArrayItem(json->SENDER_ID, i)->valueint == cl_listener.my_id)
+            f = true;
         mb_msg_buffer_add(cJSON_GetArrayItem(json->MESSAGES_ID, i)->valueint,
-                          json->CHAT_ID->valueint,
+                          cl_listener.chat_in_focus,
                           cJSON_GetArrayItem(json->SENDER_ID, i)->valueint,
-                          cJSON_GetArrayItem(json->USER_NAME, i)->valuestring,
-                          time_str, cJSON_GetArrayItem(json->MESSAGES_ARR,
-                                                       i)->valuestring);
+                          "lol",
+                          time_str[i], 
+                          cJSON_GetArrayItem(json->MESSAGES_ARR, i)->valuestring, f);
+        free(time_str[i]);
+        f = false;
     }
+    free(time_str);
 }
 
 void mx_get_history_chat(t_system *sys, t_user *user, t_json *json) {
@@ -36,7 +34,6 @@ void mx_get_history_chat(t_system *sys, t_user *user, t_json *json) {
         // Error
     }
     else {
-        json->CHAT_ID = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "CHAT_ID");
         json->MESSAGES_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGES_ARR");
         json->COUNT_MESSAGES_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "COUNT_MESSAGES_ARR");
         mx_printstr("his 1\n");
@@ -44,7 +41,8 @@ void mx_get_history_chat(t_system *sys, t_user *user, t_json *json) {
         mx_printstr("his 2\n");
         json->MESSAGES_TIME = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "MESSAGES_TIME");
         mx_printstr("his 3\n");
-        json->SENDER_ID = cJSON_GetObjectItemCaseSensitive(json->SENDER_ID, "SENDER_ID");
+        json->SENDER_ID = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "SENDER_ID");
+        mx_printstr("his 3\n");
         //json->USER_NAME = cJSON_GetObjectItemCaseSensitive(json->USER_NAME, "USER_NAME");
         add_in_user_message(json, user, json->COUNT_MESSAGES_ARR->valueint);
     }

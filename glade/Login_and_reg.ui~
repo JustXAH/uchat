@@ -3,6 +3,65 @@
 <interface>
   <requires lib="gtk+" version="3.24"/>
   <!-- interface-css-provider-path style.css -->
+  <object class="GtkDialog" id="err_pop">
+    <property name="width-request">200</property>
+    <property name="height-request">100</property>
+    <property name="can-focus">False</property>
+    <property name="title" translatable="yes">Error</property>
+    <property name="type-hint">dialog</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can-focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can-focus">False</property>
+            <property name="layout-style">center</property>
+            <child>
+              <object class="GtkButton" id="err_btn">
+                <property name="label" translatable="yes">Close</property>
+                <property name="name">err_btn</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="margin-bottom">15</property>
+                <signal name="clicked" handler="on_err_btn_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="err_msg_lbl">
+            <property name="name">err_msg_lbl</property>
+            <property name="width-request">150</property>
+            <property name="height-request">70</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">label</property>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="1">err_btn</action-widget>
+    </action-widgets>
+  </object>
   <object class="GtkWindow" id="log_and_reg_window">
     <property name="name">log_and_reg_window</property>
     <property name="can-focus">False</property>
@@ -127,6 +186,9 @@
                 <property name="x">30</property>
               </packing>
             </child>
+            <style>
+              <class name="backgrnd"/>
+            </style>
           </object>
           <packing>
             <property name="name">log_window</property>
@@ -197,6 +259,9 @@
                 <property name="y">322</property>
               </packing>
             </child>
+            <style>
+              <class name="backgrnd"/>
+            </style>
           </object>
           <packing>
             <property name="name">loading_log_window</property>
@@ -276,8 +341,8 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <signal name="clicked" handler="on_reg_new_btn_clicked" swapped="no"/>
-                <accelerator key="Return" signal="activate"/>
                 <accelerator key="KP_Enter" signal="activate"/>
+                <accelerator key="Return" signal="activate"/>
               </object>
               <packing>
                 <property name="x">135</property>
@@ -365,6 +430,9 @@
                 <property name="y">520</property>
               </packing>
             </child>
+            <style>
+              <class name="backgrnd"/>
+            </style>
           </object>
           <packing>
             <property name="name">reg_window</property>
@@ -372,6 +440,9 @@
             <property name="position">2</property>
           </packing>
         </child>
+        <style>
+          <class name="backgrnd"/>
+        </style>
       </object>
     </child>
   </object>
@@ -536,6 +607,9 @@ Have a nice adventure, traveler.</property>
                     <property name="position">2</property>
                   </packing>
                 </child>
+                <style>
+                  <class name="backgrnd"/>
+                </style>
               </object>
               <packing>
                 <property name="name">page7</property>
@@ -575,10 +649,16 @@ Have a nice adventure, traveler.</property>
                           <object class="GtkListBox" id="chat_msg_lst_box">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
+                            <style>
+                              <class name="backgrnd"/>
+                            </style>
                           </object>
                         </child>
                       </object>
                     </child>
+                    <style>
+                      <class name="backgrnd"/>
+                    </style>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -606,7 +686,9 @@ Have a nice adventure, traveler.</property>
                                 <property name="activates-default">True</property>
                                 <property name="show-emoji-icon">True</property>
                                 <signal name="activate" handler="on_chat_send_btn_clicked" swapped="no"/>
-                                <accelerator key="t" signal="grab-focus"/>
+                                <style>
+                                  <class name="backgrnd"/>
+                                </style>
                               </object>
                             </child>
                           </object>
@@ -689,6 +771,9 @@ Have a nice adventure, traveler.</property>
                     <property name="position">2</property>
                   </packing>
                 </child>
+                <style>
+                  <class name="backgrnd"/>
+                </style>
               </object>
               <packing>
                 <property name="name">page0</property>
@@ -702,21 +787,9 @@ Have a nice adventure, traveler.</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <child>
-                  <object class="GtkImage" id="profile_avatar_img">
-                    <property name="width-request">170</property>
-                    <property name="height-request">170</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="pixbuf">Custom_logo.jpg</property>
-                  </object>
-                  <packing>
-                    <property name="x">25</property>
-                    <property name="y">25</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkButton" id="profile_edit">
                     <property name="label" translatable="yes">Edit profile</property>
+                    <property name="name">profile_edit</property>
                     <property name="width-request">110</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
@@ -878,6 +951,22 @@ Have a nice adventure, traveler.</property>
                     <property name="y">200</property>
                   </packing>
                 </child>
+                <child>
+                  <object class="GtkImage" id="profile_avatar_img">
+                    <property name="width-request">170</property>
+                    <property name="height-request">170</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="pixbuf">Custom_logo.jpg</property>
+                  </object>
+                  <packing>
+                    <property name="x">25</property>
+                    <property name="y">25</property>
+                  </packing>
+                </child>
+                <style>
+                  <class name="backgrnd"/>
+                </style>
               </object>
               <packing>
                 <property name="name">page1</property>
@@ -1001,6 +1090,9 @@ Have a nice adventure, traveler.</property>
                     <property name="y">200</property>
                   </packing>
                 </child>
+                <style>
+                  <class name="backgrnd"/>
+                </style>
               </object>
               <packing>
                 <property name="name">page6</property>
@@ -1041,37 +1133,39 @@ Have a nice adventure, traveler.</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="edit_profile_save">
-                    <property name="label" translatable="yes">Save</property>
+                  <object class="GtkButton" id="edit_profile_pass_save">
+                    <property name="label" translatable="yes">    Save
+Password</property>
+                    <property name="name">edit_profile_pass_save</property>
                     <property name="width-request">110</property>
-                    <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
+                    <signal name="clicked" handler="on_edit_profile_pass_save_clicked" swapped="no"/>
                   </object>
                   <packing>
-                    <property name="x">52</property>
-                    <property name="y">245</property>
+                    <property name="x">255</property>
+                    <property name="y">266</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="edit_profile_cancel">
-                    <property name="label" translatable="yes">Cancel</property>
+                  <object class="GtkButton" id="edit_profile_back">
+                    <property name="label" translatable="yes">Back</property>
+                    <property name="name">edit_profile_back</property>
                     <property name="width-request">110</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
-                    <signal name="clicked" handler="on_edit_profile_cancel_clicked" swapped="no"/>
+                    <signal name="clicked" handler="on_edit_profile_back_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="x">52</property>
-                    <property name="y">288</property>
+                    <property name="y">266</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkLabel" id="edit_profile_login">
                     <property name="width-request">120</property>
                     <property name="height-request">30</property>
-                    <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Login</property>
                   </object>
@@ -1084,7 +1178,6 @@ Have a nice adventure, traveler.</property>
                   <object class="GtkLabel" id="edit_profile_name">
                     <property name="width-request">120</property>
                     <property name="height-request">30</property>
-                    <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Name</property>
                   </object>
@@ -1097,7 +1190,6 @@ Have a nice adventure, traveler.</property>
                   <object class="GtkLabel" id="edit_profile_email">
                     <property name="width-request">120</property>
                     <property name="height-request">30</property>
-                    <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">E-Mail</property>
                   </object>
@@ -1107,11 +1199,12 @@ Have a nice adventure, traveler.</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkEntry" id="edit_profile_log_entry">
+                  <object class="GtkEntry" id="edit_profile_old_pas_entry">
                     <property name="height-request">50</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="placeholder-text" translatable="yes">New Login</property>
+                    <property name="margin-right">20</property>
+                    <property name="placeholder-text" translatable="yes">Old Password</property>
                   </object>
                   <packing>
                     <property name="x">225</property>
@@ -1119,12 +1212,12 @@ Have a nice adventure, traveler.</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkEntry" id="edit_profile_name_entry">
+                  <object class="GtkEntry" id="edit_profile_new_pas1_entry">
                     <property name="width-request">100</property>
                     <property name="height-request">50</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="placeholder-text" translatable="yes">New Name</property>
+                    <property name="placeholder-text" translatable="yes">New password</property>
                   </object>
                   <packing>
                     <property name="x">225</property>
@@ -1132,18 +1225,22 @@ Have a nice adventure, traveler.</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkEntry" id="edit_profile_email_entry">
+                  <object class="GtkEntry" id="edit_profile_new_pas2_entry">
+                    <property name="name">edit_profile_new_pas2_entry</property>
                     <property name="width-request">100</property>
                     <property name="height-request">50</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="placeholder-text" translatable="yes">New E-Mail</property>
+                    <property name="placeholder-text" translatable="yes">Confirm password</property>
                   </object>
                   <packing>
                     <property name="x">225</property>
                     <property name="y">200</property>
                   </packing>
                 </child>
+                <style>
+                  <class name="backgrnd"/>
+                </style>
               </object>
               <packing>
                 <property name="name">page2</property>
@@ -1298,8 +1395,8 @@ Have a nice adventure, traveler.</property>
                         <property name="use-stock">True</property>
                         <property name="always-show-image">True</property>
                         <signal name="clicked" handler="on_edit_vax1_play_btn_clicked" swapped="no"/>
-                        <accelerator key="1" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                         <accelerator key="1" signal="grab-focus" modifiers="GDK_CONTROL_MASK"/>
+                        <accelerator key="1" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                       <packing>
                         <property name="left-attach">3</property>
@@ -1546,6 +1643,9 @@ Have a nice adventure, traveler.</property>
                     <property name="position">2</property>
                   </packing>
                 </child>
+                <style>
+                  <class name="backgrnd"/>
+                </style>
               </object>
               <packing>
                 <property name="name">page5</property>
@@ -1663,6 +1763,9 @@ Have a nice adventure, traveler.</property>
                     <property name="y">190</property>
                   </packing>
                 </child>
+                <style>
+                  <class name="backgrnd"/>
+                </style>
               </object>
               <packing>
                 <property name="name">page3</property>
@@ -1732,6 +1835,9 @@ Have a nice adventure, traveler.</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
+                <style>
+                  <class name="backgrnd"/>
+                </style>
               </object>
               <packing>
                 <property name="name">page4</property>
@@ -1764,6 +1870,9 @@ Have a nice adventure, traveler.</property>
                 <property name="orientation">vertical</property>
                 <property name="stack">chat_stack</property>
                 <signal name="set-focus-child" handler="on_chat_switcher_select" swapped="no"/>
+                <style>
+                  <class name="backgrnd_btn"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1868,6 +1977,9 @@ Have a nice adventure, traveler.</property>
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <signal name="row-selected" handler="on_chat_list_row_selected" swapped="no"/>
+                                <style>
+                                  <class name="backgrnd"/>
+                                </style>
                               </object>
                             </child>
                           </object>
@@ -1982,6 +2094,9 @@ Have a nice adventure, traveler.</property>
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
                                     <signal name="row-selected" handler="on_contact_list_row_selected" swapped="no"/>
+                                    <style>
+                                      <class name="backgrnd"/>
+                                    </style>
                                   </object>
                                 </child>
                               </object>
@@ -2039,6 +2154,9 @@ Have a nice adventure, traveler.</property>
                 <property name="position">2</property>
               </packing>
             </child>
+            <style>
+              <class name="backgrnd"/>
+            </style>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -2048,6 +2166,9 @@ Have a nice adventure, traveler.</property>
         </child>
       </object>
     </child>
+    <style>
+      <class name="backgrnd"/>
+    </style>
   </object>
   <object class="GtkFileChooserDialog" id="file_choose">
     <property name="name">file_choose</property>

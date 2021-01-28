@@ -47,7 +47,7 @@ void mx_user_search_by_login(t_server *serv, t_json *json, int user_index) {
     cJSON_AddItemToObject(json->SEND, "DISPATCH", json->DISPATCH);
 
     send_str = cJSON_Print(json->SEND);
-    mx_printstr(send_str);
+
     write(serv->user_socket[user_index], send_str, strlen(send_str));
 
 

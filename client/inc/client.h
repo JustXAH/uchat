@@ -32,6 +32,7 @@
 #include <ctype.h>
 #include <unistd.h>
 #include <sys/stat.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 
 // glade
 #include <gtk/gtk.h>
@@ -59,7 +60,6 @@ typedef enum e_type_cJSON_message {
     NEW_VOICE,
     SEND_VOICE_TO_USER,
     NEW_USER_PIC,
-
 }            e_type_cJSON;
 
 typedef struct s_system {
@@ -93,7 +93,7 @@ typedef struct s_system {
     bool menu;
     bool message_sent;
     bool chat;
-    bool exit;
+    char exit;
 }              t_system;
 typedef struct s_user {
     char *login;
@@ -193,6 +193,11 @@ typedef struct s_chat_win {
     GtkBox         *edit_vax_box;
     GtkFixed          *u_profile_box;
 
+    GtkBox         *edit_profile;
+    GtkLabel        *err_msg_lbl;
+
+    GtkDialog       *err_pop;
+
     GtkBox                  *msg_box;
     GtkEntry              *msg_entry;
     GtkListBox           *msg_viewer;
@@ -205,6 +210,7 @@ typedef struct s_chat_win {
     GtkLabel            *welcome_user;
 
     GtkLabel            *friend_login;
+    GtkScrolledWindow *scrl_chat_box;
 
     GtkEntry     *edit_vax1_entry;
     GtkEntry     *edit_vax2_entry;
@@ -331,7 +337,7 @@ void mb_auth_event_check();
 void mb_incoming_msg_check();
 
 void mb_contact_list_add(int chat_id, int user_id, char *user_name, bool is_online);
-void mb_msg_buffer_add(int msg_id, int chat_id, int user_id, char *user_name, char *time, char *msg_text);
+void mb_msg_buffer_add(int msg_id, int chat_id, int user_id, char *user_name, char *time, char *msg_text, bool outgoing);
 
 //void mb_send_msg(t_message *msg);
 void mb_display_msg(t_message *msg);
@@ -341,7 +347,7 @@ void mb_display_chat_with_contact(int chat_id);
 void mb_invalid_credentials_msg();
 void mb_reset_credentials_msg();
 
-int mb_get_uid_by_cid(int chat_id);
+//int mb_get_uid_by_cid(int chat_id);
 
 gboolean on_search_entry_match_select(GtkEntryCompletion *widget,
                                         GtkTreeModel       *model,

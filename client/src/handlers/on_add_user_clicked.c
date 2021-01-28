@@ -22,7 +22,6 @@ void on_add_user_clicked(GtkButton *btn) {
                         chat->user->contacts_id[chat->user->contacts_count - 1],
                         chat->user->contacts_login[chat->user->contacts_count - 1], false);
 
-    mx_printstr("on_add_user_clicked 2\n");
     //Show Chat window
     gtk_stack_set_visible_child(chat_win.all_stack, 
                                 GTK_WIDGET(chat_win.msg_box));
@@ -41,16 +40,20 @@ void on_add_user_clicked(GtkButton *btn) {
                                 gtk_widget_get_parent(
                                     GTK_WIDGET(contact_list->contact_gui))));
 
-    mx_printstr("on_add_user_clicked 5\n");
-
     //Set the new chat in focus and display it;
     cl_listener.chat_in_focus = contact_list->chat_id;
     mx_printint(cl_listener.chat_in_focus);
     mx_printstr(" <- chat in focus\n");
+    //mx_get_history_chat_request(chat->sys, chat->user, chat->json, cl_listener.chat_in_focus);
+    
+    //here is big 
+    // mb_display_chat_with_contact(contact_list->chat_id);
+
     mx_get_history_chat_request(chat->sys, chat->user, chat->json, cl_listener.chat_in_focus);
 
     mb_display_chat_with_contact(contact_list->chat_id);
     cl_listener.just_added_new_friend = false;
+
     mx_printstr("on_add_user_clicked finished\n");
 }
 static void load_recieved_contact() {
