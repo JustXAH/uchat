@@ -19,5 +19,6 @@ void mx_get_voice_file_id(t_system *sys, t_user *user, t_json *json) {
         mx_strdel(&sys->file_path);
         mx_strdel(&sys->voice_name);
         printf("Successfully saved voice file to SERVER!\n");
+
     }
 }

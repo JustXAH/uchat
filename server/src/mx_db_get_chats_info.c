@@ -10,7 +10,7 @@ static int get_chats_info_callback(void *NotUsed, int argc, char **argv, char **
     ci_count++;
     NotUsed = 0;
     for (int i = 0; i < argc; i++) {
-        if (!mx_strcmp(azColName[i],"User"))
+        if (!mx_strcmp(azColName[i],"Id"))
             c->id = argv[i] ? mx_atoi(argv[i]) : 0;
         if (!mx_strcmp(azColName[i],"ChatName"))
             c->chat_name = mx_strdup(argv[i]);
@@ -27,10 +27,10 @@ t_chat *mx_db_get_chats_info(sqlite3 *db, int user) {
     ci_count = 0;
     char sql[1024];
     snprintf(sql, sizeof(sql),
-             "SELECT User2 AS User, Login AS ChatName, Notification2 AS Notification \
+             "SELECT Chats.Id AS Id, Login AS ChatName, Notification2 AS Notification \
              FROM Chats JOIN Users ON Chats.User2 = Users.Id \
              WHERE User = '%d' UNION ALL \
-             SELECT User, Login AS ChatName, Notification \
+             SELECT Chats.Id AS Id, Login AS ChatName, Notification \
              FROM Chats JOIN Users ON Chats.User = Users.Id \
              WHERE User2 = '%d';",user,user);
     rc = sqlite3_exec(db, sql, get_chats_info_callback, 0, &err_msg);

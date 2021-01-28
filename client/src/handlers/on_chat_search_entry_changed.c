@@ -5,7 +5,7 @@ extern t_chat_list *contact_list;
 extern t_client_st cl_listener;
 
 void on_chat_search_entry_changed() {
-    //printf("search entry changed\n"); 
+    //printf("search entry changed\n");
 //    char *query = (char *)gtk_entry_get_text(GTK_ENTRY(chat_win.fsearch_entry));
 //    t_chat_list *con_buf = contact_list;
 //

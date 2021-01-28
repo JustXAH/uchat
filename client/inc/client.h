@@ -257,6 +257,7 @@ typedef struct s_chat_list {
 void mx_structs_initialization(t_system *sys, t_user *user);
 void mx_cache_dir_creator();
 
+
 /*
  * READ SERVER ANSWER
  */
@@ -278,6 +279,7 @@ char *mx_file_receiving(t_system *sys, t_json *json);
 void mx_get_user_pic_id(t_system *sys, t_user *user, t_json *json);
 
 
+
 /*
  * REQUEST TO SERVER
  */
@@ -294,10 +296,12 @@ void mx_send_voice_file_to_user_request(t_system *sys, t_json *json,
                                         int voice_id, int contact_id);
 void mx_send_file_to_server(t_system *sys, char *file_path);
 
+
 void mx_chat_event(t_system *sys, t_user *user, pthread_t thread);
 void mx_client_menu(t_system *sys, t_user *user);
 void mx_sending_messages(t_system *sys, t_user *user, char *buff);
 void mx_save_user_pic_file_request(t_system *sys, t_user *user, t_json *json);
+
 
 
 /*

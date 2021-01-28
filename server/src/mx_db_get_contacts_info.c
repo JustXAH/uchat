@@ -49,5 +49,6 @@ t_contact *mx_db_get_contacts_info(sqlite3 *db, int user) {
         gci_user_info = gci_user_info->next;
         free(tmp);
     }
+    printf("loading contacs complete\n");
     return contacts;
 }

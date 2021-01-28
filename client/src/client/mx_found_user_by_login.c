@@ -13,6 +13,7 @@ void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json) {
     if (MALLOC_SIZE(sys->found_user_login)) {
         mx_strdel(&sys->found_user_login);
     }
+
     if (cJSON_IsFalse(json->RESULT)) {
         write (1, "LOGIN DOESN'T EXIST\n", 20); // это затычка!
         // нужно вывести сообщение о ошибке на экран
@@ -44,6 +45,7 @@ void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json) {
             /*
              * Функция вывода аватарки в нужное поле в профайле
              */
+
 
             // при выходе из профайла удаление аватарки из кэша
             if (remove(file_path) == 0) {

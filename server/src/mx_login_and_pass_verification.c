@@ -50,7 +50,7 @@ static void chats_json_creator(sqlite3 *db, t_json **json, int user) {
             free(chats->id);
         }
         if (MALLOC_SIZE(chats->chat_name)) {
-            for (int i = 0; i != NUMBER_VOICES; i++) {
+            for (int i = 0; i != chats->count; i++) {
                 if (chats->chat_name[i] != NULL) {
                     mx_strdel(&chats->chat_name[i]);
                 }
@@ -78,19 +78,26 @@ static void contacts_json_creator(sqlite3 *db, t_json **json, int user) {
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_COUNT",
                           (*json)->CONTACTS_COUNT);
 
+    printf("\n1\n");
     if (contacts->count > 0) {
         if (MALLOC_SIZE(contacts->id)) {
+            printf("\n2\n");
             free(contacts->id);
         }
         if (MALLOC_SIZE(contacts->login)) {
-            for (int i = 0; i != NUMBER_VOICES; i++) {
+            printf("\n3\n");
+            for (int i = 0; i != contacts->count; i++) {
+                printf("\n4\n");
                 if (contacts->login[i] != NULL) {
+                    printf("\n5\n");
                     mx_strdel(&contacts->login[i]);
                 }
             }
+            printf("\n5\n");
             free(contacts->login);
         }
     }
+    printf("\n6\n");
     if (MALLOC_SIZE(contacts))
         free(contacts);
 }

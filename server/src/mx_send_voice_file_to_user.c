@@ -25,7 +25,6 @@ void mx_send_voice_file_to_user(char *filename, int user_socket) {
 
     while (!feof(fp)) {
         file_len_read = fread(buffer, 1, MAX_LEN, fp);
-
         send(user_socket, buffer, file_len_read, 0);
         memset(buffer, '\0', MAX_LEN);
     }

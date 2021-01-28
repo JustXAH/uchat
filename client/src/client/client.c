@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
     t_user *user = (t_user *)malloc(sizeof(t_user));
     struct sockaddr_in servaddr;
     pthread_t thread_server;
-    int cli_socket = 0;
+//    int cli_socket = 0;
 
     chat = (t_chat *)malloc(sizeof(t_chat));
     mx_structs_initialization(sys, user);
@@ -38,8 +38,6 @@ int main(int argc, char *argv[]) {
     // socket create and varification
     sys->sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
-//    sys->sockfd = cli_socket;
-;
     if (sys->sockfd == -1) {
         write(2, "ERROR, socket creation failed\n", 30);
         exit(0);
@@ -94,10 +92,11 @@ int main(int argc, char *argv[]) {
 
 //    // close the socket
     printf("Socket closed.\n");
-    close(cli_socket);
+    close(sys->sockfd);
 
 
     printf("GG WP!\n");
+
 
     system("leaks -q uchat");
 

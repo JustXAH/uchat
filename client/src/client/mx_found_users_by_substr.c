@@ -5,6 +5,7 @@
 #include "client.h"
 
 void mx_found_users_by_substr(t_system *sys, t_user *user, t_json *json) {
+
     json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
                                                     "RESULT");
     //Cleaning memory from previous searches

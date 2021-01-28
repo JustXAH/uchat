@@ -29,7 +29,7 @@ t_message_info *mx_db_get_message(sqlite3 *db, int mes_id) {
     gm_mes_info = (t_message_info*) malloc (sizeof(t_message_info));
     gm_mes_info->next = NULL;
     snprintf(sql, sizeof(sql),
-             "SELECT Id, User, Text, Time FROM glm_messages WHERE Id = '%d';",mes_id);
+             "SELECT Id, User, Text, Time FROM Messages WHERE Id = '%d';",mes_id);
     rc = sqlite3_exec(db, sql, get_message_callback, 0, &err_msg);
     if (rc != SQLITE_OK ) {
         fprintf(stderr, "Failed to select data\n");

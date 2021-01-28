@@ -5,6 +5,7 @@
 #include "client.h"
 
 void mx_send_file_to_server(t_system *sys, char *file_path) {
+
     FILE *fp = fopen(file_path, "rb");
     char buffer[MAX_LEN];
     size_t file_len_read = 0;
