@@ -55,7 +55,10 @@ void mb_display_msg(t_message *msg) {
 
     gtk_container_add(GTK_CONTAINER(chat_win.msg_viewer), msg_box);
     gtk_widget_show_all(msg_box);
-
+    
+    GtkAdjustment *adj = gtk_scrolled_window_get_vadjustment(chat_win.scrl_chat_box);
+    gtk_adjustment_set_value(adj, gtk_adjustment_get_upper(adj));
+    gtk_scrolled_window_set_vadjustment(chat_win.scrl_chat_box, adj);
 //    free(txt_msg);
 //    free(txt_buff);
     mx_printstr("msg displayed successfully\n");

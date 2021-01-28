@@ -61,6 +61,9 @@
 .backgrnd {
     background-color: #2b2b2b;
 }
+.backgrnd_btn {
+    background-color: red;
+}
 .message_list {
     border-color: cyan;
     border-width: 3px;

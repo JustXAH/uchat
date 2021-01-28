@@ -208,6 +208,7 @@ typedef struct s_chat_win {
     GtkLabel            *welcome_user;
 
     GtkLabel            *friend_login;
+    GtkScrolledWindow *scrl_chat_box;
 
     GtkEntry     *edit_vax1_entry;
     GtkEntry     *edit_vax2_entry;

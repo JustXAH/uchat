@@ -105,6 +105,8 @@ void chat_win_init(t_system *sys) {
                                                         "friend_login"));
     chat_win.file_choose_window = GTK_WIDGET(gtk_builder_get_object(sys->builder,
                                                            "file_choose"));
+    chat_win.scrl_chat_box = GTK_SCROLLED_WINDOW(gtk_builder_get_object(sys->builder,
+                                                           "chat_msg_scrld"));
 }
 void mb_client_globals_initialization() {
     cl_listener.logged_in = 0;
