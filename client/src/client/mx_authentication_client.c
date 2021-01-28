@@ -78,7 +78,7 @@ void user_contacts_parse_and_save(t_user *user, t_json *json) {
         user->contacts_login = (char **) malloc(sizeof(char *) * user->contacts_count + 1);
 
         for (int i = 0; i != user->contacts_count; i++) {
-            user->contacts_id[i] = cJSON_GetArrayItem(json->CONTACTS_LOGIN_ARR, i)->valueint;
+            user->contacts_id[i] = cJSON_GetArrayItem(json->CONTACTS_ID_ARR, i)->valueint;
             user->contacts_login[i] = strdup(cJSON_GetArrayItem(json->CONTACTS_LOGIN_ARR, i)->valuestring);
         }
         user->contacts_login[user->contacts_count] = NULL;

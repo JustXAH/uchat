@@ -219,6 +219,7 @@ typedef struct s_client_st {
     char *my_name;
     bool fsearch;
     bool *pending_requests;
+    bool just_added_new_friend;
 }               t_client_st;
 
 typedef struct s_message {
