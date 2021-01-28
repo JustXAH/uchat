@@ -22,5 +22,5 @@ void mx_voice_file_receiver(t_server *serv, char *unique_name,
         memset(buffer, '\0', MAX_LEN);
     }
     fclose(fp);
-    printf("Voice file receiving was successful!");
+    printf("Voice file receiving was successful!\n");
 }

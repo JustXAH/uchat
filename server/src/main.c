@@ -4,6 +4,7 @@
 
 #include "server.h"
 
+
 void* poll_and_rw(void *data) {
     t_server *serv = (t_server *) data;
 

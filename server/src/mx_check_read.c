@@ -35,7 +35,7 @@ static void read_and_write(t_server *serv, int user_index) {
                 mx_user_search_by_substr(serv, json, user_index);
                 break;
             case USER_SEARCH_BY_LOGIN:
-                mx_user_search_by_login(serv, json, user_index); // добавить аватарку
+                mx_user_search_by_login(serv, json, user_index);
                 break;
             case NEW_CONTACT:
                 mx_printstr("about to add a new contact\n");

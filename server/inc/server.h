@@ -101,17 +101,20 @@ typedef struct s_json {
     cJSON *VOICE_ID;
     cJSON *VOICE_NAME;
     cJSON *USER_NAME;
+    cJSON *MESSAGE_TIME;
     cJSON *MESSAGE_ID;
     cJSON *VOICES_ID_ARR;
     cJSON *VOICES_NAME_ARR;
     cJSON *USER_PIC_ID;
+    cJSON *DISPATCH;
+
 }              t_json;
 
-//struct for database
 typedef struct s_user {
     int id;
     char *login;
     char *password;
+    int photo_file_id;
     struct s_user *next;
 }              t_user;
 
@@ -131,6 +134,7 @@ typedef struct s_chat {
 typedef struct s_user_info {
     int id;
     char *login;
+    int photo_file_id;
 }              t_user_info;
 
 typedef struct s_chat_info {
@@ -152,7 +156,6 @@ typedef struct s_message {
     int *id;
     int *user;
     char **text;
-    char **login;
     time_t *timestamp;
     int count;
 }               t_message;
@@ -162,45 +165,7 @@ typedef struct s_voice {
     char **filename;
     char **voice_name;
 }               t_voice;
-//
-//typedef struct s_user {
-//    int id;
-//    char *login;
-//    char *password;
-//    struct s_user *next;
-//}              t_user;
-//
-//typedef struct s_contact {
-//    int *id;
-//    char **login;
-//    int count;
-//}              t_contact;
-//
-//typedef struct s_chat {
-//    int *id;
-//    char **chat_name;
-//    int count;
-//}              t_chat;
-//
-//typedef struct s_user_info {
-//    int id;
-//    char *login;
-//    struct s_user_info *next;
-//}              t_user_info;
-//
-//typedef struct s_chat_info {
-//    int id;
-//    char *chat_name;
-//    struct s_chat_info *next;
-//}               t_chat_info;
-//
-//typedef struct s_message {
-//    int id;
-//    int user;
-//    char *text;
-//    time_t timestamp;
-//    struct s_message *next;
-//} t_message;
+
 
 /*
  * SERVER
@@ -229,6 +194,12 @@ void mx_voice_file_receiver(t_server *serv, char *unique_name,
                             int user_index);
 void mx_send_voice_file_handler(t_server *serv, t_json *json, int user_index);
 void mx_send_voice_file_to_user(char *filename, int user_socket);
+void mx_save_user_pic_and_get_id(t_server *serv, t_json *json,
+                                 int user_index);
+void mx_user_pic_receiver(t_server *serv, char *unique_name,
+                          int user_index);
+void mx_send_user_pic_to_user(char *filename, int user_socket);
+
 
 /*
  * DATABASE
@@ -240,6 +211,7 @@ int mx_db_check_login(sqlite3 *db, char *login, char *password); //returns id; "
 int mx_db_check_login_exist(sqlite3 *db, char *login); //returns id; "0" - login doesn't exist
 int mx_db_init(sqlite3 *db); //clean db and init tables
 int mx_db_create_new_contact(sqlite3 *db, int user, int contact); //
+int mx_db_set_user_picture(sqlite3 *db, int user, char *filename); //
 int mx_db_create_new_chat(sqlite3 *db, int user, int contact); //return chat_id
 int *mx_db_get_contacts(sqlite3 *db, int user); // 0-ended array of users_id; NULL if contact list is empty
 t_contact *mx_db_get_contacts_info(sqlite3 *db, int user); //

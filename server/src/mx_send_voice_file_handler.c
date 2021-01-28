@@ -37,12 +37,17 @@ void mx_send_voice_file_handler(t_server *serv, t_json *json, int user_index) {
         write(serv->user_socket[user_index], send_str, strlen(send_str));
     }
     else {
+        filename = mx_db_get_filename(serv->db, json->VOICE_ID->valueint);
+
         json->RESULT = cJSON_CreateTrue();
+        json->FILENAME = cJSON_CreateString(filename);
+
         cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
+        cJSON_AddItemToObject(json->SEND, "FILENAME", json->FILENAME);
+
         send_str = cJSON_Print(json->SEND);
         write(to_whom_socket, send_str, strlen(send_str));
 
-        filename = mx_db_get_filename(serv->db, json->VOICE_ID->valueint);
         // функция отправки голосового файла юзеру
         mx_send_voice_file_to_user(filename, to_whom_socket);
     }

@@ -4,31 +4,6 @@
 
 #include "client.h"
 
-//bool filename_extension_parsing(t_json **json, char *filename) {
-//    bool result = false;
-//    char *buff_str = filename;
-//    char *extension = NULL;
-//
-//    while (*buff_str) {
-//        buff_str++;
-//    }
-//    while (*buff_str != '.') {
-//        buff_str--;
-//    }
-//    extension = strdup(buff_str);
-//    if(strcmp(extension, ".wav") == 0 || strcmp(extension, ".mp3") == 0
-//      || strcmp(extension, ".aif") == 0 || strcmp(extension, ".mid") == 0) {
-//        result = true;
-//        (*json)->EXTENSION = cJSON_CreateString(extension);
-//        (*json)->FILENAME = cJSON_CreateString(filename);
-//
-//        cJSON_AddItemToObject((*json)->SEND, "EXTENSION", (*json)->EXTENSION);
-//        cJSON_AddItemToObject((*json)->SEND, "FILENAME", (*json)->FILENAME);
-//    }
-//    free(extension);
-//    return result;
-//}
-
 void mx_save_voice_file_request(t_system *sys, t_user *user, t_json *json) {
     char *str_user = NULL;
 

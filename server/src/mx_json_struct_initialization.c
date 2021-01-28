@@ -30,5 +30,4 @@ void mx_json_struct_initialization(t_json *json) {
     json->FILENAME = NULL;
     json->VOICE_ID = NULL;
     json->POSITION = NULL;
-    json->USER_PIC_ID = NULL;
 }

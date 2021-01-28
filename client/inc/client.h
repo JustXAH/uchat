@@ -109,6 +109,7 @@ typedef struct s_user {
     int my_id;
     int contacts_count;
     int chats_count;
+    int user_pic_id;
 }              t_user;
 typedef struct s_json {
     cJSON *SERVER_JSON;
@@ -144,9 +145,13 @@ typedef struct s_json {
     cJSON *VOICE_ID;
     cJSON *VOICE_NAME;
     cJSON *USER_NAME;
+    cJSON *MESSAGE_ID;
+    cJSON *MESSAGE_TIME;
+    cJSON *CONTACT_NAME;
     cJSON *VOICES_ID_ARR;
     cJSON *VOICES_NAME_ARR;
     cJSON *USER_PIC_ID;
+    cJSON *DISPATCH;
 }              t_json;
 
 typedef struct s_chat {
@@ -221,7 +226,7 @@ typedef struct s_client_st {
 }               t_client_st;
 
 typedef struct s_message {
-    int id;
+    //int id;
     int user_id;
     int chat_id;
     int msg_id;
@@ -238,7 +243,7 @@ typedef struct s_chat_list {
     int *user_ids;
     char **user_names;
     int user_amount;
-    t_message *chat_history;
+    bool is_online;
     GtkWidget *contact_gui;
     struct s_chat_list *next_chat;
 }              t_chat_list;
@@ -250,6 +255,7 @@ typedef struct s_chat_list {
  * MAIN
  */
 void mx_structs_initialization(t_system *sys, t_user *user);
+void mx_cache_dir_creator();
 
 /*
  * READ SERVER ANSWER
@@ -268,7 +274,8 @@ void mx_get_history_chat(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_message(t_system *sys, t_user *user, t_json *json);
 void mx_get_voice_file_from_user(t_system *sys, t_user *user, t_json *json);
 void mx_get_voice_file_id(t_system *sys, t_user *user, t_json *json);
-void mx_voice_file_receiving(t_system *sys);
+char *mx_file_receiving(t_system *sys, t_json *json);
+void mx_get_user_pic_id(t_system *sys, t_user *user, t_json *json);
 
 
 /*
@@ -285,11 +292,12 @@ void mx_get_history_chat_request(t_system *sys, t_user *user, t_json *json, int 
 void mx_save_voice_file_request(t_system *sys, t_user *user, t_json *json);
 void mx_send_voice_file_to_user_request(t_system *sys, t_json *json,
                                         int voice_id, int contact_id);
-void mx_send_voice_file_to_server(t_system *sys, char *file_path);
+void mx_send_file_to_server(t_system *sys, char *file_path);
 
 void mx_chat_event(t_system *sys, t_user *user, pthread_t thread);
 void mx_client_menu(t_system *sys, t_user *user);
 void mx_sending_messages(t_system *sys, t_user *user, char *buff);
+void mx_save_user_pic_file_request(t_system *sys, t_user *user, t_json *json);
 
 
 /*
@@ -314,13 +322,13 @@ gboolean mb_event_listener(gpointer data);
 void mb_auth_event_check();
 void mb_incoming_msg_check();
 
-void mb_contact_list_add(int chat_id, int user_id, char *user_name);
+void mb_contact_list_add(int chat_id, int user_id, char *user_name, bool is_online);
 void mb_msg_buffer_add(int msg_id, int chat_id, int user_id, char *user_name, char *time, char *msg_text);
 
-void mb_send_msg(t_message *msg);
+//void mb_send_msg(t_message *msg);
 void mb_display_msg(t_message *msg);
 void mb_display_chat_with_contact(int chat_id);
-void mb_add_msg_to_history(t_message **history, t_message *new_msg);
+//void mb_add_msg_to_history(t_message **history, t_message *new_msg);
 
 void mb_invalid_credentials_msg();
 void mb_reset_credentials_msg();

@@ -78,7 +78,7 @@ void user_contacts_parse_and_save(t_user *user, t_json *json) {
         user->contacts_login = (char **) malloc(sizeof(char *) * user->contacts_count + 1);
 
         for (int i = 0; i != user->contacts_count; i++) {
-            user->contacts_id[i] = cJSON_GetArrayItem(json->CONTACTS_LOGIN_ARR, i)->valueint;
+            user->contacts_id[i] = cJSON_GetArrayItem(json->CONTACTS_ID_ARR, i)->valueint;
             user->contacts_login[i] = strdup(cJSON_GetArrayItem(json->CONTACTS_LOGIN_ARR, i)->valuestring);
         }
         user->contacts_login[user->contacts_count] = NULL;
@@ -119,6 +119,10 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
         cl_listener.authentication = 1;
         cl_listener.my_id = json->USER_ID->valueint;
         
+        for (int i = 0; i != user->contacts_count; i++) {
+            mx_printstr("adding contact");
+            mb_contact_list_add(user->chats_id[i], user->contacts_id[i], user->contacts_login[i], false);
+        }
     }
 //    cJSON_DeleteItemFromObject(json->SERVER_JSON, "RESULT");
 //    cJSON_DeleteItemFromObject(json->SERVER_JSON, "USER_ID");

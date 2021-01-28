@@ -25,6 +25,7 @@ void mx_structs_initialization(t_system *sys, t_user *user) {
     user->who_online_count = 0;
     user->who_online = NULL;
     user->voices_name = NULL;
+    user->user_pic_id = 0;
     user->voices_id = (int *)malloc(sizeof(int) * NUMBER_VOICES);
     for (int i = 0; i != NUMBER_VOICES; i++) {
         user->voices_id[i] = 0;

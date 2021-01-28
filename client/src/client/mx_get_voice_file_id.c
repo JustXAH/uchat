@@ -14,9 +14,10 @@ void mx_get_voice_file_id(t_system *sys, t_user *user, t_json *json) {
         user->voices_id[sys->position] = json->VOICE_ID->valueint;
         printf("Successfully saved voice file info in DB (POSITION: %d; VOICE_ID: %d)\n",
                sys->position, json->VOICE_ID->valueint);
-        mx_send_voice_file_to_server(sys, sys->file_path);
+        // отправка аватарки на сервер
+        mx_send_file_to_server(sys, sys->file_path);
         mx_strdel(&sys->file_path);
         mx_strdel(&sys->voice_name);
-        printf("Successfully saved voice file in SERVER!\n");
+        printf("Successfully saved voice file to SERVER!\n");
     }
 }

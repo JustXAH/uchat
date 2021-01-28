@@ -72,8 +72,10 @@ void *read_server(void *data) {
                 mx_get_voice_file_id(sys, user, json);
                 break;
             case SEND_VOICE_TO_USER:
-                write(1, "SEND AUDIO\n", 11);
                 mx_get_voice_file_from_user(sys, user, json);
+                break;
+            case NEW_USER_PIC:
+                mx_get_user_pic_id(sys, user, json);
                 break;
         }
         printf("Switch ending\n");
