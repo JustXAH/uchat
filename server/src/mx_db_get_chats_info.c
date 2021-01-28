@@ -19,6 +19,7 @@ static int get_chats_info_callback(void *NotUsed, int argc, char **argv, char **
         if (!mx_strcmp(azColName[i],"Time"))
             c->timestamp = mx_atoi(argv[i]);
     }
+    printf("chat info %d: %s, %d %ld",c->id,c->chat_name,c->notification,c->timestamp);
     return 0;
 }
 
@@ -44,7 +45,7 @@ t_chat *mx_db_get_chats_info(sqlite3 *db, int user) {
              FROM Chats \
              INNER JOIN Users ON Chats.User = Users.Id \
              INNER JOIN (SELECT MAX(Time) AS Time, Chat FROM Messages GROUP BY Chat) AS MaxT ON Chats.Id = MaxT.Chat \
-             WHERE User2 = '%d';",user,user);
+             WHERE User2 = '%d' ORDER BY Time;",user,user);
 
     rc = sqlite3_exec(db, sql, get_chats_info_callback, 0, &err_msg);
     if (rc != SQLITE_OK ) {
@@ -62,6 +63,7 @@ t_chat *mx_db_get_chats_info(sqlite3 *db, int user) {
         chats->id[i] = ci_chat_info->id;
         chats->chat_name[i] = ci_chat_info->chat_name;
         chats->notification[i] = ci_chat_info->notification;
+        chats->timestamp[i] = ci_chat_info->timestamp;
         t_chat_info *tmp = ci_chat_info;
         ci_chat_info = ci_chat_info->next;
         free(tmp);
