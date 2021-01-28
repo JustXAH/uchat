@@ -8,7 +8,6 @@ extern t_chat *chat;
 static void load_recieved_contact();
 static void load_recieved_chat();
 void on_add_user_clicked(GtkButton *btn) {
-    cl_listener.just_added_new_friend = true;
     mx_add_new_contact_request(chat->sys,  chat->user, 
                                chat->json, chat->sys->found_user_id);
     load_recieved_contact();
@@ -44,10 +43,9 @@ void on_add_user_clicked(GtkButton *btn) {
     cl_listener.chat_in_focus = contact_list->chat_id;
     mx_printint(cl_listener.chat_in_focus);
     mx_printstr(" <- chat in focus\n");
-    mx_get_history_chat_request(chat->sys, chat->user, chat->json, cl_listener.chat_in_focus);
+    //mx_get_history_chat_request(chat->sys, chat->user, chat->json, cl_listener.chat_in_focus);
 
     mb_display_chat_with_contact(contact_list->chat_id);
-    cl_listener.just_added_new_friend = false;
     mx_printstr("on_add_user_clicked finished\n");
 }
 static void load_recieved_contact() {

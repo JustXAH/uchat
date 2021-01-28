@@ -46,10 +46,13 @@ t_message *mx_db_get_last_messages(sqlite3 *db, int chat) {
     mes->id = (int*)malloc(glm_count * sizeof(int));
     mes->user = (int*)malloc(glm_count * sizeof(int));
     mes->text = (char**)malloc(glm_count * sizeof(char*));
+    mes->timestamp = (time_t*)malloc(glm_count * sizeof(time_t));
     for (int i = glm_count-1; i >= 0; i--) {
         mes->id[i] = glm_messages->id;
+        mes->timestamp[i] = glm_messages->timestamp;
         mes->user[i] = glm_messages->user;
         mes->text[i] = glm_messages->text;
+        
         t_message_info *tmp = glm_messages;
         glm_messages = glm_messages->next;
         free(tmp);

@@ -7,6 +7,7 @@
 char *mx_substr(const char *str, int a, int b) {
     char *tmp;
     int j = 0;
+    
     if (a == b) {
         tmp = mx_strnew(1);
         tmp[0] = str[a];

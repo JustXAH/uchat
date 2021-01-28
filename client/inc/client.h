@@ -92,7 +92,7 @@ typedef struct s_system {
     bool menu;
     bool message_sent;
     bool chat;
-    bool exit;
+    char exit;
 }              t_system;
 typedef struct s_user {
     char *login;
@@ -223,7 +223,6 @@ typedef struct s_client_st {
     char *my_name;
     bool fsearch;
     bool *pending_requests;
-    bool just_added_new_friend;
 }               t_client_st;
 
 typedef struct s_message {
@@ -328,7 +327,7 @@ void mb_auth_event_check();
 void mb_incoming_msg_check();
 
 void mb_contact_list_add(int chat_id, int user_id, char *user_name, bool is_online);
-void mb_msg_buffer_add(int msg_id, int chat_id, int user_id, char *user_name, char *time, char *msg_text);
+void mb_msg_buffer_add(int msg_id, int chat_id, int user_id, char *user_name, char *time, char *msg_text, bool outgoing);
 
 //void mb_send_msg(t_message *msg);
 void mb_display_msg(t_message *msg);

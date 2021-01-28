@@ -4,12 +4,33 @@
 
 #include "server.h"
 
+static char *get_time(long time) {
+    char *time_str = NULL;
+    time_t time_2 = time;
+
+    time_str = mx_substr(ctime(&(time_2)), 12, 16);
+    printf("%s\n", time_str);
+    return time_str;
+}
+
 void mx_history_chat(t_server *serv, t_json *json, int user_index) {
     char *send_str = NULL;
     json->CHAT_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON,"CHAT_ID");
 
     t_message *message = mx_db_get_last_messages(serv->db, json->CHAT_ID->valueint);
-
+    char *tmp = NULL;
+    char *tmp1 = NULL;
+    char *tbuf = NULL;
+    for (int i = 0; i < message->count; i++) {
+        tbuf = get_time(message->timestamp[i]);
+        tmp1 = tmp;
+        tmp = mx_strjoin(tmp, tbuf);
+        free(tmp1);
+        tmp1 = tmp;
+        tmp = mx_strjoin(tmp, "~");
+        free(tmp1);
+        free(tbuf);
+    }
     json->SEND = cJSON_CreateObject();
     json->TYPE = cJSON_CreateNumber(HISTORY_CHAT);
 
@@ -22,13 +43,16 @@ void mx_history_chat(t_server *serv, t_json *json, int user_index) {
         json->MESSAGES_ARR = cJSON_CreateStringArray((const char *const *) message->text, message->count);
         json->COUNT_MESSAGES_ARR = cJSON_CreateNumber(message->count);
         json->MESSAGES_ID = cJSON_CreateIntArray(message->id, message->count);
-        json->MESSAGES_TIME = cJSON_CreateIntArray((const int *) message->timestamp, message->count);
+        //json->MESSAGES_TIME = cJSON_CreateIntArray(message->timestamp, message->count);
+        
+        // json->MESSAGES_TIME = cJSON_CreateStringArray((const char *const *) tbuf, message->count);
+        
         json->SENDER_ID = cJSON_CreateIntArray(message->user, message->count);
         //mx_printstr("mx_his 3\n");
         cJSON_AddItemToObject(json->SEND, "MESSAGES_ARR", json->MESSAGES_ARR);
         cJSON_AddItemToObject(json->SEND, "COUNT_MESSAGES_ARR", json->COUNT_MESSAGES_ARR);
         cJSON_AddItemToObject(json->SEND, "MESSAGES_ID", json->MESSAGES_ID);
-        cJSON_AddItemToObject(json->SEND, "MESSAGES_TIME", json->MESSAGES_TIME);
+        cJSON_AddItemToObject(json->SEND, "MESSAGES_TIME", cJSON_CreateString(tmp));
         cJSON_AddItemToObject(json->SEND, "SENDER_ID", json->SENDER_ID);
     }
     cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
@@ -41,4 +65,6 @@ void mx_history_chat(t_server *serv, t_json *json, int user_index) {
 
     cJSON_Delete(json->SEND);
     free(send_str);
+    if(tmp)
+        free(tmp);
 }
