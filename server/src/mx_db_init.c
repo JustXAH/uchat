@@ -30,12 +30,12 @@ int mx_db_drop_init_fill(sqlite3 *db){
 
     sqlite3_free(err_msg);
 
-    mx_db_insert_new_user(db,"test","123456"); //1
-    mx_db_insert_new_user(db,"max_z","password"); //2
-    mx_db_insert_new_user(db,"max_b","onemoreline"); //3
-    mx_db_insert_new_user(db,"ihor","123456"); //4
-    mx_db_insert_new_user(db,"dima","carpathians"); //5
-    mx_db_insert_new_user(db,"artem","qwerty123"); //6
+    // mx_db_insert_new_user(db,"test","123456"); //1
+    // mx_db_insert_new_user(db,"max_z","password"); //2
+    // mx_db_insert_new_user(db,"max_b","onemoreline"); //3
+    // mx_db_insert_new_user(db,"ihor","123456"); //4
+    // mx_db_insert_new_user(db,"dima","carpathians"); //5
+    // mx_db_insert_new_user(db,"artem","qwerty123"); //6
     mx_db_create_new_contact(db,1,2); //1
     mx_db_create_new_contact(db,1,3); //2
     mx_db_create_new_contact(db,1,4); //3
