@@ -49,14 +49,18 @@ void user_chats_parse_and_save(t_user *user, t_json *json) {
                                                              "CHATS_ID_ARR");
     json->CHATS_NAME_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
                                                                 "CHATS_NAME_ARR");
+    json->NOTIFICATION = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "NOTIFICATION");
 
     if(user->chats_count != 0) {
         user->chats_id = (int *) malloc(sizeof(int) * user->chats_count);
         user->chats_name = (char **) malloc(sizeof(char *) * user->chats_count + 1);
+        user->notification = (int *) malloc(sizeof(int) * user->chats_count);
 
         for (int i = 0; i != user->chats_count; i++) {
             user->chats_id[i] = cJSON_GetArrayItem(json->CHATS_ID_ARR, i)->valueint;
             user->chats_name[i] = strdup(cJSON_GetArrayItem(json->CHATS_NAME_ARR, i)->valuestring);
+            user->notification[i] = cJSON_GetArrayItem(json->NOTIFICATION, i)->valueint;
+            printf("notification = %d\n", user->notification[i]);
         }
         user->chats_name[user->contacts_count] = NULL;
     }

@@ -40,7 +40,7 @@
 #include <gio/gio.h>
 
 #define MAX_LEN 1024
-#define PORT 5001
+#define PORT 5000
 #define SA struct sockaddr
 #define NUMBER_VOICES 8
 
@@ -60,6 +60,7 @@ typedef enum e_type_cJSON_message {
     NEW_VOICE,
     SEND_VOICE_TO_USER,
     NEW_USER_PIC,
+    REMOVE_NOTIFICATION,
 }            e_type_cJSON;
 
 typedef struct s_system {
@@ -111,6 +112,7 @@ typedef struct s_user {
     int contacts_count;
     int chats_count;
     int user_pic_id;
+    int *notification;
 }              t_user;
 typedef struct s_json {
     cJSON *SERVER_JSON;
@@ -153,6 +155,7 @@ typedef struct s_json {
     cJSON *VOICES_NAME_ARR;
     cJSON *USER_PIC_ID;
     cJSON *DISPATCH;
+    cJSON *NOTIFICATION;
     cJSON *FILE_SIZE;
 }              t_json;
 
@@ -314,6 +317,7 @@ void mx_save_voice_file_request(t_system *sys, t_user *user, t_json *json);
 void mx_send_voice_file_to_user_request(t_system *sys, t_json *json,
                                         int voice_id, int contact_id);
 void mx_send_file_to_server(t_system *sys, char *file_path);
+void mx_remove_notification_request(t_system *sys, t_json *json, t_user *user, int chat_id, int user_id);
 
 
 void mx_chat_event(t_system *sys, t_user *user, pthread_t thread);

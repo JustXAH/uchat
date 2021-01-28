@@ -30,7 +30,7 @@ static void add_in_user_message(t_json *json, t_user *user, int count) {
 }
 
 void mx_add_new_message(t_system *sys, t_user *user, t_json *json) {
-    //m_printstr("")
+//    m_printstr("")
     json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "RESULT");
     if (cJSON_IsFalse(json->RESULT)) {
         // Error

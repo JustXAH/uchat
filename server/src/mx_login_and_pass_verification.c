@@ -38,12 +38,16 @@ static void chats_json_creator(sqlite3 *db, t_json **json, int user) {
     (*json)->CHATS_NAME_ARR = cJSON_CreateStringArray(
             (const char *const *) chats->chat_name, chats->count);
     (*json)->CHATS_COUNT = cJSON_CreateNumber(chats->count);
+    (*json)->NOTIFICATION = cJSON_CreateIntArray(chats->notification, chats->count);
 
     cJSON_AddItemToObject((*json)->SEND, "CHATS_ID_ARR",
                           (*json)->CHATS_ID_ARR);
     cJSON_AddItemToObject((*json)->SEND, "CHATS_NAME_ARR",
                           (*json)->CHATS_NAME_ARR);
-    cJSON_AddItemToObject((*json)->SEND, "CHATS_COUNT", (*json)->CHATS_COUNT);
+    cJSON_AddItemToObject((*json)->SEND, "CHATS_COUNT",
+                          (*json)->CHATS_COUNT);
+    cJSON_AddItemToObject((*json)->SEND, "NOTIFICATION",
+                          (*json)->NOTIFICATION);
 
     if (chats->count > 0) {
         if (MALLOC_SIZE(chats->id)) {
