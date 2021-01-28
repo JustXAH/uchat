@@ -201,6 +201,7 @@ void mx_send_voice_file_to_user(char *filename, int user_socket);
  int mx_db_check_login(sqlite3 *db, char *login, char *password); //returns id; "0" - login doesn't exist; "-1" - wrong password
  int mx_db_check_login_exist(sqlite3 *db, char *login); //returns id; "0" - login doesn't exist
  int mx_db_init(sqlite3 *db); //clean db and init tables
+ int mx_db_drop_init_fill(sqlite3 *db); //clean db and init tables
  int mx_db_create_new_contact(sqlite3 *db, int user, int contact); //
  int mx_db_delete_contact(sqlite3 *db, int user, int contact);
  int mx_db_set_user_picture(sqlite3 *db, int user, char *filename); //
