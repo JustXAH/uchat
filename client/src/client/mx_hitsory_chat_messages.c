@@ -14,8 +14,8 @@ static void add_in_user_message(t_json *json, t_user *user, int count) {
     bool f = false;
 
     for (int i = 0; i < count; i++) {
-        if (cJSON_GetArrayItem(json->SENDER_ID, i)->valueint == cl_listener.my_id)
-            f = true;
+    if (cJSON_GetArrayItem(json->SENDER_ID, i)->valueint == cl_listener.my_id)
+        f = true;
         mb_msg_buffer_add(cJSON_GetArrayItem(json->MESSAGES_ID, i)->valueint,
                           cl_listener.chat_in_focus,
                           cJSON_GetArrayItem(json->SENDER_ID, i)->valueint,

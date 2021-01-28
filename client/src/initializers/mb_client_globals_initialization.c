@@ -99,8 +99,6 @@ void chat_win_init(t_system *sys) {
     gtk_entry_completion_set_text_column (chat_win.s_comp, 0);
     g_signal_connect(G_OBJECT(chat_win.s_comp),"match-selected", G_CALLBACK(on_search_entry_match_select), NULL);
     */
-    chat_win.scrl_chat_box = GTK_SCROLLED_WINDOW(gtk_builder_get_object(sys->builder,
-                                                        "chat_msg_scrld"));
     chat_win.welcome_user = GTK_LABEL(gtk_builder_get_object(sys->builder,
                                                         "welcome_user"));
     chat_win.friend_login = GTK_LABEL(gtk_builder_get_object(sys->builder,
@@ -117,8 +115,8 @@ void mb_client_globals_initialization() {
 
     cl_listener.fsearch = false;
 
-    cl_listener.pending_requests = (bool *)malloc(NEW_USER_PIC + 1);
-    for (int i = 0; i <= NEW_USER_PIC; i++)
+    cl_listener.pending_requests = (bool *)malloc(HISTORY_CHAT + 1);
+    for (int i = 0; i <= HISTORY_CHAT; i++)
         cl_listener.pending_requests[i] = false;
     
     incoming_msg_buffer = NULL;

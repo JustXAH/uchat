@@ -217,8 +217,6 @@ typedef struct s_chat_win {
     GtkEntry     *edit_vax6_entry;
     GtkEntry     *edit_vax7_entry;
     GtkEntry     *edit_vax8_entry;
-    
-    GtkScrolledWindow *scrl_chat_box;
 }                t_chat_win;
 
 typedef struct s_client_st {

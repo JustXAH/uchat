@@ -19,6 +19,7 @@ void mx_found_users_by_substr(t_system *sys, t_user *user, t_json *json) {
         sys->found_usernames = NULL;
     }
     sys->found_usernames_count = 0;
+
     if (cJSON_IsFalse(json->RESULT)) {
         write (1, "LOGINS DON'T EXIST\n", 20); // это затычка!
         // здесь должна выводится пустая строка с сообщением, что пользователи не найдены
