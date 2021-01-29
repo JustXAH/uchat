@@ -10,14 +10,13 @@ void on_friends_search_entry_changed() {
     if (cl_listener.dont_bother_search)
         return;
     printf("entry search started\n");
-    char *query = (char *)gtk_entry_get_text(GTK_ENTRY(chat_win.fsearch_entry));
+    char *query = query = (char *)gtk_entry_get_text(GTK_ENTRY(chat_win.fsearch_entry));
     t_chat_list *con_buf = contact_list;
 
     if (strlen(query) > 0) {
         //Clearing old results
         gtk_list_box_set_selection_mode(chat_win.search_list, GTK_SELECTION_NONE);
         GList *children, *iter;
-
         children = gtk_container_get_children(GTK_CONTAINER(chat_win.search_list));
         for (iter = children; iter != NULL; iter = g_list_next(iter))
             gtk_widget_destroy(GTK_WIDGET(iter->data));
