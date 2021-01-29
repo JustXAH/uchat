@@ -194,8 +194,8 @@ typedef struct s_chat_win {
     GtkStack           *search_stack;
     GtkStack              *all_stack;
     GtkFixed         *my_profile_box;
-    GtkBox         *edit_vax_box;
     GtkFixed          *u_profile_box;
+    GtkBox         *edit_vax_box;
 
     GtkBox         *edit_profile;
     GtkLabel        *err_msg_lbl;
