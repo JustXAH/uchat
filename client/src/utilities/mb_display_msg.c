@@ -35,20 +35,20 @@ void mb_display_msg(t_message *msg) {
     msg_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
     context_box = gtk_widget_get_style_context(msg_box);
     gtk_style_context_add_class(context_box, "msg_box");
-
+    
     if (msg->outgoing) {
-        gtk_widget_set_margin_start(msg_box, 10);
-        gtk_widget_set_margin_end(msg_box, 350);
-        gtk_label_set_xalign(GTK_LABEL(view_name), 1);
-        gtk_label_set_xalign(GTK_LABEL(view_msg), 1);
-        gtk_label_set_xalign(GTK_LABEL(view_time), 1);
-    } else {
-        gtk_widget_set_margin_start(msg_box, 200);
+        //gtk_widget_set_margin_start(msg_box, 10);
+        gtk_widget_set_margin_end(msg_box, 300);
         gtk_label_set_xalign(GTK_LABEL(view_name), 0);
-        gtk_label_set_xalign(GTK_LABEL(view_msg), 0);
+        gtk_label_set_xalign(GTK_LABEL(view_msg),  1);
         gtk_label_set_xalign(GTK_LABEL(view_time), 0);
+    } else {
+        gtk_widget_set_margin_start(msg_box, 300);
+        gtk_label_set_xalign(GTK_LABEL(view_name), 1);
+        gtk_label_set_xalign(GTK_LABEL(view_msg), 0);
+        gtk_label_set_xalign(GTK_LABEL(view_time), 1);
     }
-
+    //gtk_label_set_line_wrap(PANGO_WRAP_WORD);
     gtk_box_pack_start(GTK_BOX(msg_box), view_name, TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(msg_box), view_time, TRUE, TRUE, 0);
     gtk_box_pack_end(GTK_BOX(msg_box), view_msg, TRUE, TRUE, 0);

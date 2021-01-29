@@ -60,6 +60,7 @@
 .backgrnd {
     background-color: #2b2b2b;
 }
+
 .backgrnd_btn {
     background-color: red;
 }
@@ -121,12 +122,12 @@ color: rgb(1, 179, 179);
 }
 
 .msg_intext {
-    font-size: 13px;
+    font-size: 24px;
     /*margin-top: 10px;*/
     margin-bottom: 10px;
     margin-left: 10px;
     margin-right: 10px;
-    color: darkcyan;
+    color: rgb(122, 255, 255);
 }
 
 
@@ -135,11 +136,11 @@ color: rgb(1, 179, 179);
     /*margin-bottom: 10px;*/
     margin-left: 10px;
     margin-right: 10px;
-    color: rebeccapurple;
+    color: rgb(180, 126, 235);
 }
 
 .msg_outext {
-    font-size: 18px;
+    font-size: 16px;
     margin-left: 10px;
     margin-right: 10px;
 
@@ -149,23 +150,26 @@ color: rgb(1, 179, 179);
     border-width: 5px;
 }
 .msg_box {
-    background-color: azure;
+    background-color: rgba(49, 70, 87, 0.822);
     border-color: aqua;
     border-width: 5px;
+    border-radius: 15px;
 }
 .cont_list_ofline {
     padding-top: 5px;
     padding-bottom: 3px;
-    background-color: #ffa398;
+    background-color: #f72a13;
     font-size: 18px;
     color: black;
+    border-radius: 5px;
 }
 .cont_list_online {
     padding-top: 5px;
     padding-bottom: 3px;
-    background-color: #a6ff8a;
+    background-color: #58f727;
     font-size: 18px;
     color: black;
+    border-radius: 5px;
 }
 .cont_list_search {
     padding-top: 5px;
@@ -173,9 +177,10 @@ color: rgb(1, 179, 179);
     background-color: #68797c;
     font-size: 18px;
     color: black;
+    border-radius: 5px;
 }
 .msg_time {
-    color: black;
+    color: rgb(255, 255, 255);
     font-size: 10px;
     padding-right: 10px;
     padding-left: 10px;
