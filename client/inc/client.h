@@ -228,14 +228,14 @@ typedef struct s_chat_win {
     GtkEntry     *edit_vax6_entry;
     GtkEntry     *edit_vax7_entry;
     GtkEntry     *edit_vax8_entry;
-    GtkBox  *Vox_1;
-    GtkBox  *Vox_2;
-    GtkBox  *Vox_3;
-    GtkBox  *Vox_4;
-    GtkBox  *Vox_5;
-    GtkBox  *Vox_6;
-    GtkBox  *Vox_7;
-    GtkBox  *Vox_8;
+    GtkButton  *Vox_1;
+    GtkButton  *Vox_2;
+    GtkButton  *Vox_3;
+    GtkButton  *Vox_4;
+    GtkButton  *Vox_5;
+    GtkButton  *Vox_6;
+    GtkButton  *Vox_7;
+    GtkButton  *Vox_8;
 
     GtkImage *edit_avatar_img;
     GtkImage *profile_avatar_img;
