@@ -23,28 +23,28 @@ static void send_voice_file(int i) {
 
 }
 
-void on_Vox_1_activate(GtkButton *btn) {
+void on_Vox_1_clicked(GtkButton *btn) {
     send_voice_file(0);
 }
-void on_Vox_2_activate(GtkButton *btn) {
+void on_Vox_2_clicked(GtkButton *btn) {
     send_voice_file(1);
 }
-void on_Vox_3_activate(GtkButton *btn) {
+void on_Vox_3_clicked(GtkButton *btn) {
     send_voice_file(2);
 }
-void on_Vox_4_activate(GtkButton *btn) {
+void on_Vox_4_clicked(GtkButton *btn) {
     send_voice_file(3);
 }
-void on_Vox_5_activate(GtkButton *btn) {
+void on_Vox_5_clicked(GtkButton *btn) {
     send_voice_file(4);
 }
-void on_Vox_6_activate(GtkButton *btn) {
+void on_Vox_6_clicked(GtkButton *btn) {
     send_voice_file(5);
 }
-void on_Vox_7_activate(GtkButton *btn) {
+void on_Vox_7_clicked(GtkButton *btn) {
     send_voice_file(6);
 }
-void on_Vox_8_activate(GtkButton *btn) {
+void on_Vox_8_clicked(GtkButton *btn) {
     send_voice_file(7);
 }
 

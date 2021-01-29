@@ -123,6 +123,10 @@ void chat_win_init(t_system *sys) {
                                                            "file_choose"));
     chat_win.scrl_chat_box = GTK_SCROLLED_WINDOW(gtk_builder_get_object(sys->builder,
                                                            "chat_msg_scrld"));
+    chat_win.edit_avatar_img = GTK_IMAGE(gtk_builder_get_object(sys->builder,
+                                                                      "edit_avatar_img"));
+    chat_win.profile_avatar_img = GTK_IMAGE(gtk_builder_get_object(sys->builder,
+                                                                      "profile_avatar_img"));
 }
 void mb_client_globals_initialization() {
     cl_listener.logged_in = 0;
