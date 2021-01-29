@@ -63,6 +63,14 @@ void chat_win_init(t_system *sys) {
                                                               "edit_vax"));
     chat_win.edit_profile = GTK_BOX(gtk_builder_get_object(sys->builder,
                                                               "edit_profile"));
+    chat_win.Vox_1 = GTK_BOX(gtk_builder_get_object(sys->builder, "Vox_1"));
+    chat_win.Vox_2 = GTK_BOX(gtk_builder_get_object(sys->builder, "Vox_2"));
+    chat_win.Vox_3 = GTK_BOX(gtk_builder_get_object(sys->builder, "Vox_3"));
+    chat_win.Vox_4 = GTK_BOX(gtk_builder_get_object(sys->builder, "Vox_4"));
+    chat_win.Vox_5 = GTK_BOX(gtk_builder_get_object(sys->builder, "Vox_5"));
+    chat_win.Vox_6 = GTK_BOX(gtk_builder_get_object(sys->builder, "Vox_6"));
+    chat_win.Vox_7 = GTK_BOX(gtk_builder_get_object(sys->builder, "Vox_7"));
+    chat_win.Vox_8 = GTK_BOX(gtk_builder_get_object(sys->builder, "Vox_8"));
     //Search                                                    
     chat_win.fsearch_entry = GTK_SEARCH_ENTRY(gtk_builder_get_object(sys->builder,
                                                         "friends_search_entry"));
@@ -84,6 +92,7 @@ void chat_win_init(t_system *sys) {
                                                                        "edit_vax7_entry"));
     chat_win.edit_vax8_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
                                                                        "edit_vax8_entry"));
+
     chat_win.err_msg_lbl = GTK_LABEL(gtk_builder_get_object(sys->builder,
                                                            "err_msg_lbl"));
     chat_win.err_pop = GTK_DIALOG(gtk_builder_get_object(sys->builder,
@@ -114,6 +123,10 @@ void chat_win_init(t_system *sys) {
                                                            "file_choose"));
     chat_win.scrl_chat_box = GTK_SCROLLED_WINDOW(gtk_builder_get_object(sys->builder,
                                                            "chat_msg_scrld"));
+    chat_win.edit_avatar_img = GTK_IMAGE(gtk_builder_get_object(sys->builder,
+                                                                      "edit_avatar_img"));
+    chat_win.profile_avatar_img = GTK_IMAGE(gtk_builder_get_object(sys->builder,
+                                                                      "profile_avatar_img"));
 }
 void mb_client_globals_initialization() {
     cl_listener.logged_in = 0;

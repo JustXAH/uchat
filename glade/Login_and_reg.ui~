@@ -682,6 +682,7 @@ Have a nice adventure, traveler.</property>
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <signal name="clicked" handler="on_Vox_1_clicked" swapped="no"/>
+                                    <accelerator key="1" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
                                   </object>
                                   <packing>
                                     <property name="left-attach">0</property>
@@ -696,6 +697,7 @@ Have a nice adventure, traveler.</property>
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <signal name="clicked" handler="on_Vox_3_clicked" swapped="no"/>
+                                    <accelerator key="3" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                                   </object>
                                   <packing>
                                     <property name="left-attach">1</property>
@@ -710,6 +712,7 @@ Have a nice adventure, traveler.</property>
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <signal name="clicked" handler="on_Vox_5_clicked" swapped="no"/>
+                                    <accelerator key="5" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                                   </object>
                                   <packing>
                                     <property name="left-attach">2</property>
@@ -724,6 +727,7 @@ Have a nice adventure, traveler.</property>
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <signal name="clicked" handler="on_Vox_7_clicked" swapped="no"/>
+                                    <accelerator key="7" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                                   </object>
                                   <packing>
                                     <property name="left-attach">3</property>
@@ -738,6 +742,7 @@ Have a nice adventure, traveler.</property>
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <signal name="clicked" handler="on_Vox_2_clicked" swapped="no"/>
+                                    <accelerator key="2" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                                   </object>
                                   <packing>
                                     <property name="left-attach">0</property>
@@ -752,6 +757,7 @@ Have a nice adventure, traveler.</property>
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <signal name="clicked" handler="on_Vox_4_clicked" swapped="no"/>
+                                    <accelerator key="4" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                                   </object>
                                   <packing>
                                     <property name="left-attach">1</property>
@@ -766,6 +772,7 @@ Have a nice adventure, traveler.</property>
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <signal name="clicked" handler="on_Vox_6_clicked" swapped="no"/>
+                                    <accelerator key="6" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                                   </object>
                                   <packing>
                                     <property name="left-attach">2</property>
@@ -780,6 +787,7 @@ Have a nice adventure, traveler.</property>
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <signal name="clicked" handler="on_Vox_8_clicked" swapped="no"/>
+                                    <accelerator key="8" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                                   </object>
                                   <packing>
                                     <property name="left-attach">3</property>
@@ -1199,6 +1207,7 @@ Have a nice adventure, traveler.</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="pixbuf">Custom_logo.jpg</property>
+                    <property name="pixel-size">170</property>
                   </object>
                   <packing>
                     <property name="x">25</property>

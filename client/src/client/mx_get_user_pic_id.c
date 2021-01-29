@@ -16,6 +16,7 @@ void mx_get_user_pic_id(t_system *sys, t_user *user, t_json *json) {
         printf("Successfully saved user pic info to DB (USER_PIC ID: %d)\n",
                json->USER_PIC_ID->valueint);
         //отправка аватарки на сервер
+
         mx_send_file_to_server(sys, sys->file_path);
         mx_strdel(&sys->file_path);
 //        mx_strdel(&sys->filename);

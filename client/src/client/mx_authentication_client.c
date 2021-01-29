@@ -5,6 +5,7 @@
 #include "client.h"
 
 extern t_client_st cl_listener;
+extern t_chat_win chat_win;
 
 void user_voices_parse_and_save(t_user *user, t_json *json) {
     json->VOICES_ID_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
@@ -28,6 +29,7 @@ void user_voices_parse_and_save(t_user *user, t_json *json) {
         }
         else if (cJSON_GetArrayItem(json->VOICES_NAME_ARR, i)->valuestring ==
                    NULL) {
+//            printf("voice name %d = %s", i , cJSON_GetArrayItem(json->VOICES_NAME_ARR, i)->valuestring);
             user->voices_name[i] = mx_strjoin("VOX ", mx_itoa(i + 1));
         }
         else {
@@ -37,6 +39,26 @@ void user_voices_parse_and_save(t_user *user, t_json *json) {
         printf("\nuser->voices_name[%d] = |%s|\n", i, user->voices_name[i]);
     }
     user->voices_name[NUMBER_VOICES] = NULL;
+
+//        char *buff = NULL;
+//    for (int i = 0; i < NUMBER_VOICES; i++) {
+//        printf("%d - 0\n", i);
+//        buff = mx_strjoin("chat_win->Vox_", mx_itoa(i));
+//        printf("%d - 1\n", i);
+        gtk_entry_set_text(chat_win.edit_vax1_entry, user->voices_name[0]);
+        gtk_entry_set_text(chat_win.edit_vax2_entry, user->voices_name[1]);
+        gtk_entry_set_text(chat_win.edit_vax3_entry, user->voices_name[2]);
+        gtk_entry_set_text(chat_win.edit_vax4_entry, user->voices_name[3]);
+        gtk_entry_set_text(chat_win.edit_vax5_entry, user->voices_name[4]);
+        gtk_entry_set_text(chat_win.edit_vax6_entry, user->voices_name[5]);
+        gtk_entry_set_text(chat_win.edit_vax7_entry, user->voices_name[6]);
+        gtk_entry_set_text(chat_win.edit_vax8_entry, user->voices_name[7]);
+//        printf(" 2");
+//        free(buff);
+//        printf("%d - 3\n", i);
+//    }
+
+//    ++++++++++++++++++++++++++++++++++++++++++++
 }
 
 void user_chats_parse_and_save(t_user *user, t_json *json) {
@@ -88,19 +110,18 @@ void user_contacts_parse_and_save(t_user *user, t_json *json) {
 
 void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
     json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
-                                                     "RESULT");
+                                                    "RESULT");
     json->USER_ID = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
-                                                    "USER_ID");
+                                                     "USER_ID");
 
     if (cJSON_IsFalse(json->RESULT)) {
         sys->authentication = false;
         if (json->USER_ID->valueint == 0) { // login doesn't exist
-            write (1, "LOGIN DOESN'T EXIST\n", 20); // это затычка!
+            write(1, "LOGIN DOESN'T EXIST\n", 20); // это затычка!
             // нужно вывести сообщение о ошибке на экран и запустить поторную процедуру логина
             cl_listener.authentication = 2;
-        }
-        else  { // "-1" wrong password
-            write (1, "WRONG PASSWORD\n", 15); // это затычка!
+        } else { // "-1" wrong password
+            write(1, "WRONG PASSWORD\n", 15); // это затычка!
             // нужно вывести сообщение о ошибке на экран и запустить поторную процедуру логина
             cl_listener.authentication = 2;
         }
@@ -129,7 +150,7 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
 //    cJSON_DeleteItemFromObject(json->SERVER_JSON, "RESULT");
 //    cJSON_DeleteItemFromObject(json->SERVER_JSON, "USER_ID");
 //void user_take_vox_names(t_user *user, t_json *json) {
-//
-//    }
-//    void gtk_menu_item_set_label (GtkMenuItem *menu_item, const gchar *label);
+//    user.voicename
+//}
+//    void gtk_menu_item_set_label (GtkMenuItem *menu_item, const gchar *)la
 }

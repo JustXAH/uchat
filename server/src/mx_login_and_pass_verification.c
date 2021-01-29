@@ -6,10 +6,10 @@
 
 static void voices_json_creator(sqlite3 *db, t_json **json, int user) {
     t_voice *voice = mx_db_get_users_voices(db, user);
-
     (*json)->VOICES_ID_ARR = cJSON_CreateIntArray(voice->id, NUMBER_VOICES);
     (*json)->VOICES_NAME_ARR = cJSON_CreateStringArray(
             (const char *const *) voice->voice_name, NUMBER_VOICES);
+//    printf("\nVoice - %s\n", cJSON_GetArrayItem((*json)->VOICES_NAME_ARR, 0)->valuestring);
 
     cJSON_AddItemToObject((*json)->SEND, "VOICES_ID_ARR",
                           (*json)->VOICES_ID_ARR);

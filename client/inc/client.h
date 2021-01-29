@@ -40,7 +40,7 @@
 #include <gio/gio.h>
 
 #define MAX_LEN 1024
-#define PORT 5000
+#define PORT 5001
 #define SA struct sockaddr
 #define NUMBER_VOICES 8
 
@@ -228,16 +228,17 @@ typedef struct s_chat_win {
     GtkEntry     *edit_vax6_entry;
     GtkEntry     *edit_vax7_entry;
     GtkEntry     *edit_vax8_entry;
+    GtkBox  *Vox_1;
+    GtkBox  *Vox_2;
+    GtkBox  *Vox_3;
+    GtkBox  *Vox_4;
+    GtkBox  *Vox_5;
+    GtkBox  *Vox_6;
+    GtkBox  *Vox_7;
+    GtkBox  *Vox_8;
 
-//    GtkMenyItem  *Vox_1;
-//    GtkMenyItem  *Vox_2;
-//    GtkMenyItem  *Vox_3;
-//    GtkMenyItem  *Vox_4;
-//    GtkMenyItem  *Vox_5;
-//    GtkMenyItem  *Vox_6;
-//    GtkMenyItem  *Vox_7;
-//    GtkMenyItem  *Vox_8;
-
+    GtkImage *edit_avatar_img;
+    GtkImage *profile_avatar_img;
 }                t_chat_win;
 
 typedef struct s_client_st {
@@ -372,7 +373,6 @@ void mb_display_chat_with_contact(int chat_id);
 
 void mb_invalid_credentials_msg();
 void mb_reset_credentials_msg();
-void user_take_vox_names(t_user *user, t_json *json);
 
 //int mb_get_uid_by_cid(int chat_id);
 
