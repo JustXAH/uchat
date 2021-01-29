@@ -18,6 +18,7 @@ void on_search_list_row_selected(GtkListBox *listbox, GtkListBoxRow *row) {
 
     gtk_stack_set_visible_child(chat_win.all_stack, 
                                 GTK_WIDGET(chat_win.u_profile_box));
+
     free(chat->sys->searched_login);
     free(user_name);
 
