@@ -106,6 +106,12 @@ void chat_win_init(t_system *sys) {
 
     chat_win.fresults = NULL;
 
+    chat_win.add_remove_stk = GTK_STACK(gtk_builder_get_object(sys->builder,
+                                                              "add_remove_stk"));
+    chat_win.add_user = GTK_BUTTON(gtk_builder_get_object(sys->builder,
+                                                              "add_user"));
+    chat_win.remove_user = GTK_BUTTON(gtk_builder_get_object(sys->builder,
+                                                              "remove_user"));
 
     /*
     chat_win.s_comp = gtk_entry_completion_new ();

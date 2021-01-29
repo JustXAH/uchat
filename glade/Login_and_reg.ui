@@ -563,20 +563,15 @@ Have a nice adventure, traveler.</property>
                   <object class="GtkScrolledWindow" id="chat_msg_scrld">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
-                    <property name="vexpand">True</property>
                     <property name="shadow-type">in</property>
-                    <property name="propagate-natural-width">True</property>
-                    <property name="propagate-natural-height">True</property>
                     <child>
                       <object class="GtkViewport" id="chat_msg_view">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="vexpand">True</property>
                         <child>
                           <object class="GtkListBox" id="chat_msg_lst_box">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="vexpand">True</property>
                             <style>
                               <class name="backgrnd"/>
                             </style>
@@ -589,7 +584,7 @@ Have a nice adventure, traveler.</property>
                     </style>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
+                    <property name="expand">True</property>
                     <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
@@ -599,14 +594,11 @@ Have a nice adventure, traveler.</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <child>
-                      <object class="GtkStack" id="msg_entry_stk">
+                      <object class="GtkStack">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="hhomogeneous">False</property>
-                        <property name="vhomogeneous">False</property>
-                        <property name="interpolate-size">True</property>
                         <child>
-                          <object class="GtkBox" id="msg_entry_box">
+                          <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="orientation">vertical</property>
@@ -614,26 +606,17 @@ Have a nice adventure, traveler.</property>
                               <object class="GtkScrolledWindow">
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
-                                <property name="margin-start">4</property>
-                                <property name="margin-end">4</property>
-                                <property name="margin-top">4</property>
-                                <property name="margin-bottom">4</property>
+                                <property name="vexpand">True</property>
                                 <property name="shadow-type">in</property>
                                 <child>
                                   <object class="GtkViewport">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
-                                    <property name="vexpand">True</property>
                                     <child>
                                       <object class="GtkEntry" id="chat_msg_entry">
                                         <property name="visible">True</property>
                                         <property name="can-focus">True</property>
-                                        <property name="margin-start">4</property>
-                                        <property name="margin-end">4</property>
-                                        <property name="margin-top">4</property>
-                                        <property name="margin-bottom">4</property>
                                         <property name="hexpand">False</property>
-                                        <property name="vexpand">True</property>
                                         <property name="activates-default">True</property>
                                         <property name="show-emoji-icon">True</property>
                                         <signal name="activate" handler="on_chat_send_btn_clicked" swapped="no"/>
@@ -646,7 +629,7 @@ Have a nice adventure, traveler.</property>
                                 </child>
                               </object>
                               <packing>
-                                <property name="expand">True</property>
+                                <property name="expand">False</property>
                                 <property name="fill">True</property>
                                 <property name="position">0</property>
                               </packing>
@@ -658,7 +641,8 @@ Have a nice adventure, traveler.</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox" id="vox_entry_box">
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="orientation">vertical</property>
                             <child>
@@ -666,14 +650,9 @@ Have a nice adventure, traveler.</property>
                               <object class="GtkGrid">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
-                                <property name="margin-start">4</property>
-                                <property name="margin-end">4</property>
-                                <property name="margin-top">4</property>
-                                <property name="margin-bottom">4</property>
+                                <property name="vexpand">True</property>
                                 <property name="row-spacing">1</property>
                                 <property name="column-spacing">2</property>
-                                <property name="row-homogeneous">True</property>
-                                <property name="column-homogeneous">True</property>
                                 <child>
                                   <object class="GtkButton" id="Vox_1">
                                     <property name="label" translatable="yes">Vox 1</property>
@@ -682,7 +661,6 @@ Have a nice adventure, traveler.</property>
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <signal name="clicked" handler="on_Vox_1_clicked" swapped="no"/>
-                                    <accelerator key="1" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
                                   </object>
                                   <packing>
                                     <property name="left-attach">0</property>
@@ -697,7 +675,6 @@ Have a nice adventure, traveler.</property>
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <signal name="clicked" handler="on_Vox_3_clicked" swapped="no"/>
-                                    <accelerator key="3" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                                   </object>
                                   <packing>
                                     <property name="left-attach">1</property>
@@ -712,7 +689,6 @@ Have a nice adventure, traveler.</property>
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <signal name="clicked" handler="on_Vox_5_clicked" swapped="no"/>
-                                    <accelerator key="5" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                                   </object>
                                   <packing>
                                     <property name="left-attach">2</property>
@@ -727,7 +703,6 @@ Have a nice adventure, traveler.</property>
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <signal name="clicked" handler="on_Vox_7_clicked" swapped="no"/>
-                                    <accelerator key="7" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                                   </object>
                                   <packing>
                                     <property name="left-attach">3</property>
@@ -742,7 +717,6 @@ Have a nice adventure, traveler.</property>
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <signal name="clicked" handler="on_Vox_2_clicked" swapped="no"/>
-                                    <accelerator key="2" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                                   </object>
                                   <packing>
                                     <property name="left-attach">0</property>
@@ -757,7 +731,6 @@ Have a nice adventure, traveler.</property>
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <signal name="clicked" handler="on_Vox_4_clicked" swapped="no"/>
-                                    <accelerator key="4" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                                   </object>
                                   <packing>
                                     <property name="left-attach">1</property>
@@ -772,7 +745,6 @@ Have a nice adventure, traveler.</property>
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <signal name="clicked" handler="on_Vox_6_clicked" swapped="no"/>
-                                    <accelerator key="6" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                                   </object>
                                   <packing>
                                     <property name="left-attach">2</property>
@@ -787,7 +759,6 @@ Have a nice adventure, traveler.</property>
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <signal name="clicked" handler="on_Vox_8_clicked" swapped="no"/>
-                                    <accelerator key="8" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                                   </object>
                                   <packing>
                                     <property name="left-attach">3</property>
@@ -797,7 +768,7 @@ Have a nice adventure, traveler.</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
-                                <property name="fill">False</property>
+                                <property name="fill">True</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -862,7 +833,7 @@ Have a nice adventure, traveler.</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="fill">False</property>
+                    <property name="fill">True</property>
                     <property name="position">2</property>
                   </packing>
                 </child>
@@ -975,78 +946,6 @@ Have a nice adventure, traveler.</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="profile_name_lbl">
-                    <property name="width-request">120</property>
-                    <property name="height-request">30</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Name</property>
-                    <style>
-                      <class name="lbl_text"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="x">250</property>
-                    <property name="y">100</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="profile_name">
-                    <property name="width-request">120</property>
-                    <property name="height-request">50</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Name</property>
-                    <attributes>
-                      <attribute name="style" value="oblique"/>
-                      <attribute name="size" value="15000"/>
-                    </attributes>
-                    <style>
-                      <class name="lbl_text"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="x">250</property>
-                    <property name="y">125</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="profile_email_lbl">
-                    <property name="width-request">120</property>
-                    <property name="height-request">30</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">E-Mail</property>
-                    <style>
-                      <class name="lbl_text"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="x">250</property>
-                    <property name="y">175</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="profile_email">
-                    <property name="width-request">120</property>
-                    <property name="height-request">50</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">E-Mail</property>
-                    <attributes>
-                      <attribute name="style" value="oblique"/>
-                      <attribute name="size" value="15000"/>
-                    </attributes>
-                    <style>
-                      <class name="lbl_text"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="x">250</property>
-                    <property name="y">200</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkImage" id="profile_avatar_img">
                     <property name="width-request">170</property>
                     <property name="height-request">170</property>
@@ -1088,48 +987,6 @@ Have a nice adventure, traveler.</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="add_user">
-                    <property name="label" translatable="yes">Add friend</property>
-                    <property name="width-request">110</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="receives-default">True</property>
-                    <signal name="clicked" handler="on_add_user_clicked" swapped="no"/>
-                  </object>
-                  <packing>
-                    <property name="x">52</property>
-                    <property name="y">200</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="remove_user">
-                    <property name="label" translatable="yes">Remove friend</property>
-                    <property name="width-request">110</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="receives-default">True</property>
-                  </object>
-                  <packing>
-                    <property name="x">52</property>
-                    <property name="y">245</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="client_start_chat">
-                    <property name="label" translatable="yes">Start chat</property>
-                    <property name="name">client_start_chat</property>
-                    <property name="width-request">110</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="receives-default">True</property>
-                    <signal name="clicked" handler="on_client_start_chat_clicked" swapped="no"/>
-                  </object>
-                  <packing>
-                    <property name="x">52</property>
-                    <property name="y">290</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkLabel" id="friend_login">
                     <property name="width-request">120</property>
                     <property name="height-request">50</property>
@@ -1150,39 +1007,42 @@ Have a nice adventure, traveler.</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="friend_name">
-                    <property name="width-request">120</property>
-                    <property name="height-request">50</property>
+                  <object class="GtkStack" id="add_remove_stk">
+                    <property name="width-request">100</property>
+                    <property name="height-request">80</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Name</property>
-                    <attributes>
-                      <attribute name="style" value="oblique"/>
-                      <attribute name="size" value="15000"/>
-                    </attributes>
-                    <style>
-                      <class name="lbl_text"/>
-                    </style>
+                    <child>
+                      <object class="GtkButton" id="add_user">
+                        <property name="label" translatable="yes">Add friend</property>
+                        <property name="width-request">110</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="receives-default">True</property>
+                        <signal name="clicked" handler="on_add_user_clicked" swapped="no"/>
+                      </object>
+                      <packing>
+                        <property name="name">page1</property>
+                        <property name="title" translatable="yes">page1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="remove_user">
+                        <property name="label" translatable="yes">Remove friend</property>
+                        <property name="width-request">110</property>
+                        <property name="can-focus">True</property>
+                        <property name="receives-default">True</property>
+                      </object>
+                      <packing>
+                        <property name="name">page0</property>
+                        <property name="title" translatable="yes">page0</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
-                    <property name="x">250</property>
-                    <property name="y">125</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="friend_e_mail">
-                    <property name="width-request">120</property>
-                    <property name="height-request">50</property>
-                    <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">E-Mail</property>
-                    <attributes>
-                      <attribute name="style" value="oblique"/>
-                      <attribute name="size" value="15000"/>
-                    </attributes>
-                  </object>
-                  <packing>
-                    <property name="x">250</property>
-                    <property name="y">200</property>
+                    <property name="x">46</property>
+                    <property name="y">243</property>
                   </packing>
                 </child>
                 <style>
@@ -1207,7 +1067,6 @@ Have a nice adventure, traveler.</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="pixbuf">Custom_logo.jpg</property>
-                    <property name="pixel-size">170</property>
                   </object>
                   <packing>
                     <property name="x">25</property>

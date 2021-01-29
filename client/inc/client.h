@@ -236,7 +236,11 @@ typedef struct s_chat_win {
     GtkBox  *Vox_6;
     GtkBox  *Vox_7;
     GtkBox  *Vox_8;
+    
 
+    GtkStack *add_remove_stk;
+    GtkButton *add_user;
+    GtkButton *remove_user;
     GtkImage *edit_avatar_img;
     GtkImage *profile_avatar_img;
 }                t_chat_win;

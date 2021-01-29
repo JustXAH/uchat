@@ -80,7 +80,7 @@ int main(int argc , char *argv[]) {
     }
 
     mx_db_init(serv->db);
-    printf("\nDB = %d\n", (int)serv->db);
+    //printf("\nDB = %d\n", (int)serv->db);
 
     //Listen
     listen(sockfd , 3);
