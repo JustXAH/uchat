@@ -88,6 +88,13 @@ void chat_win_init(t_system *sys) {
                                                            "err_msg_lbl"));
     chat_win.err_pop = GTK_DIALOG(gtk_builder_get_object(sys->builder,
                                                            "err_pop"));
+    chat_win.msg_entry_stk = GTK_STACK(gtk_builder_get_object(sys->builder,
+                                                        "msg_entry_stk"));
+    chat_win.msg_entry_box = GTK_BOX(gtk_builder_get_object(sys->builder,
+                                                              "msg_entry_box"));
+    chat_win.vox_entry_box = GTK_BOX(gtk_builder_get_object(sys->builder,
+                                                              "vox_entry_box"));
+
     chat_win.fresults = NULL;
 
 
@@ -118,6 +125,8 @@ void mb_client_globals_initialization() {
     cl_listener.fsearch = false;
 
     cl_listener.new_contact_received = false;
+
+    cl_listener.vox_not_msg = false;
 
     cl_listener.just_added_new_friend = 0;
 

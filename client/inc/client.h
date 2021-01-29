@@ -203,6 +203,10 @@ typedef struct s_chat_win {
     GtkDialog       *err_pop;
 
     GtkBox                  *msg_box;
+    GtkStack          *msg_entry_stk;
+    GtkBox             *msg_entry_box;
+    GtkBox             *vox_entry_box;
+
     GtkEntry              *msg_entry;
     GtkListBox           *msg_viewer;
 
@@ -224,6 +228,7 @@ typedef struct s_chat_win {
     GtkEntry     *edit_vax6_entry;
     GtkEntry     *edit_vax7_entry;
     GtkEntry     *edit_vax8_entry;
+
 //    GtkMenyItem  *Vox_1;
 //    GtkMenyItem  *Vox_2;
 //    GtkMenyItem  *Vox_3;
@@ -246,6 +251,7 @@ typedef struct s_client_st {
     bool *pending_requests;
     bool just_added_new_friend;
     bool new_contact_received;
+    bool vox_not_msg;
 }               t_client_st;
 
 typedef struct s_message {

@@ -563,15 +563,20 @@ Have a nice adventure, traveler.</property>
                   <object class="GtkScrolledWindow" id="chat_msg_scrld">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
+                    <property name="vexpand">True</property>
                     <property name="shadow-type">in</property>
+                    <property name="propagate-natural-width">True</property>
+                    <property name="propagate-natural-height">True</property>
                     <child>
                       <object class="GtkViewport" id="chat_msg_view">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
+                        <property name="vexpand">True</property>
                         <child>
                           <object class="GtkListBox" id="chat_msg_lst_box">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
+                            <property name="vexpand">True</property>
                             <style>
                               <class name="backgrnd"/>
                             </style>
@@ -584,7 +589,7 @@ Have a nice adventure, traveler.</property>
                     </style>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
+                    <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
@@ -594,11 +599,14 @@ Have a nice adventure, traveler.</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <child>
-                      <object class="GtkStack">
+                      <object class="GtkStack" id="msg_entry_stk">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
+                        <property name="hhomogeneous">False</property>
+                        <property name="vhomogeneous">False</property>
+                        <property name="interpolate-size">True</property>
                         <child>
-                          <object class="GtkBox">
+                          <object class="GtkBox" id="msg_entry_box">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="orientation">vertical</property>
@@ -606,17 +614,26 @@ Have a nice adventure, traveler.</property>
                               <object class="GtkScrolledWindow">
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
-                                <property name="vexpand">True</property>
+                                <property name="margin-start">4</property>
+                                <property name="margin-end">4</property>
+                                <property name="margin-top">4</property>
+                                <property name="margin-bottom">4</property>
                                 <property name="shadow-type">in</property>
                                 <child>
                                   <object class="GtkViewport">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
+                                    <property name="vexpand">True</property>
                                     <child>
                                       <object class="GtkEntry" id="chat_msg_entry">
                                         <property name="visible">True</property>
                                         <property name="can-focus">True</property>
+                                        <property name="margin-start">4</property>
+                                        <property name="margin-end">4</property>
+                                        <property name="margin-top">4</property>
+                                        <property name="margin-bottom">4</property>
                                         <property name="hexpand">False</property>
+                                        <property name="vexpand">True</property>
                                         <property name="activates-default">True</property>
                                         <property name="show-emoji-icon">True</property>
                                         <signal name="activate" handler="on_chat_send_btn_clicked" swapped="no"/>
@@ -629,7 +646,7 @@ Have a nice adventure, traveler.</property>
                                 </child>
                               </object>
                               <packing>
-                                <property name="expand">False</property>
+                                <property name="expand">True</property>
                                 <property name="fill">True</property>
                                 <property name="position">0</property>
                               </packing>
@@ -641,8 +658,7 @@ Have a nice adventure, traveler.</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox">
-                            <property name="visible">True</property>
+                          <object class="GtkBox" id="vox_entry_box">
                             <property name="can-focus">False</property>
                             <property name="orientation">vertical</property>
                             <child>
@@ -650,9 +666,14 @@ Have a nice adventure, traveler.</property>
                               <object class="GtkGrid">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
-                                <property name="vexpand">True</property>
+                                <property name="margin-start">4</property>
+                                <property name="margin-end">4</property>
+                                <property name="margin-top">4</property>
+                                <property name="margin-bottom">4</property>
                                 <property name="row-spacing">1</property>
                                 <property name="column-spacing">2</property>
+                                <property name="row-homogeneous">True</property>
+                                <property name="column-homogeneous">True</property>
                                 <child>
                                   <object class="GtkButton" id="Vox_1">
                                     <property name="label" translatable="yes">Vox 1</property>
@@ -768,7 +789,7 @@ Have a nice adventure, traveler.</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
-                                <property name="fill">True</property>
+                                <property name="fill">False</property>
                                 <property name="position">0</property>
                               </packing>
                             </child>
@@ -833,7 +854,7 @@ Have a nice adventure, traveler.</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="fill">True</property>
+                    <property name="fill">False</property>
                     <property name="position">2</property>
                   </packing>
                 </child>
