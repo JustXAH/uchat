@@ -7,7 +7,7 @@ extern t_chat *chat;
 
 static void get_search_results();
 void on_friends_search_entry_changed() {
-    printf("entry search\n");
+    printf("entry search started\n");
     char *query = (char *)gtk_entry_get_text(GTK_ENTRY(chat_win.fsearch_entry));
     t_chat_list *con_buf = contact_list;
 
@@ -35,6 +35,7 @@ void on_friends_search_entry_changed() {
         cl_listener.fsearch = true;
         mx_printstr("entry search finished\n");
     } else { //User stopped searching
+        mx_printstr("Clearing search results\n");
         gtk_stack_set_visible_child(chat_win.search_stack, 
                                     gtk_widget_get_parent(
                                         gtk_widget_get_parent(
@@ -42,6 +43,7 @@ void on_friends_search_entry_changed() {
 
         cl_listener.fsearch = false;
     }
+    printf("entry search finished\n");
 }
 static void get_search_results() {
     while (cl_listener.pending_requests[USER_SEARCH_BY_SUBSTRING]); //waiting to receive results

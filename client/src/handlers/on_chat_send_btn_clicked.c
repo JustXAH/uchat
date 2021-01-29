@@ -22,9 +22,16 @@ static t_message *mb_form_msg(int chat_id,      int user_id,
     return msg;
 }
 void on_chat_send_btn_clicked(GtkButton *btn, GtkBuilder *builder) {
+    if (cl_listener.vox_not_msg) {
+        gtk_stack_set_visible_child(chat_win.msg_entry_stk, 
+                                    GTK_WIDGET(chat_win.msg_entry_box));
+        cl_listener.vox_not_msg = false;
+        return;
+    }
     char *txt_msg = (char *)gtk_entry_get_text(chat_win.msg_entry);
     t_chat_list *con_buf = contact_list;
     int con_id = 0;
+
     if (strlen(txt_msg) > 0) {
         do {
             if (con_buf->chat_id == cl_listener.chat_in_focus)
@@ -35,13 +42,5 @@ void on_chat_send_btn_clicked(GtkButton *btn, GtkBuilder *builder) {
                                txt_msg, cl_listener.chat_in_focus, con_id);
 
         gtk_entry_set_text(chat_win.msg_entry, "");
-        //printf("%d\n", cl_listener.chat_in_focus);
-        /*
-        t_message *msg = mb_form_msg(cl_listener.chat_in_focus,
-                                        cl_listener.my_id,
-                                        cl_listener.my_name,
-                                        txt_msg, 
-                                        true);
-        mb_send_msg(msg);*/
     }
 }

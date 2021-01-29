@@ -125,24 +125,31 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
             // нужно вывести сообщение о ошибке на экран и запустить поторную процедуру логина
             cl_listener.authentication = 2;
         }
-    } else { //RESULT = TRUE (login and password are confirmed - successful LOG IN)
+    }
+    else { //RESULT = TRUE (login and password are confirmed - successful LOG IN)
+        //printf("login confirmation recieved\n Starting to load profile data\n");
         user->my_id = json->USER_ID->valueint;
+        //printf("loading 1\n");
         user_contacts_parse_and_save(user, json);
+        //printf("loading 2\n");
         user_chats_parse_and_save(user, json);
+        //printf("loading 3\n");
         user_voices_parse_and_save(user, json);
+        //printf("loading 4\n");
 //        user->contacts = cJSON_(SERVER_JSON
         sys->authentication = true;
         sys->menu = true;
         // вход в логин прошел успешно! дальше нужно перейти в окно МЕНЮ чата
         cl_listener.authentication = 1;
         cl_listener.my_id = json->USER_ID->valueint;
-
+        printf("mx_authentication_client loading 5\n");
         for (int i = 0; i != user->contacts_count; i++) {
             mx_printstr("adding contact ");
             mx_printstr(user->contacts_login[i]);
             mx_printstr("\n");
             mb_contact_list_add(user->chats_id[i], user->contacts_id[i], user->contacts_login[i], false);
         }
+        printf("mx_authentication_client loading successful\n");
     }
 //    cJSON_DeleteItemFromObject(json->SERVER_JSON, "RESULT");
 //    cJSON_DeleteItemFromObject(json->SERVER_JSON, "USER_ID");

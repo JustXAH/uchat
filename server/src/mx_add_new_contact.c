@@ -4,16 +4,31 @@
 
 #include "server.h"
 
-void add_new_contact_and_json_create(sqlite3 *db, t_json **json) {
+static void which_user_online(t_server *serv, t_json *json, char *send_str) {
+    int contact_id = json->CONTACT_ID->valueint;
+
+    for (int i = 0; serv->users_id[i]; i++)
+        if (serv->users_id[i] == contact_id)
+            write(serv->user_socket[i], send_str, strlen(send_str));
+}
+
+static void add_new_contact_and_json_create(t_server *serv, t_json **json, int user_index, bool flag) {
     t_contact *contacts = NULL;
     int answer;
+    char *send_str;
 
-    answer = mx_db_create_new_contact(db, (*json)->USER_ID->valueint, (*json)->CONTACT_ID->valueint);
+    if (flag == true)
+        answer = mx_db_create_new_contact(serv->db, (*json)->USER_ID->valueint, (*json)->CONTACT_ID->valueint);
+    else
+        answer = mx_db_create_new_contact(serv->db, (*json)->CONTACT_ID->valueint, (*json)->USER_ID->valueint);
     if (answer == -1) {
         (*json)->RESULT = cJSON_CreateFalse();
     }
     else {
-        contacts = mx_db_get_contacts_info(db, (*json)->USER_ID->valueint);
+        if (flag)
+            contacts = mx_db_get_contacts_info(serv->db, (*json)->USER_ID->valueint);
+        else
+            contacts = mx_db_get_contacts_info(serv->db, (*json)->CONTACT_ID->valueint);
         (*json)->CONTACTS_COUNT = cJSON_CreateNumber(contacts->count);
         (*json)->RESULT = cJSON_CreateTrue();
         (*json)->CONTACTS_ID_ARR = cJSON_CreateIntArray(contacts->id, contacts->count);
@@ -23,6 +38,15 @@ void add_new_contact_and_json_create(sqlite3 *db, t_json **json) {
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_ID_ARR", (*json)->CONTACTS_ID_ARR);
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_LOGIN_ARR", (*json)->CONTACTS_LOGIN_ARR);
     cJSON_AddItemToObject((*json)->SEND, "CONTACTS_COUNT", (*json)->CONTACTS_COUNT);
+
+    send_str = cJSON_Print((*json)->SEND);
+    if (flag == true)
+        write(serv->user_socket[user_index], send_str, strlen(send_str));
+    else
+        which_user_online(serv, (*json), send_str);
+    cJSON_Delete((*json)->SEND);
+    free(send_str);
+
     if (MALLOC_SIZE(contacts->id)) {
         free(contacts->id);
     }
@@ -36,20 +60,18 @@ void add_new_contact_and_json_create(sqlite3 *db, t_json **json) {
 }
 
 void mx_add_new_contact(t_server *serv, t_json *json, int user_index) {
-    char *send_str = NULL;
     json->USER_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "USER_ID");
     json->CONTACT_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "CONTACT_ID");
+
     json->SEND = cJSON_CreateObject();
     json->TYPE = cJSON_CreateNumber(NEW_CONTACT);
-
     cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
-    add_new_contact_and_json_create(serv->db, &json);
+    add_new_contact_and_json_create(serv, &json, user_index, true);
 
-    send_str = cJSON_Print(json->SEND);
-    write(serv->user_socket[user_index], send_str, strlen(send_str));
-
-    cJSON_Delete(json->SEND);
-    free(send_str);
+    json->SEND = cJSON_CreateObject();
+    json->TYPE = cJSON_CreateNumber(NEW_CONTACT);
+    cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
+    add_new_contact_and_json_create(serv, &json, user_index, false);
 }
 
 //static int int_arr_len(const int *arr) {

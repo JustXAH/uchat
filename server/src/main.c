@@ -92,22 +92,24 @@ int main(int argc , char *argv[]) {
 
     //Receive a message from client
     for (int i = 0; serv->exit != true; i++) {
-        if (i == MAX_USERS - 1)
-            break;
+//        if (i == MAX_USERS - )
+//            break;
 //        accept connection from an incoming client
-        if (serv->user_socket[i] == -1) {
-            serv->user_socket[i] = accept(sockfd, (struct sockaddr *) &client,
-                                          (socklen_t *) &c);
-            if (serv->user_socket[i] < 0) {
-                write(2, "ERROR, accept failed", 20);
-                return 1;
+        if (serv->cli_connect < MAX_USERS) {
+            if (serv->user_socket[i] == -1) {
+                serv->user_socket[i] = accept(sockfd,
+                                              (struct sockaddr *) &client,
+                                              (socklen_t *) &c);
+                if (serv->user_socket[i] < 0) {
+                    write(2, "ERROR, accept failed", 20);
+                    return 1;
+                } else {
+                    write(1, "Connection accepted!\n", 21);
+                    mx_sorting_users_and_sockets(serv);
+                    serv->cli_connect += 1;
+                }
+                i = 0;
             }
-            else {
-                write(1, "Connection accepted!\n", 21);
-                mx_sorting_users_and_sockets(serv);
-                serv->cli_connect += 1;
-            }
-            i = 0;
         }
     }
     pthread_cancel(thread);

@@ -34,12 +34,14 @@ void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json) {
         if (cJSON_IsTrue(json->DISPATCH)) {
             json->FILENAME = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
                                                               "FILENAME");
+            json->FILE_SIZE = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
+                                                              "FILE_SIZE");
             if (MALLOC_SIZE(sys->filename)) {
                 mx_strdel(&sys->filename);
             }
             sys->filename = strdup(json->FILENAME->valuestring);
             printf("You have been sent a user pic. User pic receiving...\n");
-            file_path = mx_file_receiving(sys, json);
+            file_path = mx_file_receiving(sys, sys->filename, json->FILE_SIZE->valueint);
             printf("Successfully received and save user pic from USER!\n");
 
             /*

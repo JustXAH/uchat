@@ -94,6 +94,7 @@ typedef struct s_system {
     bool menu;
     bool message_sent;
     bool chat;
+    bool voice_play;
     char exit;
 }              t_system;
 typedef struct s_user {
@@ -202,6 +203,10 @@ typedef struct s_chat_win {
     GtkDialog       *err_pop;
 
     GtkBox                  *msg_box;
+    GtkStack          *msg_entry_stk;
+    GtkBox             *msg_entry_box;
+    GtkBox             *vox_entry_box;
+
     GtkEntry              *msg_entry;
     GtkListBox           *msg_viewer;
 
@@ -243,6 +248,8 @@ typedef struct s_client_st {
     bool fsearch;
     bool *pending_requests;
     bool just_added_new_friend;
+    bool new_contact_received;
+    bool vox_not_msg;
 }               t_client_st;
 
 typedef struct s_message {
@@ -295,7 +302,7 @@ void mx_get_history_chat(t_system *sys, t_user *user, t_json *json);
 void mx_add_new_message(t_system *sys, t_user *user, t_json *json);
 void mx_get_voice_file_from_user(t_system *sys, t_user *user, t_json *json);
 void mx_get_voice_file_id(t_system *sys, t_user *user, t_json *json);
-char *mx_file_receiving(t_system *sys, t_json *json);
+char *mx_file_receiving(t_system *sys, char *filename, int file_size);
 void mx_get_user_pic_id(t_system *sys, t_user *user, t_json *json);
 int mx_file_size_measurement(char *file_path);
 
@@ -348,6 +355,7 @@ void mb_client_globals_initialization();
 gboolean mb_event_listener(gpointer data);
 void mb_auth_event_check();
 void mb_incoming_msg_check();
+void mb_new_contact_check();
 
 void mb_contact_list_add(int chat_id, int user_id, char *user_name, bool is_online);
 void mb_msg_buffer_add(int msg_id, int chat_id, int user_id, char *user_name, char *time, char *msg_text, bool outgoing);

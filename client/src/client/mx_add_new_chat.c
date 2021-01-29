@@ -4,6 +4,9 @@
 
 #include "client.h"
 
+extern t_client_st cl_listener;
+extern t_chat *chat;
+
 static void add_chats_login(t_user *user, cJSON *CHATS_NAME_ARR) {
     user->chats_name = (char **)malloc(sizeof(char *) * (user->chats_count + 1));
     for (int i = 0; i != user->chats_count; i++) {
@@ -44,5 +47,17 @@ void mx_add_new_chat(t_system *sys, t_user *user, t_json *json) {
         cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_COUNT");
         cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_ID_ARR");
         cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_NAME_ARR");
+
+
+    int chat_i = chat->user->chats_count - 1;
+    int cont_i = chat->user->contacts_count - 1;
+
+
+    printf("about to display %s as a contact\n", chat->user->contacts_login[cont_i]);
+    mb_contact_list_add(chat->user->chats_id[chat_i], chat->user->contacts_id[cont_i], chat->user->contacts_login[cont_i], false);
+    printf("should have displayed %s as a contact\n", chat->user->contacts_login[cont_i]);
+
+    //cl_listener.new_contact_received = true;
+    mx_printstr("recieved new chat id\n");
     
 }

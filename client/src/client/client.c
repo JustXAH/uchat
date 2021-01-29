@@ -12,7 +12,7 @@ extern t_message *incoming_msg_buffer;
 static void cache_dir_removing() {
     struct stat st = {0};
 
-    if (stat("client/cache", &st) != -1) {
+    if (stat("client/cache", &st) == 0) {
         // removing cache folder
         if (rmdir("client/cache") == 0) {
             printf("Successfully removed cache directory.\n");
@@ -48,6 +48,8 @@ int main(int argc, char *argv[]) {
 
     // assign IP, PORT
     servaddr.sin_family = AF_INET;
+    printf("ARGC = %d\n", argc);
+    printf("ARGV[1]= %s\n", argv[1]);
     if (argc == 2) {
         servaddr.sin_addr.s_addr = inet_addr(argv[1]);
     }

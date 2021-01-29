@@ -5,6 +5,8 @@
 
 #include "client.h"
 
+extern t_client_st cl_listener;
+
 static void add_contacts_login(t_user *user, cJSON *CONTACTS_LOGIN_ARR) {
     user->contacts_login = (char **)malloc(sizeof(char *) * (user->contacts_count + 1));
     for (int i = 0; i != user->contacts_count; i++) {
@@ -43,5 +45,7 @@ void mx_add_new_contact(t_system *sys, t_user *user, t_json *json) {
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "CONTACTS_COUNT");
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "CONTACTS_ID_ARR");
     cJSON_DeleteItemFromObject(json->SERVER_JSON, "CONTACTS_LOGIN_ARR");
+
+    //cl_listener.new_contact_received = true;
     mx_printstr("mx_add_new_contact finished successfully\n");
 }
