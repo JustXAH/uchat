@@ -104,10 +104,6 @@ void chat_win_init(t_system *sys) {
     chat_win.vox_entry_box = GTK_BOX(gtk_builder_get_object(sys->builder,
                                                               "vox_entry_box"));
 
-    chat_win.btn_add = GTK_BUTTON(gtk_builder_get_object(sys->builder,
-                                                    "add_user"));;
-    chat_win.btn_remove = GTK_BUTTON(gtk_builder_get_object(sys->builder,
-                                                         "remove_user"));;
     chat_win.fresults = NULL;
 
     chat_win.add_remove_stk = GTK_STACK(gtk_builder_get_object(sys->builder,
