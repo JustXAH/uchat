@@ -18,6 +18,7 @@ void on_search_list_row_selected(GtkListBox *listbox, GtkListBoxRow *row) {
 
     gtk_stack_set_visible_child(chat_win.all_stack, 
                                 GTK_WIDGET(chat_win.u_profile_box));
+
     free(chat->sys->searched_login);
     free(user_name);
 
@@ -30,6 +31,9 @@ static void load_recieved_profile() {
 
     cl_listener.requested_user_name = mx_strdup(chat->sys->found_user_login);
     cl_listener.requested_user_id = chat->sys->found_user_id;
+    if (mx_checking_friend_status(chat->user, chat->sys->found_user_id))
+        chat_win.btn_add;
+
 
     gtk_label_set_text(chat_win.friend_login, chat->sys->found_user_login);
 }
