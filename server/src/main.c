@@ -9,6 +9,9 @@ void* poll_and_rw(void *data) {
     t_server *serv = (t_server *) data;
 
     for (int i = 0; serv->exit != true; ) {
+        if (i == MAX_USERS) {
+            i = 0;
+        }
         if (serv->cli_connect == 0) {
             serv->update = false;
         }
@@ -21,10 +24,8 @@ void* poll_and_rw(void *data) {
             if (serv->cli_connect != 0) {
                 if (serv->update == true) {
                     mx_update_handler(serv);
-//                    mx_sending_who_online(serv, i);
-//                    printf("\nSent int array with ONLINE users ID to this User(ID: %d; Socket: %d)\n",
-//                           serv->users_id[i], serv->user_socket[i]);
                     serv->update = false;
+                    i = 0;
                 }
                 i++;
             }

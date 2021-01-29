@@ -19,27 +19,22 @@ void user_voices_parse_and_save(t_user *user, t_json *json) {
     for (int i = 0; i != NUMBER_VOICES; i++) {
         if (json->VOICES_ID_ARR == NULL) {
             user->voices_id[i] = 0;
+            user->voices_name[i] = mx_strjoin("VOX ", mx_itoa(i + 1));
+        }
+        else if (cJSON_GetArrayItem(json->VOICES_ID_ARR, i)->valueint ==
+                 0) {
+            user->voices_id[i] = 0;
+            user->voices_name[i] = mx_strjoin("VOX ", mx_itoa(i + 1));
         }
         else {
             user->voices_id[i] = cJSON_GetArrayItem(json->VOICES_ID_ARR,
                                                     i)->valueint;
-        }
-        if (json->VOICES_NAME_ARR == NULL) {
-            user->voices_name[i] = mx_strjoin("VOX ", mx_itoa(i + 1));
-        }
-        else if (cJSON_GetArrayItem(json->VOICES_NAME_ARR, i)->valuestring ==
-                   NULL) {
-//            printf("voice name %d = %s", i , cJSON_GetArrayItem(json->VOICES_NAME_ARR, i)->valuestring);
-            user->voices_name[i] = mx_strjoin("VOX ", mx_itoa(i + 1));
-        }
-        else {
             user->voices_name[i] = strdup(
                     cJSON_GetArrayItem(json->VOICES_NAME_ARR, i)->valuestring);
         }
-        printf("\nuser->voices_name[%d] = |%s|\n", i, user->voices_name[i]);
+//        printf("user->voices_id[%d] = |%d|\nuser->voices_name[%d] = |%s|\n",i, user->voices_id[i], i, user->voices_name[i]);
     }
     user->voices_name[NUMBER_VOICES] = NULL;
-
 //        char *buff = NULL;
 //    for (int i = 0; i < NUMBER_VOICES; i++) {
 //        printf("%d - 0\n", i);
@@ -57,7 +52,6 @@ void user_voices_parse_and_save(t_user *user, t_json *json) {
 //        free(buff);
 //        printf("%d - 3\n", i);
 //    }
-
 //    ++++++++++++++++++++++++++++++++++++++++++++
 }
 
@@ -83,9 +77,6 @@ void user_chats_parse_and_save(t_user *user, t_json *json) {
         }
         user->chats_name[user->contacts_count] = NULL;
     }
-//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_COUNT");
-//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_ID_ARR");
-//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_NAME_ARR");
 }
 
 void user_contacts_parse_and_save(t_user *user, t_json *json) {
@@ -117,12 +108,10 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
     if (cJSON_IsFalse(json->RESULT)) {
         sys->authentication = false;
         if (json->USER_ID->valueint == 0) { // login doesn't exist
-            write(1, "LOGIN DOESN'T EXIST\n", 20); // это затычка!
-            // нужно вывести сообщение о ошибке на экран и запустить поторную процедуру логина
+            write(1, "LOGIN DOESN'T EXIST\n", 20);
             cl_listener.authentication = 2;
         } else { // "-1" wrong password
-            write(1, "WRONG PASSWORD\n", 15); // это затычка!
-            // нужно вывести сообщение о ошибке на экран и запустить поторную процедуру логина
+            write(1, "WRONG PASSWORD\n", 15);
             cl_listener.authentication = 2;
         }
     }
@@ -147,10 +136,5 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
             mb_contact_list_add(user->contacts_id[i], user->contacts_login[i], false);
         //printf("mx_authentication_client loading successful\n");
     }
-//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "RESULT");
-//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "USER_ID");
-//void user_take_vox_names(t_user *user, t_json *json) {
-//    user.voicename
-//}
 //    void gtk_menu_item_set_label (GtkMenuItem *menu_item, const gchar *)la
 }

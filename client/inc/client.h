@@ -290,7 +290,6 @@ typedef struct s_chat_list {
 void mx_structs_initialization(t_system *sys, t_user *user);
 void mx_cache_dir_creator();
 
-
 /*
  * READ SERVER ANSWER
  */
@@ -328,24 +327,11 @@ void mx_get_history_chat_request(t_system *sys, t_user *user, t_json *json, int 
 void mx_save_voice_file_request(t_system *sys, t_user *user, t_json *json);
 void mx_send_voice_file_to_user_request(t_system *sys, t_json *json,
                                         int voice_id, int contact_id);
-void mx_send_file_to_server(t_system *sys, char *file_path);
-void mx_remove_notification_request(t_system *sys, t_json *json, t_user *user, int chat_id, int user_id);
-
-
-void mx_chat_event(t_system *sys, t_user *user, pthread_t thread);
-void mx_client_menu(t_system *sys, t_user *user);
-void mx_sending_messages(t_system *sys, t_user *user, char *buff);
 void mx_save_user_pic_file_request(t_system *sys, t_user *user, t_json *json);
+void mx_send_file_to_server(t_system *sys, char *file_path);
 int mx_file_size_measurement(char *file_path);
-
-
-
-/*
- * MENU
- */
-void mx_view_contacts_list(t_system *sys, t_user *user);
-void mx_view_chats_list(t_system *sys, t_user *user);
-void mx_user_search(t_system *sys, t_user *user);
+void mx_remove_notification_request(t_system *sys, t_json *json, t_user *user, int chat_id, int user_id);
+bool mx_checking_friend_status(t_user *user, int contact_id);
 
 /*
  * GLADE
