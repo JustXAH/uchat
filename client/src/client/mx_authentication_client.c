@@ -121,14 +121,10 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
         // вход в логин прошел успешно! дальше нужно перейти в окно МЕНЮ чата
         cl_listener.authentication = 1;
         cl_listener.my_id = json->USER_ID->valueint;
-        printf("mx_authentication_client loading 5\n");
-        for (int i = 0; i != user->contacts_count; i++) {
-            mx_printstr("adding contact ");
-            mx_printstr(user->contacts_login[i]);
-            mx_printstr("\n");
-            mb_contact_list_add(user->chats_id[i], user->contacts_id[i], user->contacts_login[i], false);
-        }
-        printf("mx_authentication_client loading successful\n");
+        //printf("mx_authentication_client loading 5\n");
+        for (int i = 0; i != user->contacts_count; i++)
+            mb_contact_list_add(user->contacts_id[i], user->contacts_login[i], false);
+        //printf("mx_authentication_client loading successful\n");
     }
 //    cJSON_DeleteItemFromObject(json->SERVER_JSON, "RESULT");
 //    cJSON_DeleteItemFromObject(json->SERVER_JSON, "USER_ID");

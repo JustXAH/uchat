@@ -7,20 +7,27 @@ extern t_chat *chat;
 
 static void get_search_results();
 void on_friends_search_entry_changed() {
+    if (cl_listener.dont_bother_search)
+        return;
     printf("entry search started\n");
     char *query = (char *)gtk_entry_get_text(GTK_ENTRY(chat_win.fsearch_entry));
     t_chat_list *con_buf = contact_list;
 
-    if (cl_listener.fsearch == true) {
+    if (strlen(query) > 0) {
+        //Clearing old results
+        gtk_list_box_set_selection_mode(chat_win.search_list, GTK_SELECTION_NONE);
         GList *children, *iter;
 
         children = gtk_container_get_children(GTK_CONTAINER(chat_win.search_list));
         for (iter = children; iter != NULL; iter = g_list_next(iter))
             gtk_widget_destroy(GTK_WIDGET(iter->data));
         g_list_free(children);
-    }
-    if (strlen(query) > 0) { //User is searching
+
+        chat_win.search_list = GTK_LIST_BOX(gtk_builder_get_object(chat->sys->builder,
+                                                        "search_list"));   
+         //User is searching
         //printf("entry search\n");
+        gtk_list_box_set_selection_mode(chat_win.contacts_list, GTK_SELECTION_NONE);
         gtk_stack_set_visible_child(chat_win.search_stack, 
                                     gtk_widget_get_parent(
                                         gtk_widget_get_parent(
@@ -33,8 +40,9 @@ void on_friends_search_entry_changed() {
         //Displaying search results
         get_search_results();
         cl_listener.fsearch = true;
-    } else { //User stopped searching
-        mx_printstr("Clearing search results\n");
+    } 
+    else { //User stopped searching
+        gtk_list_box_set_selection_mode(chat_win.contacts_list, GTK_SELECTION_SINGLE);
         gtk_stack_set_visible_child(chat_win.search_stack, 
                                     gtk_widget_get_parent(
                                         gtk_widget_get_parent(
@@ -57,4 +65,5 @@ static void get_search_results() {
         
         gtk_widget_show_all(GTK_WIDGET(chat_win.search_list));  
     }
+    gtk_list_box_set_selection_mode(chat_win.search_list, GTK_SELECTION_SINGLE);
 }

@@ -123,10 +123,13 @@ void mb_client_globals_initialization() {
     cl_listener.chat_in_focus = 0;
 
     cl_listener.fsearch = false;
+    cl_listener.dont_bother_search = false;
 
     cl_listener.new_contact_received = false;
 
     cl_listener.vox_not_msg = false;
+
+    cl_listener.requested_user_name = NULL;
 
     cl_listener.just_added_new_friend = 0;
 

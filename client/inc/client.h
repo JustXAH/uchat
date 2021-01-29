@@ -245,6 +245,7 @@ typedef struct s_client_st {
     char authentication;
     bool message_in_buffer;
     int chat_in_focus; // 0 - home page
+    int user_in_focus;
     int my_id;
     char *my_name;
     bool fsearch;
@@ -252,6 +253,9 @@ typedef struct s_client_st {
     bool just_added_new_friend;
     bool new_contact_received;
     bool vox_not_msg;
+    int requested_user_id;
+    char *requested_user_name;
+    bool dont_bother_search;
 }               t_client_st;
 
 typedef struct s_message {
@@ -268,7 +272,6 @@ typedef struct s_message {
 }               t_message;
 
 typedef struct s_chat_list {
-    int chat_id;
     int user_id;
     char *user_name;
     int user_amount;
@@ -359,7 +362,7 @@ void mb_auth_event_check();
 void mb_incoming_msg_check();
 void mb_new_contact_check();
 
-void mb_contact_list_add(int chat_id, int user_id, char *user_name, bool is_online);
+void mb_contact_list_add(int user_id, char *user_name, bool is_online);
 void mb_msg_buffer_add(int msg_id, int chat_id, int user_id, char *user_name, char *time, char *msg_text, bool outgoing);
 
 //void mb_send_msg(t_message *msg);

@@ -19,7 +19,7 @@ static void mb_display_new_contact(t_chat_list *new_cont) {
     gtk_container_add(GTK_CONTAINER(chat_win.contacts_list), new_cont->contact_gui);
     gtk_widget_show(new_cont->contact_gui);
 }
-void mb_contact_list_add(int chat_id, int user_id, char *user_name, bool is_online) {
+void mb_contact_list_add(int user_id, char *user_name, bool is_online) {
     //mx_printstr("mb_contact_list_add started\n");
     if (contact_list == NULL) {
         contact_list = (t_chat_list *)malloc(sizeof(t_chat_list));
@@ -34,7 +34,6 @@ void mb_contact_list_add(int chat_id, int user_id, char *user_name, bool is_onli
     contact_list->user_amount = 1;
     contact_list->user_id = user_id;
     contact_list->user_name = mx_strdup(user_name);
-    contact_list->chat_id = chat_id;
     contact_list->is_online = is_online;
     mb_display_new_contact(contact_list);
     //mx_printstr("mb_contact_list_add finished successfully\n");
