@@ -30,7 +30,7 @@ void *read_server(void *data) {
                 cl_listener.pending_requests[REGISTRATION] = false;
                 break;
             case WHO_ONLINE:
-                //mx_who_online_update(sys, user, json);
+                mx_who_online_update(sys, user, json);
                 cl_listener.pending_requests[WHO_ONLINE] = false;
                 break;
             case USER_SEARCH_BY_SUBSTRING:

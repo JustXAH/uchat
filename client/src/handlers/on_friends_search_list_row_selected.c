@@ -7,7 +7,15 @@ extern t_chat *chat;
 
 static void load_recieved_profile();
 void on_search_list_row_selected(GtkListBox *listbox, GtkListBoxRow *row) {
-    int index = gtk_list_box_row_get_index(gtk_list_box_get_selected_row(chat_win.search_list));
+    //int index = gtk_list_box_row_get_index(gtk_list_box_get_selected_row(chat_win.search_list));
+    int index = 0;
+
+    for (int i = 0; i < chat->sys->found_usernames_count; i++) {
+         if (gtk_list_box_row_is_selected(GTK_LIST_BOX_ROW(gtk_widget_get_parent(chat_win.fresults[i])))) {
+            index = i;
+            break;
+         }
+    }
     char *user_name = strdup(chat->sys->found_usernames[index]);
 
     //Request profile info

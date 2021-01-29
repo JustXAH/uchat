@@ -164,14 +164,20 @@ color: rgb(1, 179, 179);
     font-size: 18px;
     color: black;
 }
-.cont_list_oflinecont_list_online {
+.cont_list_online {
     padding-top: 5px;
     padding-bottom: 3px;
     background-color: #a6ff8a;
     font-size: 18px;
     color: black;
 }
-
+.cont_list_search {
+    padding-top: 5px;
+    padding-bottom: 3px;
+    background-color: #68797c;
+    font-size: 18px;
+    color: black;
+}
 .msg_time {
     color: black;
     font-size: 10px;

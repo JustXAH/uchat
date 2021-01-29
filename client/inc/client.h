@@ -242,6 +242,7 @@ typedef struct s_chat_win {
     GtkButton *remove_user;
     GtkImage *edit_avatar_img;
     GtkImage *profile_avatar_img;
+    GtkLabel *profile_login;
 }                t_chat_win;
 
 typedef struct s_client_st {

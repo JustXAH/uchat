@@ -56,12 +56,18 @@ static void get_search_results() {
     int count = chat->sys->found_usernames_count;
 
     if (count) {
+        GtkStyleContext *context_contact;
+        if (chat_win.fresults)
+            g_free(chat_win.fresults);
+        chat_win.fresults = g_new(GtkWidget *, count);
+
         //mx_printstr("about to show results\n");
-        for (int i = 0; i < count; i++)
-            gtk_container_add(GTK_CONTAINER(chat_win.search_list), 
-                                gtk_label_new((const gchar *)
-                                    chat->sys->found_usernames[i]));
-        
+        for (int i = 0; i < count; i++) {
+            chat_win.fresults[i] = gtk_label_new((const gchar *)chat->sys->found_usernames[i]);
+            context_contact = gtk_widget_get_style_context(chat_win.fresults[i]);
+            gtk_style_context_add_class(context_contact, "cont_list_search");
+            gtk_container_add(GTK_CONTAINER(chat_win.search_list), chat_win.fresults[i]);
+        }
         gtk_widget_show_all(GTK_WIDGET(chat_win.search_list));  
     }
     gtk_list_box_set_selection_mode(chat_win.search_list, GTK_SELECTION_SINGLE);

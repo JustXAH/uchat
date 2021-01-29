@@ -92,7 +92,8 @@ void chat_win_init(t_system *sys) {
                                                                        "edit_vax7_entry"));
     chat_win.edit_vax8_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
                                                                        "edit_vax8_entry"));
-
+    chat_win.profile_login = GTK_LABEL(gtk_builder_get_object(sys->builder,
+                                                           "profile_login"));
     chat_win.err_msg_lbl = GTK_LABEL(gtk_builder_get_object(sys->builder,
                                                            "err_msg_lbl"));
     chat_win.err_pop = GTK_DIALOG(gtk_builder_get_object(sys->builder,
