@@ -6,20 +6,24 @@
 
 static void voices_json_creator(sqlite3 *db, t_json **json, int user) {
     t_voice *voice = mx_db_get_users_voices(db, user);
+    int count = 0;
 
+    for (int k = 0; k < NUMBER_VOICES; k++) {
+        if (voice->voice_name == NULL) {
+            break;
+        }
+        if (voice->voice_name[k] != NULL) {
+            count++;
+        }
+    }
     (*json)->VOICES_ID_ARR = cJSON_CreateIntArray(voice->id, NUMBER_VOICES);
     (*json)->VOICES_NAME_ARR = cJSON_CreateStringArray(
-            (const char *const *) voice->voice_name, NUMBER_VOICES);
-
+            (const char *const *) voice->voice_name, count);
     cJSON_AddItemToObject((*json)->SEND, "VOICES_ID_ARR",
                           (*json)->VOICES_ID_ARR);
     cJSON_AddItemToObject((*json)->SEND, "VOICES_NAME_ARR",
                           (*json)->VOICES_NAME_ARR);
-//    for (int i = 0; i != NUMBER_VOICES; i++) {
-//        if (voice->voice_name) {
-//            printf("\nvoice->voice_name[%d] = |%s|\n", i, voice->voice_name[i]);
-//        }
-//    }
+
     if (MALLOC_SIZE(voice->id)) {
         free(voice->id);
     }
@@ -42,12 +46,16 @@ static void chats_json_creator(sqlite3 *db, t_json **json, int user) {
     (*json)->CHATS_NAME_ARR = cJSON_CreateStringArray(
             (const char *const *) chats->chat_name, chats->count);
     (*json)->CHATS_COUNT = cJSON_CreateNumber(chats->count);
+    (*json)->NOTIFICATION = cJSON_CreateIntArray(chats->notification, chats->count);
 
     cJSON_AddItemToObject((*json)->SEND, "CHATS_ID_ARR",
                           (*json)->CHATS_ID_ARR);
     cJSON_AddItemToObject((*json)->SEND, "CHATS_NAME_ARR",
                           (*json)->CHATS_NAME_ARR);
-    cJSON_AddItemToObject((*json)->SEND, "CHATS_COUNT", (*json)->CHATS_COUNT);
+    cJSON_AddItemToObject((*json)->SEND, "CHATS_COUNT",
+                          (*json)->CHATS_COUNT);
+    cJSON_AddItemToObject((*json)->SEND, "NOTIFICATION",
+                          (*json)->NOTIFICATION);
 
     if (chats->count > 0) {
         if (MALLOC_SIZE(chats->id)) {

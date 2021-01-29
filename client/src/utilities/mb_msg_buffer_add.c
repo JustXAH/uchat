@@ -1,29 +1,24 @@
 #include "client.h"
 
 extern t_message *incoming_msg_buffer;
-extern t_chat_list *contact_list;
 extern t_client_st cl_listener;
+extern t_chat *chat;
 
-static char *mb_get_user_name(int chat_id) {
-    t_chat_list *con_buff = contact_list;
+static char *mb_get_user_name(int chat_id, int user_id) {
+    for (int i = 0; i < chat->user->chats_count; i++)
+        if (chat_id == chat->user->chats_id[i])
+            return mx_strdup(chat->user->chats_name[i]);
 
-    if (con_buff) {
-        do {
-           if (con_buff->chat_id == chat_id)
-                return mx_strdup(con_buff->user_name);
-        } while ((con_buff = con_buff->next_chat));
-    }
+    cl_listener.pending_requests[NEW_CHAT] = true;
+    mx_add_new_chat_request(chat->sys, chat->user, chat->json, user_id);
+    while (cl_listener.pending_requests[NEW_CHAT]);
+
+    for (int i = 0; i < chat->user->chats_count; i++)
+        if (chat_id == chat->user->chats_id[i])
+            return mx_strdup(chat->user->chats_name[i]);
     return NULL;
 }
-static int mb_get_uid_by_cid(int chat_id) {
-    t_chat_list *con_buf = contact_list;
-    do
-        if (con_buf->chat_id == chat_id)
-            return con_buf->user_id;
-    while ((con_buf = con_buf->next_chat));
 
-    return -1;
-}
 void mb_msg_buffer_add(int msg_id, int chat_id, int user_id, char *user_name, char *time, char *msg_text, bool outgoing) {
     if (incoming_msg_buffer == NULL) {
         incoming_msg_buffer = (t_message *)malloc(sizeof(t_message));
@@ -38,10 +33,11 @@ void mb_msg_buffer_add(int msg_id, int chat_id, int user_id, char *user_name, ch
         if (outgoing)
             incoming_msg_buffer->user_name = mx_strdup(cl_listener.my_name);
         else
-            incoming_msg_buffer->user_name = mb_get_user_name(chat_id);
+            incoming_msg_buffer->user_name = mb_get_user_name(chat_id, user_id);
         if (incoming_msg_buffer->user_name == NULL)
             incoming_msg_buffer->user_name = mx_strdup(user_name);
-    } else {
+    } 
+    else {
         t_message *temp = incoming_msg_buffer;
 
         while (temp->next) 
@@ -60,7 +56,7 @@ void mb_msg_buffer_add(int msg_id, int chat_id, int user_id, char *user_name, ch
         if (outgoing)
             temp->next->user_name = mx_strdup(cl_listener.my_name);
         else
-            temp->next->user_name = mb_get_user_name(chat_id);
+            temp->next->user_name = mb_get_user_name(chat_id, user_id);
         if (temp->next->user_name == NULL)
             temp->next->user_name = mx_strdup(user_name);
     }

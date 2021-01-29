@@ -40,7 +40,7 @@
 #include <gio/gio.h>
 
 #define MAX_LEN 1024
-#define PORT 5000
+#define PORT 5001
 #define SA struct sockaddr
 #define NUMBER_VOICES 8
 
@@ -60,6 +60,7 @@ typedef enum e_type_cJSON_message {
     NEW_VOICE,
     SEND_VOICE_TO_USER,
     NEW_USER_PIC,
+    REMOVE_NOTIFICATION,
 }            e_type_cJSON;
 
 typedef struct s_system {
@@ -112,6 +113,7 @@ typedef struct s_user {
     int contacts_count;
     int chats_count;
     int user_pic_id;
+    int *notification;
 }              t_user;
 typedef struct s_json {
     cJSON *SERVER_JSON;
@@ -154,6 +156,7 @@ typedef struct s_json {
     cJSON *VOICES_NAME_ARR;
     cJSON *USER_PIC_ID;
     cJSON *DISPATCH;
+    cJSON *NOTIFICATION;
     cJSON *FILE_SIZE;
 }              t_json;
 
@@ -200,6 +203,10 @@ typedef struct s_chat_win {
     GtkDialog       *err_pop;
 
     GtkBox                  *msg_box;
+    GtkStack          *msg_entry_stk;
+    GtkBox             *msg_entry_box;
+    GtkBox             *vox_entry_box;
+
     GtkEntry              *msg_entry;
     GtkListBox           *msg_viewer;
 
@@ -221,6 +228,17 @@ typedef struct s_chat_win {
     GtkEntry     *edit_vax6_entry;
     GtkEntry     *edit_vax7_entry;
     GtkEntry     *edit_vax8_entry;
+    GtkBox  *Vox_1;
+    GtkBox  *Vox_2;
+    GtkBox  *Vox_3;
+    GtkBox  *Vox_4;
+    GtkBox  *Vox_5;
+    GtkBox  *Vox_6;
+    GtkBox  *Vox_7;
+    GtkBox  *Vox_8;
+
+    GtkImage *edit_avatar_img;
+    GtkImage *profile_avatar_img;
 }                t_chat_win;
 
 typedef struct s_client_st {
@@ -228,11 +246,17 @@ typedef struct s_client_st {
     char authentication;
     bool message_in_buffer;
     int chat_in_focus; // 0 - home page
+    int user_in_focus;
     int my_id;
     char *my_name;
     bool fsearch;
     bool *pending_requests;
     bool just_added_new_friend;
+    bool new_contact_received;
+    bool vox_not_msg;
+    int requested_user_id;
+    char *requested_user_name;
+    bool dont_bother_search;
 }               t_client_st;
 
 typedef struct s_message {
@@ -249,7 +273,6 @@ typedef struct s_message {
 }               t_message;
 
 typedef struct s_chat_list {
-    int chat_id;
     int user_id;
     char *user_name;
     int user_amount;
@@ -287,6 +310,7 @@ void mx_get_voice_file_from_user(t_system *sys, t_user *user, t_json *json);
 void mx_get_voice_file_id(t_system *sys, t_user *user, t_json *json);
 char *mx_file_receiving(t_system *sys, char *filename, int file_size);
 void mx_get_user_pic_id(t_system *sys, t_user *user, t_json *json);
+int mx_file_size_measurement(char *file_path);
 
 
 
@@ -305,6 +329,7 @@ void mx_save_voice_file_request(t_system *sys, t_user *user, t_json *json);
 void mx_send_voice_file_to_user_request(t_system *sys, t_json *json,
                                         int voice_id, int contact_id);
 void mx_send_file_to_server(t_system *sys, char *file_path);
+void mx_remove_notification_request(t_system *sys, t_json *json, t_user *user, int chat_id, int user_id);
 
 
 void mx_chat_event(t_system *sys, t_user *user, pthread_t thread);
@@ -336,8 +361,9 @@ void mb_client_globals_initialization();
 gboolean mb_event_listener(gpointer data);
 void mb_auth_event_check();
 void mb_incoming_msg_check();
+void mb_new_contact_check();
 
-void mb_contact_list_add(int chat_id, int user_id, char *user_name, bool is_online);
+void mb_contact_list_add(int user_id, char *user_name, bool is_online);
 void mb_msg_buffer_add(int msg_id, int chat_id, int user_id, char *user_name, char *time, char *msg_text, bool outgoing);
 
 //void mb_send_msg(t_message *msg);

@@ -82,9 +82,9 @@ int main(int argc, char *argv[]) {
     //MB's shit (starting the client's listener function and initializing windows)//
     g_idle_add(mb_event_listener, NULL);
     gtk_window_initializtion(chat);
-    printf("Waiting for finish thread read_server process...\n");
+    printf("Waiting for read_server thread  to shut down...\n");
 
-    sleep(4);
+    //sleep(4);
 
     cache_dir_removing();
 

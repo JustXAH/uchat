@@ -95,8 +95,17 @@ static bool open_file_cooser() {
 
 }
 void on_edit_profile_avatar_clicked(GtkButton *btn) {
+//    GdkPixbuf * *buff;
     if (open_file_cooser()) {
         relize();
+
+//        buff = gtk_image_get_pixbuf (chat_win.edit_avatar_img);
+        gtk_image_set_from_file (chat_win.edit_avatar_img, chat->sys->file_path);
+        gtk_image_set_from_file (chat_win.profile_avatar_img, chat->sys->file_path);
+//        gtk_image_set_pixel_size (chat_win.edit_avatar_img, 1);
+//        printf("\n\n\n\n%d\n\n\n", gtk_image_get_pixel_size (chat_win.edit_avatar_img));
+//        buff = gtk_image_new_from_resource(chat->sys->file_path);
+//        gtk_image_set_from_gicon (chat_win.edit_avatar_img, (GIcon *)buff, GTK_ICON_SIZE_INVALID);
     }
 }
     //printf("settings button clicked\n");

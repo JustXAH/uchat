@@ -9,15 +9,34 @@ extern t_message *msg;
 extern t_client_st cl_listener;
 extern t_chat_list *contact_list;
 
-void on_Vox_1_activate(GtkButton *btn) {
-    int con_id = 0;
-
-    t_chat_list *con_buf = contact_list;
-    do {
-        if (con_buf->chat_id == cl_listener.chat_in_focus)
-            con_id = con_buf->user_id;
-    } while ((con_buf = con_buf->next_chat));
-
-    mx_send_voice_file_to_user_request(chat->sys, chat->json, chat->user->voices_id[0], con_id);
-    printf("Vox 1 sended");
+static void send_voice_file(int i) {
+    mx_send_voice_file_to_user_request(chat->sys, chat->json, chat->user->voices_id[i], cl_listener.user_in_focus);
+    printf("Vox %d sent\n", i);
 }
+
+void on_Vox_1_clicked(GtkButton *btn) {
+    send_voice_file(0);
+}
+void on_Vox_2_clicked(GtkButton *btn) {
+    send_voice_file(1);
+}
+void on_Vox_3_clicked(GtkButton *btn) {
+    send_voice_file(2);
+}
+void on_Vox_4_clicked(GtkButton *btn) {
+    send_voice_file(3);
+}
+void on_Vox_5_clicked(GtkButton *btn) {
+    send_voice_file(4);
+}
+void on_Vox_6_clicked(GtkButton *btn) {
+    send_voice_file(5);
+}
+void on_Vox_7_clicked(GtkButton *btn) {
+    send_voice_file(6);
+}
+void on_Vox_8_clicked(GtkButton *btn) {
+    send_voice_file(7);
+}
+
+//user.voices_name

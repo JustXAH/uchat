@@ -30,6 +30,7 @@ static void add_in_user_message(t_json *json, t_user *user, int count) {
 
 void mx_get_history_chat(t_system *sys, t_user *user, t_json *json) {
     json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "RESULT");
+    mx_remove_notification_request(sys, json, user, cl_listener.chat_in_focus, user->my_id);
     if (cJSON_IsFalse(json->RESULT)) {
         // Error
     }

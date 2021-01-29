@@ -71,14 +71,16 @@ void *read_server(void *data) {
             case NEW_USER_PIC:
                 mx_get_user_pic_id(sys, user, json);
                 break;
+            case REMOVE_NOTIFICATION:
+                break;
         }
         printf("Switch ending\n");
         cJSON_Delete(json->SERVER_JSON);
-        printf("OOPS\n");
+        //printf("OOPS\n");
         memset(buff, '\0', sizeof(buff));
     }
     free(json);
-    printf("read_server thread\n");
+    printf("read_server thread shut down\n");
     chat->sys->exit = 2;
     return 0;
 }

@@ -5,6 +5,7 @@
 #include "client.h"
 
 extern t_client_st cl_listener;
+extern t_chat_win chat_win;
 
 void user_voices_parse_and_save(t_user *user, t_json *json) {
     json->VOICES_ID_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
@@ -18,25 +19,40 @@ void user_voices_parse_and_save(t_user *user, t_json *json) {
     for (int i = 0; i != NUMBER_VOICES; i++) {
         if (json->VOICES_ID_ARR == NULL) {
             user->voices_id[i] = 0;
+            user->voices_name[i] = mx_strjoin("VOX ", mx_itoa(i + 1));
+        }
+        else if (cJSON_GetArrayItem(json->VOICES_ID_ARR, i)->valueint ==
+                 0) {
+            user->voices_id[i] = 0;
+            user->voices_name[i] = mx_strjoin("VOX ", mx_itoa(i + 1));
         }
         else {
             user->voices_id[i] = cJSON_GetArrayItem(json->VOICES_ID_ARR,
                                                     i)->valueint;
-        }
-        if (json->VOICES_NAME_ARR == NULL) {
-            user->voices_name[i] = mx_strjoin("VOX ", mx_itoa(i + 1));
-        }
-        else if (cJSON_GetArrayItem(json->VOICES_NAME_ARR, i)->valuestring ==
-                   NULL) {
-            user->voices_name[i] = mx_strjoin("VOX ", mx_itoa(i + 1));
-        }
-        else {
             user->voices_name[i] = strdup(
                     cJSON_GetArrayItem(json->VOICES_NAME_ARR, i)->valuestring);
         }
-        printf("\nuser->voices_name[%d] = |%s|\n", i, user->voices_name[i]);
+//        printf("user->voices_id[%d] = |%d|\nuser->voices_name[%d] = |%s|\n",i, user->voices_id[i], i, user->voices_name[i]);
     }
     user->voices_name[NUMBER_VOICES] = NULL;
+//        char *buff = NULL;
+//    for (int i = 0; i < NUMBER_VOICES; i++) {
+//        printf("%d - 0\n", i);
+//        buff = mx_strjoin("chat_win->Vox_", mx_itoa(i));
+//        printf("%d - 1\n", i);
+        gtk_entry_set_text(chat_win.edit_vax1_entry, user->voices_name[0]);
+        gtk_entry_set_text(chat_win.edit_vax2_entry, user->voices_name[1]);
+        gtk_entry_set_text(chat_win.edit_vax3_entry, user->voices_name[2]);
+        gtk_entry_set_text(chat_win.edit_vax4_entry, user->voices_name[3]);
+        gtk_entry_set_text(chat_win.edit_vax5_entry, user->voices_name[4]);
+        gtk_entry_set_text(chat_win.edit_vax6_entry, user->voices_name[5]);
+        gtk_entry_set_text(chat_win.edit_vax7_entry, user->voices_name[6]);
+        gtk_entry_set_text(chat_win.edit_vax8_entry, user->voices_name[7]);
+//        printf(" 2");
+//        free(buff);
+//        printf("%d - 3\n", i);
+//    }
+//    ++++++++++++++++++++++++++++++++++++++++++++
 }
 
 void user_chats_parse_and_save(t_user *user, t_json *json) {
@@ -46,20 +62,21 @@ void user_chats_parse_and_save(t_user *user, t_json *json) {
                                                              "CHATS_ID_ARR");
     json->CHATS_NAME_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
                                                                 "CHATS_NAME_ARR");
+    json->NOTIFICATION = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "NOTIFICATION");
 
     if(user->chats_count != 0) {
         user->chats_id = (int *) malloc(sizeof(int) * user->chats_count);
         user->chats_name = (char **) malloc(sizeof(char *) * user->chats_count + 1);
+        user->notification = (int *) malloc(sizeof(int) * user->chats_count);
 
         for (int i = 0; i != user->chats_count; i++) {
             user->chats_id[i] = cJSON_GetArrayItem(json->CHATS_ID_ARR, i)->valueint;
             user->chats_name[i] = strdup(cJSON_GetArrayItem(json->CHATS_NAME_ARR, i)->valuestring);
+            user->notification[i] = cJSON_GetArrayItem(json->NOTIFICATION, i)->valueint;
+            printf("notification = %d\n", user->notification[i]);
         }
         user->chats_name[user->contacts_count] = NULL;
     }
-//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_COUNT");
-//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_ID_ARR");
-//    cJSON_DeleteItemFromObject(json->SERVER_JSON, "CHATS_NAME_ARR");
 }
 
 void user_contacts_parse_and_save(t_user *user, t_json *json) {
@@ -84,40 +101,39 @@ void user_contacts_parse_and_save(t_user *user, t_json *json) {
 
 void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
     json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
-                                                     "RESULT");
+                                                    "RESULT");
     json->USER_ID = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
-                                                    "USER_ID");
+                                                     "USER_ID");
 
     if (cJSON_IsFalse(json->RESULT)) {
         sys->authentication = false;
         if (json->USER_ID->valueint == 0) { // login doesn't exist
-            write (1, "LOGIN DOESN'T EXIST\n", 20); // это затычка!
-            // нужно вывести сообщение о ошибке на экран и запустить поторную процедуру логина
+            write(1, "LOGIN DOESN'T EXIST\n", 20);
             cl_listener.authentication = 2;
-        }
-        else  { // "-1" wrong password
-            write (1, "WRONG PASSWORD\n", 15); // это затычка!
-            // нужно вывести сообщение о ошибке на экран и запустить поторную процедуру логина
+        } else { // "-1" wrong password
+            write(1, "WRONG PASSWORD\n", 15);
             cl_listener.authentication = 2;
         }
     }
     else { //RESULT = TRUE (login and password are confirmed - successful LOG IN)
         user->my_id = json->USER_ID->valueint;
+        //printf("loading 1\n");
         user_contacts_parse_and_save(user, json);
+        //printf("loading 2\n");
         user_chats_parse_and_save(user, json);
+        //printf("loading 3\n");
         user_voices_parse_and_save(user, json);
+        //printf("loading 4\n");
 //        user->contacts = cJSON_(SERVER_JSON
         sys->authentication = true;
         sys->menu = true;
         // вход в логин прошел успешно! дальше нужно перейти в окно МЕНЮ чата
         cl_listener.authentication = 1;
         cl_listener.my_id = json->USER_ID->valueint;
-        
-        for (int i = 0; i != user->contacts_count; i++) {
-            mx_printstr("adding contact ");
-            mx_printstr(user->contacts_login[i]);
-            mx_printstr("\n");
-            mb_contact_list_add(user->chats_id[i], user->contacts_id[i], user->contacts_login[i], false);
-        }
+        //printf("mx_authentication_client loading 5\n");
+        for (int i = 0; i != user->contacts_count; i++)
+            mb_contact_list_add(user->contacts_id[i], user->contacts_login[i], false);
+        //printf("mx_authentication_client loading successful\n");
     }
+//    void gtk_menu_item_set_label (GtkMenuItem *menu_item, const gchar *)la
 }
