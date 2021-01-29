@@ -23,7 +23,7 @@ void mx_get_voice_file_from_user(t_system *sys, t_user *user, t_json *json) {
         file_path = mx_file_receiving(sys, json);
         printf("Successfully received and save voice file from USER!\n");
 
-        sprintf(command, "afplay %s", file_path);
+        sprintf(command, "afplay -t 4 %s", file_path);
         status = system( command );
 
         printf("Successfully played voice message!\n");

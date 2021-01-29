@@ -33,6 +33,7 @@ void on_friends_search_entry_changed() {
         //Displaying search results
         get_search_results();
         cl_listener.fsearch = true;
+        mx_printstr("entry search finished\n");
     } else { //User stopped searching
         gtk_stack_set_visible_child(chat_win.search_stack, 
                                     gtk_widget_get_parent(

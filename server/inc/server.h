@@ -33,7 +33,7 @@
 #include <sys/stat.h>
 
 #define MAX_LEN 1024
-#define PORT 5000
+#define PORT 5001
 #define MAX_USERS 5
 #define COUNT_MESSAGES 30
 #define NUMBER_VOICES 8

@@ -151,8 +151,8 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <signal name="clicked" handler="on_log_login_btn_clicked" swapped="no"/>
-                <accelerator key="KP_Enter" signal="activate"/>
                 <accelerator key="Return" signal="activate"/>
+                <accelerator key="KP_Enter" signal="activate"/>
               </object>
               <packing>
                 <property name="x">131</property>
@@ -341,8 +341,8 @@
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <signal name="clicked" handler="on_reg_new_btn_clicked" swapped="no"/>
-                <accelerator key="KP_Enter" signal="activate"/>
                 <accelerator key="Return" signal="activate"/>
+                <accelerator key="KP_Enter" signal="activate"/>
               </object>
               <packing>
                 <property name="x">135</property>
@@ -446,7 +446,8 @@
       </object>
     </child>
   </object>
-  <object class="GtkMenu" id="menu1">
+  <object class="GtkMenu" id="vox_menu">
+    <property name="name">vox_menu</property>
     <property name="visible">True</property>
     <property name="can-focus">False</property>
     <child>
@@ -730,8 +731,8 @@ Have a nice adventure, traveler.</property>
                             <property name="has-focus">True</property>
                             <property name="receives-default">False</property>
                             <signal name="clicked" handler="on_chat_send_btn_clicked" swapped="no"/>
-                            <accelerator key="KP_Enter" signal="activate"/>
                             <accelerator key="Return" signal="activate"/>
+                            <accelerator key="KP_Enter" signal="activate"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -745,7 +746,7 @@ Have a nice adventure, traveler.</property>
                             <property name="can-focus">True</property>
                             <property name="focus-on-click">False</property>
                             <property name="receives-default">True</property>
-                            <property name="popup">menu1</property>
+                            <property name="popup">vox_menu</property>
                             <property name="direction">left</property>
                             <child>
                               <placeholder/>
@@ -1395,8 +1396,8 @@ Password</property>
                         <property name="use-stock">True</property>
                         <property name="always-show-image">True</property>
                         <signal name="clicked" handler="on_edit_vax1_play_btn_clicked" swapped="no"/>
-                        <accelerator key="1" signal="grab-focus" modifiers="GDK_CONTROL_MASK"/>
                         <accelerator key="1" signal="activate" modifiers="GDK_CONTROL_MASK"/>
+                        <accelerator key="1" signal="grab-focus" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                       <packing>
                         <property name="left-attach">3</property>
@@ -2120,6 +2121,7 @@ Password</property>
                                 <property name="can-focus">False</property>
                                 <child>
                                   <object class="GtkListBox" id="search_list">
+                                    <property name="name">search_list</property>
                                     <property name="can-focus">False</property>
                                     <signal name="row-selected" handler="on_search_list_row_selected" swapped="no"/>
                                   </object>
