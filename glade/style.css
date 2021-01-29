@@ -4,10 +4,6 @@
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
-#wellcome_scren{
-    /*border-right: 3px solid #0d0e11;*/
-    /*border-color: #111217*/
-}
 #msg_config_stk{
     /*border-right: 3px solid #0d0e11;*/
     /*border-color: #111217*/
@@ -100,11 +96,11 @@
     / margin-top: 15px; */
 margin-right: 10px;
 color: rgb(1, 179, 179);
+}
 .message_list row {
     box-shadow: 0px 0px 0px 3px cyan inset;
     margin-top: 10px;
     margin-bottom: 10px;
-}
 }
 
 
@@ -164,14 +160,20 @@ color: rgb(1, 179, 179);
     font-size: 18px;
     color: black;
 }
-.cont_list_oflinecont_list_online {
+.cont_list_online {
     padding-top: 5px;
     padding-bottom: 3px;
     background-color: #a6ff8a;
     font-size: 18px;
     color: black;
 }
-
+.cont_list_search {
+    padding-top: 5px;
+    padding-bottom: 3px;
+    background-color: #68797c;
+    font-size: 18px;
+    color: black;
+}
 .msg_time {
     color: black;
     font-size: 10px;

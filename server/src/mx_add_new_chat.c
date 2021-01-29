@@ -34,8 +34,6 @@ void add_new_chat_and_json_create(t_server *serv, t_json **json, int user_id, in
 
     send_str = cJSON_Print((*json)->SEND);
 
-    mx_printstr(send_str);
-
     if (flag == true)
         write(serv->user_socket[user_index], send_str, strlen(send_str));
     else

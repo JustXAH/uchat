@@ -61,16 +61,16 @@ void chat_win_init(t_system *sys) {
                                                         "add_ban_profile"));
     chat_win.edit_vax_box = GTK_BOX(gtk_builder_get_object(sys->builder,
                                                               "edit_vax"));
-    chat_win.edit_profile = GTK_BOX(gtk_builder_get_object(sys->builder,
+    chat_win.edit_profile = GTK_FIXED(gtk_builder_get_object(sys->builder,
                                                               "edit_profile"));
-    chat_win.Vox_1 = GTK_BOX(gtk_builder_get_object(sys->builder, "Vox_1"));
-    chat_win.Vox_2 = GTK_BOX(gtk_builder_get_object(sys->builder, "Vox_2"));
-    chat_win.Vox_3 = GTK_BOX(gtk_builder_get_object(sys->builder, "Vox_3"));
-    chat_win.Vox_4 = GTK_BOX(gtk_builder_get_object(sys->builder, "Vox_4"));
-    chat_win.Vox_5 = GTK_BOX(gtk_builder_get_object(sys->builder, "Vox_5"));
-    chat_win.Vox_6 = GTK_BOX(gtk_builder_get_object(sys->builder, "Vox_6"));
-    chat_win.Vox_7 = GTK_BOX(gtk_builder_get_object(sys->builder, "Vox_7"));
-    chat_win.Vox_8 = GTK_BOX(gtk_builder_get_object(sys->builder, "Vox_8"));
+    chat_win.Vox_1 = GTK_BUTTON(gtk_builder_get_object(sys->builder, "Vox_1"));
+    chat_win.Vox_2 = GTK_BUTTON(gtk_builder_get_object(sys->builder, "Vox_2"));
+    chat_win.Vox_3 = GTK_BUTTON(gtk_builder_get_object(sys->builder, "Vox_3"));
+    chat_win.Vox_4 = GTK_BUTTON(gtk_builder_get_object(sys->builder, "Vox_4"));
+    chat_win.Vox_5 = GTK_BUTTON(gtk_builder_get_object(sys->builder, "Vox_5"));
+    chat_win.Vox_6 = GTK_BUTTON(gtk_builder_get_object(sys->builder, "Vox_6"));
+    chat_win.Vox_7 = GTK_BUTTON(gtk_builder_get_object(sys->builder, "Vox_7"));
+    chat_win.Vox_8 = GTK_BUTTON(gtk_builder_get_object(sys->builder, "Vox_8"));
     //Search                                                    
     chat_win.fsearch_entry = GTK_SEARCH_ENTRY(gtk_builder_get_object(sys->builder,
                                                         "friends_search_entry"));
@@ -92,7 +92,8 @@ void chat_win_init(t_system *sys) {
                                                                        "edit_vax7_entry"));
     chat_win.edit_vax8_entry = GTK_ENTRY(gtk_builder_get_object(sys->builder,
                                                                        "edit_vax8_entry"));
-
+    chat_win.profile_login = GTK_LABEL(gtk_builder_get_object(sys->builder,
+                                                           "profile_login"));
     chat_win.err_msg_lbl = GTK_LABEL(gtk_builder_get_object(sys->builder,
                                                            "err_msg_lbl"));
     chat_win.err_pop = GTK_DIALOG(gtk_builder_get_object(sys->builder,
@@ -104,12 +105,14 @@ void chat_win_init(t_system *sys) {
     chat_win.vox_entry_box = GTK_BOX(gtk_builder_get_object(sys->builder,
                                                               "vox_entry_box"));
 
-    chat_win.btn_add = GTK_BUTTON(gtk_builder_get_object(sys->builder,
-                                                    "add_user"));;
-    chat_win.btn_remove = GTK_BUTTON(gtk_builder_get_object(sys->builder,
-                                                         "remove_user"));;
     chat_win.fresults = NULL;
 
+    chat_win.add_remove_stk = GTK_STACK(gtk_builder_get_object(sys->builder,
+                                                              "add_remove_stk"));
+    chat_win.add_user = GTK_BUTTON(gtk_builder_get_object(sys->builder,
+                                                              "add_user"));
+    chat_win.remove_user = GTK_BUTTON(gtk_builder_get_object(sys->builder,
+                                                              "remove_user"));
 
     /*
     chat_win.s_comp = gtk_entry_completion_new ();

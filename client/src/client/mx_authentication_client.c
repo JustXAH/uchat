@@ -34,14 +34,23 @@ void user_voices_parse_and_save(t_user *user, t_json *json) {
         }
     }
     user->voices_name[NUMBER_VOICES] = NULL;
-        gtk_entry_set_text(chat_win.edit_vax1_entry, user->voices_name[0]);
-        gtk_entry_set_text(chat_win.edit_vax2_entry, user->voices_name[1]);
-        gtk_entry_set_text(chat_win.edit_vax3_entry, user->voices_name[2]);
-        gtk_entry_set_text(chat_win.edit_vax4_entry, user->voices_name[3]);
-        gtk_entry_set_text(chat_win.edit_vax5_entry, user->voices_name[4]);
-        gtk_entry_set_text(chat_win.edit_vax6_entry, user->voices_name[5]);
-        gtk_entry_set_text(chat_win.edit_vax7_entry, user->voices_name[6]);
-        gtk_entry_set_text(chat_win.edit_vax8_entry, user->voices_name[7]);
+
+    gtk_entry_set_text(chat_win.edit_vax1_entry, user->voices_name[0]);
+    gtk_button_set_label(chat_win.Vox_1, user->voices_name[0]);
+    gtk_entry_set_text(chat_win.edit_vax2_entry, user->voices_name[1]);
+    gtk_button_set_label(chat_win.Vox_2, user->voices_name[1]);
+    gtk_entry_set_text(chat_win.edit_vax3_entry, user->voices_name[2]);
+    gtk_button_set_label(chat_win.Vox_3, user->voices_name[2]);
+    gtk_entry_set_text(chat_win.edit_vax4_entry, user->voices_name[3]);
+    gtk_button_set_label(chat_win.Vox_4, user->voices_name[3]);
+    gtk_entry_set_text(chat_win.edit_vax5_entry, user->voices_name[4]);
+    gtk_button_set_label(chat_win.Vox_5, user->voices_name[4]);
+    gtk_entry_set_text(chat_win.edit_vax6_entry, user->voices_name[5]);
+    gtk_button_set_label(chat_win.Vox_6, user->voices_name[5]);
+    gtk_entry_set_text(chat_win.edit_vax7_entry, user->voices_name[6]);
+    gtk_button_set_label(chat_win.Vox_7, user->voices_name[6]);
+    gtk_entry_set_text(chat_win.edit_vax8_entry, user->voices_name[7]);
+    gtk_button_set_label(chat_win.Vox_8, user->voices_name[7]);
 }
 
 void user_chats_parse_and_save(t_user *user, t_json *json) {
@@ -104,6 +113,7 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
         }
     }
     else { //RESULT = TRUE (login and password are confirmed - successful LOG IN)
+        //printf("login confirmation recieved\n Starting to load profile data\n");
         user->my_id = json->USER_ID->valueint;
         user_contacts_parse_and_save(user, json);
         user_chats_parse_and_save(user, json);

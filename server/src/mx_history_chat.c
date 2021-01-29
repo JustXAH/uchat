@@ -14,7 +14,6 @@ static char *get_time(long time_mess) {
     }
     else
         time_str = mx_substr(ctime(&(time_2)), 11, 16);
-    printf("%s\n", time_str);
     return time_str;
 }
 
@@ -61,8 +60,6 @@ void mx_history_chat(t_server *serv, t_json *json, int user_index) {
     cJSON_AddItemToObject(json->SEND, "RESULT", json->RESULT);
     cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
     send_str = cJSON_Print(json->SEND);
-
-    mx_printstr(send_str);
 
     write(serv->user_socket[user_index], send_str, strlen(send_str));
 

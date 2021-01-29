@@ -14,21 +14,23 @@ static void update_online_users_arr(t_user *user, cJSON *WHO_ONLINE,
     int friends_online = 0;
     int i;
     int j;
-    
-    for (i = 0; cJSON_GetArrayItem(WHO_ONLINE, i)->valueint != -1 &&
-           i != max_users; i++) {
+
+    for (i = 0; cJSON_GetArrayItem(WHO_ONLINE, i)->valueint != -1
+        && i != max_users; i++) {
         users_online++;
         for (j = 0; j != user->contacts_count; j++) {
+
             if (cJSON_GetArrayItem(WHO_ONLINE, i)->valueint == user->contacts_id[j]) {
                 friends_online++;
             }
         }
     }
-    
+
     if (user->who_online != NULL)
         free(user->who_online);
     user->who_online = (int *) malloc(sizeof(int) * friends_online);
     user->who_online_count = 0;
+
     for (i = 0; i != users_online; i++) {
         for (j = 0; j != user->contacts_count; j++) {
             con_buf = contact_list;
@@ -62,4 +64,5 @@ void mx_who_online_update(t_system *sys, t_user *user, t_json *json) {
         update_online_users_arr(user, json->WHO_ONLINE,
                                 cJSON_GetArraySize(json->WHO_ONLINE));
     }
+    cJSON_DeleteItemFromObject(json->SERVER_JSON, "WHO_ONLINE");
 }

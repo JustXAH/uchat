@@ -193,10 +193,10 @@ typedef struct s_chat_win {
     GtkStack           *search_stack;
     GtkStack              *all_stack;
     GtkFixed         *my_profile_box;
-    GtkBox         *edit_vax_box;
     GtkFixed          *u_profile_box;
+    GtkBox         *edit_vax_box;
 
-    GtkBox         *edit_profile;
+    GtkFixed         *edit_profile;
     GtkLabel        *err_msg_lbl;
 
     GtkDialog       *err_pop;
@@ -218,8 +218,6 @@ typedef struct s_chat_win {
 
     GtkLabel            *friend_login;
     GtkScrolledWindow  *scrl_chat_box;
-    GtkButton          *btn_add;
-    GtkButton          *btn_remove;
 
     GtkEntry     *edit_vax1_entry;
     GtkEntry     *edit_vax2_entry;
@@ -229,17 +227,21 @@ typedef struct s_chat_win {
     GtkEntry     *edit_vax6_entry;
     GtkEntry     *edit_vax7_entry;
     GtkEntry     *edit_vax8_entry;
-    GtkBox  *Vox_1;
-    GtkBox  *Vox_2;
-    GtkBox  *Vox_3;
-    GtkBox  *Vox_4;
-    GtkBox  *Vox_5;
-    GtkBox  *Vox_6;
-    GtkBox  *Vox_7;
-    GtkBox  *Vox_8;
+    GtkButton  *Vox_1;
+    GtkButton  *Vox_2;
+    GtkButton  *Vox_3;
+    GtkButton  *Vox_4;
+    GtkButton  *Vox_5;
+    GtkButton  *Vox_6;
+    GtkButton  *Vox_7;
+    GtkButton  *Vox_8;
 
+    GtkStack *add_remove_stk;
+    GtkButton *add_user;
+    GtkButton *remove_user;
     GtkImage *edit_avatar_img;
     GtkImage *profile_avatar_img;
+    GtkLabel *profile_login;
 }                t_chat_win;
 
 typedef struct s_client_st {

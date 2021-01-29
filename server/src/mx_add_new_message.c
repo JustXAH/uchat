@@ -55,8 +55,6 @@ void mx_add_new_message(t_server *serv, t_json *json, int user_index) {
     }
 
     send_str = cJSON_Print(json->SEND);
-    write(1, send_str, strlen(send_str));
-
 
     write(serv->user_socket[user_index], send_str, strlen(send_str));
     which_user_online(serv, json, send_str);
