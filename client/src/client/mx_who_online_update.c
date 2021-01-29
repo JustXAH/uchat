@@ -15,7 +15,7 @@ static void update_online_users_arr(t_user *user, cJSON *WHO_ONLINE,
     int i;
     int j;
     
-    for (i = 0; cJSON_GetArrayItem(WHO_ONLINE, i)->valueint != -1 ||
+    for (i = 0; cJSON_GetArrayItem(WHO_ONLINE, i)->valueint != -1 &&
            i != max_users; i++) {
         users_online++;
         for (j = 0; j != user->contacts_count; j++) {
@@ -62,7 +62,4 @@ void mx_who_online_update(t_system *sys, t_user *user, t_json *json) {
         update_online_users_arr(user, json->WHO_ONLINE,
                                 cJSON_GetArraySize(json->WHO_ONLINE));
     }
-
-
-    cJSON_DeleteItemFromObject(json->SERVER_JSON, "WHO_ONLINE");
 }

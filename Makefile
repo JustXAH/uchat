@@ -43,8 +43,8 @@ uninstall: clean
 	@make -sC $(CJSOND) $@
 	@make -sC $(CLIENTD) $@
 	@make -sC $(SERVERD) $@
+	@rm -rf uchat.db
 	@rm -rf $(LIB_DIR)
-# 	@rm -rf uchat.db
 
 clean:
 	@rm -rf $(CLIENT)

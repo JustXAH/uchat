@@ -27,7 +27,7 @@ void mx_add_new_chat(t_system *sys, t_user *user, t_json *json) {
         json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "RESULT");
         json->CHATS_ID_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "CHATS_ID_ARR");
         json->CHATS_NAME_ARR = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "CHATS_NAME_ARR");
-        //json->CHATS_COUNT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON, "CHATS_COUNT");
+
 
         if (cJSON_IsFalse(json->RESULT)) {
             // вызов всплывающего текста c ошибкой

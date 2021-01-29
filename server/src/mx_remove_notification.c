@@ -8,6 +8,5 @@ void mx_remove_notification(t_server *serv, t_json *json) {
     json->CHAT_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "CHAT_ID");
     json->USER_ID = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "USER_ID");
 
-    int i = mx_db_clear_notification(serv->db, json->CHAT_ID->valueint, json->USER_ID->valueint);
-    printf("notification = %d\n", i);
+    mx_db_clear_notification(serv->db, json->CHAT_ID->valueint, json->USER_ID->valueint);
 }

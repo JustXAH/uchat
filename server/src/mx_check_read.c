@@ -10,16 +10,12 @@ static void read_and_write(t_server *serv, int user_index) {
 
     serv->type_enum = -1;
     mx_json_struct_initialization(json);
-    write(1, "Waiting for a json from client...\n", 25);
     read(serv->user_socket[user_index], buff_message, MAX_LEN);
 
 //        Send the message back to client
     if (buff_message[0] != '\0') {
-
         json->USER_JSON = cJSON_Parse(buff_message);
         json->TYPE = cJSON_GetObjectItemCaseSensitive(json->USER_JSON, "TYPE");
-        mx_printstr(buff_message);
-        mx_printstr("\n");
         serv->type_enum = json->TYPE->valueint;
         switch (serv->type_enum) {
             case AUTHENTICATION:
@@ -64,8 +60,6 @@ static void read_and_write(t_server *serv, int user_index) {
             case REMOVE_NOTIFICATION:
                 mx_remove_notification(serv, json);
         }
-        printf("\nServer sent a response to the USER (SOCKET: %d ID: %d)\n",
-               serv->user_socket[user_index], serv->users_id[user_index]);
     }
     cJSON_Delete(json->USER_JSON);
     free(json);
@@ -75,30 +69,14 @@ void mx_check_read(t_server *serv, int user_index) {
     struct pollfd poll_set[1];
     int ret = 0;
 
-    printf("------------------------------\n");
-    printf("CHECK READ CLIENT SOCKET\n");
-    printf("cli_connect = %d\n", serv->cli_connect);
     // от socket[i] мы будем ожидать входящих данных
-
     poll_set->fd = serv->user_socket[user_index];
     poll_set->events = POLLIN;
 
     // ждём до 1 секунд
     ret = poll(poll_set, 1, 1);
-    printf("ret = %d\n", ret);
-    printf("socket = %d[%d]\n", serv->user_socket[user_index], user_index);
-    printf("user id = %d\n", serv->users_id[user_index]);
 
-    // проверяем успешность вызова
-    if (ret == -1) {
-        // ошибка
-        printf("ERROR, poll checking client socket #%d\n", user_index);
-    }
-    else if (ret == 0) {
-        // таймаут, событий не произошло
-        write(1, "No events happened\n", 19);
-    }
-    else {
+    if (ret != -1 && ret != 0) {
         // обнаружили событие, обнулим revents чтобы можно было переиспользовать структуру
         if (poll_set->revents & POLLIN) {
             // обработка входных данных от sock1
@@ -106,5 +84,4 @@ void mx_check_read(t_server *serv, int user_index) {
             read_and_write(serv, user_index);
         }
     }
-    printf("------------------------------\n");
 }

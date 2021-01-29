@@ -24,16 +24,20 @@ static void cache_dir_removing() {
 }
 
 int main(int argc, char *argv[]) {
-    t_system *sys = (t_system *)malloc(sizeof(t_system));
-    t_user *user = (t_user *)malloc(sizeof(t_user));
+    t_system *sys = NULL;
+    t_user *user = NULL;
     struct sockaddr_in servaddr;
     pthread_t thread_server;
-//    int cli_socket = 0;
 
+    if (argc != 3) {
+        mx_printerr("usage: ./uchat_server [server IP address] [network port]\n");
+        exit(1);
+    }
+
+    sys = (t_system *)malloc(sizeof(t_system));
+    user = (t_user *)malloc(sizeof(t_user));
     chat = (t_chat *)malloc(sizeof(t_chat));
     mx_structs_initialization(sys, user);
-
-//    printf("\nLOGIN = %s\nPASS = %s\n", user->login, user->password);
 
     // socket create and varification
     sys->sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -48,15 +52,8 @@ int main(int argc, char *argv[]) {
 
     // assign IP, PORT
     servaddr.sin_family = AF_INET;
-    printf("ARGC = %d\n", argc);
-    printf("ARGV[1]= %s\n", argv[1]);
-    if (argc == 2) {
-        servaddr.sin_addr.s_addr = inet_addr(argv[1]);
-    }
-    else {
-        servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
-    }
-    servaddr.sin_port = htons(PORT);
+    servaddr.sin_addr.s_addr = inet_addr(argv[1]);
+    servaddr.sin_port = htons((__uint16_t)atoi((const char *)argv[2]));
 
     // connect the client socket to server socket
     if (connect(sys->sockfd, (SA*)&servaddr, sizeof(servaddr)) != 0) {
@@ -66,12 +63,7 @@ int main(int argc, char *argv[]) {
     else
         write(1, "Successfully connected to the server...\n\n", 41);
 
-    printf("/nSOCKET = %d\n", sys->sockfd);
-
     mx_cache_dir_creator();
-
-//    mx_login_or_register(sys, user);
-//    pthread_mutex_init(&sys->mutex, NULL);
 
     chat->sys = sys;
     chat->user = user;
@@ -95,15 +87,12 @@ int main(int argc, char *argv[]) {
 
 //    // close the socket
     printf("Socket closed.\n");
-    //IDK why, but this seems to work
-    sys->sockfd = -1;
-    //close(chat->sys->sockfd);
 
+    sys->sockfd = -1;
 
     printf("GG WP!\n");
 
-    system("leaks -q uchat");
-    exit(0);
+//    system("leaks -q uchat");
     return 0;
 }
 

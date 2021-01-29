@@ -31,8 +31,6 @@ void mx_send_voice_file_handler(t_server *serv, t_json *json, int user_index) {
 
     to_whom_socket = checking_contact_status_and_taking_socket(serv, json);
 
-    printf("\n/t/t/tTIME DIFF = %f\n", difftime(time(0), serv->last_voice_send[user_index]));
-    printf("\n/t/t/tTIME DIFF = %f\n", difftime(time(0), serv->last_voice_send[user_index]));
 
     if (to_whom_socket == 0) { // user is offline and we can't send voice file
         json->RESULT = cJSON_CreateFalse();

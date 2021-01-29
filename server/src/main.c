@@ -35,15 +35,19 @@ void* poll_and_rw(void *data) {
 }
 
 int main(int argc , char *argv[]) {
-    t_server *serv = (t_server *)malloc(sizeof(t_server));
+    t_server *serv = NULL;
     int sockfd;
     int c;
     struct sockaddr_in server , client;
     pthread_t thread;
 
+    if (argc != 2) {
+        mx_printerr("usage: ./uchat_server [network port]\n");
+        exit(1);
+    }
+
+    serv = (t_server *)malloc(sizeof(t_server));
     mx_serv_struct_initialization(serv);
-
-
 
     // creater directory for media files
     mx_media_dirs_creator();
@@ -61,7 +65,7 @@ int main(int argc , char *argv[]) {
     //Prepare the sockaddr_in structure
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = INADDR_ANY;
-    server.sin_port = htons(PORT);
+    server.sin_port = htons((__uint16_t)atoi((const char *)argv[1]));
 
     //Bind
     if (bind(sockfd, (struct sockaddr *)&server , sizeof(server)) < 0) {
@@ -72,15 +76,12 @@ int main(int argc , char *argv[]) {
     write(1, "Socket successfully binded!\n", 28);
 
     //database open
-
-
     serv->db = mx_db_open("uchat.db");
     if (!serv->db) {
         return -1;
     }
 
     mx_db_init(serv->db);
-    printf("\nDB = %d\n", (int)serv->db);
 
     //Listen
     listen(sockfd , 3);
@@ -93,9 +94,6 @@ int main(int argc , char *argv[]) {
 
     //Receive a message from client
     for (int i = 0; serv->exit != true; i++) {
-//        if (i == MAX_USERS - )
-//            break;
-//        accept connection from an incoming client
         if (serv->cli_connect < MAX_USERS) {
             if (serv->user_socket[i] == -1) {
                 serv->user_socket[i] = accept(sockfd,
@@ -115,6 +113,7 @@ int main(int argc , char *argv[]) {
     }
     pthread_cancel(thread);
     mx_db_close(serv->db);
-    system("leaks -q server");
+
+//    system("leaks -q server");
     return 0;
 }

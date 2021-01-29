@@ -73,28 +73,3 @@ void mx_add_new_contact(t_server *serv, t_json *json, int user_index) {
     cJSON_AddItemToObject(json->SEND, "TYPE", json->TYPE);
     add_new_contact_and_json_create(serv, &json, user_index, false);
 }
-
-//static int int_arr_len(const int *arr) {
-//    int len = 0;
-//
-//    while (arr[len] != 0) {
-//        len++;
-//    }
-//    return len;
-//}
-//
-//static cJSON *json_id_arr_creator(sqlite3 *db, int user_id, int contact_id) {
-//    cJSON *CONTACTS = NULL;
-//    int *buff_arr;
-//    int arr_len;
-//    int result;
-//
-//    result = mx_db_create_new_contact(db, user_id, contact_id);
-//    if (result != -1) { // "-1" - an error occurred while creating a new contact
-//        buff_arr = mx_db_get_chats(db, user_id);
-//        arr_len = int_arr_len(buff_arr);
-//        CONTACTS = cJSON_CreateIntArray(buff_arr, arr_len);
-//        free(buff_arr);
-//    }
-//    return CONTACTS;
-//}

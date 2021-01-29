@@ -28,8 +28,6 @@ void mx_save_voice_file_and_get_id(t_server *serv, t_json *json,
                                                json->FILENAME->valuestring,
                                                json->VOICE_NAME->valuestring));
 
-    printf("\nVOICE_ID: |%d|\n", json->VOICE_ID->valueint);
-
     unique_voice_name = mx_db_get_filename(serv->db, json->VOICE_ID->valueint);
 
     if (json->VOICE_ID == 0) {

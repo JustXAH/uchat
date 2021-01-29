@@ -20,15 +20,11 @@ void mx_user_pic_receiver(t_server *serv, char *unique_name, int file_size,
     int len_recv = 0;
     int total = 0;
 
-    printf("\nPRIEM START\n");
     while (total != file_size) {
         len_recv = recv(serv->user_socket[user_index], buffer, MAX_LEN, 0);
         total += len_recv;
-        printf("FILE_SIZe: |%d|\nTOTAL RECV: |%d|\n", file_size, total);
         fwrite(buffer, 1, MAX_LEN, fp);
         memset(buffer, '\0', MAX_LEN);
     }
-    printf("\nPRIEM END\n");
     fclose(fp);
-    printf("User pic receiving was successful!\n");
 }

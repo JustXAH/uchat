@@ -32,14 +32,8 @@ void user_voices_parse_and_save(t_user *user, t_json *json) {
             user->voices_name[i] = strdup(
                     cJSON_GetArrayItem(json->VOICES_NAME_ARR, i)->valuestring);
         }
-//        printf("user->voices_id[%d] = |%d|\nuser->voices_name[%d] = |%s|\n",i, user->voices_id[i], i, user->voices_name[i]);
     }
     user->voices_name[NUMBER_VOICES] = NULL;
-//        char *buff = NULL;
-//    for (int i = 0; i < NUMBER_VOICES; i++) {
-//        printf("%d - 0\n", i);
-//        buff = mx_strjoin("chat_win->Vox_", mx_itoa(i));
-//        printf("%d - 1\n", i);
         gtk_entry_set_text(chat_win.edit_vax1_entry, user->voices_name[0]);
         gtk_entry_set_text(chat_win.edit_vax2_entry, user->voices_name[1]);
         gtk_entry_set_text(chat_win.edit_vax3_entry, user->voices_name[2]);
@@ -48,11 +42,6 @@ void user_voices_parse_and_save(t_user *user, t_json *json) {
         gtk_entry_set_text(chat_win.edit_vax6_entry, user->voices_name[5]);
         gtk_entry_set_text(chat_win.edit_vax7_entry, user->voices_name[6]);
         gtk_entry_set_text(chat_win.edit_vax8_entry, user->voices_name[7]);
-//        printf(" 2");
-//        free(buff);
-//        printf("%d - 3\n", i);
-//    }
-//    ++++++++++++++++++++++++++++++++++++++++++++
 }
 
 void user_chats_parse_and_save(t_user *user, t_json *json) {
@@ -73,7 +62,6 @@ void user_chats_parse_and_save(t_user *user, t_json *json) {
             user->chats_id[i] = cJSON_GetArrayItem(json->CHATS_ID_ARR, i)->valueint;
             user->chats_name[i] = strdup(cJSON_GetArrayItem(json->CHATS_NAME_ARR, i)->valuestring);
             user->notification[i] = cJSON_GetArrayItem(json->NOTIFICATION, i)->valueint;
-            printf("notification = %d\n", user->notification[i]);
         }
         user->chats_name[user->contacts_count] = NULL;
     }
@@ -117,23 +105,15 @@ void mx_authentication_client(t_system *sys, t_user *user, t_json *json) {
     }
     else { //RESULT = TRUE (login and password are confirmed - successful LOG IN)
         user->my_id = json->USER_ID->valueint;
-        //printf("loading 1\n");
         user_contacts_parse_and_save(user, json);
-        //printf("loading 2\n");
         user_chats_parse_and_save(user, json);
-        //printf("loading 3\n");
         user_voices_parse_and_save(user, json);
-        //printf("loading 4\n");
-//        user->contacts = cJSON_(SERVER_JSON
         sys->authentication = true;
         sys->menu = true;
         // вход в логин прошел успешно! дальше нужно перейти в окно МЕНЮ чата
         cl_listener.authentication = 1;
         cl_listener.my_id = json->USER_ID->valueint;
-        //printf("mx_authentication_client loading 5\n");
         for (int i = 0; i != user->contacts_count; i++)
             mb_contact_list_add(user->contacts_id[i], user->contacts_login[i], false);
-        //printf("mx_authentication_client loading successful\n");
     }
-//    void gtk_menu_item_set_label (GtkMenuItem *menu_item, const gchar *)la
 }

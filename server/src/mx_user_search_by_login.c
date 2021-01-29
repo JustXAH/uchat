@@ -60,5 +60,4 @@ void mx_user_search_by_login(t_server *serv, t_json *json, int user_index) {
     free(filename);
     free(file_path);
     free(send_str);
-    mx_printstr("mx_user_search_by_login finished\n");
 }

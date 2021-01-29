@@ -40,7 +40,6 @@
 #include <gio/gio.h>
 
 #define MAX_LEN 1024
-#define PORT 5001
 #define SA struct sockaddr
 #define NUMBER_VOICES 8
 

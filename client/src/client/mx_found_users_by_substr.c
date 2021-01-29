@@ -1,5 +1,5 @@
 //
-// Created by mac on 15.01.2021.
+// Created by Igor Khanenko on 15.01.2021.
 //
 
 #include "client.h"
@@ -20,11 +20,7 @@ void mx_found_users_by_substr(t_system *sys, t_user *user, t_json *json) {
     }
     sys->found_usernames_count = 0;
 
-    if (cJSON_IsFalse(json->RESULT)) {
-        write (1, "LOGINS DON'T EXIST\n", 20); // это затычка!
-        // здесь должна выводится пустая строка с сообщением, что пользователи не найдены
-    }
-    else { //RESULT = TRUE (user found successfully)
+    if (cJSON_IsTrue(json->RESULT)) {
         json->FOUND_USERNAMES = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
                                                                  "FOUND_USERNAMES");
         sys->found_usernames_count = cJSON_GetArraySize(json->FOUND_USERNAMES);

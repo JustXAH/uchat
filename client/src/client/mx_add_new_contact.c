@@ -49,6 +49,4 @@ void mx_add_new_contact(t_system *sys, t_user *user, t_json *json) {
     //cl_listener.new_contact_received = true;
     int cont_i = user->contacts_count - 1;
     mb_contact_list_add(user->contacts_id[cont_i], user->contacts_login[cont_i], false);
-
-    mx_printstr("mx_add_new_contact finished successfully\n");
 }

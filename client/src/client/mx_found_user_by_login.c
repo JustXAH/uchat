@@ -9,14 +9,10 @@ void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json) {
 
     json->RESULT = cJSON_GetObjectItemCaseSensitive(json->SERVER_JSON,
                                                     "RESULT");
-
     if (MALLOC_SIZE(sys->found_user_login)) {
         mx_strdel(&sys->found_user_login);
     }
-
     if (cJSON_IsFalse(json->RESULT)) {
-        write (1, "LOGIN DOESN'T EXIST\n", 20); // это затычка!
-        // нужно вывести сообщение о ошибке на экран
         sys->found_user_login = NULL;
         sys->found_user_id = -1;
     }
@@ -43,11 +39,6 @@ void mx_found_user_by_login(t_system *sys, t_user *user, t_json *json) {
             printf("You have been sent a user pic. User pic receiving...\n");
             file_path = mx_file_receiving(sys, sys->filename, json->FILE_SIZE->valueint);
             printf("Successfully received and save user pic from USER!\n");
-
-            /*
-             * Функция вывода аватарки в нужное поле в профайле
-             */
-
 
             // при выходе из профайла удаление аватарки из кэша
             if (remove(file_path) == 0) {
